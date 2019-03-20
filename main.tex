@@ -1,0 +1,34 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\title{On random graphs}
+\author{Leo Davy }
+\date{March 2019}
+
+\begin{document}
+
+\maketitle
+\tableofcontents{}
+
+\chapter{An introduction to random graphs}
+\input{Chapters/Introduction.tex}
+
+\chapter{The Erdos-Renyi Model}
+\input{Chapters/ERModel.tex}
+
+\chapter{Branching processes on random graphs}
+\input{Chapters/BranchingProcesses.tex}
+
+\chapter{The configuration model}
+\input{Chapters/ConfigurationModel.tex}
+
+\appendix
+
+\chapter{Some probabilistic tools}
+\input{Chapters/Appendix.tex}
+
+\end{document}

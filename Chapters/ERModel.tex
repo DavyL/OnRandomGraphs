@@ -1,0 +1,24 @@
+\section{Different approaches of the same space}
+As said in the title of the section there are different ways to approach the Erdos-Renyi model that we may call paradigms as they will give us the same kind of results but depending on the context, one might be much more convenient to use than the others.
+\newline
+Historically the first paper published on random graphs was from Erdos and Renyi in 1959, in which they give the following construction :
+\begin{definition}
+We call a random graph $\mathcal{G}_{n, M}$ having n possible labelled vertices and M edges. That is we choose at random ( with equal probability ) one of the $\binom{\binom{n}{2}}{M}$ possible graphs.
+\end{definition}
+One may observe that some changes in notations are made between this paraphrasing of the article of Erdos and Renyi, they are made in order to be more adapted with the modern study of random graphs. We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of edges possible on $n$ labelled vertices.
+\newline
+We then arrive to our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which the coin tosses are no longer fair, but the probability of drawing an edge is now $p$. And the coin tosses are still independent. Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$. We have :
+\begin{align}
+    \mathcal{P}(G) = p^e_G(1-p)^{N-e_G}
+\end{align}
+This model is called the binomial model. It is easily seen that this model is asymptotically equivalent to the first one if $Np$ is close to $M$ on several aspects.
+\newline
+The third model that we will investigate is on the form of a Markov process, see in Annex for a discussion on properties used here from Markov chains. At time 0 there is no edge and an edge is selected at random among all of the possible edges. At time $t$, the edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. It is clear that this model is perfectly equivalent to the first model presented in the case $t = M$. This model was also introduced in 1959 by Erdos and Renyi. The advantage of this model is that it allows one to study properties on the verge of their realisations. For instance, using this model Bollobas proved that a graph is fully connected, when the last connection made is between an isolated vertice and the giant component. But we will study this in the following.
+
+
+
+
+\section{Connectivity}
+\section{Existence of thresholds}
+\section{The stability number}
+\section{The diameter}

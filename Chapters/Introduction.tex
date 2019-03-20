@@ -1,0 +1,88 @@
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\section{Graph theory}
+Intuitively, a graph is just about dots and lines, any phenomenon that can be represented as dots connected, or not, by lines can be thought of as a graph. Hence it is clear that graph theory, the study of the so called graphs that we will define in the following, will apply to a very wide variety of problems, such as, epidemiology, sociology, internet analysis, electric circuits, road traffic, ... and of course mathematics. Historically graphs first appeared in mathematics from Leonard Euler who gave, again, his name to a formula that would be the basis for the development of topology. S
+\newline
+Formally a graph G will be defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set of $G$ and $E(G)$, disjoint from $V(G)$, the set of edges of G. For now we will consider edges only as a pair of elements, without order, contained in $V(G)$. In the following of this report hypergraphs will be studied in which edges are composed of more than two elements.
+\newline
+As an example of a graph we can consider the following graph with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7, e_8\}$ altogether with an incidence function $\psi_G : V(G) \rightarrow E(G) $ such as:
+\begin{align*}
+    \psi_G(e_1) = ab\quad
+    \psi_G(e_2) = ac\quad
+    \psi_G(e_3) = bc\quad
+    \psi_G(e_4) = ad\\
+    \psi_G(e_5) = cd\quad
+    \psi_G(e_6) = cd\quad
+    \psi_G(e_7) = ee\quad
+    \psi_G(e_8) = ae
+\end{align*}
+An equivalent way to define a graph would be through the incidence matrix $M_G = (m_{ve}) $ zith $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
+It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the adjacency matrix $A_G = (a_{uv})$. This is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. It's interesting to note that an adjacency matrix is real and hermitian, hence all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
+\newline
+An interesting property of graphs is the degree of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $Delta(G)$ as the maximal degree of G.
+From these definition we can obtain the following lemma, with $m$ the number of edges.
+\begin{theorem}
+For any graph finite graph G
+\begin{equation}
+    \sum_{v\in V(G)} d_G(v) = 2m
+\end{equation}
+\end{theorem}
+\begin{proof}
+The sum of the elements of each columns in the incidence matrix is equal to two. So the sum of the values in the colums over all the columns is equal to two times the number of columns, so $2m$. As the sum of the columns is equal to the sum of the rows, and the sum of each row is exactly the degree of a vertex, we have the result.  
+\end{proof}
+This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices. In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
+\newline
+A very important kind of graphs are the directed graphs, it's a very intuitive notion, these are simply graphs on which there are arrows on the edges, equivalently, it is like defining the adjacency between two vertices as non  symmetric, or as studying graph with non hermitian adjacency matrix 
+\newline
+As there is usually no confusion possible we will denote $V = V(G), E =E(G), \psi = \psi_G, ...$. 
+
+
+\section{Random graphs}
+This section will try to give reasons behind the study of random graphs but it's purpose is not to go deep in the details and sophistication of their study.
+The study of random graphs is a flourishing area of mathematics since it's founding papers have been published by Erdos and Renyi between 1959 and 1963. Since then a lot of work has been done on random graphs, most of the questions on the Erdos-Renyi model have found satisfying answers, and the model being simplistic, many new models have been developed.
+So we will use the very vague definition by Janson.
+\begin{definition} A random graph is a graph where nodes, or edges, or both are selected by a random procedure.
+\end{definition}
+Random graphs are interesting subject for pure mathematicians as they create a lot of open problems and offers many links with combinatorics. And for an applied mathematicians, random graphs are an entertaining tool as they may be used to simulate real world phenomenons ( most famously in sociology, epidemiology or the study of internet ). And accordingly to their level of matching with real life situations, they will be able to show the presence of complexity in the situation studied.
+\section{Cayley's formula}
+This section will first of all demonstrate an important result that will be used several times in crucial demonstrations in this report. Although it is not a demonstration that is specific to random graphs it may give an insight to the variety of techniques that may be used in the study of random graphs and how elegant are the results ( at least quite often ). This formula has been demonstrated in many different ways and we will use the demonstration by Joyal that is really elegant and also is a good place to introduce several notions that will be used in the rest of the report. 
+\begin{theorem}{Cayley's formula}
+\begin{equation}
+    t_n = n^{n-2}
+\end{equation}
+with $t_n$ the number of spanning trees on $n$ vertices.
+\end{theorem}
+Before beginning the proof some definitions will be needed. A structure ( graph or tree ) is called spanning on the vertices (resp. edges ) if it intersects all vertices (resp. edges). A tree is a special case of graph structure, that can be defined in several equivalent ways. For instance, a tree is a connected graph such that upon removal of any of it's edges it becomes disconnected, equivalently, it's a graph in which every two vertices are linked by exactly one path, equivalently, it's a connected and acyclic graph ( doesn't contain any cycle ).
+\newline 
+The trees being a subset of the graphs, it is also possible to define directed trees in which you can follow an edge only in one direction ( otherwise it would not be a tree anymore ).
+We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertice can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. WE also denote by $DRT_n$ the set of doubly rooted trees on n vertices>
+\newline
+As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. To prove the theorem it would then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$. So we will base our approach on Joyal's proof and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
+\begin{proof}
+We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
+Let's take $f:V \longrightarrow V$, and let's consider the graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.
+Drawing such a graph for any function, and will appear two different kind of structures, first there will have directed line leading to cycles, and cycles. And the whole graph will be a disjoint union of such structures. It can be interesting to observe the case in which $f$ is a permutation and then observe that the graph of $f$ is a union of disjoint cycles as expected from the common group theory result.
+\newline
+We now take $C \subseteq V$ the set of vertices that are part of a cycle under the action of $f$. Equivalently,
+\begin{align*}
+    C = \{ x : \exists i \geq 1 s. t. f^i(x) = x \}
+\end{align*}
+Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set and now we will construct a graph with the vertice set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End".
+\newline
+Now we will just append to this line the set of vertices that are not in $G$. So we construct $\~E = \bigcup_{x \in V\\C} x f(x)$ and $\~G = (V, E\cup\~E)$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
+We have now done the biggest part of the proof, that is, going from a function to a doubly rooted tree.
+\newline
+We will now take a doubly rooted tree and transform it in a function. From the definition of trees there is a unique "Start" to "End" ( SEL ) path.
+\newline
+For vertices on not on the SEL, for instance some vertice $j$, we define $f(j)$ as the first neighbour on the $j$ to end line.
+\newline
+For vertices on the SEL, 
+\begin{align}
+    SEL = \{x_1, x_2, ..., x_k\}, \text{and} SEL_< = \{x_{\sigma_1}, x_{\sigma_2}, ..., x_{sigma_k}\} 
+\end{align}
+we define $f(x_{\sigma_i}) = x_i, \forall i \in [k]$.
+\newline
+Thus, we have two injective constructions, if composed give the identity, hence we have a bijection between the set of endomorphism of $[n]$ and the space of doubly rooted trees on n vertices. So the proof is complete.
+\end{proof}
