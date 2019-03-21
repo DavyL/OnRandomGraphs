@@ -19,6 +19,72 @@ The third model that we will investigate is on the form of a Markov process, see
 
 
 \section{Connectivity}
+
+One of the most fundamental structure of a graph will be it's number of components. Hence, the first question we will try to ask is how often a random graph in the Erdos-Renyi model is connected. It is essential to answer this question as many other questions might not make sense on a graph that is not connected ( for instance the diameter, the existence of hamiltonian paths or the stability number of the graph ). 
+\newline
+It is also an interesting first topic to have an insight of the kind of elegant results that arise from the study of random graphs. The main aim of this section will be to prove the following theorem in a didactic way as it is the first random graphs proof that we will study.
+\begin{theorem}
+Let $p = p(n) = \frac{log(n) + c}{n}$
+\newline
+Then $\lim_{n \to \infty} P(G \in \mathcal{G}_{n, p}\text{ is connected }) = e^{-e^{-c}}$ 
+\end{theorem}
+The proof of this theorem will be in two parts, first we will show that a graph will be connected if and only if there are no isolated vertices and then we will estimate the distribution that follows the number of isolated vertices.
+\begin{theorem}
+	With $p = \frac{log(n) + c}{n}$
+	 Almost every $G \in \mathcal{G}_{n, p}$ consists of a giant component and isolated vertices. 
+\end{theorem}
+\begin{proof}
+During this proof we will consider the random value $X_k$ that counts the number of isolated vertices of order k.
+So, let's estimate the probability $P(X_2 > 0) = P(X_2 \geq 1 )$. In order to do so we will use the method of first moment.
+\begin{align}
+	\mathbb{P}(X_2 \geq 1) \leq \mathbb{E}(X_2) 	&= \binom{n}{2}\mathbb{P}(\text{"drawing an isolated edge"}) \\
+						    	&= \binom{n}{2}p((1-p)^{n-1})^2 \\
+							&\leq (\frac{ne}{2})^2p(e^{-p})^{2(n-2)} \\
+						    	&= \mathcal{O}\left(n^2p \frac{ e^2 e^{-2p(n+1)} }{4}\right) \\
+							&= \mathcal{O}(n^2p)
+\end{align}
+So it's sufficient that $p = o^{-2}$ in order to have almost surely no edges in G. This is clearly satisfied by the $p$ we use in the theorem.
+\newline
+However, this is not sufficient to prove that there is no isolated other than vertices. We will observe that there can't have any component of size larger than $\lceil \frac{n}{2} \rceil$ that is not the largest component in the graph.
+Hence, we will study, the probability that there is any component of intermediary size that is not connected to the greatest component.
+\begin{align}
+	\mathbb{P}(X_k \geq 1) &\leq \mathbb{E}(X_k)\quad, \forall k \geq 3 \\
+				&\leq \binom{n}{k} k^{k-2} q_k\\
+				&\leq \binom{n}{k} k^{k-2} p^{k-1} ((1-p)^{n-k})^k
+\end{align}
+In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components. A tree on $k$ vertices having $k-1$ edges, this means in terms of probability that it must have $k-1$ "success" and on each of the $k$ vertices $n-k$ failures. Which leads to the following line.
+\newline 
+Now we will try to have an upper bound of the RHS such that the series on $k$ will converge.
+\begin{align}
+	\mathbb{P}(X_k \geq 1) 	&\leq (\frac{ne}{k})^k k^{k-2} p^{k-1} e^{-pk(n-k))}\\
+				&\leq n^ke^kk^{-2} p^{k-1}e^{-(\log(n) + c)\frac{k(n-k)}{n}}\\
+				&\leq n^\frac{k^2}{n} p^{k-1}e^{-c\frac{k(n-k)}{n}}\\
+				&\leq s
+\end{align}
+
+\end{proof}
 \section{Existence of thresholds}
+One of the most surprising features on random graphs, which seems to have motivated Erdos to publish results from 1959, is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
+This zone which produces great difference in limiting probability will be called a threshold.
+It has been shown by Bollobas and Thomason that this is in fact not exclusive to random graphs, but true for all monotone properties on random subsets.
+\begin{definition}
+We will call a graph property a family of graphs that is closed under isomorphism.
+\end{definition}
+This means that a graph property is independent of the labelling and of the drawing of the graph.
+We can refine properties in the following definition.
+\begin{definition}
+	A property is monotone increasing (resp. decreasing) if it's stable under the the addition (resp. removal) of an edge.
+	A graph property $\mathcal{Q}$ is convex if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$ then $B \in \mathcal{Q}$. 
+\end{definition}
+For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertice are monotone decreasing. As an example of property that is neither monotone increasing or decreasing, we can think of being $k$-regular for some $k$ ( this means that all vertices are of degree $k$). Having exactly $k$ isolated vertices is an example of convex property.
+\newline
+The following result follows from definition with $\mathcal{Q}$ a monotone increasing property
+\begin{equation}
+	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
+\end{equation}
+However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentionned in the introduction $\mathcal{G}_{n, M}$
+
+
+
 \section{The stability number}
 \section{The diameter}
