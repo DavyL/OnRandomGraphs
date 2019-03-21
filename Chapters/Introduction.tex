@@ -39,12 +39,17 @@ The sum of the elements of each columns in the incidence matrix is equal to two.
 \end{proof}
 This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices. In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
 \newline
-One of the most fundamental properties of graphs is also the connexity. We will say that a graph is connected, if there is a path connecting any two edges. We define a path as a sequence of vertices connected by edges linking it's two ends. In fact we will consider simple paths, that are paths without loops, a simple path is always defined when there is a path. If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$. And we will call a component of a vertex the set of the vertices that can be reached from this vertex. 
+One of the most fundamental properties of graphs is also the connexity. 
+We will say that a graph is connected, if there is a path connecting any two edges. 
+We define a path as a sequence of vertices connected by edges linking it's two ends. 
+In fact we will consider simple paths, that are paths without loops, a simple path is always defined when there is a path. 
+If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$, from this definition we may observe that $d_G(v) = |N(v)|$. And we will call a component of a vertex the set of the vertices that can be reached from this vertex. 
 Then a connected graph is a graph with only one component.
-Some interesting graphs to which we might often refer are the complete graph on n vertices, denoted by $\mathbb{K}_n$, and the complete bipartite graph $\mathbb{K}{n,m}$. A complete graph is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
+\newline
+Some interesting graphs to which we might often refer are the complete graph on n vertices, denoted by $\mathbb{K}_n$, and the complete bipartite graph $\mathbb{K}_{n,m}$. A complete graph is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
 A graph is bipartite if it's set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
 The complete bipartite graph is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
-This implies the same condition on $Y$.
+This implies the same condition on the vertices in $Y$.
 \newline
 We call a simple graph a graph that doesn't contain any loop or multiple edge. We will mainly study simple graphs as multigraphs or loopy graphs only add redundant information. We will see later that it is possible to mimic loopy graphs and multiple graphs by assigning weight to the edges.
 \newline
@@ -74,13 +79,17 @@ with $t_n$ the number of spanning trees on $n$ vertices.
 Before beginning the proof some definitions will be needed. A structure ( graph or tree ) is called spanning on the vertices (resp. edges ) if it intersects all vertices (resp. edges). A tree is a special case of graph structure, that can be defined in several equivalent ways. For instance, a tree is a connected graph such that upon removal of any of it's edges it becomes disconnected, equivalently, it's a graph in which every two vertices are linked by exactly one path, equivalently, it's a connected and acyclic graph ( doesn't contain any cycle ).
 \newline 
 The trees being a subset of the graphs, it is also possible to define directed trees in which you can follow an edge only in one direction ( otherwise it would not be a tree anymore ).
-We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertice can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. WE also denote by $DRT_n$ the set of doubly rooted trees on n vertices>
+We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertice can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. 
+We also denote by $DRT_n$ the set of doubly rooted trees on n vertices.
 \newline
-As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. To prove the theorem it would then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$. So we will base our approach on Joyal's proof and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
+As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. 
+To prove the theorem it would then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$. So we will base our approach on Joyal's proof and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
 \begin{proof}
 We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
 Let's take $f:V \longrightarrow V$, and let's consider the graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.
-Drawing such a graph for any function, and will appear two different kind of structures, first there will have directed line leading to cycles, and cycles. And the whole graph will be a disjoint union of such structures. It can be interesting to observe the case in which $f$ is a permutation and then observe that the graph of $f$ is a union of disjoint cycles as expected from the common group theory result.
+Drawing such a graph for any function, and will appear two different kind of structures, first there will have directed line leading to cycles, and then cycles. 
+And the whole graph will be a disjoint union of such components.
+It can be interesting to observe the case in which $f$ is a permutation and then observe that the graph of $f$ is a union of disjoint cycles as expected from the common group theory result.
 \newline
 We now take $C \subseteq V$ the set of vertices that are part of a cycle under the action of $f$. Equivalently,
 \begin{align*}
@@ -97,7 +106,7 @@ For vertices on not on the SEL, for instance some vertice $j$, we define $f(j)$ 
 \newline
 For vertices on the SEL, 
 \begin{align}
-    SEL = \{x_1, x_2, ..., x_k\}, \text{and} SEL_< = \{x_{\sigma_1}, x_{\sigma_2}, ..., x_{\sigma_k}\} 
+    SEL = \{x_1, x_2, ..., x_k\}, \text{ and } SEL_< = \{x_{\sigma_1}, x_{\sigma_2}, ..., x_{\sigma_k}\} 
 \end{align}
 we define $f(x_{\sigma_i}) = x_i, \forall i \in [k]$.
 \newline
