@@ -3,9 +3,12 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \section{Graph theory}
-Intuitively, a graph is just about dots and lines, any phenomenon that can be represented as dots connected, or not, by lines can be thought of as a graph. Hence it is clear that graph theory, the study of the so called graphs that we will define in the following, will apply to a very wide variety of problems, such as, epidemiology, sociology, internet analysis, electric circuits, road traffic, ... and of course mathematics. Historically graphs first appeared in mathematics from Leonard Euler who gave, again, his name to a formula that would be the basis for the development of topology. S
+Intuitively, graphs are just about dots and lines, any phenomenon that can be represented as dots connected, or not, by lines can be thought of as a graph. 
+Hence it is clear that graph theory, the study of the so called graphs that we will define in the following, will apply to a very wide variety of problems, such as, epidemiology, sociology, internet analysis, electric circuits, road traffic, ... and of course mathematics. 
+Historically graphs first appeared in mathematics from Leonard Euler who gave, again, his name to a formula that would be the basis for the development of topology.
 \newline
-Formally a graph G will be defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set of $G$ and $E(G)$, disjoint from $V(G)$, the set of edges of G. For now we will consider edges only as a pair of elements, without order, contained in $V(G)$. In the following of this report hypergraphs will be studied in which edges are composed of more than two elements.
+Formally a graph G will be defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set ( the points ) of $G$ and $E(G)$, disjoint from $V(G)$, the set of edges ( the lines ) of G. 
+For now we will consider edges only as a pair of elements, without order, contained in $V(G)$. In the following of this report hypergraphs and directed graphs will be studied in which edges are composed of more than two elements or edges have a direction.
 \newline
 As an example of a graph we can consider the following graph with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7, e_8\}$ altogether with an incidence function $\psi_G : V(G) \rightarrow E(G) $ such as:
 \begin{align*}
@@ -18,8 +21,10 @@ As an example of a graph we can consider the following graph with $ V(G) = \{a, 
     \psi_G(e_7) = ee\quad
     \psi_G(e_8) = ae
 \end{align*}
-An equivalent way to define a graph would be through the incidence matrix $M_G = (m_{ve}) $ zith $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
-It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the adjacency matrix $A_G = (a_{uv})$. This is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. It's interesting to note that an adjacency matrix is real and hermitian, hence all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
+An equivalent way to define a graph would be through the incidence matrix $M_G = (m_{ve}) $ with $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
+It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the adjacency matrix $A_G = (a_{uv})$.
+This is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. 
+It's interesting to note that an adjacency matrix is real and hermitian, thus all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
 \newline
 An interesting property of graphs is the degree of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
 From these definition we can obtain the following lemma, with $m$ the number of edges.
@@ -33,6 +38,18 @@ For any graph finite graph G
 The sum of the elements of each columns in the incidence matrix is equal to two. So the sum of the values in the colums over all the columns is equal to two times the number of columns, so $2m$. As the sum of the columns is equal to the sum of the rows, and the sum of each row is exactly the degree of a vertex, we have the result.  
 \end{proof}
 This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices. In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
+\newline
+One of the most fundamental properties of graphs is also the connexity. We will say that a graph is connected, if there is a path connecting any two edges. We define a path as a sequence of vertices connected by edges linking it's two ends. In fact we will consider simple paths, that are paths without loops, a simple path is always defined when there is a path. If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$. And we will call a component of a vertex the set of the vertices that can be reached from this vertex. 
+Then a connected graph is a graph with only one component.
+Some interesting graphs to which we might often refer are the complete graph on n vertices, denoted by $\mathbb{K}_n$, and the complete bipartite graph $\mathbb{K}{n,m}$. A complete graph is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
+A graph is bipartite if it's set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
+The complete bipartite graph is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
+This implies the same condition on $Y$.
+\newline
+We call a simple graph a graph that doesn't contain any loop or multiple edge. We will mainly study simple graphs as multigraphs or loopy graphs only add redundant information. We will see later that it is possible to mimic loopy graphs and multiple graphs by assigning weight to the edges.
+\newline
+It is also possible to define the union of two graphs simply as the union of each of the vertex sets and edge sets.
+
 \newline
 A very important kind of graphs are the directed graphs, it's a very intuitive notion, these are simply graphs on which there are arrows on the edges, equivalently, it is like defining the adjacency between two vertices as non  symmetric, or as studying graph with non hermitian adjacency matrix 
 \newline
