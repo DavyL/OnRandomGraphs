@@ -78,13 +78,77 @@ We can refine properties in the following definition.
 \end{definition}
 For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertice are monotone decreasing. As an example of property that is neither monotone increasing or decreasing, we can think of being $k$-regular for some $k$ ( this means that all vertices are of degree $k$). Having exactly $k$ isolated vertices is an example of convex property.
 \newline
+Here is a theorem showing that monotone increasing properties make probability distributions on these properties also monotone increasing.
+\begin{theorem}
+	Suppose $\mathcal{Q}$ is a monotone increasing property and $0 \leq M_1 \leq M_2 \leq N$ and $0 \leq p_1 \leq p_2 \leq 1$.
+	\newline
+	Then
+	$$\mathbb{P}_{M_1}(\mathcal{Q}) \leq  \mathbb{P}_{M_2}(\mathcal{Q}) \text{  and  } \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$$
+\end{theorem}
+\begin{proof}
+	The first inequality is clear, as the only difference between the two spaces on which we evaluate the property $\mathcal{Q}$ is that on the RHS edges have been added, hence, the probability of realising a monotone increasing has been increased.
+	\newline
+	For the second inequality, let $p = \frac{p_2 - p_1}{1 - p_1}$. Let $G_1 \in \mathcal{G}_{n, p_1}, G_2 \in mathcal{G}_{n, p}$
+	\newline
+	So if $G_2 = G_1 \cup G$ it's edges are chosen with probability $p_1 + p - p_1 p = p$. So $G_1$ is in $G_2$, the property being monotone increasing, we have $ \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$
+\
+\end{proof}
 The following result follows from definition with $\mathcal{Q}$ a monotone increasing property
 \begin{equation}
 	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
 \end{equation}
-However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentionned in the introduction $\mathcal{G}_{n, M}$
+However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentionned in the introduction $\mathcal{G}_{n, M}$.
+Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_M(\mathcal{Q})$ for every $M$ close to $pN$ then we know $\mathbb{P}_p(\mathcal{Q})$ with a comparable accuracy. The converse being clearly false, for instance the property of containing M edges.
 
+\begin{theorem}
+	Suppose $\mathcal{Q}$ is any property and $0 < p = M/N< 1$ 
+	\newline
+	Then $\mathbb{P}_M(\mathcal{Q}) \leq 3 \sqrt{M}\mathbb{P}_p(\mathcal{Q})$
+\end{theorem}
+\begin{proof}
+	Let $\mathcal{Q}$ be any property, then we will write $\mathcal{Q}$ as a partition based on the number of edges in each graph contained in $\mathcal{Q}$.
+	\newline
+	So we have
+	$$\mathcal{Q} = \bigsqcup_{m=0}^{N} \mathcal{Q}_m \quad, \text{ with } \forall G \in \mathcal{Q}_m, e(G) = m$$
+	$\mathbb{P}_m(\mathcal{Q}) = |\mathcal{Q}_m| \binom{N}{M}^{-1}$
+	From this we can obtain 
+	\begin{align}
+		\mathbb{P}_p(\mathcal{Q})	&= \sum_{A \in \mathcal{Q}} p^{|A|}q^{N-|A|}\\
+						&= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{|A|}q^{N-|A|}\\
+						&= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{m}q^{N-m}\\
+						&= \sum_{m=0}^{N}|\mathcal{Q}_m|p^{m}q^{N-m}\\
+						&= \sum_{m=0}^N p^mq^{N-m}\binom{N}{M}\mathbb{P}_m(\mathcal{Q}) \\
+						&\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
+						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}
+	\end{align}
+	So we have
+	\begin{equation}
+		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi  q M})
+	\end{equation}
+	Observing that $q<1$ and $\sqrt{2\pi}e^{\frac{1}{6}} \approx 2.961... < 3$ the proof is complete.
+\end{proof}
+The previous section was about connectivity in $\mathcal{G}_{n,p}$, in this section we have seen that connectivity can be characterized as a monotone increasing property.
+Also it was observed that the function $p$ was somehow best possible, by that we mean that modifying it slightly would impply to only have a zero-one law. 
+We call such a function $p$ a threshold ( in that case for the connectivity ). 
+\newline
 
+More formally, let $\mathcal{Q}$ a monotone increasing property,  in $\mathcal{G}_{n, p}$, we call $\hat{p} = \hat{p}(n)$ a threshold if
+\begin{align}
+	\mathbb{P}(\mathcal{G}_{n,p} \in \mathcal{Q}) \rightarrow \left\{\begin{array}{rl}
+										0 & \text{if } p \ll \hat{p},\\
+										1 & \text{if } p \gg \hat{p}.
+									 \end{array}
+									\right.
+\end{align}
 
+Analogously, in $\mathcal{G}_{n, M}$, we call $\hat{M} = \hat{M}(n)$ a threshold if
+\begin{align}
+	\mathbb{P}(\mathcal{G}_{n,M} \in \mathcal{Q}) \rightarrow \left\{\begin{array}{rl}
+										0 & \text{if } M \ll \hat{M},\\
+										1 & \text{if } M \gg \hat{M}.
+									 \end{array}
+									\right.
+\end{align}
+In fact, thresholds are unique with respect to the multiplication by a scalar. So for the following, we should denote a threshold for a property as the threshold.
 \section{The stability number}
 \section{The diameter}
