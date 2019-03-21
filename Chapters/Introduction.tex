@@ -21,7 +21,7 @@ As an example of a graph we can consider the following graph with $ V(G) = \{a, 
 An equivalent way to define a graph would be through the incidence matrix $M_G = (m_{ve}) $ zith $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
 It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the adjacency matrix $A_G = (a_{uv})$. This is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. It's interesting to note that an adjacency matrix is real and hermitian, hence all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
 \newline
-An interesting property of graphs is the degree of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $Delta(G)$ as the maximal degree of G.
+An interesting property of graphs is the degree of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
 From these definition we can obtain the following lemma, with $m$ the number of edges.
 \begin{theorem}
 For any graph finite graph G
@@ -71,7 +71,7 @@ We now take $C \subseteq V$ the set of vertices that are part of a cycle under t
 \end{align*}
 Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set and now we will construct a graph with the vertice set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End".
 \newline
-Now we will just append to this line the set of vertices that are not in $G$. So we construct $\~E = \bigcup_{x \in V\\C} x f(x)$ and $\~G = (V, E\cup\~E)$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
+Now we will just append to this line the set of vertices that are not in $G$. So we construct $\tilde{E} = \bigcup_{x \in V\\C} x f(x)$ and $\tilde{G} = (V, E\cup\tilde{E})$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
 We have now done the biggest part of the proof, that is, going from a function to a doubly rooted tree.
 \newline
 We will now take a doubly rooted tree and transform it in a function. From the definition of trees there is a unique "Start" to "End" ( SEL ) path.
@@ -80,7 +80,7 @@ For vertices on not on the SEL, for instance some vertice $j$, we define $f(j)$ 
 \newline
 For vertices on the SEL, 
 \begin{align}
-    SEL = \{x_1, x_2, ..., x_k\}, \text{and} SEL_< = \{x_{\sigma_1}, x_{\sigma_2}, ..., x_{sigma_k}\} 
+    SEL = \{x_1, x_2, ..., x_k\}, \text{and} SEL_< = \{x_{\sigma_1}, x_{\sigma_2}, ..., x_{\sigma_k}\} 
 \end{align}
 we define $f(x_{\sigma_i}) = x_i, \forall i \in [k]$.
 \newline
