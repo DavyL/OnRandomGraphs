@@ -126,7 +126,7 @@ Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_
 						&= \sum_{m=0}^{N}|\mathcal{Q}_m|p^{m}q^{N-m}\\
 						&= \sum_{m=0}^N p^mq^{N-m}\binom{N}{M}\mathbb{P}_m(\mathcal{Q}) \\
 						&\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
-						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}
+						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
 	So we have
 	\begin{equation}
@@ -157,5 +157,55 @@ Analogously, in $\mathcal{G}_{n, M}$, we call $\hat{M} = \hat{M}(n)$ a threshold
 									\right.
 \end{align}
 In fact, thresholds are unique with respect to the multiplication by a scalar. So for the following, we should denote a threshold for a property as the threshold.
+
+
 \section{The stability number}
+Another property of graphs that one might be interested to study is the stability number. The stability number of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
+One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the chromatic number. Indeed, the chromatic number being the smallest number of colours that make a proper colouring of a graph. 
+That means a colouring on which there are no two adjacent vertices of the same color. 
+We are then led to a similar question than finding the stability number of a graph.
+If we denote by $\alpha(G)$ the stability number of a graph, we have the simple lower bound
+\begin{equation}
+	\chi(G) \geq \frac{n}{\alpha(H)}
+\end{equation}
+Before giving a lower bound on the stability number of a graph it might be interesting to denote that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
+Although the following theorem will give a bound that is quite tight in $\mathcal{G}_{n, p}$ the problem of finding the actual maximum stable set of a graph is a $NP$-hard problem.
+\begin{theorem}
+	The stability number of a graph in $\mathcal{G}_{n, p}$, is at most $\lceil 2p^{-1}\log(n)\rceil$.
+\end{theorem}
+\begin{proof}
+	Let $G \in \mathcal{G}_{n,p}$ and $S \subseteq V$ such that $V$ contains $k+1$ vertices.
+	Then we have 
+	\begin{equation}
+		\mathcal{P}(\text{"S is a stable set""}) = (1-p)^{\binom{k+1}{2}  }
+	\end{equation}
+	as none of the $\binom{k+1}{2}$ possible edges must be selected.
+	\newline
+	Let's define our random values as follow, $X_S = \mathbb{1}(\text{" $S$ is a stable set "})$ and
+	\begin{equation}
+		X_{k+1} = \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} X_S
+	\end{equation}
+	the random variable counting the number of stable sets of size $k+1$, so what we are investigating here is the rank $\alpha$ such that $X_k = 0, \forall k > \alpha$. Such an $\alpha$ would then be maximal stability number.
+	\begin{align}
+		\mathbb{E}X_{k+1} &= \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} \mathbb{E} X_S 	
+				  = \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} \mathbb{P}(X_S = 1)	\\		
+		&= \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} (1-p)^{\binom{k+1}{2}  }		
+		= (1-p)^{\binom{k+1}{2}} \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} 1 	\\	
+		&= \binom{n}{k+1} (1-p)^{\binom{k+1}{2}} 
+	\end{align}
+	Now we will use the common inequalities $  \binom{n}{k+1} \leq \frac{n^{k+1}}{(k+1)!} $ and $(1-p) \leq e^{-p}$. 
+	And we have
+	\begin{align}
+		\mathbb{E}X_{k+1} 	&\leq  \frac{n^{k+1}}{(k+1)!} e^{-p \binom{k+1}{2}} = \frac{n^{k+1}}{(k+1)!} e^{-p \frac{k(k+1)}{2}}\\
+									     &\leq  \frac{(ne^{-p\frac{k}{2}})^{k+1}}{(k+1)!}
+	\end{align}
+	So, if we consider $k = \lceil 2p^{-1}\log(n)\rceil \leq 2p^{-1}\log(n)$ we have that $ ne^{-p\frac{k}{2}} \leq 1$.
+	We finally obtain 
+	\begin{equation}
+		\mathbb{E} X_{k+1} \longrightarrow_{n \to \infty} 0
+	\end{equation}
+	And then $X_{k+1} = 0$ almost surely which proves the theorem.
+
+\end{proof}
+
 \section{The diameter}
