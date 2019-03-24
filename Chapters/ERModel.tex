@@ -339,3 +339,46 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 		&\leq \exp(-\alpha_k^2\frac{(pn)^k}{9}) = n^{-\frac{K^2}{9}}
 	\end{align}
 \end{proof}
+We will now prove another lemma
+\begin{lemma}
+	Let $K > 12$ a constant and $\alpha_k, \beta_k, \gamma_k, k=1,...,d-1$ as before.
+	\newline
+	Set 
+	\begin{equation}
+		\delta_k = \exp(2\sum_{l=1}^{k}(\alpha_l + \beta_l +\gamma_l)) - 1
+	\end{equation}
+	Then if $n$ is sufficiently large, with probability at least $1-n^{-K-2}$ for every vertex $x$ and every natural number $k, 1\leq k \leq d-1$ we have
+	\begin{equation}
+		||\Gamma_k(x)| - (pn)^k| \leq \delta_k(pn)^k
+	\end{equation}
+\end{lemma}
+
+\begin{proof}
+	As $\delta_{d-1} \longrightarrow_{n\to\infty} 0$ we may assume that $\delta_{d-1} < \frac{1}{4}$
+	For a fixed vertex $x$, we denote by $\Omega_k^*$ the set of graph for which 
+	\begin{equation}
+		||\Gamma_l(x) - (pn)^l| \leq \delta_l(pn)^l \quad, 0 \leq l \leq k
+	\end{equation}
+	And it is easy to verify that it is decreasing. Anf if one replaces $|\Gamma_l(x)|$ by $a$ it is clear that we have
+	\begin{equation}
+		\Omega_k^* \subseteq \Omega_{k-1}^* \subseteq \Omega_k
+	\end{equation}
+	Now, simply applying Bayes formula ( for the complementary ) we have
+	\begin{equation}
+		1 - \mathbb{P}(\Omega_k^*)= 1-\mathbb(\Omega_{k-1}^*)
+		+ \mathbb(\Omega_{k-1}^*)\mathbb{P}(||\Gamma_k(x)| - (pn)^k| \leq \delta_k(pn)^k | \Omega_{k-1}^*)
+
+	\end{equation}
+	If $G \in \Omega_{k-1}^*$ and $|a| = |\Gamma_{k-1}(x)|$ and by applying the definition of belonging to $\Omega_{k-1}^*$ and multiplying both sides by $pn$ we have 
+	\begin{equation}
+		|(pn)^k - apn| \leq \delta_{k-1}(pn)^k
+	\end{equation}
+	And we obtain using the second triangular inequality
+	\begin{align}
+		\mathbb{P}(\not\Omega_k^* | \Omega_{k-1}^*) 
+		&\leq \mathbb{P}(\Omega_{k-1}^*^{-1}\mathbb{P}(||\gamma_k(x)| - apn| \geq (\delta_k - \delta_{k-1})(pn)^k | \Omega_k)
+		&\leq (1 - 2(k-1)n^{-\frac{K^2}{9}})^{-1}\mathbb{P}(||\Gamma_k(x)| - apn| \geq 2(\alpha_k + \beta_k + \gamma_k)(pn)^k | \Omega_k)
+	\end{align}
+\end{proof}
+
+
