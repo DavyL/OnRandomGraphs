@@ -28,13 +28,13 @@ For instance, using this model Bollobas proved that a graph is fully connected, 
 One of the most fundamental structure of a graph will be it's number of components. Hence, the first question we will try to ask is how often a random graph in the Erdos-Renyi model is connected. It is essential to answer this question as many other questions might not make sense on a graph that is not connected ( for instance the diameter, the existence of hamiltonian paths or the stability number of the graph ). 
 \newline
 It is also an interesting first topic to have an insight of the kind of elegant results that arise from the study of random graphs. The main aim of this section will be to prove the following theorem in a didactic way as it is the first random graphs proof that we will study.
-\begin{theorem}
+\begin{theorem}\label{th:connect}
 Let $p = p(n) = \frac{log(n) + c}{n}$
 \newline
 Then $\lim_{n \to \infty} P(G \in \mathcal{G}_{n, p}\text{ is connected }) = e^{-e^{-c}}$ 
 \end{theorem}
 The proof of this theorem will be in two parts, first we will show that a graph will be connected if and only if there are no isolated vertices and then we will estimate the distribution that follows the number of isolated vertices.
-\begin{theorem}
+\begin{theorem}\label{th:isolcomp}
 	With $p = \frac{log(n) + c}{n}$
 	 Almost every $G \in \mathcal{G}_{n, p}$ consists of a giant component and isolated vertices. 
 \end{theorem}
@@ -48,7 +48,7 @@ So, let's estimate the probability $P(X_2 > 0) = P(X_2 \geq 1 )$. In order to do
 						    	&= \mathcal{O}\left(n^2p \frac{ e^2 e^{-2p(n+1)} }{4}\right) \\
 							&= \mathcal{O}(n^2p)
 \end{align}
-So it's sufficient that $p = o^{n{-2}}$ in order to have almost surely no edges in G. This is clearly satisfied by the $p$ we use in the theorem.
+So it's sufficient that $p = o^(n{-2})$ in order to have almost surely no edges in G. This is clearly satisfied by the $p$ we use in the theorem.
 \newline
 However, this is not sufficient to prove that there is no isolated other than vertices. We will observe that there can't have any component of size larger than $\lceil \frac{n}{2} \rceil$ that is not the largest component in the graph.
 Hence, we will study, the probability that there is any component of intermediary size that is not connected to the greatest component.
@@ -59,15 +59,26 @@ Hence, we will study, the probability that there is any component of intermediar
 \end{align}
 In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components. A tree on $k$ vertices having $k-1$ edges, this means in terms of probability that it must have $k-1$ "success" and on each of the $k$ vertices $n-k$ failures. Which leads to the following line.
 \newline 
-Now we will try to have an upper bound of the RHS such that the sum on $k$ will converges to a $\mathcal{0}(n^{-\delta})$ for some $\delta >0$.
+Now we will try to have an upper bound of the RHS such that the sum on $k$ will converges to a $o(n^{-\delta})$ for some $\delta >0$.
 \begin{align}
-	\mathbb{P}(X_k \geq 1) 	&\leq (\frac{ne}{k})^k k^{k-2} p^{k-1} e^{-pk(n-k))}\\
-				&\leq n^ke^kk^{-2} p^{k-1}e^{-(\log(n) + c)\frac{k(n-k)}{n}}\\
-				&\leq n^\frac{k^2}{n} p^{k-1}e^{-c\frac{k(n-k)}{n}}\\
-				&\leq s
+	\mathbb{P}(X_k \geq 1) 	
+	            &\leq k^{-2}p^{-1}(\frac{ne}{k})^k k^{k} p^{k} e^{-p\frac{n}{2}(n-k))}\\
+	            &\leq k^{-2}p^{-1}((\frac{ne}{k}) k p e^{-p\frac{n}{2}})^k\\
+	            &\leq p^{-1}(nep e^{-p\frac{n}{2}})^k
 \end{align}
-
+If we denote the bracketed term by $A$, then
+\begin{equation}
+    A = \mathcal{O}(\log(n) n^{-\frac{1}{2}})
+\end{equation}
+Hence, $A$ goes to 0 without any condition on $k$, so we obtain
+\begin{equation}
+    \sum_{k=3}^{\lceil n/2\rceil} \mathbb{P}(X_k \geq 1)\leq p^{-1}\sum_{k=3}^{\lceil n/2\rceil} A^k = o(1)
+\end{equation}
+Which gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depend on the existence of isolated connected components of size 2 or more. So it only depends on the existence of isolated vertices.
+An intuitive point of view on that is some isolated component emerges it is really likely to be eaten by the giant component, then the only components that have a chance of not being absorbed by the giant component are the isolated vertex.
+So we have proved \ref{th:isolcomp}.
 \end{proof}
+
 \section{Existence of thresholds}
 One of the most surprising features on random graphs, which seems to have motivated Erdos to publish results from 1959, is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
 This zone which produces great difference in limiting probability will be called a threshold.
@@ -367,7 +378,6 @@ We will now prove another lemma
 	\begin{equation}\label{eq:bayes}
 		1 - \mathbb{P}(\Omega_k^*)= 1-\mathbb{P}(\Omega_{k-1}^*)
 		+ \mathbb{P}(\Omega_{k-1}^*)\mathbb{P}(||\Gamma_k(x)| - (pn)^k| \leq \delta_k(pn)^k | \Omega_{k-1}^*)
-
 	\end{equation}
 	If $G \in \Omega_{k-1}^*$ and $|a| = |\Gamma_{k-1}(x)|$ and by applying the definition of belonging to $\Omega_{k-1}^*$ and multiplying both sides by $pn$ we have 
 	\begin{equation}
@@ -384,7 +394,7 @@ We will now prove another lemma
 		&\leq 2\mathbb{P}(||\Gamma_k(x)| - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn | \Omega_k)\\
 		&\leq 2n^{-\frac{K^2}{9}}
 	\end{align}
-	If we combine the last inequality that is obtained applying the previous lemma with \ref{bayes} then we have the result.
+	If we combine the last inequality that is obtained applying the previous lemma with \ref{eq:bayes} then we have the result.
 \end{proof}
 \begin{theorem}
 	Using all previous definitions on $p$ and $d$, in $\mathcal{G}_{n, p}$ we have
@@ -454,7 +464,7 @@ We will now prove another lemma
 	\end{equation}
 	Using the following theorem ( TODO : PROVE IT SOMEWHERE )
 	\begin{theorem}
-		$\lim{n \to \infty) \mathbb{E}_r(X_n) - \lambda^r = 0$
+		$\lim_{n\to\infty} \mathbb{E}_r(X_n) - \lambda^r = 0$
 			\newline
 			$\implies X \longrightarrow_d \mathcal{P}_{\lambda}$
 	\end{theorem}
