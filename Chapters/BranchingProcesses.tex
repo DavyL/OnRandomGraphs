@@ -5,6 +5,7 @@ This number following a distribution, we call it the offspring distribution and 
 \begin{equation}
 	p_i = \mathbb{P}(\text{ having i child })
 \end{equation}
+When we say that a branching process is a "something" branching process, that means that the offspring distribution follows the "something" law (typically a Poisson branching process).
 And we also denote by $Z_n$ the number of individuals in the n-th generation. 
 Then if we consider that the offspring distribution doesn't depend on the generation of the individual considered we have
 \begin{equation}
@@ -41,27 +42,153 @@ So in terms of set, we can consider that at time (step) $t$ we have :
 The process starts as follow, at $t = 0$, no vertex has been seen yet, so $U_0 = V$ and the process has not started yet then $A_0 = \emptyset, E_0=\emptyset$.
 In the case of a branching process we consider a rooted tree and we denote the root as $r$, so at $t = 1$, $A_1 = r, U_1 = V\backslash\{r\}, E_1 = r$.
 The two-steps initialisation might seem redundant but we will use it in the future when we will extend this process to study any kind of graph. 
-For the following steps, at time $t > 1$, the process is as follow, a vertex $v_t$ is picked \footnote{We use "picked" as follow, if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} in $A_{t-1}$. 
+\newline
+For the following steps, at time $t > 1$, the process is as follow, a vertex $v_t$ is picked \footnote{We use "picked" as follow, if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
 For convenience we will add the variable $\eta_t = |N_(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
 And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$
 Finally, we move $v_t$ to $E_t$ and the process stops when all vertices are explored $|E_t|$ = n, equivalently $t=n$, equivalently $|U_t| = 0$.
 \newline
 Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out only if the algorithm finishes.
-We can then define $T$ as the moment the population dies out.
-\begin{equation}
-	T := \min\{t: A_t = 0\}
-\end{equation}
-\newline
-Let $X_1, X_2, ...$ be i.i.d. random values the same distribution as $X_{1,1}$, hence following the same offspring distribution.
-\begin{align}
+\begin{align}\label{activatedV}
 	\left\{\begin{array}{rl}
-			U_0 &= 1\\
-			U_i &= U_{i-1} + X_i - 1 = X_1 + ... + X_i - ( i - 1)..
+			|A_0| &= 1\\
+			|A_i| &= |A_{i-1}| + \eta_i - 1 = \eta_1 + ... + \eta_i - ( i - 1)
 	 \end{array}
 	\right.
 \end{align}
+With all the $\eta_i$ independent and identically distributed random variables.
+We can then define $T$ as the instant the population dies out.
+\begin{equation}
+	T := \min\{t: A_t = 0\}
+\end{equation}
+If $T = \infty$ then we say that the population survives. 
+\newline
+We have that $\{A_t\}_t$ is a random walk on the tree and we also get the following evolution equation 
+\begin{equation}\label{eq:St}
+	|S_t| = |S_{t-1}| + \eta_t - 1
+\end{equation}
+\newline
+When we are considering the Erdos Renyi model, in the Markovian paradigm, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
+Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex we $v$ is
+\begin{equation}
+	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
+\end{equation}
+So we have
+\begin{equation}
+	\eta_t ~ \text{Bin}( n - (t-1) - |A_{t-1}|, p)
+\end{equation}
+and we observe comparing it to \ref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
+However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are almost independently distributed.
+We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
+This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \ref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
+\newline
+As the Poisson law is more convenient to work with than the Bernoulli, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and Bernoulli branching process.
+\begin{theorem}
+For a branching process with a binomial offspring distribution with parameter $n$ and $p$ and a branching process with a Poisson offspring distribution with parameter $\lambda = np$
+	\begin{equation}
+		\mathbb{P}_{n,p}(T \geq k) = \mathbb{P}_{\lambda}^*(T^* \geq k) + e_k(n)\quad, \forall k \geq 1
+	\end{equation}
+	With $T$ (resp. $T^*$) the size of the binomial (resp. Poisson) resulting branching process.
+	And 
+	\begin{equation}
+		|e_k(n)| \leq \frac{2\lambda ^2}{n}\sum{s=1}^{k-1} \mathbb{P}_{lambda}^*(T^* \geq s) \leq \frac{2\lambda ^2k}{n}
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	The proof makes use of couplings, see Annex (TODO : WRITE ON COUPLINGS IN THE ANNEX), they are a way to define distinct random values on a common probability space giving information on the intertwinning of both.
+	\begin{equation}
+		X_i~\text{Bin}(n, \frac{\lambda}{n})\quad,\quad X_i^* ~\text{Poi}(\lambda)
+	\end{equation}
+	If we denote by \mathbb{P} the joint probability distribution of $X_i$ and $X_i^*$n then according to the theorem (TODO : ADD THE THEOREM IN ANNEX + PROVE IT) then
+	\begin{equation}
+		\mathbb{P}(X_i \neq X_i^*) \leq \frac{\lambda^2}{n}
+	\end{equation}
+	Also, 
+	\begin{align}
+		\mathbb{P}_{n,p}(t\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T\geq k, T^* < k)\\
+		\mathbb{P}_{\lambda}^*(t\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T< k, T^* \geq k)
+	\end{align}
+	Which gives,
+	\begin{align}
+		|\mathbb{P}_{n, p}&(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)|\\
+				  &\leq  \mathbb{P}(T\geq k, T^* < k) +\mathbb{P}(T< k, T^* \geq k)
+	\end{align}
+	The following part, until the end of the proof, is valid if we exchange $T$ by $T^*$ and $X$ by $X^*$.
+	\newline
+	By construction of $T$, the event $\{T\geqk\}$ is only defined by the events $X_1, ...., X_{k-1}$
+	Then we have $T\geqk$ and $T^*<k$ if there exists some $s$ such as $X_s \neq X_s^*$.
+	Hence, 
+	\begin{equation}
+		\mathbb{P}(T\geq k, T^*<k) \leq \sum_{s=1}^{k-1}\mathbb{P}(T \geq K, X_i \neq X_i^*, \forall i \leq s-1, X_s \neq X_s^*)
+	\end{equation}
+	If we are in the event,$T \geq K, X_i \neq X_i^*, \forall i \leq s-1$ then
+	\begin{equation}
+		X_1^*+...+X_i^* \geq i, \forall i \leq s-1
+	\end{equation}
+	In particular,
+	\begin{equation}
+		X_1^*+....+X_s^* = T^* - 1 \geq s-1
+	\end{equation}
+	Then the event $\{T^* \geq s\}$ depends only on the $X_i^*, i\leq s-1$ thus it is independent of the event $X_s \neq X_s^*$.
+	Combining these elements we obtain,
+	\begin{align}
+		\mathbb{P}(T\geq k, T^* < k) &\leq \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s, X_s \neq X_s^*) 	\\
+					     &\leq  \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)(X_s \neq X_s^*) 	\\
+					     &\leq  \frac{\lambda ^2}{n} \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s) 
+	\end{align}
+	The last inequality being obtained by the theorem on couplings (TODO : ADD REFERENCE ).
+	Using the remark on the fact that this portion of the proof is valid for both the binomial and the Poisson case we obtain the following inequality that finishes the proof.
+	\begin{equation}
+		e_k(n) = |\mathbb{P}_{n, p}&(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)
+	\end{equation}
+\end{proof}
+The last theorem gives us some kind of "point wise" convergence between Poisson and binomial branching for trees to be larger than some fixed constant.
+\newline
+Now we want to investigate the typical size of a connected component in $\mathcal{G}_{n,p}$. We denote the connected comported of a vertex $v$ by $\mathcal{C}(v)$ and as a typical component we take $\mathcal{C}(1)$.
+\begin{theorem}
+	For all $k\geq1$,
+	\begin{equation}
+		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \leq \mathbb{P}_{n,p}(T\geq k)
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	We consider $|U_i| = n - i - |A_i|$ the number of vertice at step $t = i$ and the random variable $X_i$ that is the offspring distribution on vertices that make the branching process stay a tree.
+	And $Y_i$ the converse of $X_i$ that is the offspring distribution for elements that have already appeared in our branching process. We then have
+	\begin{equation}
+		X_i ~ \text{Bin}(|U_{i-1}|, p) \quad, \quad Y_i ~ \text{Bin}(n-|U_{i-1}|, p)
+	\end{equation}
+	And we construct the random variable $X_i^{\geq} = X_i + Y_i$ Then we have that $X_i{\geq} ~ \text{Bin}(n, p)$ if $X_i$ and $Y_i$ are independent, so it is true if we consider $X_i{\geq}$ conditionnally on $\{X_j\}_{j=1}^{i-1}$. Which gives that they are i.i.d. variables.
+	\newline
+	Also, as $Y_i \geq 0$, then $X_j{\geq} \geq X_i$.
+	And if we denote by 
+	\begin{equation}
+		A_i^{\geq} = X_1 + ... + X_i^{\geq} - (i-1)
+	\end{equation}
+	Then, 
+	\begin{equation}
+		\mathbb{P}_{n,p}(|\mathcal{C}(1)|\geq k) = \mathbb{P}(|A_t| > 0, \forall t \leq k-1) 
+		\leq \mathbb{P}(|A_t^{\geq}| > 0, \forall t \leq k-1) = \mathbb{P}(T\geq k)
+	\end{equation}
+\end{proof}
+Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one that gives a lower bound on the size of a typical connected component although it is less useful than the previous because it is less fit for asymptotical evaluations.
 
-
+\begin{theorem}
+	\begin{equation}
+		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \geq \mathbb{P}_{n-k,p}(T\geq k)
+	\end{equation}
+	Here $T$ is the total progeny of a branching process with parameter $n-k$ and $p$.
+\end{theorem}
+Here is a sketch of the proof, the following changes shall just be plugged in the previous proof and the result will appear.
+\begin{proof}
+	The proof is very similar to the previous one but the following random variables are used
+	\begin{equation}
+		Y_i \sim \text{Bin}(N_{i-1} - (n-k), p)
+	\end{equation}
+	then 
+	\begin{equation}
+		X_i = X_i^{\leq}+Y_i
+	\end{equation}
+\end{proof}
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }
 \section{The supercritical case : $\lambda > 1 $ }
