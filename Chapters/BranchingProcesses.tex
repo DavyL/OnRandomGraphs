@@ -1,4 +1,42 @@
 \section{Galton-Watson trees}
+A branching process is the simplest model that can be used to describe the evolution of a population over time.
+Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
+This number following a distribution, we call it the offspring distribution and denote it by $\{p_i\}_0^{\infty}$ such as
+\begin{equation}
+	p_i = \mathbb{P}(\text{ having i child })
+\end{equation}
+And we also denote by $Z_n$ the number of individuals in the n-th generation. 
+Then if we consider that the offspring distribution doesn't depend on the generation of the individual considered we have
+\begin{equation}
+	Z_n = \sum_{i=1}^{Z_{n-1}}X_{n, i} \quad, \text{ with } X = \{X_{n,i}\}_{n,i} \text{,  i.i.d.}
+\end{equation}
+Observing this distribution, we observe that if for some generation $k_0$ we have $Z_{k_0} = 0$, then $Z_{k_0 + k} = 0$ for any $k$. We would say that that the population dies out at $k_0$ and one might be interested to study under which condition a population will die out.
+It was in fact this question that was studied by Galton and Watson (TODO : CHECK AND ADD HISTORICAL DETAILS ) that led to the study of branching processes. 
+Hence, we might refer to these branching proces as Galton-Watson processes or trees (GW).
+We can obtain the following theorem
+\begin{theorem}
+	If $\mathbb{E}X \leq 1$ then the population dies out almost surely.
+\end{theorem}
+\begin{proof}
+	TODO : ADD PROOF
+\end{proof}
+\begin{theorem}
+	If $\mathbb{E}X > 1$ then the population survives with a non-zero probability.
+\end{theorem}
+\begin{proof}
+	TODO : ADD PROOF
+\end{proof}
+We will now define an exploration process of such a branching process.
+\newline
+Let $X_1, X_2, ...$ be i.i.d. random values the same distribution as $X_{1,1}$
+\begin{align}
+	\left\{\begin{array}{rl}
+										0 & \text{if } M \ll \hat{M},\\
+										1 & \text{if } M \gg \hat{M}.
+	 \end{array}
+	\right.
+\end{align}
+
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }
 \section{The supercritical case : $\lambda > 1 $ }
