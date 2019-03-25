@@ -26,16 +26,41 @@ We can obtain the following theorem
 \begin{proof}
 	TODO : ADD PROOF
 \end{proof}
-We will now define an exploration process of such a branching process.
+We will now define an exploration process of such a branching process. We will use the model of Bollobas and Riordan ( TODO : ADD REF ).
+In this model we consider a graph with $n$ vertices and the exploration will take $n$ steps. 
+For now we will consider the case where we are exploring a connected component.
+With this process we think of vertices in three different positions, a vertex can be active, that means the algorithm knows the existence of the vertex and is evaluating it.
+A vertex can be explored, in that case we can consider that the vertex has been completely evaluated and sorted, in some fashion we can forget about it.
+Otherwise a vertex can be unseen, meaning that we still have no idea of what it is.
+So in terms of set, we can consider that at time (step) $t$ we have :
+\begin{align}
+	A_t&: \text{ the set of active vertices at time $t$ } \\
+	E_t&: \text{ the set of explored vertices at time $t$ } \\
+	U_t&: \text{ the set of unseen vertices at time $t$ } 
+\end{align}
+The process starts as follow, at $t = 0$, no vertex has been seen yet, so $U_0 = V$ and the process has not started yet then $A_0 = \emptyset, E_0=\emptyset$.
+In the case of a branching process we consider a rooted tree and we denote the root as $r$, so at $t = 1$, $A_1 = r, U_1 = V\backslash\{r\}, E_1 = r$.
+The two-steps initialisation might seem redundant but we will use it in the future when we will extend this process to study any kind of graph. 
+For the following steps, at time $t > 1$, the process is as follow, a vertex $v_t$ is picked \footnote{We use "picked" as follow, if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} in $A_{t-1}$. 
+For convenience we will add the variable $\eta_t = |N_(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
+And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$
+Finally, we move $v_t$ to $E_t$ and the process stops when all vertices are explored $|E_t|$ = n, equivalently $t=n$, equivalently $|U_t| = 0$.
 \newline
-Let $X_1, X_2, ...$ be i.i.d. random values the same distribution as $X_{1,1}$
+Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out only if the algorithm finishes.
+We can then define $T$ as the moment the population dies out.
+\begin{equation}
+	T := \min\{t: A_t = 0\}
+\end{equation}
+\newline
+Let $X_1, X_2, ...$ be i.i.d. random values the same distribution as $X_{1,1}$, hence following the same offspring distribution.
 \begin{align}
 	\left\{\begin{array}{rl}
-										0 & \text{if } M \ll \hat{M},\\
-										1 & \text{if } M \gg \hat{M}.
+			U_0 &= 1\\
+			U_i &= U_{i-1} + X_i - 1 = X_1 + ... + X_i - ( i - 1)..
 	 \end{array}
 	\right.
 \end{align}
+
 
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }

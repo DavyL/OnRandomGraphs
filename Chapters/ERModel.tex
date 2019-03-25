@@ -78,7 +78,7 @@ Which gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depen
 An intuitive point of view on that is some isolated component emerges it is really likely to be eaten by the giant component, then the only components that have a chance of not being absorbed by the giant component are the isolated vertex.
 So we have proved \ref{th:isolcomp}.
 \end{proof}
-
+The proof of \ref{th:connect} will be given in the part on branching processes.
 \section{Existence of thresholds}
 One of the most surprising features on random graphs, which seems to have motivated Erdos to publish results from 1959, is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
 This zone which produces great difference in limiting probability will be called a threshold.
@@ -118,7 +118,7 @@ The following result follows from definition with $\mathcal{Q}$ a monotone incre
 However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentionned in the introduction $\mathcal{G}_{n, M}$.
 Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_M(\mathcal{Q})$ for every $M$ close to $pN$ then we know $\mathbb{P}_p(\mathcal{Q})$ with a comparable accuracy. The converse being clearly false, for instance the property of containing M edges.
 
-\begin{theorem}
+\begin{theorem}\label{th:linkMP}
 	Suppose $\mathcal{Q}$ is any property and $0 < p = M/N< 1$ 
 	\newline
 	Then $\mathbb{P}_M(\mathcal{Q}) \leq 3 \sqrt{M}\mathbb{P}_p(\mathcal{Q})$
@@ -497,7 +497,7 @@ We will now prove another lemma
 	Finally, if we combine the last result with \ref{eq:diamcv} it is clear that the proof if complete.
 \end{proof}
 	To end this section we present two theorems that are much easier to prove with a similar flavor to the previous one.
-\begin{theorem}
+	\begin{theorem}\label{th:diam2}
 	Suppose 
 	\begin{equation}
 		i) \quad p^2n - 2\log(n) \longrightarrow \infty
@@ -530,8 +530,16 @@ We will now prove another lemma
 	\end{align}	
 \end{proof}
 And simply if we remember a previous corollary linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary
-TODO : ADD IT
+
 \begin{corollary}
-	If
+	If $M=M(n) < \binom{n}{2}$ satisfies 
+	\begin{equation}
+		\frac{2M^2}{n^3} - \log(n) \longrightarrow \infty
+	\end{equation}
+	Then almost every graph in $\mathcal{G}_{n, M}$ is of diameter 2.
 \end{corollary}
+\begin{proof}
+	The first condition makes that we are not studying a complete graph then the diameter is not 1.
+	And we have the proof simply using \ref{th:linkMP} with $pN = M$ and combining it with the previous theorem \ref{th:diam2} we have the result.
+\end{proof}
 
