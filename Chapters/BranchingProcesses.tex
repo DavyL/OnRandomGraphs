@@ -189,6 +189,30 @@ Here is a sketch of the proof, the following changes shall just be plugged in th
 		X_i = X_i^{\leq}+Y_i
 	\end{equation}
 \end{proof}
+Before finishing this section, here is a theorem that gives the probability law of $|A_t$ in a random graph branching process.
+\begin{theorem}
+	\begin{equation}
+		|A_t| + (t-1) \sim \text{Bin}(n-1, 1 - (1-p)^t)
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	Let's first observe by symmetry that 
+	\begin{equation}
+		X \sim \text{Bin}(m, p) \iff Y = m-X \sim \text{Bin}(m, 1-p)
+	\end{equation}
+	So to prove the theorem we will prove the equivalent statement
+	\begin{equation}
+		n-t-|A_t| = |U_t| \sim \text{Bin}(n-1, (1-p)^t)
+	\end{equation}
+	Indeed, 
+	\begin{align}
+		|U_t| &= n - t - |A_t| = n - t - |A_{t-1}| - |\eta_t| + 1 \\
+		      &= n - (t-1) - A_{t-1} -\eta_t \\
+		      &= n - (t-1) - A_{t-1} - \text{Bin}(n-(t-1)-|A_{t-1}|, p)\\
+		      &=|U_{t-1}| - \text{Bin}(|U_{t-1}|, p) = \text{Bin}(|U_{t-1}|, 1-p)
+	\end{align}
+	Simply applying a recursion on the last result gives the expected result.
+\end{proof}
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }
 \section{The supercritical case : $\lambda > 1 $ }
