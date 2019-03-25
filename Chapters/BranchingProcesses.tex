@@ -99,7 +99,7 @@ For a branching process with a binomial offspring distribution with parameter $n
 	\begin{equation}
 		X_i~\text{Bin}(n, \frac{\lambda}{n})\quad,\quad X_i^* ~\text{Poi}(\lambda)
 	\end{equation}
-	If we denote by \mathbb{P} the joint probability distribution of $X_i$ and $X_i^*$n then according to the theorem (TODO : ADD THE THEOREM IN ANNEX + PROVE IT) then
+	If we denote by $\mathbb{P}$ the joint probability distribution of $X_i$ and $X_i^*$n then according to the theorem (TODO : ADD THE THEOREM IN ANNEX + PROVE IT) then
 	\begin{equation}
 		\mathbb{P}(X_i \neq X_i^*) \leq \frac{\lambda^2}{n}
 	\end{equation}
@@ -115,8 +115,8 @@ For a branching process with a binomial offspring distribution with parameter $n
 	\end{align}
 	The following part, until the end of the proof, is valid if we exchange $T$ by $T^*$ and $X$ by $X^*$.
 	\newline
-	By construction of $T$, the event $\{T\geqk\}$ is only defined by the events $X_1, ...., X_{k-1}$
-	Then we have $T\geqk$ and $T^*<k$ if there exists some $s$ such as $X_s \neq X_s^*$.
+	By construction of $T$, the event $\{T\geq k\}$ is only defined by the events $X_1, ...., X_{k-1}$
+	Then we have $T\geq k$ and $T^*<k$ if there exists some $s$ such as $X_s \neq X_s^*$.
 	Hence, 
 	\begin{equation}
 		\mathbb{P}(T\geq k, T^*<k) \leq \sum_{s=1}^{k-1}\mathbb{P}(T \geq K, X_i \neq X_i^*, \forall i \leq s-1, X_s \neq X_s^*)
@@ -139,7 +139,7 @@ For a branching process with a binomial offspring distribution with parameter $n
 	The last inequality being obtained by the theorem on couplings (TODO : ADD REFERENCE ).
 	Using the remark on the fact that this portion of the proof is valid for both the binomial and the Poisson case we obtain the following inequality that finishes the proof.
 	\begin{equation}
-		e_k(n) = |\mathbb{P}_{n, p}&(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)
+		e_k(n) = |\mathbb{P}_{n, p}(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)
 	\end{equation}
 \end{proof}
 The last theorem gives us some kind of "point wise" convergence between Poisson and binomial branching for trees to be larger than some fixed constant.
