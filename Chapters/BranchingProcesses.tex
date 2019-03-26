@@ -214,7 +214,7 @@ Before finishing this section, here is a theorem that gives the probability law 
 	Simply applying a recursion on the last result gives the expected result.
 \end{proof}
 Now we will apply this result to prove the following theorem.
-\begin{theorem}
+\begin{theorem}\label{th:uplambda}
 	$\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}$
 \end{theorem}
 In the previous theorem, $I_{\lambda}$ stands for the large deviation rate function and is defined as follow.
@@ -245,6 +245,53 @@ It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}
 	\end{equation}
 \end{proof}
+From this theorem we can obtain that a typical component will be smaller than any (finite) composition of lograithm (TODO : CHECK THIS ) on $n$ almost surely.Now using this result we will obtain a logarithmic bound on the largest connected component.
+\newline
+For this we will use the random variable 
+\begin{equation}
+	\mathcal{Z}_{\leq k } = \sum_{v \in V} \mathcal{1}{|\mathcal{C}(v)| \leq k}
+\end{equation}
+Observing that $\mathcal{Z}_{\leq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume unicity on the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
+\begin{equation}
+	|\mathcal{C}_{\max}| = \max\{k: \mathbb{Z}_{\leq k} \leq k\}
+\end{equation}
+And we obtain 
+\begin{equation}
+	\mathbb{E}_{\lambda}(\mathbb{Z}_{\leq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \leq k)
+\end{equation}
+Applying the theorem above \ref{th:uplambda} we immediately have the following result.
+\begin{lemma}
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \leq a \log n) \longrightarrow_{n \to \infty} 0 \quad, a>I_{\lambda}^{-1}$
+\end{lemma}
+We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the subcritical regime).
+\begin{lemma}
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \leq a\log(n)) \leq \mathcal{O}(n^{-\delta})$
+\end{lemma}
+\begin{proof}
+	This prove will be a little bit more technical as it uses the second moment methods.
+	First of all we will need an estimate of the variance on $Z_{\geq}$, for this purpose we will use the following function
+	\begin{equation}
+		\chi_k(\lambda) = \mathbb{E}_{\lambda}(|\mathcal{C}(v)|\mathbbm{1}_{\{|\mathcal{C}(v)| \geq k\}})
+	\end{equation}
+	\begin{lemma}
+		$\mathbb{V}_{\lambda}(Z_{\geq k}) \leq n\chi_k(\lambda)$
+	\end{lemma}
+	\begin{proof}
+		By definition of the variance
+		\begin{equation}
+			\mathbb{V}_{\lambda}(Z_{\geq k}) = \sum_{i,j \in V}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
+				-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)
+		\end{equation}
+		And we can split those probabilities as components form an obvious partition of the vertex set as follow
+		\begin{equation}
+			(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
+			= (\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, i \leftrightarrow j) 
+			+ (\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k, i \not\leftrightarrow j)
+
+		\end{equation}
+	\end{proof}
+\end{proof}
+
 
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }
