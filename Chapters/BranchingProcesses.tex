@@ -284,11 +284,41 @@ We will now prove the next lemma that is similar to the previous one but gives a
 		\end{equation}
 		And we can split those probabilities as components form an obvious partition of the vertex set as follow
 		\begin{equation}
-			(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
 			= (\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, i \leftrightarrow j) 
 			+ (\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k, i \not\leftrightarrow j)
-
 		\end{equation}
+		Furthermore, 
+		\begin{align}
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
+			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k, |\mathcal{C}(j)| \geq k) \\
+			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k)\mathbb{P}( |\mathcal{C}(j)| \geq k | |\mathcal{C}(i)| = l) 
+		\end{align}
+		And simply observing that in $\mathcal{G}_{n,p}$, the event $\{|\mathcal{C}(j)| \geq k\}$ naturally increases with $n$, thus decreases if $l$ vertices are removed, we have in the event where $i$ and $j$ are not connected.
+		\begin{align}
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
+			&\leq \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k)\mathbb{P}( |\mathcal{C}(j)| \geq k ) \\
+			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k) \\
+			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k) 
+		\end{align}
+		And in the case where $i$ and $j$ are part of the same connected component then
+		\begin{equation}
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
+			=\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
+		\end{equation}
+		So, if we denote by $\Gamma$ the partition in connected components of $V$. Then we have the following
+		\begin{align}
+		\mathbb{Z}_{\geq k} &=  \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
+			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)) \\
+			&+\sum_{j \not \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)))
+			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)) \\
+			&\leq \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
+			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)^2 \\	
+			&\leq \sum_{C \in \Gamma} (\mathbb{P}_{\lambda}(|C| \geq k)
+			-\mathbb{P}_{\lambda}(|C| \geq k)^2) \sum_{i \in C} \sum_{j \in C} 1\\	
+			&\leq \sum_{C \in \Gamma} (\mathbb{P}_{\lambda}(|C| \geq k)
+			-\mathbb{P}_{\lambda}(|C| \geq k)^2) |C|^2
+		\end{align}
 	\end{proof}
 \end{proof}
 
