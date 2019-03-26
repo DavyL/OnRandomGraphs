@@ -190,7 +190,7 @@ Here is a sketch of the proof, the following changes shall just be plugged in th
 	\end{equation}
 \end{proof}
 Before finishing this section, here is a theorem that gives the probability law of $|A_t$ in a random graph branching process.
-\begin{theorem}
+\begin{theorem}\label{th:Atlaw}
 	\begin{equation}
 		|A_t| + (t-1) \sim \text{Bin}(n-1, 1 - (1-p)^t)
 	\end{equation}
@@ -213,6 +213,39 @@ Before finishing this section, here is a theorem that gives the probability law 
 	\end{align}
 	Simply applying a recursion on the last result gives the expected result.
 \end{proof}
+Now we will apply this result to prove the following theorem.
+\begin{theorem}
+	$\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}$
+\end{theorem}
+In the previous theorem, $I_{\lambda}$ stands for the large deviation rate function and is defined as follow.
+\begin{equation}
+	I_{\lambda} = \lambda - 1 - \log(\lambda)
+\end{equation}
+It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
+\begin{proof}
+	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
+	Using \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
+	\begin{equation}
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq \mathbb{P}(|A_t|>0) \leq \mathbb{P}_{\lambda}(\text{Bin}(n-1, 1-(1-p)^t) \leq t)
+	\end{equation}
+	Using Bernoulli's inequality ( TODO : PROVE IT SOMEWHERE ) $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
+	\begin{equation}
+		\mathbb{P}_{\lambda}(e^{s\text{Bin}(n-1, tp)} \leq e^{st}) 
+	\end{equation}
+	Then we can apply Markov inequality which gives 
+	\begin{equation}
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}_{\lambda}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
+	\end{equation}
+	Replacing the moment generating function of the binomial with it's value (TODO : COMPUTE IT SOMEWHERE AND ADD REF ), we obtain 
+	\begin{equation}
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s(\frac{t\lambda}{n})^n) \leq e^{-t(s - \lambda e^s - \lambda)}
+	\end{equation}
+	Using $s=\log(1/\lambda)$, which minimizes the bound, we obtain
+	\begin{equation}
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}
+	\end{equation}
+\end{proof}
+
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }
 \section{The supercritical case : $\lambda > 1 $ }
