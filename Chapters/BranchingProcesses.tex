@@ -324,10 +324,10 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\end{equation}
 	And using \ref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
 	\begin{equation}
-		\chi_{k_n}(\lambda) \leq \sum_{t=k_n}^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(\k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-aI_{\lambda}})
+		\chi_{k_n}(\lambda) \leq \sum_{t=k_n}^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-a I_{\lambda}})
 	\end{equation}
 	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \ref{eq:nexplambda} to obtain the formula of the expectation, 
-	\ref{lowbin} to obtain a lower bound and \ref{th:poibin} to convert our lower bound in the Poisson distribution.
+	\ref{th:lowbin} to obtain a lower bound and \ref{th:poibin} to convert our lower bound in the Poisson distribution.
 	So we have
 	\begin{equation}
 		\mathbb{E} Z_{\geq k} = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k) \geq n \mathbb{P}_{n-k, p}(T \geq k) 
@@ -375,7 +375,7 @@ Now, simply combining the previous results \ref{lemmalambdainf} and \ref{lemmala
 	\newline
 	Then
 	\begin{equation}
-		\frac{|\mathcal{C}_{\max}|}{\log(n)}} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
+		\frac{|\mathcal{C}_{\max}|}{\log(n)} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
 	\end{equation}
 \end{theorem}
 
