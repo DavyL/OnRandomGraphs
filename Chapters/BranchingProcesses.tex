@@ -83,7 +83,7 @@ We also denote that the random walk we defined explores only a connected compone
 This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \ref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
 \newline
 As the Poisson law is more convenient to work with than the Bernoulli, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and Bernoulli branching process.
-\begin{theorem}
+\begin{theorem}\label{th:poibin}
 For a branching process with a binomial offspring distribution with parameter $n$ and $p$ and a branching process with a Poisson offspring distribution with parameter $\lambda = np$
 	\begin{equation}
 		\mathbb{P}_{n,p}(T \geq k) = \mathbb{P}_{\lambda}^*(T^* \geq k) + e_k(n)\quad, \forall k \geq 1
@@ -91,7 +91,7 @@ For a branching process with a binomial offspring distribution with parameter $n
 	With $T$ (resp. $T^*$) the size of the binomial (resp. Poisson) resulting branching process.
 	And 
 	\begin{equation}
-		|e_k(n)| \leq \frac{2\lambda ^2}{n}\sum{s=1}^{k-1} \mathbb{P}_{lambda}^*(T^* \geq s) \leq \frac{2\lambda ^2k}{n}
+		|e_k(n)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}_{\lambda}^*(T^* \geq s) \leq \frac{2\lambda ^2k}{n}
 	\end{equation}
 \end{theorem}
 \begin{proof}
@@ -172,7 +172,7 @@ Now we want to investigate the typical size of a connected component in $\mathca
 \end{proof}
 Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one that gives a lower bound on the size of a typical connected component although it is less useful than the previous because it is less fit for asymptotical evaluations.
 
-\begin{theorem}
+\begin{theorem}\label{th:lowbin}
 	\begin{equation}
 		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \geq \mathbb{P}_{n-k,p}(T\geq k)
 	\end{equation}
@@ -249,23 +249,23 @@ From this theorem we can obtain that a typical component will be smaller than an
 \newline
 For this we will use the random variable 
 \begin{equation}
-	\mathbb{Z}_{\leq k } = \sum_{v \in V} \mathbbm{1}{|\mathcal{C}(v)| \leq k}
+	\mathbb{Z}_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
 \end{equation}
-Observing that $\mathcal{Z}_{\leq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume unicity on the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
+Observing that $\mathcal{Z}_{\geq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume unicity on the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
 \begin{equation}
-	|\mathcal{C}_{\max}| = \max\{k: \mathbb{Z}_{\leq k} \leq k\}
+	|\mathcal{C}_{\max}| = \max\{k: \mathbb{Z}_{\geq k} \geq k\}
 \end{equation}
 And we obtain 
-\begin{equation}
-	\mathbb{E}_{\lambda}(\mathbb{Z}_{\leq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \leq k)
+\begin{equation}\label{eq:nexplambda}
+	\mathbb{E}_{\lambda}(\mathbb{Z}_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
 \end{equation}
 Applying the theorem above \ref{th:uplambda} we immediately have the following result.
-\begin{lemma}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \geq a \log n) \longrightarrow_{n \to \infty} 0 \quad, a>I_{\lambda}^{-1}$
+\begin{lemma}\label{lemmalambdainf}
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \geq a \log n) = \mathcal{0}(n^{-\delta}) \quad, a>I_{\lambda}^{-1}, \quad \delta > 0$
 \end{lemma}
 We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the subcritical regime).
-\begin{lemma}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \leq a\log(n)) \leq \mathcal{O}(n^{-\delta})$
+\begin{lemma}\label{lemmalambdasup}
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \leq a\log(n)) = \mathcal{O}(n^{-\delta})\quad, a<I_{\lambda}^{-1}, \quad \delta >0$
 \end{lemma}
 \begin{proof}
 	This prove will be a little bit more technical as it uses the second moment methods.
@@ -308,17 +308,76 @@ We will now prove the next lemma that is similar to the previous one but gives a
 		\end{equation}
 		Which gives, removing all negative terms
 		\begin{equation}
-			\mathbb{V}(Z_{\geq}) \leq \sum_{i,j \in V} \mathbb{P}_{\lambda}(|\mathcal{C}(i)|\geq k, i \leftrightarrow j)
+			\mathbb{V}(Z_{\geq k}) \leq \sum_{i,j \in V} \mathbb{P}_{\lambda}(|\mathcal{C}(i)|\geq k, i \leftrightarrow j)
 		\end{equation}
 		And using properties of the expectation (linearity and behaviour in regard of indicator function ) we have
 		\begin{align}
-		\mathbb{V}(Z_{\geq}) &\leq \sum_{i \in V}\sum_{j \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k\mathbbm{1}_{j \in \mathcal{C}(i)})) \\
-				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k\sum_{j\in V} \mathbbm{1}_{j \in \mathcal{C}(i)})) \\
-				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k\sum_{j\in V} |\mathcal{C}(i)|)) 
+			\mathbb{V}(Z_{\geq k}) &\leq \sum_{i \in V}\sum_{j \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{|\mathcal{C}(i)|\geq k} \mathbbm{1}_{j \in \mathcal{C}(i)})\\
+				&\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{|\mathcal{C}(i)|\geq k} \sum_{j\in V} \mathbbm{1}_{j \in \mathcal{C}(i)}) \\
+				&\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{|\mathcal{C}(i)|\geq k}  |\mathcal{C}(i)|) = n\chi_k(\lambda) 
 		\end{align}
 	\end{proof}
+	As we want to prove that $\mathbb{P}_{\lambda}(Z_{\geq k_n} = 0)$ goes to 0 for $n$ sufficiently large using Bienaymé-Tchebychev inequality, we will give an upper bound on the variance and a lower bound on the expectation of $Z_{\geq k_n}$.
+	TODO : CHECK THE FOLLOWING (NOT CLEAR WHY )
+	\begin{equation}
+		\chi_{k_n}(\lambda) = \sum_{t=k_n}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t) 
+	\end{equation}
+	And using \ref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
+	\begin{equation}
+		\chi_{k_n}(\lambda) \leq \sum_{t=k_n}^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(\k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-aI_{\lambda}})
+	\end{equation}
+	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \ref{eq:nexplambda} to obtain the formula of the expectation, 
+	\ref{lowbin} to obtain a lower bound and \ref{th:poibin} to convert our lower bound in the Poisson distribution.
+	So we have
+	\begin{equation}
+		\mathbb{E} Z_{\geq k} = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k) \geq n \mathbb{P}_{n-k, p}(T \geq k) 
+		= n(\mathbb{P}_{\lambda_n}^*(T^* \geq k) + o(1) )
+	\end{equation}
+	$T$ and $T^*$ being the total progeny of branching process ( Binomial and Poisson), and $\lambda_n = (n-k)p = \frac{n-k}{n}p$ from \ref{th:poibin}.
+	\newline
+	And we can compute the term on the RHS as follows
+	\begin{equation}
+		\mathbb{P}_{\lambda_n}^*(T^* \geq k)
+		 = \sum_{t=k}^{\infty} \mathbb{P}_{\lambda_n}^*(T^* = k)
+		 = \sum_{t=k}^{\infty} \frac{(\lambda_n t)^{t-1}}{t!} e^{-\lambda_n t}
+	\end{equation}
+	To simplify the writings we observe $\lambda_n = (1-o(1))\lambda$ and $I_{\lambda_n} = I_{\lambda} + o(1)$, then applying stirling formula we obtain
+	\begin{equation}
+		\frac{(\lambda_n t)^{t-1}}{t!} e^{-\lambda_n t}
+		= \frac{\lambda^{t-1} (1-o(1))^{t-1}t^{t-1}}{t^t} \frac{e^t}{t^t\sqrt{2\pi t}(1 + o(1))} e^{-(1-o(1))\lambda t}	
+	\end{equation}
+	Simplifying we get
+	\begin{equation}
+		\frac{(\lambda_n t)^{t-1}}{t!} e^{-\lambda_n t}
+		= \frac{1}{\lambda t^{\frac{3}{2}}}(\lambda t t^{-\lambda})^t (1 + o(1))
+		= \frac{e^{-I_{\lambda} t }}{\lambda t^{\frac{3}{2}}} (1 + o(1)) \geq \frac{1}{\lambda}e^{-I_{\lambda} t}
+	\end{equation}
+	Now, as the summand is decreasing we can bound it by the integral as follows.
+	\begin{equation}
+		n\mathbb{P}_{\lambda_n}^*(T^* \geq k)
+		\geq \frac{n}{\lambda} \int_{k}^{\infty} e^{-I_{\lambda} t} \mathrm{d}t
+		 = \frac{e^{-I_{\lambda} k}}{\lambda I_{\lambda}}
+	\end{equation}
+	With $k_n = a\log(n)$ we have 
+	\begin{equation}
+		\mathbb{E} Z_{k_n} \geq n\mathbb{P}_{\lambda_n}^*(T^* \geq k_n) \geq n^{-I_{\lambda} a + 1}
+	\end{equation}
+	And finally we have
+	\begin{equation}
+		\mathbb{P}(Z_{k_n} = 0) \leq \frac{\mathbb{V}Z_{k_n}}{(\mathbb{E}Z_{k_n})^2} \leq \frac{\mathcal{O}(n^{-I_{\lambda}a + 1})}{n^{-2I_{\lambda}a + 2} \lambda I_{\lambda}} 
+			= \mathcal{O}(n^{I_{\lambda}a - 1})
+	\end{equation}
+	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ asymptotically almost surely.
 \end{proof}
-
+Now, simply combining the previous results \ref{lemmalambdainf} and \ref{lemmalambdasup}  we have
+\begin{theorem}
+	If $\lambda < 1$
+	\newline
+	Then
+	\begin{equation}
+		\frac{|\mathcal{C}_{\max}|}{\log(n)}} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
+	\end{equation}
+\end{theorem}
 
 \section{The exploration process, Karp's new approach}
 \section{The subcritical case : $\lambda < 1 $ }
