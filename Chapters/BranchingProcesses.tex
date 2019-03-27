@@ -249,7 +249,7 @@ From this theorem we can obtain that a typical component will be smaller than an
 \newline
 For this we will use the random variable 
 \begin{equation}
-	\mathcal{Z}_{\leq k } = \sum_{v \in V} \mathcal{1}{|\mathcal{C}(v)| \leq k}
+	\mathbb{Z}_{\leq k } = \sum_{v \in V} \mathbbm{1}{|\mathcal{C}(v)| \leq k}
 \end{equation}
 Observing that $\mathcal{Z}_{\leq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume unicity on the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
 \begin{equation}
@@ -295,30 +295,42 @@ We will now prove the next lemma that is similar to the previous one but gives a
 			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k)\mathbb{P}( |\mathcal{C}(j)| \geq k | |\mathcal{C}(i)| = l) 
 		\end{align}
 		And simply observing that in $\mathcal{G}_{n,p}$, the event $\{|\mathcal{C}(j)| \geq k\}$ naturally increases with $n$, thus decreases if $l$ vertices are removed, we have in the event where $i$ and $j$ are not connected.
-		\begin{align}
+		\begin{align}\label{negval}
 			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
 			&\leq \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k)\mathbb{P}( |\mathcal{C}(j)| \geq k ) \\
 			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k) \\
 			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k) 
 		\end{align}
 		And in the case where $i$ and $j$ are part of the same connected component then
-		\begin{equation}
+		\begin{equation}\label{posval}
 			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
 			=\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
 		\end{equation}
 		So, if we denote by $\Gamma$ the partition in connected components of $V$. Then we have the following
 		\begin{align}
-		\mathbb{Z}_{\geq k} &=  \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
+			\mathbb{V} \mathbb{Z}_{\geq k} &=  \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
 			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)) \\
 			&+\sum_{j \not \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)))
 			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)) \\
 			&\leq \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
-			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)^2 \\	
+			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)^2) \\	
 			&\leq \sum_{C \in \Gamma} (\mathbb{P}_{\lambda}(|C| \geq k)
 			-\mathbb{P}_{\lambda}(|C| \geq k)^2) \sum_{i \in C} \sum_{j \in C} 1\\	
 			&\leq \sum_{C \in \Gamma} (\mathbb{P}_{\lambda}(|C| \geq k)
-			-\mathbb{P}_{\lambda}(|C| \geq k)^2) |C|^2
+			-\mathbb{P}_{\lambda}(|C| \geq k)^2) |C|^2 \\
+			&\leq \sum_{C \in \Gamma} \mathbb{P}_{\lambda}(|C| \geq k) n |C|
+			- \sum_{C\in\Gamma} \mathbb{P}_{\lambda}(|C| \geq k)^2 |C|^2 \\
+			&\leq n \chi_k(\lambda) - \sum_{C \in \Gamma} \mathbb{P}_{\lambda}(|C| \geq k)^2 |C|^2 		
 		\end{align}
+		A way of seeing this proof is to consider the covariance matrix, of the random variable $\mathbbm{1}_{|\mathcal{C}(i)|\leq k}(i)$ for all vertex $i$.
+		So this matrix is of the size than the adjacency matrix of the graph.
+		\newline
+		Observing that it is possible to permute the columns of the adjacency matrix to obtain a block decomposition of the matrix, with each block representing a connected component.
+		To make it clear, in each block line or column there is at least a non-zero value. And each block containing for instance the vertex $i$ is of size $|\mathcal{C}(i)| \times |\mathcal{C}(i)|$. Outside of these blocks that we place on the diagonal all values are zero.
+		\newline
+		Now, if we compute the covariance matrix on this block matrix of adjacency, in each connected block the values are positive (from \ref{posval} and outside these blocks negative ( from \ref{negval} ). 
+		\newline
+		Then the first inequality above corresponds to taking the positive values of this matrix by taking it's trace and the third one comes from observing that in each block the values are constant from \ref{posval}. Hence we observe that $\chi_k(\lambda)$ is the trace of the covariance matrix.			
 	\end{proof}
 \end{proof}
 
