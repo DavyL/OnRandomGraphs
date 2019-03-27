@@ -306,31 +306,16 @@ We will now prove the next lemma that is similar to the previous one but gives a
 			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \leftrightarrrow j)
 			=\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
 		\end{equation}
-		So, if we denote by $\Gamma$ the partition in connected components of $V$. Then we have the following
+		Which gives, removing all negative terms
+		\begin{equation}
+			\mathbb{V}(Z_{\geq}) \leq \sum_{i,j \in V} \mathbb{P}_{\lambda}(|\mathcal{C}(i)|\geq k, i \leftrightarrow j)
+		\end{equation}
+		And using properties of the expectation (linearity and behaviour in regard of indicator function ) we have
 		\begin{align}
-			\mathbb{V} \mathbb{Z}_{\geq k} &=  \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
-			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)) \\
-			&+\sum_{j \not \in C}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)))
-			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)) \\
-			&\leq \sum_{C \in \Gamma} \sum_{i \in C} (\sum_{j \in C}\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
-			-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)^2) \\	
-			&\leq \sum_{C \in \Gamma} (\mathbb{P}_{\lambda}(|C| \geq k)
-			-\mathbb{P}_{\lambda}(|C| \geq k)^2) \sum_{i \in C} \sum_{j \in C} 1\\	
-			&\leq \sum_{C \in \Gamma} (\mathbb{P}_{\lambda}(|C| \geq k)
-			-\mathbb{P}_{\lambda}(|C| \geq k)^2) |C|^2 \\
-			&\leq \sum_{C \in \Gamma} \mathbb{P}_{\lambda}(|C| \geq k) n |C|
-			- \sum_{C\in\Gamma} \mathbb{P}_{\lambda}(|C| \geq k)^2 |C|^2 \\
-			&\leq n \chi_k(\lambda) - \sum_{C \in \Gamma} \mathbb{P}_{\lambda}(|C| \geq k)^2 |C|^2 		
+		\mathbb{V}(Z_{\geq}) &\leq \sum_{i \in V}\sum_{j \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k}\mathbbm{1}_{j \in \mathcal{C}(i)})) \\
+				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k}\sum_{j\in V} \mathbbm{1}_{j \in \mathcal{C}(i)})) \\
+				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k}\sum_{j\in V} |\mathcal{C}(i)|)) 
 		\end{align}
-		A way of seeing this proof is to consider the covariance matrix, of the random variable $\mathbbm{1}_{|\mathcal{C}(i)|\leq k}(i)$ for all vertex $i$.
-		So this matrix is of the size than the adjacency matrix of the graph.
-		\newline
-		Observing that it is possible to permute the columns of the adjacency matrix to obtain a block decomposition of the matrix, with each block representing a connected component.
-		To make it clear, in each block line or column there is at least a non-zero value. And each block containing for instance the vertex $i$ is of size $|\mathcal{C}(i)| \times |\mathcal{C}(i)|$. Outside of these blocks that we place on the diagonal all values are zero.
-		\newline
-		Now, if we compute the covariance matrix on this block matrix of adjacency, in each connected block the values are positive (from \ref{posval} and outside these blocks negative ( from \ref{negval} ). 
-		\newline
-		Then the first inequality above corresponds to taking the positive values of this matrix by taking it's trace and the third one comes from observing that in each block the values are constant from \ref{posval}. Hence we observe that $\chi_k(\lambda)$ is the trace of the covariance matrix.			
 	\end{proof}
 \end{proof}
 
