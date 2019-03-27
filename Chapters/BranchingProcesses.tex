@@ -303,7 +303,7 @@ We will now prove the next lemma that is similar to the previous one but gives a
 		\end{align}
 		And in the case where $i$ and $j$ are part of the same connected component then
 		\begin{equation}\label{posval}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \leftrightarrrow j)
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \leftrightarrow j)
 			=\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
 		\end{equation}
 		Which gives, removing all negative terms
@@ -312,9 +312,9 @@ We will now prove the next lemma that is similar to the previous one but gives a
 		\end{equation}
 		And using properties of the expectation (linearity and behaviour in regard of indicator function ) we have
 		\begin{align}
-		\mathbb{V}(Z_{\geq}) &\leq \sum_{i \in V}\sum_{j \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k}\mathbbm{1}_{j \in \mathcal{C}(i)})) \\
-				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k}\sum_{j\in V} \mathbbm{1}_{j \in \mathcal{C}(i)})) \\
-				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k}\sum_{j\in V} |\mathcal{C}(i)|)) 
+		\mathbb{V}(Z_{\geq}) &\leq \sum_{i \in V}\sum_{j \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k\mathbbm{1}_{j \in \mathcal{C}(i)})) \\
+				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k\sum_{j\in V} \mathbbm{1}_{j \in \mathcal{C}(i)})) \\
+				     &\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{\lambda}(|\mathcal{C}(i)|\geq k\sum_{j\in V} |\mathcal{C}(i)|)) 
 		\end{align}
 	\end{proof}
 \end{proof}
