@@ -261,7 +261,7 @@ And we obtain
 \end{equation}
 Applying the theorem above \ref{th:uplambda} we immediately have the following result.
 \begin{lemma}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \leq a \log n) \longrightarrow_{n \to \infty} 0 \quad, a>I_{\lambda}^{-1}$
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \geq a \log n) \longrightarrow_{n \to \infty} 0 \quad, a>I_{\lambda}^{-1}$
 \end{lemma}
 We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the subcritical regime).
 \begin{lemma}
@@ -291,19 +291,19 @@ We will now prove the next lemma that is similar to the previous one but gives a
 		Furthermore, 
 		\begin{align}
 			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
-			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k, |\mathcal{C}(j)| \geq k) \\
-			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k)\mathbb{P}( |\mathcal{C}(j)| \geq k | |\mathcal{C}(i)| = l) 
+			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l, |\mathcal{C}(j)| \geq k) \\
+			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l)\mathbb{P}( |\mathcal{C}(j)| \geq k | |\mathcal{C}(i)| = l) 
 		\end{align}
 		And simply observing that in $\mathcal{G}_{n,p}$, the event $\{|\mathcal{C}(j)| \geq k\}$ naturally increases with $n$, thus decreases if $l$ vertices are removed, we have in the event where $i$ and $j$ are not connected.
 		\begin{align}\label{negval}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
-			&\leq \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k)\mathbb{P}( |\mathcal{C}(j)| \geq k ) \\
-			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = k) \\
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \not\leftrightarrow j) 
+			&\leq \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l)\mathbb{P}( |\mathcal{C}(j)| \geq k ) \\
+			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l) \\
 			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k) 
 		\end{align}
 		And in the case where $i$ and $j$ are part of the same connected component then
 		\begin{equation}\label{posval}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \leftrightarrrow j)
 			=\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
 		\end{equation}
 		So, if we denote by $\Gamma$ the partition in connected components of $V$. Then we have the following
