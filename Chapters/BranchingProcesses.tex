@@ -386,7 +386,20 @@ This change of speed in the growth rate is called the phase transition.
 \section{The supercritical case : $\lambda > 1 $ }
 First we will show that that in the supercritical case there is a component of linear size (in $n$). In order to show that we will use that the existence if there exists a path of a linear size, then it is contained in a component of linear size too.
 Here we will consider $p = \frac{1 + \epsilon}{n}$. 
-The proof will make an extensive use of the depth-first seach algorithm (TODO : DESCRIBE IT SOMEWHERE ), at each step of the algorithm, when it is searching for a neighbour it is simply following a Bernoulli random variable of parameter $p$.
+For the beginning we will use the recent approach from Sudakov (TODO : ADD REF ) which makes use of an algorithm of graph exploration called the depth first search (DFS).
+We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to it's active stack.
+Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
+\newline
+More formally we will use the same partition of vertex as in the BFS, $A_t$ the set of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertice that have not yet been added to $A_t$.
+We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X_N = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge.
+So the algorithm starts at some specified vertex. From there it checks for edges using each time one of the $X_i$, the number of evaluations is our time value.
+If $X_t = 1$, then the new vertex under evaluation is moved from $U_t$ into $A_t$ and the same procedure repeats. 
+In the case that all possible edges from a vertex have been tested and answered negatively, then the vertex is moved to set of explored vertice of corresponding time, so it is moved from $A_t$ to $E_t$.
+The algortihm stops when $A_t$ is empty.
+\newline
+In order for the algorithm to be able to explore all components, when $A_t$ is empty, an edge is selected from $u_t$.
+\newline
+The proof will make an extensive use of the depth-first seach algorithm, at each step of the algorithm, when it is searching for a neighbour it is simply following a Bernoulli random variable of parameter $p$.
 So we consider $X_N = \{X_i\}_i^N$ our sequence of i.i.d. random variables where each $X_i$ follows a Bernoulli of parameter $p$.
 Keeping the notation from the breadth first search algorithm we obtain the following inequality.
 \begin{equation}
@@ -401,16 +414,16 @@ From these two inequalities we understand that having knowledge on $X$ will give
 \newline
 The following simple lemma will give us information on the behaviour of our binomial. It is the only probabilistic tool that we will use to show our theorem on the growth rate of the giant component.
 \begin{lemma}\label{lemmaN0}
-	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, 
+	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{2}$. Then, 
 	\begin{equation}
 		|X_{N_0} - N_0 p| \leq n^{\frac{2}{3}} \quad, \text{a.a.s.}
 	\end{equation}
 \end{lemma}
 \begin{proof}
-	Let's observe that $\mathbb{E}X_{N_0} = N_0 p = \frac{\epsilon(1+\epsilon}{2}n$.
+	Let's observe that $\mathbb{E}X_{N_0} = N_0 p = \frac{\epsilon(1+\epsilon)}{2}n$.
 	Simply using Chernoff inequality ( Chung and Lu modification for binomial variables ) TODO : ADD REF + CHECK IF TRUE + CHECK IF THERE IS SIMPLER ARGUMENT
 	\begin{equation}
-		\mathbb{P}(|X_{N_0} - \mathbb{E}X_{N_0}| > n^{\frac{2}{3} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
+		\mathbb{P}(|X_{N_0} - \mathbb{E}X_{N_0}| > n^{\frac{2}{3}} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
 	\end{equation}
 	So asymptotically almost surely we have 
 	\begin{equation}
@@ -437,10 +450,27 @@ Now we can state and prove the following theorem making use of the previous lemm
 		|U_t| = n - |A_t| - |E_t| \geq \frac{n}{3}
 	\end{equation}
 	So, we obtain that the algorithm has tested all the $|E_t||U_t| \geq \frac{n^2}{9}$ possible pairs between the set of explored vertices and not seen vertices.
-	But $\frac{n^2}{9} > \epsilon\frac{n^2}{2} = N_0$ \footnote{ $\epsilon$ is small enough} and as we assumed that we are at a step $t$ of the algorithm that is less than $N_0$ we have a contradiction.
-	TODO : NOT CLEAR WHY 
+	But $\frac{n^2}{9} > \epsilon\frac{n^2}{2} = N_0$ \footnote{ $\epsilon$ is small enough} and as we assumed that we are at a step $t$ of the algorithm that is less than $N_0$ we have a contradiction. 
 	\newline
-	We are then sure from the previous argument that $|E_{N_0}| < \frac{n}{3}$ and from \ref{eq:At} $|A_{N_0}| \leq 1 + N_0$, then $U_{N_0} \neq \emptyset$. 
+	We are then sure from the previous argument that $|E_{N_0}| < \frac{n}{3}$ and we claim $A_{N_0}| < \frac{\epsilon^2 n}{5}$, then $U_{N_0} \neq \emptyset$. 
 	Which means that there are still elements that can be added to the connected component.
+	We are going to use the same arguments as previously.
+	\newline
+	By lemma \ref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$.
+	Which gives that the number of active and explored vertices is at least as follows
+	\begin{equation}
+		|A_{N_0} \cup E_{N_0}| \geq \frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}
+	\end{equation}
+	So $|E_{N_0} \geq \frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}}$ and that would mean all of the pairs between $E_{N_0}$ and $A_{N_0}$ have been explored.
+	So we obtain the following set of inequalities.
+	\begin{align}
+		N_0 = \frac{\epsilon n^2}{2} \geq |E_{N_0}||A_{N_0}| &\geq (\frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}} )
+									(n - \frac{\epsilon n}{2} - \frac{\epsilon^2 n}{2} + n^{\frac{2}{3}})\\
+									&\geq \frac{\epsilon n^2}{2} + \frac{\epsilon ^2 n^2 }{20} - \mathcal{O}(\epsilon ^3)n^2 
+									
+	\end{align}
+	The last inequality being only with the dominating terms ( i.e. the $n^2$ ) and for $\epsilon < 1$ it is larger than $\frac{\epsilon n^2}{2}$ Which is a contradiction.
+	Then $A_{N_0}$ must be larger or equal than $\frac{\epsilon ^2n}{5}$ and observing that $A_{N_0}$ must be a path we have the result.
 \end{proof}
+
 \section{Some words on the critical case}
