@@ -1,14 +1,16 @@
 \documentclass{report}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage{amsmath, amssymb, amsthm, bbm}
+\usepackage[backend = biber, style = alphabetic, sorting = nyt]{biblatex}
+\addbibresource{bibliography.bib}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
 \title{On random graphs}
 \author{Leo Davy }
-\date{March 2019}
 
+\date{}
 \usepackage{hyperref}
 \begin{document}
 
@@ -31,5 +33,7 @@
 
 \chapter{Some probabilistic tools}
 \input{Chapters/Appendix.tex}
+
+\printbibliography[heading = bibintoc, title={References}]
 
 \end{document}
