@@ -1,7 +1,7 @@
 \section{Different approaches of the same space}
 As said in the title of the section there are different ways to approach the Erdos-Renyi model that we may call paradigms as they will give us the same kind of results but depending on the context, one might be much more convenient to use than the others.
 \newline
-Historically the first paper published on random graphs was from Erdos and Renyi in 1959, in which they give the following construction :
+Historically the first paper published on random graphs was from Erdos and Renyi in 1959 \cite{erdos59}, in which they give the following construction :
 \begin{definition}
 We call a random graph $\mathcal{G}_{n, M}$ having $n$ labelled vertices and $M$ edges. That is we choose at random ( with equal probability ) one of the $\binom{\binom{n}{2}}{M}$ possible graphs.
 \end{definition}
@@ -18,7 +18,7 @@ At time 0 there is no edge and an edge is selected at random among all of the po
 At time $t$, the edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. 
 It is clear that this model is perfectly equivalent to the first model presented in the case $t = M$. This model was also introduced in 1959 by Erdos and Renyi and is usually refered to as the random graph process.
 The advantage of this model is that it allows one to study properties on the verge of their realisations.
-For instance, using this model Bollobas proved that a graph is fully connected, when the last connection made is between an isolated vertice and the giant component. But we will study this in the following.
+For instance, using this model Bollob\'as proved that a graph is fully connected, when the last connection made is between an isolated vertice and the giant component. But we will study this in the following.
 
 
 
@@ -39,7 +39,9 @@ The proof of this theorem will be in two parts, first we will show that a graph 
 	 Almost every $G \in \mathcal{G}_{n, p}$ consists of a giant component and isolated vertices. 
 \end{theorem}
 \begin{proof}
-During this proof we will consider the random value $X_k$ that counts the number of isolated vertices of order k.
+This proof can be found in \cite{Spencer14} or \cite{Bollob01}.
+\newline
+During this proof we will consider the random value $X_k$ that counts the number of vertices that are in components of size $k$.
 So, let's estimate the probability $P(X_2 > 0) = P(X_2 \geq 1 )$. In order to do so we will use the method of first moment.
 \begin{align}
 	\mathbb{P}(X_2 \geq 1) \leq \mathbb{E}(X_2) 	&= \binom{n}{2}\mathbb{P}(\text{"drawing an isolated edge"}) \\
@@ -48,7 +50,7 @@ So, let's estimate the probability $P(X_2 > 0) = P(X_2 \geq 1 )$. In order to do
 						    	&= \mathcal{O}\left(n^2p \frac{ e^2 e^{-2p(n+1)} }{4}\right) \\
 							&= \mathcal{O}(n^2p)
 \end{align}
-So it's sufficient that $p = o^(n{-2})$ in order to have almost surely no edges in G. This is clearly satisfied by the $p$ we use in the theorem.
+So it's sufficient that $p = o(n^{-2})$ in order to have almost surely no edges in G. This is clearly satisfied by the $p$ we use in the theorem.
 \newline
 However, this is not sufficient to prove that there is no isolated other than vertices. We will observe that there can't have any component of size larger than $\lceil \frac{n}{2} \rceil$ that is not the largest component in the graph.
 Hence, we will study, the probability that there is any component of intermediary size that is not connected to the greatest component.
@@ -79,19 +81,20 @@ An intuitive point of view on that is some isolated component emerges it is real
 So we have proved \ref{th:isolcomp}.
 \end{proof}
 The proof of \ref{th:connect} will be given in the part on branching processes.
-\section{Existence of thresholds}
-One of the most surprising features on random graphs, which seems to have motivated Erdos to publish results from 1959, is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
+\section{Existence of thresholds}\footnote{ The proofs and results from this section are from \cite{JLR} and \cite{Bollob01}}
+One of the most surprising features on random graphs, which seems to have motivated Erd\H{o}s to publish his results from 1959 ( TODO : FIND THE REF THAT SAID THAT...), is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
 This zone which produces great difference in limiting probability will be called a threshold.
-It has been shown by Bollobas and Thomason that this is in fact not exclusive to random graphs, but true for all monotone properties on random subsets.
+It has been shown by Bollob\'as and Thomason \cite{Bollob87} that this is in fact not exclusive to random graphs, but true for all monotone properties on random subsets.
 \begin{definition}
 We will call a graph property a family of graphs that is closed under isomorphism.
 \end{definition}
 This means that a graph property is independent of the labelling and of the drawing of the graph.
 We can refine properties in the following definition.
 \begin{definition}
-	A property is monotone increasing (resp. decreasing) if it's stable under the the addition (resp. removal) of an edge.
+	A property is monotone\footnote{ A propery is monotone if it is either increasing or decreasing} increasing (resp. decreasing) if it's stable under the the addition (resp. removal) of an edge.
 	A graph property $\mathcal{Q}$ is convex if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$ then $B \in \mathcal{Q}$. 
 \end{definition}
+
 For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertice are monotone decreasing. 
 As an example of property that is neither monotone increasing or decreasing, we can think of being $k$-regular for some $k$ ( this means that all vertices are of degree $k$).
 Having exactly $k$ isolated vertices is an example of a convex not monotone property.
@@ -139,7 +142,7 @@ Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_
 						&\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
 						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
-	So we have
+	So we have (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
 	\begin{equation}
 		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi q M}
 	\end{equation}
@@ -170,7 +173,7 @@ Analogously, in $\mathcal{G}_{n, M}$, we call $\hat{M} = \hat{M}(n)$ a threshold
 In fact, thresholds are unique with respect to the multiplication by a scalar. So for the following, we should denote a threshold for a property as the threshold.
 
 
-\section{The stability number}
+\section{The stability number}\footnote{This section is from \cite{Bondy08}}
 Another property of graphs that one might be interested to study is the stability number. The stability number of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
 One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the chromatic number. Indeed, the chromatic number being the smallest number of colours that make a proper colouring of a graph. 
 That means a colouring on which there are no two adjacent vertices of the same color. 
@@ -219,7 +222,7 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 
 \end{proof}
 
-\section{The diameter}
+\section{The diameter}\footnote{This section uses \cite{Bollob01}}
 
 \begin{definition}
 	The diameter of a graph is the greatest distance between any pair of vertice. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
@@ -340,7 +343,7 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
 	\end{align}
-	And using Theorem 1.7 from Bollobas we have
+	And using Theorem 1.7 from Bollob\'as we have
 	\begin{align}
 		&\leq \frac{1}{\sqrt{\alpha_k^2p_an_k}}\exp(-\frac{1}{3}\alpha_k^2p_an_k) \\
 		&\leq \exp(-\frac{1}{3}\alpha_k^2p_an_k)
@@ -448,7 +451,7 @@ We will now prove another lemma
 	\begin{equation}
 		\mathbb{E}_r(X) = \frac{n!}{(n-r)!}2\mathbb{F}_r(1+o(1)) + o(1)
 	\end{equation}
-	Admitting a lemma from Bollobas TODO : ADD IT / PROVE IT ?
+	Admitting a lemma from Bollob\'as TODO : ADD IT / PROVE IT ?
 	\newline
 	With probability at least $1-n^{-K}$
 	\begin{equation}

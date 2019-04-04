@@ -27,7 +27,7 @@ We can obtain the following theorem
 \begin{proof}
 	TODO : ADD PROOF
 \end{proof}
-We will now define an exploration process of such a branching process. We will use the model of Bollobas and Riordan ( TODO : ADD REF ).
+We will now define an exploration process of such a branching process. We will use the model of Bollob\'as and Riordan ( TODO : ADD REF ).
 In this model we consider a graph with $n$ vertices and the exploration will take $n$ steps. 
 For now we will consider the case where we are exploring a connected component.
 With this process we think of vertices in three different positions, a vertex can be active, that means the algorithm knows the existence of the vertex and is evaluating it.
@@ -68,7 +68,7 @@ We have that $\{A_t\}_t$ is a random walk on the tree and we also get the follow
 	|S_t| = |S_{t-1}| + \eta_t - 1
 \end{equation}
 \newline
-When we are considering the Erdos Renyi model, in the Markovian paradigm, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
+When we are considering the Erd\H{o}s Renyi model, in the Markovian paradigm, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
 Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex we $v$ is
 \begin{equation}
 	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
@@ -386,7 +386,7 @@ This change of speed in the growth rate is called the phase transition.
 \section{The supercritical case : $\lambda > 1 $ }
 First we will show that that in the supercritical case there is a component of linear size (in $n$). In order to show that we will use that the existence if there exists a path of a linear size, then it is contained in a component of linear size too.
 Here we will consider $p = \frac{1 + \epsilon}{n}$. 
-For the beginning we will use the recent approach from Sudakov (TODO : ADD REF ) which makes use of an algorithm of graph exploration called the depth first search (DFS).
+For the beginning we will use the recent approach from Sudakov \cite{Sudakov} which makes use of an algorithm of graph exploration called the depth first search (DFS).
 We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to it's active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
