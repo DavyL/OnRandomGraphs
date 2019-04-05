@@ -69,20 +69,20 @@ We have that $\{A_t\}_t$ is a random walk on the tree and we also get the follow
 \end{equation}
 \newline
 When we are considering the Erd\H{o}s Renyi model, in the Markovian paradigm, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
-Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex we $v$ is
+Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex $v$ is
 \begin{equation}
 	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
 \end{equation}
 So we have
 \begin{equation}
-	\eta_t ~ \text{Bin}( n - (t-1) - |A_{t-1}|, p)
+	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
 and we observe comparing it to \ref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
 However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are almost independently distributed.
 We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
 This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \ref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
 \newline
-As the Poisson law is more convenient to work with than the Bernoulli, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and Bernoulli branching process.
+As the Poisson law is more convenient to work with than the binomial, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and binomial branching process.
 \begin{theorem}\label{th:poibin}
 For a branching process with a binomial offspring distribution with parameter $n$ and $p$ and a branching process with a Poisson offspring distribution with parameter $\lambda = np$
 	\begin{equation}
@@ -95,9 +95,9 @@ For a branching process with a binomial offspring distribution with parameter $n
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	The proof makes use of couplings, see Annex (TODO : WRITE ON COUPLINGS IN THE ANNEX), they are a way to define distinct random values on a common probability space giving information on the intertwinning of both.
+	The proof makes use of couplings, see Annex (TODO : WRITE ON COUPLINGS IN THE ANNEX), they are a way to define distinct random values on a common probability space giving information on the inter-twinning of both.
 	\begin{equation}
-		X_i~\text{Bin}(n, \frac{\lambda}{n})\quad,\quad X_i^* ~\text{Poi}(\lambda)
+		X_i\sim\text{Bin}(n, \frac{\lambda}{n})\quad,\quad X_i^* \sim\text{Poi}(\lambda)
 	\end{equation}
 	If we denote by $\mathbb{P}$ the joint probability distribution of $X_i$ and $X_i^*$n then according to the theorem (TODO : ADD THE THEOREM IN ANNEX + PROVE IT) then
 	\begin{equation}
@@ -152,12 +152,12 @@ Now we want to investigate the typical size of a connected component in $\mathca
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	We consider $|U_i| = n - i - |A_i|$ the number of vertice at step $t = i$ and the random variable $X_i$ that is the offspring distribution on vertices that make the branching process stay a tree.
+	We consider $|U_i| = n - i - |A_i|$ the number of vertices at step $t = i$ and the random variable $X_i$ that is the offspring distribution on vertices that make the branching process stay a tree.
 	And $Y_i$ the converse of $X_i$ that is the offspring distribution for elements that have already appeared in our branching process. We then have
 	\begin{equation}
-		X_i ~ \text{Bin}(|U_{i-1}|, p) \quad, \quad Y_i ~ \text{Bin}(n-|U_{i-1}|, p)
+		X_i \sim \text{Bin}(|U_{i-1}|, p) \quad, \quad Y_i \sim \text{Bin}(n-|U_{i-1}|, p)
 	\end{equation}
-	And we construct the random variable $X_i^{\geq} = X_i + Y_i$ Then we have that $X_i{\geq} ~ \text{Bin}(n, p)$ if $X_i$ and $Y_i$ are independent, so it is true if we consider $X_i{\geq}$ conditionnally on $\{X_j\}_{j=1}^{i-1}$. Which gives that they are i.i.d. variables.
+	And we construct the random variable $X_i^{\geq} = X_i + Y_i$ Then we have that $X_i{\geq} ~ \text{Bin}(n, p)$ if $X_i$ and $Y_i$ are independent, so it is true if we consider $X_i{\geq}$ conditionally on $\{X_j\}_{j=1}^{i-1}$. Which gives that they are i.i.d. variables.
 	\newline
 	Also, as $Y_i \geq 0$, then $X_j{\geq} \geq X_i$.
 	And if we denote by 
@@ -170,7 +170,7 @@ Now we want to investigate the typical size of a connected component in $\mathca
 		\leq \mathbb{P}(|A_t^{\geq}| > 0, \forall t \leq k-1) = \mathbb{P}(T\geq k)
 	\end{equation}
 \end{proof}
-Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one that gives a lower bound on the size of a typical connected component although it is less useful than the previous because it is less fit for asymptotical evaluations.
+Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one that gives a lower bound on the size of a typical connected component although it is less useful than the previous because it is less fit for asymptotic evaluations.
 
 \begin{theorem}\label{th:lowbin}
 	\begin{equation}
@@ -189,7 +189,7 @@ Here is a sketch of the proof, the following changes shall just be plugged in th
 		X_i = X_i^{\leq}+Y_i
 	\end{equation}
 \end{proof}
-Before finishing this section, here is a theorem that gives the probability law of $|A_t$ in a random graph branching process.
+Before finishing this section, here is a theorem that gives the probability law of $|A_t|$ in a random graph branching process.
 \begin{theorem}\label{th:Atlaw}
 	\begin{equation}
 		|A_t| + (t-1) \sim \text{Bin}(n-1, 1 - (1-p)^t)
@@ -217,7 +217,7 @@ Now we will apply this result to prove the following theorem.
 \begin{theorem}\label{th:uplambda}
 	$\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}$
 \end{theorem}
-In the previous theorem, $I_{\lambda}$ stands for the large deviation rate function and is defined as follow.
+In the previous theorem, $I_{\lambda}$ stands for the large deviation rate function and is defined as follows.
 \begin{equation}
 	I_{\lambda} = \lambda - 1 - \log(\lambda)
 \end{equation}
@@ -226,32 +226,32 @@ It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
 	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
 	Using \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
 	\begin{equation}
-		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq \mathbb{P}(|A_t|>0) \leq \mathbb{P}_{\lambda}(\text{Bin}(n-1, 1-(1-p)^t) \leq t)
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq \mathbb{P}(|A_t|>0) \leq \mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t)
 	\end{equation}
-	Using Bernoulli's inequality ( TODO : PROVE IT SOMEWHERE ) $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
+	Using Bernoulli's inequality \ref{bernoulli} $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
 	\begin{equation}
-		\mathbb{P}_{\lambda}(e^{s\text{Bin}(n-1, tp)} \leq e^{st}) 
+		\mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t) \leq \mathbb{P}(e^{s\text{Bin}(n-1, tp)} \geq e^{st}) 
 	\end{equation}
-	Then we can apply Markov inequality which gives 
+	Then we can apply Markov inequality which gives, $\forall s \geq 0$ 
 	\begin{equation}
-		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}_{\lambda}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
 	\end{equation}
 	Replacing the moment generating function of the binomial with it's value (TODO : COMPUTE IT SOMEWHERE AND ADD REF ), we obtain 
 	\begin{equation}
-		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s(\frac{t\lambda}{n})^n) \leq e^{-t(s - \lambda e^s - \lambda)}
+		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s\frac{t\lambda}{n})^n \leq e^{-t(s - \lambda e^s + \lambda)}
 	\end{equation}
-	Using $s=\log(1/\lambda)$, which minimizes the bound, we obtain
+	Using $s=\log(1/\lambda)$, which minimises the bound \footnote{ Observe that as $s$ must be positive, $\lambda$ must be smaller than 1 for the argument to be true.}, we obtain
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}
 	\end{equation}
 \end{proof}
-From this theorem we can obtain that a typical component will be smaller than any (finite) composition of lograithm (TODO : CHECK THIS ) on $n$ almost surely.Now using this result we will obtain a logarithmic bound on the largest connected component.
+Now using this result we will obtain a logarithmic bound on the largest connected component.
 \newline
 For this we will use the random variable 
 \begin{equation}
 	\mathbb{Z}_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
 \end{equation}
-Observing that $\mathcal{Z}_{\geq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume unicity on the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
+Observing that $Z_{\geq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume uniqueness of the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
 \begin{equation}
 	|\mathcal{C}_{\max}| = \max\{k: \mathbb{Z}_{\geq k} \geq k\}
 \end{equation}
@@ -261,11 +261,11 @@ And we obtain
 \end{equation}
 Applying the theorem above \ref{th:uplambda} we immediately have the following result.
 \begin{lemma}\label{lemmalambdainf}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \geq a \log n) = \mathcal{0}(n^{-\delta}) \quad, a>I_{\lambda}^{-1}, \quad \delta > 0$
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a\geqI_{\lambda}^{-1}, \quad \delta > 0$
 \end{lemma}
-We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the subcritical regime).
+We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the sub-critical regime).
 \begin{lemma}\label{lemmalambdasup}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| \leq a\log(n)) = \mathcal{O}(n^{-\delta})\quad, a<I_{\lambda}^{-1}, \quad \delta >0$
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| < a\log(n)) = \mathcal{O}(n^{-\delta})\quad, a\leq I_{\lambda}^{-1}, \quad \delta >0$
 \end{lemma}
 \begin{proof}
 	This prove will be a little bit more technical as it uses the second moment methods.
@@ -341,10 +341,10 @@ We will now prove the next lemma that is similar to the previous one but gives a
 		 = \sum_{t=k}^{\infty} \mathbb{P}_{\lambda_n}^*(T^* = k)
 		 = \sum_{t=k}^{\infty} \frac{(\lambda_n t)^{t-1}}{t!} e^{-\lambda_n t}
 	\end{equation}
-	To simplify the writings we observe $\lambda_n = (1-o(1))\lambda$ and $I_{\lambda_n} = I_{\lambda} + o(1)$, then applying stirling formula we obtain
+	To simplify the writings we observe $\lambda_n = (1-o(1))\lambda$ and $I_{\lambda_n} = I_{\lambda} + o(1)$, then applying Stirling's formula we obtain
 	\begin{equation}
 		\frac{(\lambda_n t)^{t-1}}{t!} e^{-\lambda_n t}
-		= \frac{\lambda^{t-1} (1-o(1))^{t-1}t^{t-1}}{t^t} \frac{e^t}{t^t\sqrt{2\pi t}(1 + o(1))} e^{-(1-o(1))\lambda t}	
+		= \frac{\lambda^{t-1} (1-o(1))^{t-1}t^{t-1}}{t^t} \frac{e^t}{\sqrt{2\pi t}(1 + o(1))} e^{-(1-o(1))\lambda t}	
 	\end{equation}
 	Simplifying we get
 	\begin{equation}
@@ -390,16 +390,16 @@ For the beginning we will use the recent approach from Sudakov \cite{Sudakov} wh
 We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to it's active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
-More formally we will use the same partition of vertex as in the BFS, $A_t$ the set of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertice that have not yet been added to $A_t$.
+More formally we will use the same partition of vertex as in the BFS, $A_t$ the set of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
 We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X_N = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge.
 So the algorithm starts at some specified vertex. From there it checks for edges using each time one of the $X_i$, the number of evaluations is our time value.
 If $X_t = 1$, then the new vertex under evaluation is moved from $U_t$ into $A_t$ and the same procedure repeats. 
-In the case that all possible edges from a vertex have been tested and answered negatively, then the vertex is moved to set of explored vertice of corresponding time, so it is moved from $A_t$ to $E_t$.
-The algortihm stops when $A_t$ is empty.
+In the case that all possible edges from a vertex have been tested and answered negatively, then the vertex is moved to set of explored vertices of corresponding time, so it is moved from $A_t$ to $E_t$.
+The algorithm stops when $A_t$ is empty.
 \newline
 In order for the algorithm to be able to explore all components, when $A_t$ is empty, an edge is selected from $u_t$.
 \newline
-The proof will make an extensive use of the depth-first seach algorithm, at each step of the algorithm, when it is searching for a neighbour it is simply following a Bernoulli random variable of parameter $p$.
+The proof will make an extensive use of the depth-first search algorithm, at each step of the algorithm, when it is searching for a neighbour it is simply following a Bernoulli random variable of parameter $p$.
 So we consider $X_N = \{X_i\}_i^N$ our sequence of i.i.d. random variables where each $X_i$ follows a Bernoulli of parameter $p$.
 Keeping the notation from the breadth first search algorithm we obtain the following inequality.
 \begin{equation}
@@ -427,7 +427,7 @@ The following simple lemma will give us information on the behaviour of our bino
 	\end{equation}
 	So asymptotically almost surely we have 
 	\begin{equation}
-		|X_{N_0} - \mathbb{E}X_{N_0}| \leq n^{\frac{2}{3}
+		|X_{N_0} - \mathbb{E}X_{N_0}| \leq n^{\frac{2}{3}}
 	\end{equation}
 \end{proof}
 Now we can state and prove the following theorem making use of the previous lemma and of our knowledge of the depth first search algorithm.
@@ -461,12 +461,12 @@ Now we can state and prove the following theorem making use of the previous lemm
 	\begin{equation}
 		|A_{N_0} \cup E_{N_0}| \geq \frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}
 	\end{equation}
-	So $|E_{N_0} \geq \frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}}$ and that would mean all of the pairs between $E_{N_0}$ and $A_{N_0}$ have been explored.
+	So $|E_{N_0}| \geq \frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}}$ and that would mean all of the pairs between $E_{N_0}$ and $A_{N_0}$ have been explored.
 	So we obtain the following set of inequalities.
 	\begin{align}
 		N_0 = \frac{\epsilon n^2}{2} \geq |E_{N_0}||A_{N_0}| &\geq (\frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}} )
 									(n - \frac{\epsilon n}{2} - \frac{\epsilon^2 n}{2} + n^{\frac{2}{3}})\\
-									&\geq \frac{\epsilon n^2}{2} + \frac{\epsilon ^2 n^2 }{20} - \mathcal{O}(\epsilon ^3)n^2 
+									&\geq \frac{\epsilon n^2}{2} + \frac{\epsilon ^2 n^2 }{20} - o(\epsilon ^3)n^2 
 									
 	\end{align}
 	The last inequality being only with the dominating terms ( i.e. the $n^2$ ) and for $\epsilon < 1$ it is larger than $\frac{\epsilon n^2}{2}$ Which is a contradiction.
