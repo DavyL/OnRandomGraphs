@@ -1,7 +1,22 @@
-\section{Common inequalities}
+\section{Common inequalities and simple probabilistic results}
 This section presents inequalities that are used in this report and proves them.
-\begin{theorem}[Bernoulli's inequality]\label{bernoulli}
+\begin{theorem}[The moment generating function of a binomial]\label{binMGF}
+	If $X \sim \text{Bin}(n, p)$, then 
+	\begin{equation}
+		\mathbb{E}(e^{tX}) = (1 - p + e^t p)^n
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	\begin{align}
+		\mathbb{E}(e^{tX}) 	&= \sum_{k=1}^n e^{tk} \mathbb{P}(X =k) \\
+					&= \sum_{k=1}^n \binom{n}{k} e^{tk}p^k(1-p)^k  \\
+					&= \sum_{k=1}^n \binom{n}{k} (e^tp)^k(1-p)^k  \\
+					&=(1 - p + e^t p)^n
+	\end{align}
+\end{proof}
 
+\begin{theorem}[Bernoulli's inequality]\label{bernoulli}
+	
 \end{theorem}
 \begin{theorem}[n choose k approximation]
 
