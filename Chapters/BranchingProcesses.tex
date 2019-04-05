@@ -236,7 +236,7 @@ It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
 	\end{equation}
-	Replacing the moment generating function of the binomial with it's value (TODO : COMPUTE IT SOMEWHERE AND ADD REF ), we obtain 
+	Replacing the moment generating function of the binomial with it's value \ref{binMGF}, we obtain 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s\frac{t\lambda}{n})^n \leq e^{-t(s - \lambda e^s + \lambda)}
 	\end{equation}
