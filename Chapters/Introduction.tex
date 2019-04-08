@@ -7,10 +7,10 @@ Intuitively, graphs are just about dots and lines, any phenomenon that can be re
 Hence it is clear that graph theory, the study of the so called graphs that we will define in the following, will apply to a very wide variety of problems, such as, epidemiology, sociology, internet analysis, electric circuits, road traffic, ... and of course mathematics. 
 Historically graphs first appeared in mathematics from Leonard Euler who gave, again, his name to a formula that would be the basis for the development of topology.
 \newline
-Formally a graph G will be defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set ( the points ) of $G$ and $E(G)$, disjoint from $V(G)$, the set of edges ( the lines ) of G. 
-For now we will consider edges only as a pair of elements, without order, contained in $V(G)$. In the following of this report hypergraphs and directed graphs will be studied in which edges are composed of more than two elements or edges have a direction.
+Formally a \emph{graph} G will be defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$, disjoint from $V(G)$, the set of edges ( the lines ) of G. 
+For now we will consider edges only as a pair of elements, without order, contained in $V(G)$. In the following of this report hypergraphs and directed graphs will be studied in which edges are composed of more than two elements or edges have a direction but we will define them properly when needed.
 \newline
-As an example of a graph we can consider the following graph with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7, e_8\}$ altogether with an incidence function $\psi_G : V(G) \rightarrow E(G) $ such as:
+As an example of a graph we can consider the following graph (TODO: ADD GRAPHICAL REPRESENTATION) with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7, e_8\}$ altogether with an \emph{incidence function} $\psi_G : V(G) \rightarrow E(G) $ such as:
 \begin{align*}
     \psi_G(e_1) = ab\quad
     \psi_G(e_2) = ac\quad
@@ -21,12 +21,32 @@ As an example of a graph we can consider the following graph with $ V(G) = \{a, 
     \psi_G(e_7) = ee\quad
     \psi_G(e_8) = ae
 \end{align*}
-An equivalent way to define a graph would be through the incidence matrix $M_G = (m_{ve}) $ with $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
-It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the adjacency matrix $A_G = (a_{uv})$.
+An equivalent way to define a graph would be through the \emph{incidence matrix} $M_G = (m_{ve}) $ with $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
+It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the \emph{adjacency matrix} $A_G = (a_{uv})$.
+\begin{equation}
+	M_G =	\kbordermatrix{
+		& e_1 & e_2 & e_3 & e_4 & e_5 & e_6 & e_7 & e_8 \\
+		a & 1 & 1   & 0   & 1   & 0   & 0   & 0   & 1 \\ 
+		b & 1 & 0   & 1   & 0   & 0   & 0   & 0   & 0 \\ 
+		c & 0 & 1   & 1   & 0   & 1   & 1   & 0   & 0 \\ 
+		d & 0 & 0   & 0   & 1   & 1   & 1   & 0   & 0 \\ 
+		e & 0 & 0   & 0   & 0   & 0   & 0   & 2   & 1 \\ 
+	}
+,\quad
+	A_G = \kbordermatrix{
+		  & a & b & c & d & e \\
+		a & 0 & 1 & 1 & 1 & 1 \\ 
+		b & 1 & 0 & 1 & 0 & 0 \\ 
+		c & 1 & 1 & 0 & 2 & 0 \\ 
+		d & 1 & 0 & 2 & 0 & 0 \\ 
+		e & 1 & 0 & 0 & 0 & 1 \\ 
+	}
+\end{equation}
+
 This is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. 
 It's interesting to note that an adjacency matrix is real and hermitian, thus all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
 \newline
-An interesting property of graphs is the degree of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
+An interesting property of graphs is the \emph{degree} of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
 From these definition we can obtain the following lemma, with $m$ the number of edges.
 \begin{theorem}
 For any graph finite graph G
@@ -39,23 +59,27 @@ The sum of the elements of each columns in the incidence matrix is equal to two.
 \end{proof}
 This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices. In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
 \newline
-One of the most fundamental properties of graphs is also the connexity. 
-We will say that a graph is connected, if there is a path connecting any two edges. 
-We define a path as a sequence of vertices connected by edges linking it's two ends. 
-In fact we will consider simple paths, that are paths without loops, a simple path is always defined when there is a path. 
-If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$, from this definition we may observe that $d_G(v) = |N(v)|$. And we will call a component of a vertex the set of the vertices that can be reached from this vertex. 
+One of the most fundamental properties of graphs is also the connexity or connectivity. 
+We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
+We define a \emph{path} as a sequence of vertices connected by edges linking it's two ends. 
+In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths, that are paths without loops, a simple path is always defined when there is a path. 
+If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$ called the \emph{neighbours} of $v$.
+From this definition we may observe that $d_G(v) = |N(v)|$ if $G$ is a graph without loops. 
+And we will call a (connected) \emph{component} of a vertex the set of vertices that can be reached from this vertex. 
 Then a connected graph is a graph with only one component.
 \newline
-Some interesting graphs to which we might often refer are the complete graph on n vertices, denoted by $\mathbb{K}_n$, and the complete bipartite graph $\mathbb{K}_{n,m}$. A complete graph is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
-A graph is bipartite if it's set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
-The complete bipartite graph is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
+Some interesting graphs to which we might often refer are the complete graph on n vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$ (TODO : ADD GRAPHICAL REPRESENTATION ). 
+A \emph{complete graph} is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
+A graph is \emph{bipartite} if it's set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
+The \emph{complete bipartite graph} is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
 This implies the same condition on the vertices in $Y$.
 \newline
-We call a simple graph a graph that doesn't contain any loop or multiple edge. We will mainly study simple graphs as multigraphs or loopy graphs only add redundant information. We will see later that it is possible to mimic loopy graphs and multiple graphs by assigning weight to the edges.
+We call a \emph{simple graph} a graph that doesn't contain any loop or multiple edge. We will mainly study simple graphs as multigraphs or loopy graphs only add redundant information. 
+We will see later that it is possible to mimic loopy graphs and multigraphs by assigning weights to the edges.
 \newline
 It is also possible to define the union of two graphs simply as the union of each of the vertex sets and edge sets.
 \newline
-A very important kind of graphs are the directed graphs, it's a very intuitive notion, these are simply graphs on which there are arrows on the edges, equivalently, it is like defining the adjacency between two vertices as non  symmetric, or as studying graph with non hermitian adjacency matrix 
+A very important kind of graphs are the \emph{directed graphs}, it's a very intuitive notion, these are simply graphs on which there are arrows on the edges, equivalently, it is like defining the adjacency between two vertices as non  symmetric, or as studying graph with non hermitian adjacency matrix 
 \newline
 As there is usually no confusion possible we will denote $V = V(G), E =E(G), \psi = \psi_G, ...$. 
 
@@ -63,10 +87,10 @@ As there is usually no confusion possible we will denote $V = V(G), E =E(G), \ps
 \section{Random graphs}
 This section will try to give reasons behind the study of random graphs but it's purpose is not to go deep in the details and sophistication of their study.
 The study of random graphs is a flourishing area of mathematics since it's founding papers have been published by Erdos and Renyi between 1959 and 1963 \cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
-
+(TODO : REVISE THIS WHOLE SECTION )
 Since then a lot of work has been done on random graphs, most of the questions on the Erdos-Renyi model have found satisfying answers, and the model being simplistic, many new models have been developed.
-So we will use the very vague definition by Janson.
-\begin{definition} A random graph is a graph where nodes, or edges, or both are selected by a random procedure.
+So we will use the very vague definition by Janson \ref{Janson14}.
+\begin{definition} A \emph{random graph} is a graph where nodes, or edges, or both are selected by a random procedure.
 \end{definition}
 Random graphs are interesting subject for pure mathematicians as they create a lot of open problems and offers many links with combinatorics. And for an applied mathematicians, random graphs are an entertaining tool as they may be used to simulate real world phenomenons ( most famously in sociology, epidemiology or the study of internet ). And accordingly to their level of matching with real life situations, they will be able to show the presence of complexity in the situation studied.
 \section{Cayley's formula}
@@ -77,14 +101,16 @@ This section will first of all demonstrate an important result that will be used
 \end{equation}
 with $t_n$ the number of spanning trees on $n$ vertices.
 \end{theorem}
-Before beginning the proof some definitions will be needed. A structure ( graph or tree ) is called spanning on the vertices (resp. edges ) if it intersects all vertices (resp. edges). A tree is a special case of graph structure, that can be defined in several equivalent ways. For instance, a tree is a connected graph such that upon removal of any of it's edges it becomes disconnected, equivalently, it's a graph in which every two vertices are linked by exactly one path, equivalently, it's a connected and acyclic graph ( doesn't contain any cycle ).
+Before beginning the proof some definitions will be needed. A structure ( graph or tree ) is called \emph{spanning} on the vertices (resp. edges ) if it intersects all vertices (resp. edges). 
+A \emph{tree} is a special case of graph structure, that can be defined in several equivalent ways. For instance, a tree is a connected graph such that upon removal of any of it's edges it becomes disconnected, equivalently, it's a graph in which every two vertices are linked by exactly one path, equivalently, it's a connected and acyclic graph ( doesn't contain any cycle ).
 \newline 
-The trees being a subset of the graphs, it is also possible to define directed trees in which you can follow an edge only in one direction ( otherwise it would not be a tree anymore ).
+The trees being a subset of the graphs, it is also possible to define \emph{directed trees} in which you can follow an edge only in one direction ( otherwise it would not be a tree anymore ).
 We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertice can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. 
 We also denote by $DRT_n$ the set of doubly rooted trees on n vertices.
 \newline
 As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. 
 To prove the theorem it would then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$. So we will base our approach on Joyal's proof and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
+(TODO : ADD GRAPHICAL REPRESENTATION OF THE PROOF ON SOME EXAMPLE)
 \begin{proof}
 We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
 Let's take $f:V \longrightarrow V$, and let's consider the graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.
