@@ -13,7 +13,7 @@ Then if we consider that the offspring distribution doesn't depend on the genera
 \end{equation}
 Observing this distribution, we observe that if for some generation $k_0$ we have $Z_{k_0} = 0$, then $Z_{k_0 + k} = 0$ for any $k$. We would say that that the population dies out at $k_0$ and one might be interested to study under which condition a population will die out.
 It was in fact this question that was studied by Galton and Watson (TODO : CHECK AND ADD HISTORICAL DETAILS ) that led to the study of branching processes. 
-Hence, we might refer to these branching proces as Galton-Watson processes or trees (GW).
+Hence, we might refer to these branching processes as Galton-Watson processes or trees (GW).
 We can obtain the following theorem
 \begin{theorem}
 	If $\mathbb{E}X \leq 1$ then the population dies out almost surely.
@@ -27,7 +27,7 @@ We can obtain the following theorem
 \begin{proof}
 	TODO : ADD PROOF
 \end{proof}
-We will now define an exploration process of such a branching process. We will use the model of Bollob\'as and Riordan ( TODO : ADD REF ).
+We will now define an exploration process of such a branching process. We will use the model and notations from Bollob\'as and Riordan \cite{BollobRiordan12}, which is in fact an extension of the process introduced by Karp in \cite{Karp90}.
 In this model we consider a graph with $n$ vertices and the exploration will take $n$ steps. 
 For now we will consider the case where we are exploring a connected component.
 With this process we think of vertices in three different positions, a vertex can be active, that means the algorithm knows the existence of the vertex and is evaluating it.
@@ -39,11 +39,11 @@ So in terms of set, we can consider that at time (step) $t$ we have :
 	E_t&: \text{ the set of explored vertices at time $t$ } \\
 	U_t&: \text{ the set of unseen vertices at time $t$ } 
 \end{align}
-The process starts as follow, at $t = 0$, no vertex has been seen yet, so $U_0 = V$ and the process has not started yet then $A_0 = \emptyset, E_0=\emptyset$.
+The process starts as follows, at $t = 0$, no vertex has been seen yet, so $U_0 = V$ and the process has not started yet then $A_0 = \emptyset, E_0=\emptyset$.
 In the case of a branching process we consider a rooted tree and we denote the root as $r$, so at $t = 1$, $A_1 = r, U_1 = V\backslash\{r\}, E_1 = r$.
 The two-steps initialisation might seem redundant but we will use it in the future when we will extend this process to study any kind of graph. 
 \newline
-For the following steps, at time $t > 1$, the process is as follow, a vertex $v_t$ is picked \footnote{We use "picked" as follow, if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
+For the following steps, at time $t > 1$, the process is as follows, a vertex $v_t$ is picked \footnote{We use \emph{picked} in the sense that if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
 For convenience we will add the variable $\eta_t = |N_(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
 And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$
 Finally, we move $v_t$ to $E_t$ and the process stops when all vertices are explored $|E_t|$ = n, equivalently $t=n$, equivalently $|U_t| = 0$.
@@ -68,7 +68,7 @@ We have that $\{A_t\}_t$ is a random walk on the tree and we also get the follow
 	|S_t| = |S_{t-1}| + \eta_t - 1
 \end{equation}
 \newline
-When we are considering the Erd\H{o}s Renyi model, in the Markovian paradigm, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
+When we are considering the Erd\H{o}s Renyi model, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
 Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex $v$ is
 \begin{equation}
 	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|

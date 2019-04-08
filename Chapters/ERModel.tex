@@ -13,14 +13,15 @@ And the coin tosses are still independent. Now if we denote by $e_G$ the number 
 \begin{align}
 	\mathbb{P}(G) = p^{e_G}(1-p)^{N-e_G}
 \end{align}
-This model is called the binomial model. It is easily seen that this model is asymptotically equivalent to the first one if $Np$ is close to $M$ on several aspects.
+This model is called the \emph{binomial model}. It is easily seen that this model is asymptotically equivalent to the first one if $Np$ is close to $M$ on several aspects.
 \newline
 The third model that we will investigate is on the form of a Markov process, see in Annex for a discussion on properties used here from Markov chains. 
 At time 0 there is no edge and an edge is selected at random among all of the possible edges. 
 At time $t$, the edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. 
-It is clear that this model is perfectly equivalent to the first model presented in the case $t = M$. This model was also introduced in 1959 by Erdos and Renyi and is usually refered to as the random graph process.
+It is clear that this model is perfectly equivalent to the first model presented in the case $t = M$. 
+This model was also introduced in 1959 by Erdos and Renyi and is usually refered to as the \emph{random graph process}.
 The advantage of this model is that it allows one to study properties on the verge of their realisations.
-For instance, using this model Bollob\'as proved that a graph is fully connected, when the last connection made is between an isolated vertice and the giant component. But we will study this in the following.
+For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertice and the giant component. Equivalently, when $\delta(G) > 1$. But we will study this in the following.
 
 
 
@@ -82,19 +83,19 @@ Which gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depen
 An intuitive point of view on that is some isolated component emerges it is really likely to be eaten by the giant component, then the only components that have a chance of not being absorbed by the giant component are the isolated vertex.
 So we have proved \ref{th:isolcomp}.
 \end{proof}
-The proof of \ref{th:connect} will be given in the part on branching processes.
+The proof of \ref{th:connect} can be done using the second moment method or Stein's method, see \cite{JLR}. (TODO : CHOOSE WHICH ONE TO PRESENT.).
 \section{Existence of thresholds}\footnote{ The proofs and results from this section are from \cite{JLR} and \cite{Bollob01}}
 One of the most surprising features on random graphs, which seems to have motivated Erd\H{o}s to publish his results from 1959 ( TODO : FIND THE REF THAT SAID THAT...), is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
-This zone which produces great difference in limiting probability will be called a threshold.
+This zone which produces great difference in limiting probability will be called a \emph{threshold}.
 It has been shown by Bollob\'as and Thomason \cite{Bollob87} that this is in fact not exclusive to random graphs, but true for all monotone properties on random subsets.
 \begin{definition}
-We will call a graph property a family of graphs that is closed under isomorphism.
+	We will call a \emph{graph property} a family of graphs that is closed under isomorphism.
 \end{definition}
 This means that a graph property is independent of the labelling and of the drawing of the graph.
 We can refine properties in the following definition.
 \begin{definition}
-	A property is monotone\footnote{ A propery is monotone if it is either increasing or decreasing} increasing (resp. decreasing) if it's stable under the the addition (resp. removal) of an edge.
-	A graph property $\mathcal{Q}$ is convex if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$ then $B \in \mathcal{Q}$. 
+	A property is \emph{monotone }\footnote{ A propery is monotone if it is either increasing or decreasing} \emph{increasing} (resp. \emph{decreasing}) if it's stable under the the addition (resp. removal) of an edge.
+	A graph property $\mathcal{Q}$ is \emph{convex} if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$ then $B \in \mathcal{Q}$. 
 \end{definition}
 
 For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertice are monotone decreasing. 
@@ -136,15 +137,15 @@ Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_
 	$\mathbb{P}_m(\mathcal{Q}) = |\mathcal{Q}_m| \binom{N}{M}^{-1}$
 	From this we can obtain, with $q = 1 - p$
 	\begin{align*}
-		\mathbb{P}_p(\mathcal{Q})	&= \sum_{A \in \mathcal{Q}} p^{|A|}q^{N-|A|}\\
-						&= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{|A|}q^{N-|A|}\\
-						&= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{m}q^{N-m}\\
-						&= \sum_{m=0}^{N}|\mathcal{Q}_m|p^{m}q^{N-m}\\
-						&= \sum_{m=0}^N p^mq^{N-m}\binom{N}{M}\mathbb{P}_m(\mathcal{Q}) \\
-						&\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
+		\mathbb{P}_p(\mathcal{Q})	&= \sum_{A \in \mathcal{Q}} p^{|A|}q^{N-|A|}
+						= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{|A|}q^{N-|A|}\\
+						&= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{m}q^{N-m}
+						= \sum_{m=0}^{N}|\mathcal{Q}_m|p^{m}q^{N-m}\\
+						&= \sum_{m=0}^N p^mq^{N-m}\binom{N}{M}\mathbb{P}_m(\mathcal{Q}) 
+						\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
 						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
-	So we have (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
+	So we have \ref{binomTail} (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
 	\begin{equation}
 		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi q M}
 	\end{equation}
@@ -177,12 +178,12 @@ In fact, thresholds are unique with respect to the multiplication by a scalar. S
 
 \section{The stability number}\footnote{This section is from \cite{Bondy08}}
 Another property of graphs that one might be interested to study is the stability number. The stability number of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
-One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the chromatic number. Indeed, the chromatic number being the smallest number of colours that make a proper colouring of a graph. 
+One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the \emph{chromatic number}. Indeed, the chromatic number being the smallest number of colours\footnote{A colouring of a graph is just assigning to each edge a color. Colors can be thought as "red, green, blue, ..." or as numbers.} that makes a \emph{proper colouring} of a graph. 
 That means a colouring on which there are no two adjacent vertices of the same color. 
 We are then led to a similar question than finding the stability number of a graph.
-If we denote by $\alpha(G)$ the stability number of a graph, we have the simple lower bound
+If we denote by $\alpha(G)$ the stability number of a graph, we have the simple lower bound \footnote{ We use this link with the chromatic as a simple motivation for studying the stability number. It is a number which is in fact of great importance in graph theory but on matters that are out of the scope of this report. See for instance Chapter 12 in \cite{Bondy08}.}
 \begin{equation}
-	\chi(G) \geq \frac{n}{\alpha(H)}
+	\chi(G) \geq \frac{n}{\alpha(G)}
 \end{equation}
 Before giving a lower bound on the stability number of a graph it might be interesting to denote that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
 Although the following theorem will give a bound that is quite tight in $\mathcal{G}_{n, p}$ the problem of finding the actual maximum stable set of a graph is a $NP$-hard problem.
@@ -193,11 +194,11 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 	Let $G \in \mathcal{G}_{n,p}$ and $S \subseteq V$ such that $V$ contains $k+1$ vertices.
 	Then we have 
 	\begin{equation}
-		\mathcal{P}(\text{"S is a stable set""}) = (1-p)^{\binom{k+1}{2}  }
+		\mathcal{P}(\text{"S is a stable set"}) = (1-p)^{\binom{k+1}{2}  }
 	\end{equation}
 	as none of the $\binom{k+1}{2}$ possible edges must be selected.
 	\newline
-	Let's define our random values as follow, $X_S = \mathbb{1}(\text{" $S$ is a stable set "})$ and
+	Let's define our random values as follow, $X_S = \mathbbm{1}(\text{" $S$ is a stable set "})$ and
 	\begin{equation}
 		X_{k+1} = \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} X_S
 	\end{equation}
@@ -227,7 +228,7 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 \section{The diameter}\footnote{This section uses \cite{Bollob01}}
 
 \begin{definition}
-	The diameter of a graph is the greatest distance between any pair of vertice. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
+	The \emph{diameter} of a graph is the greatest distance between any pair of vertice. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
 \end{definition}
 It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious ( and will be discussed later in this report ) but we can also think of optimization problems in which the fact that two points are far appart might be of great consequences.
 This section won't be focused on real world applications of the diameter because as we will see we are not studying the right model for this. 
@@ -237,7 +238,7 @@ One of the challenging questions in graph theory is estimating the following fun
 \begin{equation}
 	n(D, \Delta) = max\{ |G|, \text{diam}(G) \leq D, \Delta(G) \leq \Delta\}
 \end{equation}
-$n$ is the function that for a fixed diameter and a fixed maximal degree, gives the graph with a maximal number of verifies both conditions.
+$n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the graph with a maximal number of verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
 \newline
 For instance if we take $\Delta = 2$ we obtain easily by construction that a graph that maximizes the number of vertices with a diameter $D$ is a $(2D+1)$-cycle. Hence, 
 \begin{equation}
@@ -246,12 +247,12 @@ For instance if we take $\Delta = 2$ we obtain easily by construction that a gra
 But it is in fact very hard to obtain such a formula for other values of $D$ or $\Delta$.
 \newline
 If we take a graph of max degree $\Delta$ we observe that there are at most $\Delta (\Delta - 1)^{k-1}$ vertices at distance $k$ from a chosen vertex. It is easily to be convinced of this simply by drawing such a graph. 
-From this very simple construction we can obtain the following upped bound
+From this very simple construction we can obtain the following upper bound
 \begin{equation}
 	n(D, \Delta) \leq 1 + \Delta \sum_{j=1}^{D}(\Delta - 1)^{j-1} = \frac{\Delta(\Delta - 1)^D - 2}{\Delta - 2} = n_0(D, \Delta)
 \end{equation}
 $n_0$ is called the Moore bound and a graph for which the Moore bound is best possible is called a Moore graph. 
-As Donald Knuth would have suspected, the Petersen's graph is such a graph with parameter $D= 2$ and $\Delta = 3$.
+The \emph{Petersen's graph} is such a graph with parameter $D= 2$ and $\Delta = 3$. (TODO : ADD A DRAWING OF PETERSEN'S GRAPH).
 \newline
 Now let's give some functions that will allow us to make a study of the diameter in random graphs. If we choose $x$ a vertex in a graph, then we define $\Gamma_k(x)$ as the set of vertices at distance $k$ from $x$. And from this we will define $N_k(x)$ as the set of vertices of distance less than or equal to $k$. 
 Formally, we have
@@ -283,10 +284,9 @@ Also
 	p \frac{\log(n)}{n}^{-1} \longrightarrow_{n \to \infty} \infty
 \end{equation}
 that should not be too surprising as the threshold for connectivity is $\frac{\log(n) + c}{n}$ as shown before.
-We may also consider that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon > 0$ as it can be shown that otherwise the diameter of $\mathcal{G}_{n,p}$ is lower or equal than 2 ( TODO : CHECK THIS )
-One might be interested in what $p(n, d, c)$ or $d(n , p, c)$ look like so here they are
+We may also consider that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon > 0$ as it can be shown that otherwise the diameter of $\mathcal{G}_{n,p}$ is lower or equal than 2. One might be interested in what $p(n, d, c)$ or $d(n , p, c)$ look like so here they are
 \begin{equation}
-	p=n^{\frac{1}{d} - 1}(\log(\frac{n^2}{c})^\frac{1}{d}
+	p=n^{\frac{1}{d} - 1}(\log(\frac{n^2}{c}))^\frac{1}{d}
 \end{equation}
 \begin{align}
 	d &= \frac{1}{\log(pn)}(\log(n) + \log \log (n) + log(2) + \mathcal{O}(\frac{1}{\log(n)}))\\
@@ -345,7 +345,7 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
 	\end{align}
-	And using Theorem 1.7 from Bollob\'as we have
+	And using Theorem 1.7 \ref{binomTail} from Bollob\'as (TODO : ADD IT IN THE ANNEX AND PROVE IT, JUST A TAIL INEQ ON BINOM)we have
 	\begin{align}
 		&\leq \frac{1}{\sqrt{\alpha_k^2p_an_k}}\exp(-\frac{1}{3}\alpha_k^2p_an_k) \\
 		&\leq \exp(-\frac{1}{3}\alpha_k^2p_an_k)
@@ -390,7 +390,7 @@ We will now prove another lemma
 	\end{equation}
 	And we obtain using the second triangular inequality
 	\begin{align}
-		\mathbb{P}(\not\Omega_k^* | \Omega_{k-1}^*) 
+		\mathbb{P}(\neg\Omega_k^* | \Omega_{k-1}^*) 
 		&\leq \mathbb{P}(\Omega_{k-1}^*)^{-1}\mathbb{P}(||\gamma_k(x)| - apn| \geq (\delta_k - \delta_{k-1})(pn)^k | \Omega_k)\\
 		&\leq (1 - 2(k-1)n^{-\frac{K^2}{9}})^{-1}\mathbb{P}(||\Gamma_k(x)| - apn| \geq 2(\alpha_k + \beta_k + \gamma_k)(pn)^k | \Omega_k)
 	\end{align}
@@ -453,7 +453,7 @@ We will now prove another lemma
 	\begin{equation}
 		\mathbb{E}_r(X) = \frac{n!}{(n-r)!}2\mathbb{F}_r(1+o(1)) + o(1)
 	\end{equation}
-	In order to shorten the proof, we admit the following lemma that requires a quite long and technical proof. The proof can be found in \ref{Bollob81}.
+	In order to shorten the proof, we admit the following lemma that requires a quite long and technical proof. The proof can be found in \cite{Bollob81}.
 	\begin{lemma}
 		With probability at least $1-n^{-K}$
 		\begin{equation}
@@ -504,6 +504,8 @@ We will now prove another lemma
 	\end{equation}
 	Finally, if we combine the last result with \ref{eq:diamcv} it is clear that the proof if complete.
 \end{proof}
+The impressive result of this theorem is that the values of the diameter are spread only on two values with the conditions we set on $p$. In fact the number of values that the diameter can take has been fully resolved by Chung and Lu in \cite{ChungLu01}.
+\newline
 	To end this section we present two theorems that are much easier to prove with a similar flavor to the previous one.
 	\begin{theorem}\label{th:diam2}
 	Suppose 
@@ -537,7 +539,7 @@ We will now prove another lemma
 			    \text{iff  } n^2 (1-p) &\longrightarrow +\infty			
 	\end{align}	
 \end{proof}
-And simply if we remember a previous corollary linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary
+And simply if we remember the previous theorem \ref{th:linkMP} linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary
 
 \begin{corollary}
 	If $M=M(n) < \binom{n}{2}$ satisfies 
