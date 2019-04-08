@@ -43,7 +43,7 @@ It is also possible to define a graph in a third way, that is equivalent for the
 	}
 \end{equation}
 
-This is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. 
+The latter is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. 
 It's interesting to note that an adjacency matrix is real and hermitian, thus all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
 \newline
 An interesting property of graphs is the \emph{degree} of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
@@ -57,7 +57,8 @@ For any graph finite graph G
 \begin{proof}
 The sum of the elements of each columns in the incidence matrix is equal to two. So the sum of the values in the colums over all the columns is equal to two times the number of columns, so $2m$. As the sum of the columns is equal to the sum of the rows, and the sum of each row is exactly the degree of a vertex, we have the result.  
 \end{proof}
-This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices. In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
+This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices.
+In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
 \newline
 One of the most fundamental properties of graphs is also the connexity or connectivity. 
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
