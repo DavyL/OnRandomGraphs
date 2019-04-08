@@ -1,13 +1,15 @@
 \section{Different approaches of the same space}
 As said in the title of the section there are different ways to approach the Erdos-Renyi model that we may call paradigms as they will give us the same kind of results but depending on the context, one might be much more convenient to use than the others.
 \newline
-Historically the first paper published on random graphs was from Erdos and Renyi in 1959 \cite{erdos59}, in which they give the following construction :
+The first paper published on random graphs that gained notoriety was from Erdos and Renyi in 1959 \cite{erdos59}, in which they give the following construction :
 \begin{definition}
 We call a random graph $\mathcal{G}_{n, M}$ having $n$ labelled vertices and $M$ edges. That is we choose at random ( with equal probability ) one of the $\binom{\binom{n}{2}}{M}$ possible graphs.
 \end{definition}
 One may observe that some changes in notations are made between this paraphrasing of the article of Erdos and Renyi, they are made in order to be more adapted with the modern study of random graphs. We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of edges possible on $n$ labelled vertices.
 \newline
-We then arrive to our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which the coin tosses are no longer fair, but the probability of drawing an edge is now $p$. And the coin tosses are still independent. Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$. We have :
+We then arrive to our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which the coin tosses are no longer fair, but the probability of drawing an edge is now $p$.
+This model was first introduced by Gilbert in 1959, see \cite{Gilbert59}\footnote{It is interesting to note that Gilbert's paper who was at the time working at Bell's laboratories formulated the question of connectivity based on real life phone networks.}.
+And the coin tosses are still independent. Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$. We have :
 \begin{align}
 	\mathbb{P}(G) = p^{e_G}(1-p)^{N-e_G}
 \end{align}
