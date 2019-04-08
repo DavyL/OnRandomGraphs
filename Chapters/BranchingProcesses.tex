@@ -1,4 +1,4 @@
-\section{Galton-Watson trees}
+\section{Galton-Watson trees and Karp's exploration process}
 A branching process is the simplest model that can be used to describe the evolution of a population over time.
 Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
 This number following a distribution, we call it the offspring distribution and denote it by $\{p_i\}_0^{\infty}$ such as
@@ -68,7 +68,7 @@ We have that $\{A_t\}_t$ is a random walk on the tree and we also get the follow
 	|S_t| = |S_{t-1}| + \eta_t - 1
 \end{equation}
 \newline
-When we are considering the Erd\H{o}s Renyi model, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
+When we are considering the Erd\H{o}s Renyi model as a random graph process, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
 Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex $v$ is
 \begin{equation}
 	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
@@ -137,7 +137,7 @@ For a branching process with a binomial offspring distribution with parameter $n
 					     &\leq  \frac{\lambda ^2}{n} \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s) 
 	\end{align}
 	The last inequality being obtained by the theorem on couplings (TODO : ADD REFERENCE ).
-	Using the remark on the fact that this portion of the proof is valid for both the binomial and the Poisson case we obtain the following inequality that finishes the proof.
+	Using the remark on the fact that this portion of the proof is valid for both the binomial and the Poisson case we obtain the following inequality which finishes the proof.
 	\begin{equation}
 		e_k(n) = |\mathbb{P}_{n, p}(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)
 	\end{equation}
@@ -153,7 +153,7 @@ Now we want to investigate the typical size of a connected component in $\mathca
 \end{theorem}
 \begin{proof}
 	We consider $|U_i| = n - i - |A_i|$ the number of vertices at step $t = i$ and the random variable $X_i$ that is the offspring distribution on vertices that make the branching process stay a tree.
-	And $Y_i$ the converse of $X_i$ that is the offspring distribution for elements that have already appeared in our branching process. We then have
+	And $Y_i$ the converse of $X_i$ that is, the offspring distribution for elements that have already appeared in our branching process. We then have
 	\begin{equation}
 		X_i \sim \text{Bin}(|U_{i-1}|, p) \quad, \quad Y_i \sim \text{Bin}(n-|U_{i-1}|, p)
 	\end{equation}
@@ -211,9 +211,20 @@ Before finishing this section, here is a theorem that gives the probability law 
 		      &= n - (t-1) - A_{t-1} - \text{Bin}(n-(t-1)-|A_{t-1}|, p)\\
 		      &=|U_{t-1}| - \text{Bin}(|U_{t-1}|, p) = \text{Bin}(|U_{t-1}|, 1-p)
 	\end{align}
-	Simply applying a recursion on the last result gives the expected result.
+	Induction on the last result gives the expected result.
 \end{proof}
-Now we will apply this result to prove the following theorem.
+
+\section{The subcritical case}
+Now we will apply the results from the previous section in order to prove the following theorem.
+\begin{theorem}\label{th:subCritCV}
+	If $\lambda < 1$
+	\newline
+	Then
+	\begin{equation}
+		\frac{|\mathcal{C}_{\max}|}{\log(n)} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
+	\end{equation}
+\end{theorem}
+\newline
 \begin{theorem}\label{th:uplambda}
 	$\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}$
 \end{theorem}
@@ -369,20 +380,10 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\end{equation}
 	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ asymptotically almost surely.
 \end{proof}
-Now, simply combining the previous results \ref{lemmalambdainf} and \ref{lemmalambdasup}  We have
-\begin{theorem}
-	If $\lambda < 1$
-	\newline
-	Then
-	\begin{equation}
-		\frac{|\mathcal{C}_{\max}|}{\log(n)} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
-	\end{equation}
-\end{theorem}
+Now, simply combining the previous results \ref{lemmalambdainf} and \ref{lemmalambdasup} wehave our proof of our main theorem in this section \ref{th:subCritCV}.
 Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
 This change of speed in the growth rate is called the phase transition.
 
-\section{The exploration process, Karp's new approach}
-\section{The subcritical case : $\lambda < 1 $ }
 \section{The supercritical case : $\lambda > 1 $ }
 First we will show that that in the supercritical case there is a component of linear size (in $n$). In order to show that we will use that the existence if there exists a path of a linear size, then it is contained in a component of linear size too.
 Here we will consider $p = \frac{1 + \epsilon}{n}$. 
