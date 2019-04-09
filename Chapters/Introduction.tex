@@ -3,6 +3,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \section{Graph theory}\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}
+(TODO : REWRITE THE FIRST PARAGRAPH)
 Intuitively, graphs are just about dots and lines, any phenomenon that can be represented as dots connected, or not, by lines can be thought of as a graph. 
 Hence it is clear that graph theory, the study of the so called graphs that we will define in the following, will apply to a very wide variety of problems, such as, epidemiology, sociology, internet analysis, electric circuits, road traffic, ... and of course mathematics. 
 Historically graphs first appeared in mathematics from Leonard Euler who gave, again, his name to a formula that would be the basis for the development of topology.
@@ -44,7 +45,7 @@ It is also possible to define a graph in a third way, that is equivalent for the
 \end{equation}
 
 The latter is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. 
-It's interesting to note that an adjacency matrix is real and hermitian, thus all of it's eigenvalues are real and the study of it's distribution is a common topic in graph theory.
+It is interesting to note that an adjacency matrix is real and hermitian, thus all of its eigenvalues are real and the study of theirs distribution is a common topic in graph theory.
 \newline
 An interesting property of graphs is the \emph{degree} of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
 From these definition we can obtain the following lemma, with $m$ the number of edges.
@@ -58,7 +59,7 @@ For any graph finite graph G
 The sum of the elements of each columns in the incidence matrix is equal to two. So the sum of the values in the colums over all the columns is equal to two times the number of columns, so $2m$. As the sum of the columns is equal to the sum of the rows, and the sum of each row is exactly the degree of a vertex, we have the result.  
 \end{proof}
 This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices.
-In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal. And for the anecdote, finding the problem of showing that two graphs are in the same automorphism group is a $NP$-hard problem.
+In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal.
 \newline
 One of the most fundamental properties of graphs is also the connexity or connectivity. 
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
@@ -98,7 +99,7 @@ So we will use the very vague definition by Janson \cite{Janson14}.
 Random graphs are interesting subject for pure mathematicians as they create a lot of open problems and offers many links with combinatorics. And for an applied mathematicians, random graphs are an entertaining tool as they may be used to simulate real world phenomenons ( most famously in sociology, epidemiology or the study of internet ). And accordingly to their level of matching with real life situations, they will be able to show the presence of complexity in the situation studied.
 \section{Cayley's formula}
 This section will first of all demonstrate an important result that will be used several times in crucial demonstrations in this report. Although it is not a demonstration that is specific to random graphs it may give an insight to the variety of techniques that may be used in the study of random graphs and how elegant are the results ( at least quite often ). This formula has been demonstrated in many different ways and we will use the demonstration by Joyal \cite{joyal} \footnote{In fact we follow the procedure from \cite{JoyalProof} that is obtained from \cite{joyal} }that is really elegant and also is a good place to introduce several notions that will be used in the rest of the report. 
-\begin{theorem}{Cayley's formula}
+\begin{theorem}{Cayley's formula}\label{cayley}
 \begin{equation}
     t_n = n^{n-2}
 \end{equation}

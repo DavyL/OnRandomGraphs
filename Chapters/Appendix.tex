@@ -1,5 +1,5 @@
 \section{Common inequalities and simple probabilistic results}
-This section presents inequalities that are used in this report and proves them.
+This section presents inequalities that are used in this report and proves most of them. (TODO : PROVE THEM)
 \begin{theorem}[The moment generating function of a binomial]\label{binMGF}
 	If $X \sim \text{Bin}(n, p)$, then 
 	\begin{equation}
@@ -15,29 +15,69 @@ This section presents inequalities that are used in this report and proves them.
 	\end{align}
 \end{proof}
 \begin{theorem}[Convergence of factorial moments implies convergence in distribution]
-
+	Let $X$ be a random variable with a distribution that is determined by its moments. If $X_1, X_2, ...$ are random variables with finite moments such that
+	$\mathbb{E}_k(X_n) \longrightarrow \mathbb{E}_k(X)$ when $ n \to \infty$ for every integer $k \geq 1$ then
+	\begin{equation}
+		X_n \longrightarrow_d X
+	\end{equation}
 \end{theorem}
 \begin{theorem}[Factorial moments of a Poisson ]
-
+	If $X \sim \text{Poi}(\lambda)$ then
+	\begin{equation}
+		\mathbb{E}_r(X) = \lambda^r
+	\end{equation}
 \end{theorem}
 \begin{theorem}[Bernoulli's inequality]\label{bernoulli}
-	
+	\begin{equation}
+		1 - (1-p)^t \leq tp
+	\end{equation}
 \end{theorem}
-\begin{theorem}[n choose k approximation]
+\begin{theorem}[Stirling's formula]\label{stirling}
+	\begin{equation}
+		n! \sim (\frac{n}{e})^n \sqrt{2\pi n}
+	\end{equation}
+\end{theorem}
 
-\end{theorem}
+\begin{corollary}[n choose k approximation]
+	\begin{equation}
+		\binom{n}{k} \leq \frac{n^k}{k!} \leq (\frac{ne}{k})^k
+	\end{equation}
+\end{corollary}
 
 \begin{theorem}[Markov's inequality]\label{markov}
-
+	\begin{equation}
+		\mathbb{P}(X \geq a) \leq \frac{\mathbb{E}X}{a}
+	\end{equation}
 \end{theorem}
-\begin{theorem}[Chebyshev's inequality]\label{cheby}
-
+\begin{corollary}[Chebyshev's inequality]\label{cheby}
+	\begin{equation}
+		\mathbb{P}(|X - \mathbb{E}X| \geq k \mathbb{V}X ) \leq \frac{1}{k^2}
+	\end{equation}
 \end{theorem}
 
 \section{Tail inequalities}
-\begin{theorem}[Chernoff bound]\label{chernoff}
-
+The following inequalities are designated as Chernoff inequalities.
+\begin{theorem}[Chernoff bound]\label{chernoff1}
+	If $X \sim \text{Bin}(n, p)$, and $\lambda = np$ then $\forall t \geq 0$
+	\begin{equation}
+		\mathbb{P}( X \geq \mathbb{E}X + t) \leq e^{-\frac{t^2}{2(\lambda + t/3)}}
+	\end{equation}
+	\begin{equation}
+		\mathbb{P}( X \geq \mathbb{E}X + t) \leq e^{-\frac{t^2}{2\lambda}}
+	\end{equation}
 \end{theorem}
+\begin{corollary}\label{chernoff2}
+	If $X \sim \text{Bin}(n, p)$, and $\lambda = np$ then $\forall t \geq 0$
+	\begin{equation}
+		\mathbb{P}( |X - \mathbb{E}X| \geq t) \leq 2e^{-\frac{t^2}{2(\lambda + t/3)}}
+	\end{equation}
+\end{corollary}
+\begin{corollary}\label{chernoff3}
+	If $X \sim \text{Bin}(n, p)$, and $0<\epsilon \leq 3/2$ then
+	\begin{equation}
+		\mathbb{P}( |X - \mathbb{E}X| \geq \epsilon \mathbb{E}X) \leq 2e^{-\frac{\epsilon^2}{3}\mathbb{E}X }
+	\end{equation}
+\end{corollary}
 \begin{theorem}[Binomial tail]\label{binomTail}
 
 \end{theorem}

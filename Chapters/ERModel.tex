@@ -63,7 +63,8 @@ Hence, we will study, the probability that there is any component of intermediar
 				&\leq \binom{n}{k} k^{k-2} q_k\\
 				&\leq \binom{n}{k} k^{k-2} p^{k-1} ((1-p)^{n-k})^k
 \end{align}
-In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components. A tree on $k$ vertices having $k-1$ edges, this means in terms of probability that it must have $k-1$ "success" and on each of the $k$ vertices $n-k$ failures. Which leads to the following line.
+In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components, the total number of spanning trees on $k$-vertices being $k^{k-2}$ from Cayley's formula \ref{cayley}.
+A tree on $k$ vertices having $k-1$ edges, this means in terms of probability that it must have $k-1$ "success" and on each of the $k$ vertices $n-k$ failures. Which leads to the following line.
 \newline 
 Now we will try to have an upper bound of the RHS such that the sum on $k$ will converges to a $o(n^{-\delta})$ for some $\delta >0$.
 \begin{align}
