@@ -22,7 +22,7 @@ As an example of a graph we can consider the following graph (TODO: ADD GRAPHICA
     \psi_G(e_7) = ee\quad
     \psi_G(e_8) = ae
 \end{align*}
-An equivalent way to define a graph would be through the \emph{incidence matrix} $M_G = (m_{ve}) $ with $m_{ve}$ the number of times the vertice $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
+An equivalent way to define a graph would be through the \emph{incidence matrix} $M_G = (m_{ve}) $ with $m_{ve}$ the number of times the vertex $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
 It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the \emph{adjacency matrix} $A_G = (a_{uv})$.
 \begin{equation}
 	M_G =	\kbordermatrix{
@@ -59,13 +59,13 @@ For any graph finite graph G
 The sum of the elements of each columns in the incidence matrix is equal to two. So the sum of the values in the colums over all the columns is equal to two times the number of columns, so $2m$. As the sum of the columns is equal to the sum of the rows, and the sum of each row is exactly the degree of a vertex, we have the result.  
 \end{proof}
 This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices.
-In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labellings that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal.
+In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labelling that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal.
 \newline
-One of the most fundamental properties of graphs is also the connexity or connectivity. 
+One of the most fundamental properties of graphs is also the connectivity. 
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
 We define a \emph{path} as a sequence of vertices connected by edges linking it's two ends. 
 In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths, that are paths without loops, a simple path is always defined when there is a path. 
-There are two famous kinds of path, the \emph{hamiltonian path}, it is a path that includes all vertices of $G$. Analoguously, an \emph{Eulerian path} is a path in which all edges are used only once.
+There are two famous kinds of path, the \emph{hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used only once.
 \newline
 If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$ called the \emph{neighbours} of $v$.
 From this definition we may observe that $d_G(v) = |N(v)|$ if $G$ is a graph without loops. 
@@ -90,9 +90,9 @@ As there is usually no confusion possible we will denote $V = V(G), E =E(G), \ps
 
 \section{Random graphs}
 This section will try to give reasons behind the study of random graphs but it's purpose is not to go deep in the details and sophistication of their study.
-The study of random graphs is a flourishing area of mathematics since it's founding papers have been published by Erdos and Renyi between 1959 and 1963 \cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
+The study of random graphs is a flourishing area of mathematics since it's founding papers have been published by Erd\H{o}s and Renyi between 1959 and 1963 \cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
 (TODO : REVISE THIS WHOLE SECTION )
-Since then a lot of work has been done on random graphs, most of the questions on the Erdos-Renyi model have found satisfying answers, and the model being simplistic, many new models have been developed.
+Since then a lot of work has been done on random graphs, most of the questions on the Erd\H{o}s-Renyi model have found satisfying answers, and the model being simplistic, many new models have been developed.
 So we will use the very vague definition by Janson \cite{Janson14}.
 \begin{definition} A \emph{random graph} is a graph where nodes, or edges, or both are selected by a random procedure.
 \end{definition}
@@ -109,7 +109,7 @@ Before beginning the proof some definitions will be needed. A structure ( graph 
 A \emph{tree} is a special case of graph structure, that can be defined in several equivalent ways. For instance, a tree is a connected graph such that upon removal of any of it's edges it becomes disconnected, equivalently, it's a graph in which every two vertices are linked by exactly one path, equivalently, it's a connected and acyclic graph ( doesn't contain any cycle ).
 \newline 
 The trees being a subset of the graphs, it is also possible to define \emph{directed trees} in which you can follow an edge only in one direction ( otherwise it would not be a tree anymore ).
-We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertice can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. 
+We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertex can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. 
 We also denote by $DRT_n$ the set of doubly rooted trees on n vertices.
 \newline
 As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. 
@@ -126,7 +126,7 @@ We now take $C \subseteq V$ the set of vertices that are part of a cycle under t
 \begin{align*}
     C = \{ x : \exists i \geq 1 s. t. f^i(x) = x \}
 \end{align*}
-Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set and now we will construct a graph with the vertice set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End".
+Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set and now we will construct a graph with the vertex set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End".
 \newline
 Now we will just append to this line the set of vertices that are not in $G$. So we construct $\tilde{E} = \bigcup_{x \in V\\C} x f(x)$ and $\tilde{G} = (V, E\cup\tilde{E})$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
 We have now done the biggest part of the proof, that is, going from a function to a doubly rooted tree.

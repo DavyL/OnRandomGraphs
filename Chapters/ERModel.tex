@@ -1,11 +1,11 @@
 \section{Different approaches of the same space}
-As said in the title of the section there are different ways to approach the Erdos-Renyi model that we may call paradigms as they will give us the same kind of results but depending on the context, one might be much more convenient to use than the others.
+As said in the title of the section there are different ways to approach the Erd\H{o}s-Renyi model that we may call paradigms as they will give us the same kind of results but depending on the context, one might be much more convenient to use than the others.
 \newline
-The first paper published on random graphs that gained notoriety was from Erdos and Renyi in 1959 \cite{erdos59}, in which they give the following construction :
+The first paper published on random graphs that gained notoriety was from Erd\H{o}s and Renyi in 1959 \cite{erdos59}, in which they give the following construction :
 \begin{definition}
 We call a random graph $\mathcal{G}_{n, M}$ having $n$ labelled vertices and $M$ edges. That is we choose at random ( with equal probability ) one of the $\binom{\binom{n}{2}}{M}$ possible graphs.
 \end{definition}
-One may observe that some changes in notations are made between this paraphrasing of the article of Erdos and Renyi, they are made in order to be more adapted with the modern study of random graphs. We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of edges possible on $n$ labelled vertices.
+One may observe that some changes in notations are made between this paraphrasing of the article of Erd\H{o}s and Renyi, they are made in order to be more adapted with the modern study of random graphs. We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of edges possible on $n$ labelled vertices.
 \newline
 We then arrive to our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which the coin tosses are no longer fair, but the probability of drawing an edge is now $p$.
 This model was first introduced by Gilbert in 1959, see \cite{Gilbert59}\footnote{It is interesting to note that Gilbert's paper who was at the time working at Bell's laboratories formulated the question of connectivity based on real life phone networks.}.
@@ -19,17 +19,17 @@ The third model that we will investigate is on the form of a Markov process, see
 At time 0 there is no edge and an edge is selected at random among all of the possible edges. 
 At time $t$, the edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. 
 It is clear that this model is perfectly equivalent to the first model presented in the case $t = M$. 
-This model was also introduced in 1959 by Erdos and Renyi and is usually refered to as the \emph{random graph process}.
+This model was also introduced in 1959 by Erd\H{o}s and Renyi and is usually referred to as the \emph{random graph process}.
 The advantage of this model is that it allows one to study properties on the verge of their realisations.
-For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertice and the giant component. Equivalently, when $\delta(G) > 1$. But we will study this in the following.
+For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertices and the giant component. Equivalently, when $\delta(G) > 1$. But we will study this in the following.
 \newline
-All of the models introduced above are designated as Erd\"os-R\'enyi model.
+All of the models introduced above are designated as Erd\H{o}s-R\'enyi model.
 
 
 
 \section{Connectivity}
 
-One of the most fundamental structure of a graph will be it's number of components. Hence, the first question we will try to ask is how often a random graph in the Erdos-Renyi model is connected. It is essential to answer this question as many other questions might not make sense on a graph that is not connected ( for instance the diameter, the existence of hamiltonian paths or the stability number of the graph ). 
+One of the most fundamental structure of a graph will be it's number of components. Hence, the first question we will try to ask is how often a random graph in the Erd\H{o}s-Renyi model is connected. It is essential to answer this question as many other questions might not make sense on a graph that is not connected ( for instance the diameter, the existence of Hamiltonian paths or the stability number of the graph ). 
 \newline
 It is also an interesting first topic to have an insight of the kind of elegant results that arise from the study of random graphs. The main aim of this section will be to prove the following theorem in a didactic way as it is the first random graphs proof that we will study.
 \begin{theorem}\label{th:connect}
@@ -96,11 +96,11 @@ It has been shown by Bollob\'as and Thomason \cite{Bollob87} that this is in fac
 This means that a graph property is independent of the labelling and of the drawing of the graph.
 We can refine properties in the following definition.
 \begin{definition}
-	A property is \emph{monotone }\footnote{ A propery is monotone if it is either increasing or decreasing} \emph{increasing} (resp. \emph{decreasing}) if it's stable under the the addition (resp. removal) of an edge.
+	A property is \emph{monotone }\footnote{ A property is monotone if it is either increasing or decreasing} \emph{increasing} (resp. \emph{decreasing}) if it's stable under the the addition (resp. removal) of an edge.
 	A graph property $\mathcal{Q}$ is \emph{convex} if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$ then $B \in \mathcal{Q}$. 
 \end{definition}
 
-For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertice are monotone decreasing. 
+For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertex are monotone decreasing. 
 As an example of property that is neither monotone increasing or decreasing, we can think of being $k$-regular for some $k$ ( this means that all vertices are of degree $k$).
 Having exactly $k$ isolated vertices is an example of a convex not monotone property.
 \newline
@@ -123,7 +123,7 @@ The following result follows from definition with $\mathcal{Q}$ a monotone incre
 \begin{equation}
 	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
 \end{equation}
-However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentionned in the introduction $\mathcal{G}_{n, M}$.
+However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentioned in the introduction $\mathcal{G}_{n, M}$.
 Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_M(\mathcal{Q})$ for every $M$ close to $pN$ then we know $\mathbb{P}_p(\mathcal{Q})$ with a comparable accuracy. The converse being clearly false, for instance the property of containing M edges.
 
 \begin{theorem}\label{th:linkMP}
@@ -153,8 +153,8 @@ Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_
 	\end{equation}
 	Observing that $q \leq 1$ and $\sqrt{2\pi}e^{\frac{1}{6}} \approx 2.961... < 3$ the proof is complete.
 \end{proof}
-The previous section was about connectivity in $\mathcal{G}_{n,p}$, in this section we have seen that connectivity can be characterized as a monotone increasing property.
-Also it was observed that the function $p$ was somehow best possible, by that we mean that modifying it slightly would impply to only have a zero-one law. 
+The previous section was about connectivity in $\mathcal{G}_{n,p}$, in this section we have seen that connectivity can be characterised as a monotone increasing property.
+Also it was observed that the function $p$ was somehow best possible, by that we mean that modifying it slightly would imply to only have a zero-one law. 
 We call such a function $p$ a threshold ( in that case for the connectivity ). 
 \newline
 
@@ -180,8 +180,8 @@ In fact, thresholds are unique with respect to the multiplication by a scalar. S
 
 \section{The stability number}\footnote{This section is from \cite{Bondy08}}
 Another property of graphs that one might be interested to study is the stability number. The stability number of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
-One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the \emph{chromatic number}. Indeed, the chromatic number being the smallest number of colours\footnote{A colouring of a graph is just assigning to each edge a color. Colors can be thought as "red, green, blue, ..." or as numbers.} that makes a \emph{proper colouring} of a graph. 
-That means a colouring on which there are no two adjacent vertices of the same color. 
+One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the \emph{chromatic number}. Indeed, the chromatic number being the smallest number of colours\footnote{A colouring of a graph is just assigning to each edge a colour. Colours can be thought as "red, green, blue, ..." or as numbers.} that makes a \emph{proper colouring} of a graph. 
+That means a colouring on which there are no two adjacent vertices of the same colour. 
 We are then led to a similar question than finding the stability number of a graph.
 If we denote by $\alpha(G)$ the stability number of a graph, we have the simple lower bound \footnote{ We use this link with the chromatic as a simple motivation for studying the stability number. It is a number which is in fact of great importance in graph theory but on matters that are out of the scope of this report. See for instance Chapter 12 in \cite{Bondy08}.}
 \begin{equation}
@@ -230,9 +230,9 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 \section{The diameter}\footnote{This section uses \cite{Bollob01}}
 
 \begin{definition}
-	The \emph{diameter} of a graph is the greatest distance between any pair of vertice. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
+	The \emph{diameter} of a graph is the greatest distance between any pair of vertices. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
 \end{definition}
-It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious ( and will be discussed later in this report ) but we can also think of optimization problems in which the fact that two points are far appart might be of great consequences.
+It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious ( and will be discussed later in this report ) but we can also think of optimisation problems in which the fact that two points are far apart might be of great consequences.
 This section won't be focused on real world applications of the diameter because as we will see we are not studying the right model for this. 
 Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will demonstrate it through several technical lemmas, some of which will be admitted. Finally some corollary will be obtained from the theorem.
 \newline
@@ -242,7 +242,7 @@ One of the challenging questions in graph theory is estimating the following fun
 \end{equation}
 $n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the graph with a maximal number of verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
 \newline
-For instance if we take $\Delta = 2$ we obtain easily by construction that a graph that maximizes the number of vertices with a diameter $D$ is a $(2D+1)$-cycle. Hence, 
+For instance if we take $\Delta = 2$ we obtain easily by construction that a graph that maximises the number of vertices with a diameter $D$ is a $(2D+1)$-cycle. Hence, 
 \begin{equation}
 	n(D, 2) = 2D + 1, \forall D \in \mathbb{N}
 \end{equation}
@@ -268,7 +268,7 @@ And we can link those with the diameter using, diam$(G) \leq d $ if and only if 
 \newline
 Similarly diam$(G) \geq d $ if and only if $\exists y, N_{d-1}(y) \neq V(G)$.
 \newline
-Now we will define the probabilty function that we will use in the following of this section as 
+Now we will define the probability function that we will use in the following of this section as 
 \begin{equation} \label{eq:pdiam}
 	p^d n^{d-1} = \log(\frac{n^2}{c}) \quad, \text{  for some } c >0
 \end{equation}
@@ -277,7 +277,7 @@ and as a teaser the following abbreviated version of the theorem we will properl
 	$\mathbb{P}(d \leq \text{diam}(\mathcal{G}_{n, p}) \leq d + 1) \longrightarrow_{n \to \infty} 1$
 \end{theorem}
 This (inexact )theorem that is very strong states that all random graphs in $\mathcal{G}_{n, p}$ have (nearly exactly) the same diameter.
-In the actual theorem that we will prove we will be able to characterize exactly the probability of obtaining either $d$ or $d+1$ as a function of the parameter $c$ in \label{eq:diam}
+In the actual theorem that we will prove we will be able to characterise exactly the probability of obtaining either $d$ or $d+1$ as a function of the parameter $c$ in \label{eq:diam}
 \newline
 Before proving such a theorem we will need some technical lemmas and assumptions. So we will give here some equations for reference later.
 So we will assume that $0 < p < 1$ and $d=d(n)$ is a natural number.
@@ -298,7 +298,7 @@ And finally
 \begin{equation}
 	p(pn)^{d-2} = o(1)
 \end{equation}
-The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ conditionnaly on some space that we will now define. $\Omega_k \subseteq \mathcal{G}_{n, p}$ is a set of graphs with $a = |\Gamma_{k-1}(x)|$ and $b = |N_{k-1}(x)|$ that satisfy
+The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ conditionally on some space that we will now define. $\Omega_k \subseteq \mathcal{G}_{n, p}$ is a set of graphs with $a = |\Gamma_{k-1}(x)|$ and $b = |N_{k-1}(x)|$ that satisfy
 \begin{align}
  \left\{\begin{array}{rl}
 		 \frac{1}{2}(pn)^{k-1} \leq a &\leq \frac{1}{2}(pn)^{k-1} \\
@@ -311,7 +311,7 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 	\newline
 	$1 \leq k = k(n)  \leq d-1$
 	\newline
-	And $ K = K(n)$ that satisfy $ 6 \leq K \leq \frac{1}{12} \sqrt{pn\frac{1}{\log[n}}$
+	And $ K = K(n)$ that satisfy $ 6 \leq K \leq \frac{1}{12} \sqrt{pn\frac{1}{\log(n)}}$
 	We also define
 	\begin{equation}
 		\alpha_k = K\sqrt{\frac{\log{n}}{(pn)^k}} , \quad \beta_k = p(pn)^{k-1}, \quad \gamma_k = 2\frac{(pn)^{k-1}}{n} = \frac{2\beta_k}{pn}
@@ -328,7 +328,7 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 	\begin{equation}
 		p^a = 1 - (1-p)^a
 	\end{equation}
-	Hence, the random value $|\Gamma_k(x)|$ follows a binomial on $n-b$ elements, with a propability $p_a$.
+	Hence, the random value $|\Gamma_k(x)|$ follows a binomial on $n-b$ elements, with a probability $p_a$.
 	In the following inequalities we will assume that $n$ is large enough, this will allow us to do certain inequalities that are not really precise but asymptotically satisfying. Also to make it more easy for the reader we consider that all of these inequalities take place in $\Omega_k$ without writing it explicitly.
 	\begin{align}
 		|\gamma_k(x) - apn| &\geq (\alpha_k + \beta_k + \gamma_k)apn \\
@@ -342,7 +342,7 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 	\begin{align}
 		\mathbb{P}(|\gamma_k(x) - apn| \geq (\alpha_k &+ \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \\&\leq \mathbb{P}(|\gamma_k(x) - apn_k| \geq (\alpha_k + \beta_k )apn_k \quad|\quad \Omega_k)
 	\end{align}
-	Now using $ap -p_a \leq \beta_k ap$ and the triangular inequality (TODO : CHECK TRI INEQ ) we have
+	Now using $ap -p_a \leq \beta_k ap$ and the triangular inequality we have
 	\begin{align}
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
