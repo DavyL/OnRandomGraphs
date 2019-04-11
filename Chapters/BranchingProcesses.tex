@@ -14,6 +14,78 @@ Then if we consider that the offspring distribution doesn't depend on the genera
 Observing this distribution, we observe that if for some generation $k_0$ we have $Z_{k_0} = 0$, then $Z_{k_0 + k} = 0$ for any $k$. We would say that that the population dies out at $k_0$ and one might be interested to study under which condition a population will die out.
 It was in fact this question that was studied by Galton and Watson (TODO : CHECK AND ADD HISTORICAL DETAILS ) that led to the study of branching processes. 
 Hence, we might refer to these branching processes as Galton-Watson processes or trees (GW).
+\newline
+We define $\mu = \mathbb{E} X_{1,1} < \infty$
+\begin{lemma}\label{martinGW}
+	$M_n = \frac{1}{\mu^n}Z_n$ is a Martingale. 
+	\footnote{We take $\mathcal{F}_n = \sigma(X_{i,j} , i,j \in \mathbb{N})$ as the filtration adapted to $M_n$ }
+\end{lemma}
+\begin{proof}
+	Let's first show the integrability property.
+	\begin{align}
+		\mathbb{E}Z_{n+1} 	&= \mathbb{E}(X_{n,1} + X_{n,2} + ... + X_{n, Z_n}) \\
+					&= \sum_{k=0}^{\infty} \mathbb{P}(Z_n = k)\mathbb{E}(X_{n,1} + ... + X_{n,k})\\
+					&= \sum_{k=0}^{\infty} \mathbb{P}(Z_n = k) \mu k = \mu \mathbb{E}Z_n \\
+					&= \mu ^{n+1} \mathbb{E} Z_0 = \mu^{n+1}
+	\end{align}
+	Then we have that $\mathbb{E}M_{n+1} = 1$.
+	\newline
+	Now let's prove the property on the conditional expectation.
+	\begin{align}
+		\mathbb{E}(Z_{n+1} | \mathcal{F}_n) 	&= \mathbb{E}( X_{n,1} + X_{n,2} + ... + X_{n, Z_n} | \mathcal{F}_n ) \\
+							&= \mathbb{E}X_{n, 1} \mathbb{E}(Z_n |\mathcal{F}_n ) = \mu Z_n
+	\end{align}
+	And we obtain,
+	\begin{equation}
+		\mathbb{E}(M_{n+1} | \mathcal{F}_n) = \mathbb{E}(\frac{Z_{n+1}}{\mu^{n+1}}) = \frac{Z_n}{\mu^n} = M_n
+	\end{equation}
+\end{proof}
+We now define the following generating function
+\begin{equation}
+	\phi(s) = \sum_{k=0}^{\infty} p_k s^k \quad , |s| <1
+\end{equation}
+Then if we define the extinction probability $\zeta$ as $\zeta = \mathbb{P}(\lim_{n \to \infty} Z_n = 0)$
+we have
+\begin{theorem}
+	The extinction probability is the fixed point of $\phi$.
+\end{theorem}
+\begin{proof}
+	For this proof we will rewrite the expression for $Z_{n+1}$ as a sum of independent Galton-Watson process. 
+	In order to do so we simply consider that the descendency of the second generation is a sum of $Z_1$ GW process.
+	For all of the $1 \leq j \leq Z_1$ child, we denote by $Z_n(j)$ as the number of descendants of $n$-th generation of $j$.
+	\begin{equation}\label{indepGW}
+		Z_{n+1} = \sum_{j=1}^{Z_1} Z_n(j)
+	\end{equation}
+	Each of these $Z_n(j)$ is a GW process independent from the others and for each we can then construct $M_n(j)$ as in \ref{martinGW}.
+	As these are Martingales, using the convergence theorem of Martingales (TODO : ADD IT IN ANNEX ) we have that they converge to some random values that we denote by $M$ and $M(j)$.
+	Now if we divide both sides in \ref{indepGW} by $\mu^{n+1}$.
+	\begin{equation}
+		\frac{Z_{n+1}}{\mu^{n+1}} = M_{n+1} = \mu^{-1} \sum_{j=1}^{Z_1} M_n(j)
+	\end{equation}
+	And by taking limits we have
+	\begin{equation}
+		M = \frac{1}{\mu} \sum_{j=1}^{Z_1}M(j)
+	\end{equation}
+	Which gives that $\mu M$ is distributed as $\sum_{j=1}^{Z_1}$ and we can finally obtain
+	\begin{align}
+		\mathbb{P}(M = 0) 	&= \mathbb{P}(\mu M = 0) = \mathbb{P}(\sum_{j=1}^{Z_1}(M_j = 0) \\
+					&= \sum_{k=1}^{\infty} p_k \mathbb{P}(\sum_{j=1}^{k} M(j) = 0 | Z_1 = k) \\
+					&= \sum_{k=1}^{\infty} p_k (\mathbb{P}(M=0))^k\\
+					&= \phi(\mathbb{P}(M=0))
+	\end{align}
+\end{proof}
+Using this result we can obtain the following result
+\begin{theorem}
+	The exctinction probability of a Poisson branching process of parameter $\lambda$ is the solution of $x = e^{-\lambda(1-x)}$.
+\end{theorem}
+\begin{proof}
+	\begin{align}
+		\phi(s) &= \sum_{k=0}^{\infty} p_k s^k = e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda ^k}{k!} s^k\\
+			&= e^{-\lambda}e^{\lambda s} = e^{-\lambda(1 -s)}
+	\end{align}
+\end{proof}
+
+
 We can obtain the following theorem
 \begin{theorem}
 	If $\mathbb{E}X \leq 1$ then the population dies out almost surely.
