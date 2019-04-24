@@ -3,87 +3,63 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \section{Graph theory}\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}
-(TODO : REWRITE THE FIRST PARAGRAPH)
-Intuitively, graphs are just about dots and lines, any phenomenon that can be represented as dots connected, or not, by lines can be thought of as a graph. 
-Hence it is clear that graph theory, the study of the so called graphs that we will define in the following, will apply to a very wide variety of problems, such as, epidemiology, sociology, internet analysis, electric circuits, road traffic, ... and of course mathematics. 
-Historically graphs first appeared in mathematics from Leonard Euler who gave, again, his name to a formula that would be the basis for the development of topology.
+Formally a \emph{graph} $G$ is defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges ( the lines ) of G. 
 \newline
-Formally a \emph{graph} G will be defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$, disjoint from $V(G)$, the set of edges ( the lines ) of G. 
-For now we will consider edges only as a pair of elements, without order, contained in $V(G)$. In the following of this report hypergraphs and directed graphs will be studied in which edges are composed of more than two elements or edges have a direction but we will define them properly when needed.
+This is the simplest way to define a graph, hence this kind of graph is usually called a \emph{simple graph}. 
+More general graphs can be defined, for instance the loopy graphs, multigraphs, directed graphs or hypergraphs. 
+They are not of major importance in this report so they won't be detailed here, their formal definition can be found in any book on graph theory ( see for instance \cite{Bondy08} ).
 \newline
-As an example of a graph we can consider the following graph (TODO: ADD GRAPHICAL REPRESENTATION) with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7, e_8\}$ altogether with an \emph{incidence function} $\psi_G : V(G) \rightarrow E(G) $ such as:
+We will call two vertices $u, v \in V(G)$ as \emph{adjacent} if $\{u, v\} \in E(G)$ and we will write it as $u \leftrightarrow v$. 
+We may also refer to edges being adjacent if they share a vertex.
+\newline
+As an example of a graph we can consider the following graph (TODO: ADD GRAPHICAL REPRESENTATION) with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7\}$ with : 
 \begin{align*}
-    \psi_G(e_1) = ab\quad
-    \psi_G(e_2) = ac\quad
-    \psi_G(e_3) = bc\quad
-    \psi_G(e_4) = ad\\
-    \psi_G(e_5) = cd\quad
-    \psi_G(e_6) = cd\quad
-    \psi_G(e_7) = ee\quad
-    \psi_G(e_8) = ae
+	e_1 = \{a, b\}\quad
+	e_2 = \{a, c\}\quad
+	e_3 = \{b, c\}\quad
+	e_4 = \{a, d\}\\
+	e_5 = \{c, d\}\quad
+    	e_6 = \{a, e\}\quad
+	e_7 = \{c, e\}
 \end{align*}
-An equivalent way to define a graph would be through the \emph{incidence matrix} $M_G = (m_{ve}) $ with $m_{ve}$ the number of times the vertex $v$ and the edge $e$ are incident. So $m_{ve}$ can take the values 0 (not incident), 1 or 2 ( $e$ is a loop ).
-It is also possible to define a graph in a third way, that is equivalent for the structure but doesn't take in account the labelling of the edges, it is through the \emph{adjacency matrix} $A_G = (a_{uv})$.
+The \emph{adjacency matrix} of a graph $G$ is the $n \times n$ matrix defined as $A_G = (a_{u,v})$ with $a_{u, v} = \mathbbm{1}_{E(G)}(\{u, v\})$
 \begin{equation}
-	M_G =	\kbordermatrix{
-		& e_1 & e_2 & e_3 & e_4 & e_5 & e_6 & e_7 & e_8 \\
-		a & 1 & 1   & 0   & 1   & 0   & 0   & 0   & 1 \\ 
-		b & 1 & 0   & 1   & 0   & 0   & 0   & 0   & 0 \\ 
-		c & 0 & 1   & 1   & 0   & 1   & 1   & 0   & 0 \\ 
-		d & 0 & 0   & 0   & 1   & 1   & 1   & 0   & 0 \\ 
-		e & 0 & 0   & 0   & 0   & 0   & 0   & 2   & 1 \\ 
-	}
-,\quad
 	A_G = \kbordermatrix{
 		  & a & b & c & d & e \\
 		a & 0 & 1 & 1 & 1 & 1 \\ 
 		b & 1 & 0 & 1 & 0 & 0 \\ 
-		c & 1 & 1 & 0 & 2 & 0 \\ 
-		d & 1 & 0 & 2 & 0 & 0 \\ 
-		e & 1 & 0 & 0 & 0 & 1 \\ 
+		c & 1 & 1 & 0 & 0 & 1 \\ 
+		d & 1 & 0 & 0 & 0 & 0 \\ 
+		e & 1 & 0 & 1 & 0 & 0 \\ 
 	}
 \end{equation}
 
-The latter is usually the most useful version as typically a graph will have less vertices than edges, the adjacency matrix will be much smaller to write ( hence to store in a computer ) and it usually gives all the information needed to study a graph. 
-It is interesting to note that an adjacency matrix is real and hermitian, thus all of its eigenvalues are real and the study of theirs distribution is a common topic in graph theory.
+It is interesting to note that an adjacency matrix is real and hermitian, thus all of its eigenvalues are real and the study of their distribution is a classical topic in graph theory.
 \newline
-An interesting property of graphs is the \emph{degree} of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$. And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of G and $\Delta(G)$ as the maximal degree of G.
-From these definition we can obtain the following lemma, with $m$ the number of edges.
-\begin{theorem}
-For any graph finite graph G
+An important property of graphs is the \emph{degree} of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$.
+Observing that each edge has two ends and that the degree of a vertex is the number of edges having this vertex as an end. We obtain :
 \begin{equation}
-    \sum_{v\in V(G)} d_G(v) = 2m
+	\sum_{v\in V(G)} d_G(v) = 2 |E(G)|
 \end{equation}
-\end{theorem}
-\begin{proof}
-The sum of the elements of each columns in the incidence matrix is equal to two. So the sum of the values in the colums over all the columns is equal to two times the number of columns, so $2m$. As the sum of the columns is equal to the sum of the rows, and the sum of each row is exactly the degree of a vertex, we have the result.  
-\end{proof}
-This theorem will prove useful in the following as it connects the number of edges and the degrees of the vertices.
-In graph theory a graph can be represented in many different ways and then it can be really non trivial to know if two graphs with different labelling are the same. More formally, for a same graph, we will call the set of permutation of the labelling that doesn't change the structure of the graph, it's automorphism group, denoted $Aut(G)$ and $aut(G)$ it's cardinal.
+And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of $G$ and $\Delta(G)$ as the maximal degree of $G$.
 \newline
-One of the most fundamental properties of graphs is also the connectivity. 
+We define a \emph{path} on a graph as a sequence of edges being two by two adjacent. 
+One of the most fundamental properties of graphs is also the connectivity.
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
-We define a \emph{path} as a sequence of vertices connected by edges linking it's two ends. 
-In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths, that are paths without loops, a simple path is always defined when there is a path. 
-There are two famous kinds of path, the \emph{hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used only once.
+In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths because we are studying simple graphs.
+It is clear that if a path exists it is always possible to extract a simple path from it.
+There are two famous kinds of path, the \emph{hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used exactly once.
 \newline
 If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$ called the \emph{neighbours} of $v$.
 From this definition we may observe that $d_G(v) = |N(v)|$ if $G$ is a graph without loops. 
 And we will call a (connected) \emph{component} of a vertex the set of vertices that can be reached from this vertex. 
 Then a connected graph is a graph with only one component.
 \newline
-Some interesting graphs to which we might often refer are the complete graph on n vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$ (TODO : ADD GRAPHICAL REPRESENTATION ). 
+Some interesting graphs to which we will often refer are the complete graph on n vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$ (TODO : ADD GRAPHICAL REPRESENTATION ). 
 A \emph{complete graph} is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
 A graph is \emph{bipartite} if it's set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
 The \emph{complete bipartite graph} is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
 This implies the same condition on the vertices in $Y$.
-\newline
-We call a \emph{simple graph} a graph that doesn't contain any loop or multiple edge. We will mainly study simple graphs as multigraphs or loopy graphs only add redundant information. 
-We will see later that it is possible to mimic loopy graphs and multigraphs by assigning weights to the edges.
-\newline
-It is also possible to define the union of two graphs simply as the union of each of the vertex sets and edge sets.
-\newline
-A very important kind of graphs are the \emph{directed graphs}, it's a very intuitive notion, these are simply graphs on which there are arrows on the edges, equivalently, it is like defining the adjacency between two vertices as non  symmetric, or as studying graph with non hermitian adjacency matrix 
 \newline
 As there is usually no confusion possible we will denote $V = V(G), E =E(G), \psi = \psi_G, ...$. 
 
