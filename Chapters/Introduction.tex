@@ -89,22 +89,32 @@ It also features a "small world" characteristic meaning that for most of the ver
 \newline
 
 \section{Cayley's formula}
-This section will first of all demonstrate an important result that will be used several times in crucial demonstrations in this report. Although it is not a demonstration that is specific to random graphs it may give an insight to the variety of techniques that may be used in the study of random graphs and how elegant are the results ( at least quite often ). This formula has been demonstrated in many different ways and we will use the demonstration by Joyal \cite{joyal} \footnote{In fact we follow the procedure from \cite{JoyalProof} that is obtained from \cite{joyal} }that is really elegant and also is a good place to introduce several notions that will be used in the rest of the report. 
+In this section we will prove an important result that will be used several times in crucial demonstrations in this report. 
+Indeed it will give an exact result on the number of spanning trees, which are the building blocks of connected graphs. 
+A \emph{tree} is a special case of graph structure that can be defined in several equivalent ways. 
+For instance, a tree is a connected graph such that upon removal of any of its edges, it becomes disconnected, equivalently it is a connected and acyclic graph
+\footnote{An acyclic graph is a graph that doesn't contain any cycle}.
+The adjective \emph{spanning} ( on the vertices ) meaning that those trees intersect the whole vertex set.
+
 \begin{theorem}{Cayley's formula}\label{cayley}
 \begin{equation}
     t_n = n^{n-2}
 \end{equation}
 with $t_n$ the number of spanning trees on $n$ vertices.
 \end{theorem}
-Before beginning the proof some definitions will be needed. A structure ( graph or tree ) is called \emph{spanning} on the vertices (resp. edges ) if it intersects all vertices (resp. edges). 
-A \emph{tree} is a special case of graph structure, that can be defined in several equivalent ways. For instance, a tree is a connected graph such that upon removal of any of it's edges it becomes disconnected, equivalently, it's a graph in which every two vertices are linked by exactly one path, equivalently, it's a connected and acyclic graph ( doesn't contain any cycle ).
-\newline 
-The trees being a subset of the graphs, it is also possible to define \emph{directed trees} in which you can follow an edge only in one direction ( otherwise it would not be a tree anymore ).
-We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices of the tree and which canonically maps on each edges the direction such that any vertex can reach the end. And we will call "SEL" the vertices that are in the "Start" to "End" line. 
-We also denote by $DRT_n$ the set of doubly rooted trees on n vertices.
+The proof will need to make use of directed trees.
+More generally, we define \emph{directed graphs} as graphs \footnote{Often simply called digraphs (or ditrees)} in which the adjacency relation is not symmetric
+\footnote{In a directed graph an edge can only be followed in one direction, we have if $T$ is a tree $\forall x,y \in V(T), x\to y \notimplies y \not\to x$}.
+We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices.
+In such a tree, for any vertex, there exists a path to the vertex labelled "End".
+We will call "SEL" the vertices that are in the path from "Start" to "End". 
+We also denote by $DRT_n$ the set of doubly rooted trees on $n$ vertices.
 \newline
 As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. 
-To prove the theorem it would then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$. So we will base our approach on Joyal's proof and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
+To prove the theorem it is then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$.
+We will base our approach on Joyal's proof \cite{joyal} and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
+The presentation of the proof we use comes from \cite{JoyalProof}.
+\newline
 (TODO : ADD GRAPHICAL REPRESENTATION OF THE PROOF ON SOME EXAMPLE)
 \begin{proof}
 We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
@@ -117,7 +127,9 @@ We now take $C \subseteq V$ the set of vertices that are part of a cycle under t
 \begin{align*}
     C = \{ x : \exists i \geq 1 s. t. f^i(x) = x \}
 \end{align*}
-Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set and now we will construct a graph with the vertex set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End".
+Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set 
+\footnote{The $c_i$ being integers we simply order them in increasing order.}
+and now we will construct a graph with the vertex set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End" which is an oriented graph.
 \newline
 Now we will just append to this line the set of vertices that are not in $G$. So we construct $\tilde{E} = \bigcup_{x \in V\\C} x f(x)$ and $\tilde{G} = (V, E\cup\tilde{E})$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
 We have now done the biggest part of the proof, that is, going from a function to a doubly rooted tree.
