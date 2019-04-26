@@ -7,7 +7,7 @@ Formally a \emph{graph} $G$ is defined as $G = ( V(G), E(G) )$, with $V(G)$ desi
 \newline
 This is the simplest way to define a graph, hence this kind of graph is usually called a \emph{simple graph}. 
 More general graphs can be defined, for instance the loopy graphs, multigraphs, directed graphs or hypergraphs. 
-They are not of major importance in this report so they won't be detailed here, their formal definition can be found in any book on graph theory ( see for instance \cite{Bondy08} ).
+They are not of major importance in this report so they won't be detailed here, their formal definition can be found in almost any book on graph theory ( see for instance \cite{Bondy08} ).
 \newline
 We will call two vertices $u, v \in V(G)$ as \emph{adjacent} if $\{u, v\} \in E(G)$ and we will write it as $u \leftrightarrow v$. 
 We may also refer to edges being adjacent if they share a vertex.
@@ -51,7 +51,7 @@ In fact we will consider simple\footnote{ More generally, the use of the adjecti
 It is clear that if a path exists it is always possible to extract a simple path from it.
 There are two famous kinds of path, the \emph{hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used exactly once.
 \newline
-If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$ called the \emph{neighbours} of $v$.
+If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$ which are called the \emph{neighbours} of $v$.
 From this definition we may observe that $d_G(v) = |N(v)|$ if $G$ is a graph without loops. 
 And we will call a (connected) \emph{component} of a vertex the set of vertices that can be reached from this vertex. 
 Then a connected graph is a graph with only one component.

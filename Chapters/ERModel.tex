@@ -39,12 +39,12 @@ It is essential to answer this question as many other questions might not make s
 It is also an interesting first topic to have an insight of the kind of elegant results that arise from the study of random graphs.
 The main aim of this section will be to prove the following theorem in a detailed way as it is the first random graphs proof that we will study.
 \begin{theorem}\label{th:connect}
-	Let $p = p(n) = \frac{\log(n) + c}{n}$ , $c \in \mathbb{R}^+$
+	Let $p = p(n) = \frac{\log(n) + c}{n}$ , $c \in \mathbb{R}$
 \newline
 Then $\lim_{n \to \infty} P(G \in \mathcal{G}_{n, p}\text{ is connected }) = e^{-e^{-c}}$ 
 \end{theorem}
 The proof of this theorem will be in two parts, first we will show that a graph will be connected if and only if there are no isolated vertices and then we will estimate the distribution that follows the number of isolated vertices.
-We designate by giant component the largest connected component with a size increasing linearly in $n$.
+We designate by giant component a component with a size increasing linearly in $n$.
 \begin{theorem}\label{th:isolcomp}
 	With $p = \frac{\log(n) + c}{n}$
 	 Almost every $G \in \mathcal{G}_{n, p}$ consists of a single giant component and isolated vertices. 
@@ -88,14 +88,28 @@ Hence, $A$ goes to 0 without any condition on $k$, so we obtain
 \begin{equation}
     \sum_{k=3}^{\lceil n/2\rceil} \mathbb{P}(X_k \geq 1)\leq p^{-1}\sum_{k=3}^{\lceil n/2\rceil} A^k = o(1)
 \end{equation}
-Which gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depend on the existence of isolated connected components of size 2 or more. So it only depends on the existence of isolated vertices.
-An intuitive point of view on that is some isolated component emerges it is really likely to be eaten by the giant component, then the only components that have a chance of not being absorbed by the giant component are the isolated vertex.
+This gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depend on the existence of isolated connected components of size 2 or more. So it only depends on the existence of isolated vertices.
 So we have proved \ref{th:isolcomp}.
 \end{proof}
+
 The proof of \ref{th:connect} can be done using the second moment method or Stein's method, see \cite{JLR}. (TODO : CHOOSE WHICH ONE TO PRESENT.).
+
+
 \section{Existence of thresholds}\footnote{ The proofs and results from this section are from \cite{JLR} and \cite{Bollob01}}
-One of the most surprising features on random graphs, which seems to have motivated Erd\H{o}s to publish his results from 1959 ( TODO : FIND THE REF THAT SAID THAT...), is the existence of thresholds. That is, for many graph properties, with a small variation on the number of edges ( in the ER model ) or on $p(n)$, the limiting probability would jump between 0 and 1.
-This zone which produces great difference in limiting probability will be called a \emph{threshold}.
+One of the most surprising features on random graphs, which seems to have motivated Erd\H{o}s to publish his results from 1959 ( TODO : FIND THE REF THAT SAID THAT...), is the existence of thresholds.
+Indeed the property of appearance of certain graph properties will be either 0 or 1 for a great range of functions $p$.
+\newline
+For instance from the previous theorem we observe that $\forall \epsilon > 0$  if $p = (1+\epsilon)\frac{\log(n)}{n}$ 
+or if $p = \frac{\log(n) + \omega(n)}{n}$ with $\lim_{n\to \infty} \omega(n) = \infty$ then $\lim_{n\to\infty}\mathbb{P}(G \in \mathcal{G}_{n,p} \text{is connected}) = 1$.
+We would say that for such $p$, $\mathcal{G}_{n,p}$ is almost surely connected.
+We also observe that if in the previous definitions of $p$ we changed the $+$ signs into $-$ signs, we would find that $\mathcal{G}_{n,p}$ is almost surely disconnected.
+\newline
+Hence, the function $p$ from \ref{th:connect} has some very peculiar behaviour on the property of connectivity.
+We will call such a function a \emph{threshold} (here, for connectivity).
+\newline
+The aim of this section is to detail formally what we mean by a graph property and a threshold function.
+We will also show a formal relation between $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ and a proof of the existence of thresholds on a family of graph properties.
+\newline
 It has been shown by Bollob\'as and Thomason \cite{Bollob87} that this is in fact not exclusive to random graphs, but true for all monotone properties on random subsets.
 \begin{definition}
 	We will call a \emph{graph property} a family of graphs that is closed under isomorphism.
@@ -104,15 +118,15 @@ This means that a graph property is independent of the labelling and of the draw
 We can refine properties in the following definition.
 \begin{definition}
 	A property is \emph{monotone }\footnote{ A property is monotone if it is either increasing or decreasing} \emph{increasing} (resp. \emph{decreasing}) if it's stable under the the addition (resp. removal) of an edge.
-	A graph property $\mathcal{Q}$ is \emph{convex} if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$ then $B \in \mathcal{Q}$. 
+	A graph property $\mathcal{Q}$ is \emph{convex} if when $ A,C \in \mathcal{Q}$ and $A\subseteq B\subseteq C$\footnote{ $\subseteq$ is the inclusion of the edges on the same set of vertices} then $B \in \mathcal{Q}$. 
 \end{definition}
 
-For instance, being connected or containing a specific subgraph are monotone increasing properties where as being planar or containing an isolated vertex are monotone decreasing. 
+For instance, being connected or containing a specific subgraph are monotone increasing properties whereas being planar or containing an isolated vertex are monotone decreasing. 
 As an example of property that is neither monotone increasing or decreasing, we can think of being $k$-regular for some $k$ ( this means that all vertices are of degree $k$).
 Having exactly $k$ isolated vertices is an example of a convex not monotone property.
 \newline
 Here is a theorem showing that monotone increasing properties make probability distributions on these properties also monotone increasing.
-\begin{theorem}
+\begin{theorem}\label{th:QIncr}
 	Suppose $\mathcal{Q}$ is a monotone increasing property and $0 \leq M_1 \leq M_2 \leq N$ and $0 \leq p_1 \leq p_2 \leq 1$.
 	\newline
 	Then
@@ -127,11 +141,12 @@ Here is a theorem showing that monotone increasing properties make probability d
 \
 \end{proof}
 The following result follows from definition with $\mathcal{Q}$ a monotone increasing property
-\begin{equation}
+\begin{equation}\label{eq:QProp}
 	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
 \end{equation}
-However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... However from the following lemmas it is very useful to obtain some results on the links between $\mathcal{G}_{n, p}$ mentioned in the introduction $\mathcal{G}_{n, M}$.
-Indeed the following theorem shows that if we know quite accurately $\mathbb{P}_M(\mathcal{Q})$ for every $M$ close to $pN$ then we know $\mathbb{P}_p(\mathcal{Q})$ with a comparable accuracy. The converse being clearly false, for instance the property of containing M edges.
+However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... 
+\newline
+The following theorem shows that if we know quite accurately $\mathbb{P}_M(\mathcal{Q})$ for every $M$ close to $pN$ then we know $\mathbb{P}_p(\mathcal{Q})$ with a comparable accuracy. The converse being clearly false, for instance the property of containing M edges.
 
 \begin{theorem}\label{th:linkMP}
 	Suppose $\mathcal{Q}$ is any property and $0 < p = M/N< 1$ 
@@ -168,8 +183,8 @@ We call such a function $p$ a threshold ( in that case for the connectivity ).
 More formally, let $\mathcal{Q}$ a monotone increasing property,  in $\mathcal{G}_{n, p}$, we call $\hat{p} = \hat{p}(n)$ a threshold if
 \begin{align}
 	\mathbb{P}(\mathcal{G}_{n,p} \in \mathcal{Q}) \rightarrow \left\{\begin{array}{rl}
-										0 & \text{if } p \ll \hat{p},\\
-										1 & \text{if } p \gg \hat{p}.
+										0 & \text{if } p / \hat{p} \to 0,\\
+										1 & \text{if } p / \hat{p} \to \infty.
 									 \end{array}
 									\right.
 \end{align}
@@ -177,13 +192,66 @@ More formally, let $\mathcal{Q}$ a monotone increasing property,  in $\mathcal{G
 Analogously, in $\mathcal{G}_{n, M}$, we call $\hat{M} = \hat{M}(n)$ a threshold if
 \begin{align}
 	\mathbb{P}(\mathcal{G}_{n,M} \in \mathcal{Q}) \rightarrow \left\{\begin{array}{rl}
-										0 & \text{if } M \ll \hat{M},\\
-										1 & \text{if } M \gg \hat{M}.
+										0 & \text{if } M / \hat{M} \to 0,\\
+										1 & \text{if } M / \hat{M} \to \infty.
 									 \end{array}
 									\right.
 \end{align}
-In fact, thresholds are unique with respect to the multiplication by a scalar. So for the following, we should denote a threshold for a property as the threshold.
-
+In fact, thresholds are unique with respect to the multiplication by a positive constant. So for the following, we should denote a threshold for a property as \emph{the} threshold.
+\newline
+As said in the introduction of this section, the fact that thresholds could be found for many of the properties that where investigated is one of the main reason behind the study of random graphs.
+In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )confirms that we can always expect the existence of a threshold if the property investigated is non trivial.
+\begin{theorem}
+	Every non-trivial monotone graph property has a threshold
+\end{theorem}
+\begin{proof}
+	We consider without loss of generality that $\mathcal{P}$ is a monotone increasing graph property.
+	Given $0 < \epsilon < 1$ we define $p:[0,1] \to [0,1]$ such that :
+	\begin{equation}
+		\mathbb{P}(\mathcal{G}_{n, p} \in \mathcal{P}) = \epsilon
+	\end{equation}
+	The existence of $p$ is guaranteed from \ref{eq:QProp} because it is an increasing polynomial in $p$, from 0 to 1.
+	Indeed, we know that it is increasing from \ref{th:QIncr}.
+	\newline
+	We will show that $p^* = p(\frac{1}{2})$ is a threshold for $\mathcal{P}$ through a coupling argument.
+	We take $G_1, G_2, ..., G_k$ independent random variables in $\mathcal{G}_{n,p}$.
+	Then we claim that $G_1 \cup G_2 \cup ... \cup G_k$ is distributed as a random variable in $\mathcal{G}_{n, 1 - (1-p)^k}$.
+	Which is clear when we observe the following equivalence for $p_1 < p$ and $p_2$.
+	\begin{equation}
+		1 - p = (1 - p_1)(1-p_2) \iff p = p_1 + p_2 - p_1p_2
+	\end{equation}
+	The previous equation being satisfied with $p = 1 -(1-p)^k$, $p_1 = 1 - (1-p)^{k-1}$ and $p_2 = p$.
+	\newline
+	We prove the claim by induction, the initialisation is clearly true, then if we write $G = G_1 \cup ... \cup G_{k-1}$.
+	\begin{align}
+		\mathbb{P}(G \cup G_k = H) 	&= \mathbb{P}(G=H) + \mathbb{P}(G_k = H) - \mathbb{P}(G \cap G_k = H) \\ 
+						&= \mathbb{P}(G=H) + \mathbb{P}(G_k = H) - \mathbb{P}(G = H)\mathbb{P}(G_k = H) 
+	\end{align}
+	And we can conclude in the same way as in \ref{th:QIncr}.
+	We may now use Bernoulli's inequality \ref{bernoulli}, $1 - (1-p)^k \leq kp$ to obtain
+	\begin{equation}
+		\mathbb{G}_{n,1 - (1-p)^k)} \subseteq \mathbb{G}_{n, kp}
+	\end{equation}
+	and so $\mathbb{G}_{n, kp} \not\in \mathcal{P}$ implies $G_1, G_2, ..., G_k \not\in \mathcal{P}$. 
+	We obtain
+	\begin{equation}
+		\mathbb{P}(\mathbb{G}_{n, kp} \not\in \mathcal{P}) \leq (\mathbb{P}(\mathbb{G}_{n,p}\not\in\mathcal{P}))^k
+	\end{equation}
+	Let $\omega$ be a function of $n$ growing arbitrarily slowly such that $\lim_{n\to\infty}\omega(n) = \infty$. 
+	Suppose also $p^* = p(\frac{1}{2})$ and $k=\omega$, then
+	\begin{equation}
+		\mathbb{P}(\mathbb{G}_{n, \omega p^*} \not\in \mathcal{P}) \leq 2^{-\omega} = o(1)
+	\end{equation}
+	On the other hand,
+	\begin{equation}
+		\frac{1}{2} = \mathbb{P}(\mathbb{G}_{n,p^*} \not\in \mathcal{P}) \leq (\mathbb{P}(\mathbb{G}_{n, \frac{p^*}{\omega}} \not\in \mathcal{P}))^{\omega}
+	\end{equation}
+	Finally, 
+	\begin{equation}
+		\mathbb{P}(\mathbb{G}_{n, \frac{p^*}{\omega}} \not \in \mathcal{P}) \geq 2^{-\frac{1}{\omega}} = 1 -o(1)
+	\end{equation}
+	This proves that $p^*$ is a threshold for $\mathcal{P}$.
+\end{proof}
 
 \section{The stability number}\footnote{This section is from \cite{Bondy08}}
 Another property of graphs that one might be interested to study is the stability number. The stability number of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
@@ -240,14 +308,14 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 	The \emph{diameter} of a graph is the greatest distance between any pair of vertices. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
 \end{definition}
 It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious ( and will be discussed later in this report ) but we can also think of optimisation problems in which the fact that two points are far apart might be of great consequences.
-This section won't be focused on real world applications of the diameter because as we will see we are not studying the right model for this. 
+This section won't be focused on real world applications of the diameter because as we will see we are studying a model which is not realistic for that. 
 Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will demonstrate it through several technical lemmas, some of which will be admitted. Finally some corollary will be obtained from the theorem.
 \newline
 One of the challenging questions in graph theory is estimating the following function
 \begin{equation}
 	n(D, \Delta) = max\{ |G|, \text{diam}(G) \leq D, \Delta(G) \leq \Delta\}
 \end{equation}
-$n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the graph with a maximal number of verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
+$n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the graph with a maximal number of vertices that verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
 \newline
 For instance if we take $\Delta = 2$ we obtain easily by construction that a graph that maximises the number of vertices with a diameter $D$ is a $(2D+1)$-cycle. Hence, 
 \begin{equation}
@@ -262,6 +330,15 @@ From this very simple construction we can obtain the following upper bound
 \end{equation}
 $n_0$ is called the Moore bound and a graph for which the Moore bound is best possible is called a Moore graph. 
 The \emph{Petersen's graph} is such a graph with parameter $D= 2$ and $\Delta = 3$. (TODO : ADD A DRAWING OF PETERSEN'S GRAPH).
+\newline
+When $D=2$ explicit constructions of Moore graphs have been found with $\Delta = 2$ (pentagon) and $\Delta = 3$ (Petersen's graph) as we have seen above.
+There also exists an explicit construction with $\Delta = 7$, the Hoffman-Singleton graph on 50 vertices.
+There might exist a graph with $\Delta = 57$ on 3250 vertices but its existence is still an open-question.
+However, it is proved that no other graph of diameter 2 can be a Moore graph, see Hoffman Singleton (TODO: ADD REF).
+\newline
+In the end of this section we will give a quite good lower bound on $n$, in order to do so, we will see that we can select a probability function $p$ such that the value of the diameter is highly concentrated.
+\newline
+In the following we will consider that $d = d(n)$ is a natural number (representing the diameter) and $c$ is a positive real number.
 \newline
 Now let's give some functions that will allow us to make a study of the diameter in random graphs. If we choose $x$ a vertex in a graph, then we define $\Gamma_k(x)$ as the set of vertices at distance $k$ from $x$. And from this we will define $N_k(x)$ as the set of vertices of distance less than or equal to $k$. 
 Formally, we have
@@ -279,18 +356,31 @@ Now we will define the probability function that we will use in the following of
 \begin{equation} \label{eq:pdiam}
 	p^d n^{d-1} = \log(\frac{n^2}{c}) \quad, \text{  for some } c >0
 \end{equation}
-and as a teaser the following abbreviated version of the theorem we will properly give and prove later.
-\begin{theorem}
-	$\mathbb{P}(d \leq \text{diam}(\mathcal{G}_{n, p}) \leq d + 1) \longrightarrow_{n \to \infty} 1$
+The aim of this section wille be to prove the following theorem.
+\begin{theorem}\label{th:diam2}
+	Using all previous definitions on $p$, $d$ and $c$. We have,
+	\begin{equation}
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n, p}) = d) \longrightarrow e^{-\frac{c}{2}}
+	\end{equation}	
+	\begin{equation}
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) = d + 1) \longrightarrow 1 - e^{-\frac{c}{2}}
+	\end{equation}
 \end{theorem}
-This (inexact )theorem that is very strong states that all random graphs in $\mathcal{G}_{n, p}$ have (nearly exactly) the same diameter.
-In the actual theorem that we will prove we will be able to characterise exactly the probability of obtaining either $d$ or $d+1$ as a function of the parameter $c$ in \label{eq:diam}
+This theorem states that in $\mathcal{G}_{n,p}$ with $p$ defined as in \ref{eq:pdiam} the diameter is spread on only two values.
+As a corollary we clearly have
+\begin{corollary}
+	Using all previous definitions on $p$, $d$ and $c$. We have,
+	\begin{equation}
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p} \in \{d, d+1\}) \longrightarrow 1
+	\end{equation}
+\end{corollary}
+
+In fact the number of values that the diameter can take has been fully resolved by Chung and Lu in \cite{ChungLu01}.
 \newline
 Before proving such a theorem we will need some technical lemmas and assumptions. So we will give here some equations for reference later.
-So we will assume that $0 < p < 1$ and $d=d(n)$ is a natural number.
 Also 
 \begin{equation}
-	p \frac{\log(n)}{n}^{-1} \longrightarrow_{n \to \infty} \infty
+	p (\frac{\log(n)}{n})^{-1} \longrightarrow_{n \to \infty} \infty
 \end{equation}
 that should not be too surprising as the threshold for connectivity is $\frac{\log(n) + c}{n}$ as shown before.
 We may also consider that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon > 0$ as it can be shown that otherwise the diameter of $\mathcal{G}_{n,p}$ is lower or equal than 2. One might be interested in what $p(n, d, c)$ or $d(n , p, c)$ look like so here they are
@@ -410,15 +500,6 @@ We will now prove another lemma
 	\end{align}
 	If we combine the last inequality that is obtained applying the previous lemma with \ref{eq:bayes} then we have the result.
 \end{proof}
-\begin{theorem}
-	Using all previous definitions on $p$ and $d$, in $\mathcal{G}_{n, p}$ we have
-	\begin{equation}
-		\mathbb{P}(\text{diam}(G) = d) \longrightarrow e^{-\frac{c}{2}}
-	\end{equation}	
-	\begin{equation}
-		\mathbb{P}(\text{diam}(G) = d + 1) \longrightarrow 1 - e^{-\frac{c}{2}}
-	\end{equation}
-\end{theorem}
 \begin{definition}
 	For $x$ and $y$ two vertices of $G$, we say that $x$ and $y$ are remote if $y \not\in N_d(x)$.
 \end{definition}
@@ -455,10 +536,10 @@ We will now prove another lemma
 	\end{lemma}
 	TODO : CHECK FOLLOWING LEMMA
 	\begin{lemma}
-		The $r$-th factorial moment of a random value is within $o(1)$ of the expected number of ordered $r$-tuples of disjoint remote pairs.
+		The $r$-th factorial moment of $X$ ( $X$ being the number of remote pairs of vertices ) is within $o(1)$ of the expected number of ordered $r$-tuples of disjoint remote pairs.
 	\end{lemma}
 	If we denote by $\mathbb{F}_r$ the probability that a fixed $r$-tuple consists of vertices remote from each other.
-	Then with $X$ the random value that counts the number of remote pair of vertices.
+	Then,
 	\begin{equation}
 		\mathbb{E}_r(X) = \frac{n!}{(n-r)!}2\mathbb{F}_r(1+o(1)) + o(1)
 	\end{equation}
@@ -479,11 +560,12 @@ We will now prove another lemma
 	\begin{equation}
 		\mathbb{E}_r(X) = n^r2^{-r}(\frac{c}{n})^r(1+o(1)) + o(1)
 	\end{equation}
-	Using the following theorem ( TODO : PROVE IT SOMEWHERE )
-	\begin{theorem}
-		$\lim_{n\to\infty} \mathbb{E}_r(X_n) - \lambda^r = 0$
-			\newline
-			$\implies X \longrightarrow_d \mathcal{P}_{\lambda}$
+	Using the following theorem 
+	\begin{theorem}\footnote{See \ref{th:factPois} for a proof}
+		\begin{align}
+			\lim_{n\to\infty} \mathbb{E}_r(X_n) &- \lambda^r = 0 \\
+					&\implies X \longrightarrow_d \mathcal{P}_{\lambda}
+		\end{align}
 	\end{theorem}
 	Then we have that $X$ converges in distribution to Poisson law of parameter $\frac{c}{2}$.
 	\newline
@@ -513,8 +595,6 @@ We will now prove another lemma
 	\end{equation}
 	Finally, if we combine the last result with \ref{eq:diamcv} it is clear that the proof if complete.
 \end{proof}
-The impressive result of this theorem is that the values of the diameter are spread only on two values with the conditions we set on $p$. In fact the number of values that the diameter can take has been fully resolved by Chung and Lu in \cite{ChungLu01}.
-\newline
 	To end this section we present two theorems that are much easier to prove with a similar flavor to the previous one.
 	\begin{theorem}\label{th:diam2}
 	Suppose 
@@ -561,4 +641,47 @@ And simply if we remember the previous theorem \ref{th:linkMP} linking $\mathcal
 	The first condition makes that we are not studying a complete graph then the diameter is not 1.
 	And we have the proof simply using \ref{th:linkMP} with $pN = M$ and combining it with the previous theorem \ref{th:diam2} we have the result.
 \end{proof}
+
+Now that we know that the diameter is spread on two values we are interested in restricting it on only one value. 
+We may observe that theorem \ref{th:diam2} gives us enough information to do so.
+Indeed, we see that if we forced $c \to 0$ then the diameter would be $d$. This would translate in \ref{eq:pdiam} as
+\begin{equation}
+	p^dn^{d-1} - 2\log(n) \longrightarrow \infty
+\end{equation}
+But this restriction is not sufficient because the values of the diameter might be smaller than $d$ then we will need to make sure that the probability that the diameter is $d-1$ goes to 0 which we could do forcing $c \to \infty$.
+In the same fashion as previously this would translate as
+\begin{equation}
+	p^{d-1}n^{d-2} - 2 \log(n) \longrightarrow -\infty
+\end{equation}
+
+This informal reasoning gives motivation for the following corollary of \ref{th:diam2} that we will now formally prove. 
+\footnote{In fact it is a immediate consequence of the last part of the proof of \ref{th:diam2} but we will prove it only assuming the theorem itself.}
+\begin{corollary}
+	Suppose $d = d(n) \geq 3$ and $p = p(n)$ satisfy
+	\begin{equation}
+		\frac{\log(n)}{d} - 3\log\log n \to \infty
+	\end{equation}
+	\begin{equation}
+		p^dn^{d-1} - 2\log(n) \longrightarrow \infty \quad \text{and} \quad
+		p^{d-1}n^{d-2} - 2 \log(n) \longrightarrow -\infty
+	\end{equation}
+	Then almost every $\mathbb{G}_{n,p}$ has diameter $d$.
+\end{corollary}
+\begin{proof}
+	Let $K_1$ and $K_2$ be positive constants and define $0<p_1<p_2<1$ by
+	\begin{equation}
+		p_1^{d+1}n^d = \log(\frac{n^2}{K_1}) \quad \text{and} \quad p_2^{d}n^{d-1} = \log(\frac{n^2}{K_2})	
+	\end{equation}
+	Then 
+	\begin{equation}
+		\limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p} \geq d+1 )
+		\leq  \limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p_1} \geq d+1 ) = 1 - e^{-\frac{K_1}{2}}
+	\end{equation}
+	\begin{equation}
+		\limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p} \leq d-1 )
+		\leq  \limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p_2} \geq d-1 ) = e^{-\frac{K_2}{2}}
+	\end{equation}
+	As we can choose an arbitrary small $K_1$ and an arbitrarily large $K_2$ the assertion follows.
+\end{proof}
+
 
