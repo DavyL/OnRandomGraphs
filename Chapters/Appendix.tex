@@ -49,12 +49,21 @@ This section presents inequalities that are used in this report and proves most 
 		\mathbb{P}(X \geq a) \leq \frac{\mathbb{E}X}{a}
 	\end{equation}
 \end{theorem}
+\begin{proof}
+    \begin{equation}
+        \mathbb{E}X = \int_0^{\infty}x f(x)dx \geq \int_a^{\infty} xf(x)dx \geq  a\int_a^{\infty} f(x)dx =a \mathbb{P}(X\geq a)
+    \end{equation}
+\end{proof}
+
+
 \begin{corollary}[Chebyshev's inequality]\label{cheby}
 	\begin{equation}
 		\mathbb{P}(|X - \mathbb{E}X| \geq k \mathbb{V}X ) \leq \frac{1}{k^2}
 	\end{equation}
 \end{corollary}
-
+\begin{proof}
+    Apply \ref{markov} using the random variable $(X-\mathbb{E}X)^2$
+\end{proof}
 \section{Tail inequalities}
 The following inequalities are designated as Chernoff inequalities.
 \begin{theorem}[Chernoff bound]\label{chernoff1}
