@@ -312,7 +312,7 @@ This section won't be focused on real world applications of the diameter because
 Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will demonstrate it through several technical lemmas, some of which will be admitted. Finally some corollary will be obtained from the theorem.
 \newline
 One of the challenging questions in graph theory is estimating the following function
-\begin{equation}
+\begin{equation}\label{eq:DDeltaProb}
 	n(D, \Delta) = max\{ |G|, \text{diam}(G) \leq D, \Delta(G) \leq \Delta\}
 \end{equation}
 $n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the graph with a maximal number of vertices that verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
@@ -356,7 +356,11 @@ Now we will define the probability function that we will use in the following of
 \begin{equation} \label{eq:pdiam}
 	p^d n^{d-1} = \log(\frac{n^2}{c}) \quad, \text{  for some } c >0
 \end{equation}
-The aim of this section wille be to prove the following theorem.
+In order for $d = d(n)$ to be finite we need \footnote{ See \ref{eq:pnd}}
+\begin{equation}
+	\frac{pn}{(\log(n))^3} \longrightarrow \infty
+\end{equation}
+The aim of this section will be to prove the following theorem.
 \begin{theorem}\label{th:diam2}
 	Using all previous definitions on $p$, $d$ and $c$. We have,
 	\begin{equation}
@@ -387,7 +391,7 @@ We may also consider that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon >
 \begin{equation}
 	p=n^{\frac{1}{d} - 1}(\log(\frac{n^2}{c}))^\frac{1}{d}
 \end{equation}
-\begin{align}
+\begin{align}\label{eq:pnd}
 	d &= \frac{1}{\log(pn)}(\log(n) + \log \log (n) + log(2) + \mathcal{O}(\frac{1}{\log(n)}))\\
 	  &= \mathcal{O}((1+o(1))\frac{\log(n)}{\log\log(n)})
 \end{align}
@@ -656,7 +660,7 @@ In the same fashion as previously this would translate as
 
 This informal reasoning gives motivation for the following corollary of \ref{th:diam2} that we will now formally prove. 
 \footnote{In fact it is a immediate consequence of the last part of the proof of \ref{th:diam2} but we will prove it only assuming the theorem itself.}
-\begin{corollary}
+\begin{corollary}\label{th:aediam}
 	Suppose $d = d(n) \geq 3$ and $p = p(n)$ satisfy
 	\begin{equation}
 		\frac{\log(n)}{d} - 3\log\log n \to \infty
@@ -682,6 +686,53 @@ This informal reasoning gives motivation for the following corollary of \ref{th:
 		\leq  \limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p_2} \geq d-1 ) = e^{-\frac{K_2}{2}}
 	\end{equation}
 	As we can choose an arbitrary small $K_1$ and an arbitrarily large $K_2$ the assertion follows.
+\end{proof}
+
+
+Now, going back to the degree-diameter problem defined in \ref{eq:DDeltaProb}, which is of finding the largest graph with fixed diameter and maximal degree.
+As we already have the Moore upper bound which is best possible, we are interested in finding a lower bound, and maybe hope that it would be close from Moore's bound in order to obtain precise estimate of $n(D, \Delta)$.
+To obtain such a bound here we will make use of the probabilistic method by sampling on an appropriate graph space (with known diameter and max degree), we will show that almost surely a specified propery doesn't appear (having less that a specified number of vertices).
+\newline
+
+In other words, by choosing an appropriate function $p$ of $n$ we can obtain some estimates which are almost surely true on $D$ and $\Delta$. Thus $n$ would almost surely be a lower bound of the degree-diameter problem.
+\newline
+In order to have a relation between $n$, $p$ and $\Delta$ we admit the following result from \cite{Bollob01}.
+\begin{theorem}\label{th:deltap}
+	If $\frac{pn}{\log n} \to \infty$, then almost every graph in $\mathcal{G}_{n,p}$ satisfies 
+	\begin{equation}
+		\Delta(\mathbb{G}_{n,p} = (1+o(1))pn
+	\end{equation}
+\end{theorem}
+We can obtain the following result :
+\begin{theorem}
+	Suppose $0<\epsilon <1$ and the sequence $(D_k), (\Delta_k)$ are such that 
+	\begin{equation}
+		D_k^4 \leq \Delta_k \quad \text{and} \quad D_k \to \infty
+	\end{equation}
+	Then if $k$ is sufficiently large,
+	\begin{equation}
+		n(D_k, \Delta_k) \geq \frac{((1-\epsilon)\Delta_k)^{D_k}}{2D_k\log \Delta_k}
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	As discussed before, to obtain such a proof we need to find the good function $p$ of $n$, luckily we may also choose to define $p$ on specific values of $n$ in order for the following argument to be true. 
+	So, we set 
+	\begin{equation}
+		n_k = \lceil \frac{((1-\epsilon)\Delta_k)^{D_k}}{2D_k\log \Delta_k} \rceil
+	\end{equation}
+	\begin{equation}
+		p_k = n_k^{\frac{1}{D_k} -1 }(2\log(n_k) + \log\log(n_k))^{1/D_k}
+	\end{equation}
+	From the previous corollary \ref{th:aediam}, almost every graph in $\mathcal{G}_{n_k, p_k}$ has diameter ( at most ) $D_k$.
+	From \ref{th:deltap}, almost every graph in $\mathcal{G}_{n_k,p_k}$ has maximal degree about $p_kn_k$. 
+	\begin{align}
+		\Delta(\mathbb{G}_{n_k,p_k}) 	&=(1+o(1))n_kp_k \\
+						&= (1+o(1))n_k^{1/D_k}(2\log n_k + \log\log n_k)^{1/D_k}	\\
+						&= (1+o(1))\lceil{\frac{(1-\epsilon)\Delta_k}{(2D_k\log(\Delta_k))^{1/D_k}}}\rceil(2\log n_k +  \log\log n_k)^{1/D_k}\\	
+						&\leq \frac{(1+o(1))(1-\epsilon) \Delta_k}{(2D_k \log\Delta_k)^{1/D_k}} (2D_k\log((1-\epsilon)\Delta_k))^{1/D_k} \\   
+						&\leq (1+o(1))(1-\epsilon)\Delta_k \leq (1-\epsilon)\Delta_k \\
+						&< \Delta_k	
+	\end{align}		
 \end{proof}
 
 
