@@ -32,6 +32,18 @@ This section presents inequalities that are used in this report and proves most 
 		1 - (1-p)^t \leq tp
 	\end{equation}
 \end{theorem}
+\begin{proof}
+	We show the inequality is true for any $k \in \mathbb{N}^*$ by induction. The result follows by convexity.
+	\newline
+	It is clearly true fir $k = 1$.
+	\newline
+	Assume the inequality is true at rank $k$, then,
+	\begin{align}
+		1 - (1-p)^{t+1} &= 1- (1-p)^t(1-p) = 1 - (1-p)^t -p(1-p)^t \\
+				&\leq p(t - (1-p)^t) \leq p( t + 1 - (1-p)^t) \leq p(1 + t)
+	\end{align}
+	which proves the result for any $t>0$.
+\end{proof}
 \begin{theorem}[Stirling's formula]\label{stirling}
 	\begin{equation}
 		n! \sim (\frac{n}{e})^n \sqrt{2\pi n}
@@ -43,8 +55,14 @@ This section presents inequalities that are used in this report and proves most 
 		\binom{n}{k} \leq \frac{n^k}{k!} \leq (\frac{ne}{k})^k
 	\end{equation}
 \end{corollary}
-
-\begin{theorem}[Markov's inequality]\label{markov}
+\begin{proof}
+	\begin{align}
+		\binom{n}{k} 	&= \frac{n!}{k!(n-k)!}  \\
+				&\leq \frac{n^n\sqrt(n) e^{-n} }{\sqrt{n-k} e^{-(n-k)} (n-k)^{n-k} k!} \leq \frac{n^k}{k!} \\
+				&\leq \frac{ n^k }{\sqrt{2\pi k} k^k e^{-k}} = (\frac{ne}{\sqrt{2\pi k} k})^k
+	\end{align}
+\end{proof}
+	\begin{theorem}[Markov's inequality]\label{markov}
 	\begin{equation}
 		\mathbb{P}(X \geq a) \leq \frac{\mathbb{E}X}{a}
 	\end{equation}

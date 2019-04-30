@@ -1,12 +1,12 @@
 \section{Galton-Watson trees and Karp's exploration process}
 A branching process is the simplest model that can be used to describe the evolution of a population over time.
 Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
-The distribution of this number is called the offspring distribution and denote it by $\{p_i\}_0^{\infty}$ such as
+This number following a distribution, we call it the offspring distribution and denote it by $\{p_i\}_0^{\infty}$ such as
 \begin{equation}
 	p_i = \mathbb{P}(\text{ having i child })
 \end{equation}
 When we say that a branching process is a "something" branching process, that means that the offspring distribution follows the "something" law (typically a Poisson branching process).
-And we also denote by $Z_n$ the number of individuals in the $n$-th generation. 
+And we also denote by $Z_n$ the number of individuals in the n-th generation. 
 Then if we consider that the offspring distribution doesn't depend on the generation of the individual considered we have
 \begin{equation}
 	Z_n = \sum_{i=1}^{Z_{n-1}}X_{n, i} \quad, \text{ with } X = \{X_{n,i}\}_{n,i} \text{,  i.i.d.}
@@ -76,7 +76,7 @@ we have
 \end{proof}
 Using this result we can obtain the following result
 \begin{theorem}
-	The extinction probability of a Poisson branching process of parameter $\lambda$ is the solution of $x = e^{-\lambda(1-x)}$.
+	The exctinction probability of a Poisson branching process of parameter $\lambda$ is the solution of $x = e^{-\lambda(1-x)}$.
 \end{theorem}
 \begin{proof}
 	\begin{align}
@@ -91,11 +91,7 @@ We can obtain the following theorem
 	If $\mathbb{E}X \leq 1$ then the population dies out almost surely.
 \end{theorem}
 \begin{proof}
-    If $\lambda < 1$
-	\begin{equation}
-	    \phi'(s) < \phi'(1) = \lambda < 1
-	\end{equation}
-	The only fixed point is 0.
+	TODO : ADD PROOF
 \end{proof}
 \begin{theorem}
 	If $\mathbb{E}X > 1$ then the population survives with a non-zero probability.
@@ -115,20 +111,17 @@ So in terms of set, we can consider that at time (step) $t$ we have :
 	E_t&: \text{ the set of explored vertices at time $t$ } \\
 	U_t&: \text{ the set of unseen vertices at time $t$ } 
 \end{align}
-The process starts as follows, at $t = 0$, we place one randomly chosen vertex $v_0$ in $A_0$, so $U_0 = V\backslash v_0$ and $A_0 = v_0, E_0=\emptyset $.
+The process starts as follows, at $t = 0$, no vertex has been seen yet, so $U_0 = V$ and the process has not started yet then $A_0 = \emptyset, E_0=\emptyset$.
+In the case of a branching process we consider a rooted tree and we denote the root as $r$, so at $t = 1$, $A_1 = r, U_1 = V\backslash\{r\}, E_1 = r$.
+The two-steps initialisation might seem redundant but we will use it in the future when we will extend this process to study any kind of graph. 
 \newline
-For the following steps, at time $t \geq 1$, the process is as follows, a vertex $v_t$ is picked \footnote{We use \emph{picked} in the sense that if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
-For convenience we will add the variable $\eta_t = |N(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
+For the following steps, at time $t > 1$, the process is as follows, a vertex $v_t$ is picked \footnote{We use \emph{picked} in the sense that if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
+For convenience we will add the variable $\eta_t = |N_(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
 And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$
-Finally, we move $v_t$ to $E_t$ and the process stops when all vertices in the connected component of order $n$ are explored $|E_t| = n$, equivalently $t=n$, equivalently $|A_t| = 0$.
-\footnote{This process can be very easily extended to explore every vertices simply by picking a vertex not yet explored when the set of active vertices is empty}
+Finally, we move $v_t$ to $E_t$ and the process stops when all vertices are explored $|E_t|$ = n, equivalently $t=n$, equivalently $|U_t| = 0$.
 \newline
-This process is called \emph{Breadth first search} and might be referred to as BFS and we may summarise, for $t\geq 1$  it as :
-\begin{align}
-    A_t &= (N(v_t) \cap U_{t-1})\cup A_{t-1} \backslash \{v_t\} \\
-    U_t &= U_{t-1}\backslash(\{v_t\}\cup N(v_t) ) \\
-    E_t &= E_{t-1}\cup \{v_t\}
-\end{align}
+This process is called \emph{Breadth first search} and might be referred as BFS.
+\newline
 Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out only if the algorithm finishes.
 \begin{align}\label{activatedV}
 	\left\{\begin{array}{rl}
@@ -144,7 +137,7 @@ We can then define $T$ as the instant the population dies out.
 \end{equation}
 If $T = \infty$ then we say that the population survives. 
 \newline
-We have that $\{v_t\}_t$ is a random walk on the tree under exploration and we also get the following evolution equation 
+We have that $\{A_t\}_t$ is a random walk on the tree and we also get the following evolution equation 
 \begin{equation}\label{eq:St}
 	|S_t| = |S_{t-1}| + \eta_t - 1
 \end{equation}
@@ -155,11 +148,9 @@ Studying the random walk in that case we observe that the number of vertices to 
 	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
 \end{equation}
 So we have
-\footnote{This is the conditional law on the number of neighbour of a vertex knowing $|A_{t-1}|$}
 \begin{equation}
 	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
-(TODO : ADD A VISUAL EXPLANATION OF THE BFS)
 and we observe comparing it to \ref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
 However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are almost independently distributed.
 We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
@@ -259,7 +250,7 @@ Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one t
 	\begin{equation}
 		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \geq \mathbb{P}_{n-k,p}(T\geq k)
 	\end{equation}
-	Here $T$ is the total progeny of a binomial branching process with parameter $n-k$ and $p$.
+	Here $T$ is the total progeny of a branching process with parameter $n-k$ and $p$.
 \end{theorem}
 Here is a sketch of the proof, the following changes shall just be plugged in the previous proof and the result will appear.
 \begin{proof}
@@ -315,7 +306,7 @@ In the previous theorem, $I_{\lambda}$ stands for the large deviation rate funct
 	I_{\lambda} = \lambda - 1 - \log(\lambda)
 \end{equation}
 It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
-\begin{proof}[Proof of \ref{th:uplambda}]
+\begin{proof}
 	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
 	Using \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
 	\begin{equation}
@@ -354,7 +345,7 @@ And we obtain
 \end{equation}
 Applying the theorem above \ref{th:uplambda} we immediately have the following result.
 \begin{lemma}\label{lemmalambdainf}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a > I_{\lambda}^{-1}, \quad \delta > 0$
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a\geq I_{\lambda}^{-1}, \quad \delta > 0$
 \end{lemma}
 We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the sub-critical regime).
 \begin{lemma}\label{lemmalambdasup}
@@ -476,7 +467,10 @@ For the beginning we will use the recent approach from Sudakov \cite{Sudakov} wh
 We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to it's active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
-More formally we will use the same partition of vertex as in the BFS, $A_t$ the set of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
+More formally we will use the same partition of vertex as in the BFS, $A_t$ the \emph{Last-In/First-Out stack}
+\footnote{A LIFO stack is a set in which elements are ordered according to the time they were added in the stack. 
+Only the last element added can be extracted from a LIFO stack. See Knuth TAOCP I (TODO: ADD REF ) for a detailed review of stacks, lists, ....}
+of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
 The interest of using DFS here is that $A_t$ is by construction always a path.
 \newline
 We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X_N = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge.
