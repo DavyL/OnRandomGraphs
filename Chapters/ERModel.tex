@@ -28,7 +28,7 @@ However, even if the first two are quite similar (static random graphs) the last
 \newline
 In this report we will mainly focus on $\mathcal{G}_{n, p}$ which is in fact easier to study than $\mathcal{G}_{n,M}$.
 \footnote{There is usually no confusion possible on the model being studied.}
-We will see in \ref{th:linkMP} that there is a strong relation between those two models.
+We will see in \eqref{th:linkMP} that there is a strong relation between those two models.
 
 \section{Connectivity}
 
@@ -70,7 +70,7 @@ Hence, we will study the probability that there is any component of intermediary
 				&\leq \binom{n}{k} k^{k-2} q_k\\
 				&\leq \binom{n}{k} k^{k-2} p^{k-1} ((1-p)^{n-k})^k
 \end{align}
-In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components, the total number of spanning trees on $k$-vertices being $k^{k-2}$ from Cayley's formula \ref{cayley}.
+In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components, the total number of spanning trees on $k$-vertices being $k^{k-2}$ from Cayley's formula \eqref{cayley}.
 A tree on $k$ vertices having $k-1$ edges, this means in terms of probability that it must have $k-1$ "success" and on each of the $k$ vertices $n-k$ failures. Which leads to the following line.
 \newline 
 Now we will try to have an upper bound of the RHS such that the sum on $k$ will converges to a $o(n^{-\delta})$ for some $\delta >0$.
@@ -89,10 +89,10 @@ Hence, $A$ goes to 0 without any condition on $k$, so we obtain
     \sum_{k=3}^{\lceil n/2\rceil} \mathbb{P}(X_k \geq 1)\leq p^{-1}\sum_{k=3}^{\lceil n/2\rceil} A^k = o(1)
 \end{equation}
 This gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depend on the existence of isolated connected components of size 2 or more. So it only depends on the existence of isolated vertices.
-So we have proved \ref{th:isolcomp}.
+So we have proved \eqref{th:isolcomp}.
 \end{proof}
 
-The proof of \ref{th:connect} can be done using the second moment method or Stein's method, see \cite{JLR}. (TODO : CHOOSE WHICH ONE TO PRESENT.).
+The proof of \eqref{th:connect} can be done using the second moment method or Stein's method, see \cite{JLR}. (TODO : CHOOSE WHICH ONE TO PRESENT.).
 
 
 \section{Existence of thresholds}\footnote{ The proofs and results from this section are from \cite{JLR} and \cite{Bollob01}}
@@ -104,7 +104,7 @@ or if $p = \frac{\log(n) + \omega(n)}{n}$ with $\lim_{n\to \infty} \omega(n) = \
 We would say that for such $p$, $\mathcal{G}_{n,p}$ is almost surely connected.
 We also observe that if in the previous definitions of $p$ we changed the $+$ signs into $-$ signs, we would find that $\mathcal{G}_{n,p}$ is almost surely disconnected.
 \newline
-Hence, the function $p$ from \ref{th:connect} has some very peculiar behaviour on the property of connectivity.
+Hence, the function $p$ from \eqref{th:connect} has some very peculiar behaviour on the property of connectivity.
 We will call such a function a \emph{threshold} (here, for connectivity).
 \newline
 The aim of this section is to detail formally what we mean by a graph property and a threshold function.
@@ -169,7 +169,7 @@ The following theorem shows that if we know quite accurately $\mathbb{P}_M(\math
 						\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
 						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
-	So we have \ref{binomTail} (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
+	So we have \eqref{binomTail} (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
 	\begin{equation}
 		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi q M}
 	\end{equation}
@@ -210,8 +210,8 @@ In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )con
 	\begin{equation}
 		\mathbb{P}(\mathcal{G}_{n, p} \in \mathcal{P}) = \epsilon
 	\end{equation}
-	The existence of $p$ is guaranteed from \ref{eq:QProp} because it is an increasing polynomial in $p$, from 0 to 1.
-	Indeed, we know that it is increasing from \ref{th:QIncr}.
+	The existence of $p$ is guaranteed from \eqref{eq:QProp} because it is an increasing polynomial in $p$, from 0 to 1.
+	Indeed, we know that it is increasing from \eqref{th:QIncr}.
 	\newline
 	We will show that $p^* = p(\frac{1}{2})$ is a threshold for $\mathcal{P}$ through a coupling argument.
 	We take $G_1, G_2, ..., G_k$ independent random variables in $\mathcal{G}_{n,p}$.
@@ -227,8 +227,8 @@ In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )con
 		\mathbb{P}(G \cup G_k = H) 	&= \mathbb{P}(G=H) + \mathbb{P}(G_k = H) - \mathbb{P}(G \cap G_k = H) \\ 
 						&= \mathbb{P}(G=H) + \mathbb{P}(G_k = H) - \mathbb{P}(G = H)\mathbb{P}(G_k = H) 
 	\end{align}
-	And we can conclude in the same way as in \ref{th:QIncr}.
-	We may now use Bernoulli's inequality \ref{bernoulli}, $1 - (1-p)^k \leq kp$ to obtain
+	And we can conclude in the same way as in \eqref{th:QIncr}.
+	We may now use Bernoulli's inequality \eqref{bernoulli}, $1 - (1-p)^k \leq kp$ to obtain
 	\begin{equation}
 		\mathbb{G}_{n,1 - (1-p)^k)} \subseteq \mathbb{G}_{n, kp}
 	\end{equation}
@@ -356,7 +356,7 @@ Now we will define the probability function that we will use in the following of
 \begin{equation} \label{eq:pdiam}
 	p^d n^{d-1} = \log(\frac{n^2}{c}) \quad, \text{  for some } c >0
 \end{equation}
-In order for $d = d(n)$ to be finite we need \footnote{ See \ref{eq:pnd}}
+In order for $d = d(n)$ to be finite we need \footnote{ See \eqref{eq:pnd}}
 \begin{equation}
 	\frac{pn}{(\log(n))^3} \longrightarrow \infty
 \end{equation}
@@ -370,7 +370,7 @@ The aim of this section will be to prove the following theorem.
 		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) = d + 1) \longrightarrow 1 - e^{-\frac{c}{2}}
 	\end{equation}
 \end{theorem}
-This theorem states that in $\mathcal{G}_{n,p}$ with $p$ defined as in \ref{eq:pdiam} the diameter is spread on only two values.
+This theorem states that in $\mathcal{G}_{n,p}$ with $p$ defined as in \eqref{eq:pdiam} the diameter is spread on only two values.
 As a corollary we clearly have
 \begin{corollary}
 	Using all previous definitions on $p$, $d$ and $c$. We have,
@@ -448,7 +448,7 @@ The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ co
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
 		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
 	\end{align}
-	And using Theorem 1.7 \ref{binomTail} from Bollob\'as (TODO : ADD IT IN THE ANNEX AND PROVE IT, JUST A TAIL INEQ ON BINOM)we have
+	And using Theorem 1.7 \eqref{binomTail} from Bollob\'as (TODO : ADD IT IN THE ANNEX AND PROVE IT, JUST A TAIL INEQ ON BINOM)we have
 	\begin{align}
 		&\leq \frac{1}{\sqrt{\alpha_k^2p_an_k}}\exp(-\frac{1}{3}\alpha_k^2p_an_k) \\
 		&\leq \exp(-\frac{1}{3}\alpha_k^2p_an_k)
@@ -502,7 +502,7 @@ We will now prove another lemma
 		&\leq 2\mathbb{P}(||\Gamma_k(x)| - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn | \Omega_k)\\
 		&\leq 2n^{-\frac{K^2}{9}}
 	\end{align}
-	If we combine the last inequality that is obtained applying the previous lemma with \ref{eq:bayes} then we have the result.
+	If we combine the last inequality that is obtained applying the previous lemma with \eqref{eq:bayes} then we have the result.
 \end{proof}
 \begin{definition}
 	For $x$ and $y$ two vertices of $G$, we say that $x$ and $y$ are remote if $y \not\in N_d(x)$.
@@ -565,7 +565,7 @@ We will now prove another lemma
 		\mathbb{E}_r(X) = n^r2^{-r}(\frac{c}{n})^r(1+o(1)) + o(1)
 	\end{equation}
 	Using the following theorem 
-	\begin{theorem}\footnote{See \ref{th:factPois} for a proof}
+	\begin{theorem}\footnote{See \eqref{th:factPois} for a proof}
 		\begin{align}
 			\lim_{n\to\infty} \mathbb{E}_r(X_n) &- \lambda^r = 0 \\
 					&\implies X \longrightarrow_d \mathcal{P}_{\lambda}
@@ -597,7 +597,7 @@ We will now prove another lemma
 	\begin{equation}
 		\mathbb{P}(\text{diam}(G) \leq d+1) = e^{-\frac{c_2}{2}} \longrightarrow 1
 	\end{equation}
-	Finally, if we combine the last result with \ref{eq:diamcv} it is clear that the proof if complete.
+	Finally, if we combine the last result with \eqref{eq:diamcv} it is clear that the proof if complete.
 \end{proof}
 	To end this section we present two theorems that are much easier to prove with a similar flavor to the previous one.
 	\begin{theorem}\label{th:diam2}
@@ -632,7 +632,7 @@ We will now prove another lemma
 			    \text{iff  } n^2 (1-p) &\longrightarrow +\infty			
 	\end{align}	
 \end{proof}
-And simply if we remember the previous theorem \ref{th:linkMP} linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary
+And simply if we remember the previous theorem \eqref{th:linkMP} linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary
 
 \begin{corollary}
 	If $M=M(n) < \binom{n}{2}$ satisfies 
@@ -643,12 +643,12 @@ And simply if we remember the previous theorem \ref{th:linkMP} linking $\mathcal
 \end{corollary}
 \begin{proof}
 	The first condition makes that we are not studying a complete graph then the diameter is not 1.
-	And we have the proof simply using \ref{th:linkMP} with $pN = M$ and combining it with the previous theorem \ref{th:diam2} we have the result.
+	And we have the proof simply using \eqref{th:linkMP} with $pN = M$ and combining it with the previous theorem \eqref{th:diam2} we have the result.
 \end{proof}
 
 Now that we know that the diameter is spread on two values we are interested in restricting it on only one value. 
-We may observe that theorem \ref{th:diam2} gives us enough information to do so.
-Indeed, we see that if we forced $c \to 0$ then the diameter would be $d$. This would translate in \ref{eq:pdiam} as
+We may observe that theorem \eqref{th:diam2} gives us enough information to do so.
+Indeed, we see that if we forced $c \to 0$ then the diameter would be $d$. This would translate in \eqref{eq:pdiam} as
 \begin{equation}
 	p^dn^{d-1} - 2\log(n) \longrightarrow \infty
 \end{equation}
@@ -658,8 +658,8 @@ In the same fashion as previously this would translate as
 	p^{d-1}n^{d-2} - 2 \log(n) \longrightarrow -\infty
 \end{equation}
 
-This informal reasoning gives motivation for the following corollary of \ref{th:diam2} that we will now formally prove. 
-\footnote{In fact it is a immediate consequence of the last part of the proof of \ref{th:diam2} but we will prove it only assuming the theorem itself.}
+This informal reasoning gives motivation for the following corollary of \eqref{th:diam2} that we will now formally prove. 
+\footnote{In fact it is a immediate consequence of the last part of the proof of \eqref{th:diam2} but we will prove it only assuming the theorem itself.}
 \begin{corollary}\label{th:aediam}
 	Suppose $d = d(n) \geq 3$ and $p = p(n)$ satisfy
 	\begin{equation}
@@ -689,7 +689,7 @@ This informal reasoning gives motivation for the following corollary of \ref{th:
 \end{proof}
 
 
-Now, going back to the degree-diameter problem defined in \ref{eq:DDeltaProb}, which is of finding the largest graph with fixed diameter and maximal degree.
+Now, going back to the degree-diameter problem defined in \eqref{eq:DDeltaProb}, which is of finding the largest graph with fixed diameter and maximal degree.
 As we already have the Moore upper bound which is best possible, we are interested in finding a lower bound, and maybe hope that it would be close from Moore's bound in order to obtain precise estimate of $n(D, \Delta)$.
 To obtain such a bound here we will make use of the probabilistic method by sampling on an appropriate graph space (with known diameter and max degree), we will show that almost surely a specified propery doesn't appear (having less that a specified number of vertices).
 \newline
@@ -723,8 +723,8 @@ We can obtain the following result :
 	\begin{equation}
 		p_k = n_k^{\frac{1}{D_k} -1 }(2\log(n_k) + \log\log(n_k))^{1/D_k}
 	\end{equation}
-	From the previous corollary \ref{th:aediam}, almost every graph in $\mathcal{G}_{n_k, p_k}$ has diameter ( at most ) $D_k$.
-	From \ref{th:deltap}, almost every graph in $\mathcal{G}_{n_k,p_k}$ has maximal degree about $p_kn_k$. 
+	From the previous corollary \eqref{th:aediam}, almost every graph in $\mathcal{G}_{n_k, p_k}$ has diameter ( at most ) $D_k$.
+	From \eqref{th:deltap}, almost every graph in $\mathcal{G}_{n_k,p_k}$ has maximal degree about $p_kn_k$. 
 	\begin{align}
 		\Delta(\mathbb{G}_{n_k,p_k}) 	&=(1+o(1))n_kp_k \\
 						&= (1+o(1))n_k^{1/D_k}(2\log n_k + \log\log n_k)^{1/D_k}	\\

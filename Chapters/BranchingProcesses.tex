@@ -56,9 +56,9 @@ we have
 	\begin{equation}\label{indepGW}
 		Z_{n+1} = \sum_{j=1}^{Z_1} Z_n(j)
 	\end{equation}
-	Each of these $Z_n(j)$ is a GW process independent from the others and for each we can then construct $M_n(j)$ as in \ref{martinGW}.
+	Each of these $Z_n(j)$ is a GW process independent from the others and for each we can then construct $M_n(j)$ as in \eqref{martinGW}.
 	As these are Martingales, using the convergence theorem of Martingales (TODO : ADD IT IN ANNEX ) we have that they converge to some random values that we denote by $M$ and $M(j)$.
-	Now if we divide both sides in \ref{indepGW} by $\mu^{n+1}$.
+	Now if we divide both sides in \eqref{indepGW} by $\mu^{n+1}$.
 	\begin{equation}
 		\frac{Z_{n+1}}{\mu^{n+1}} = M_{n+1} = \mu^{-1} \sum_{j=1}^{Z_1} M_n(j)
 	\end{equation}
@@ -160,10 +160,10 @@ So we have
 	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
 (TODO : ADD A VISUAL EXPLANATION OF THE BFS)
-and we observe comparing it to \ref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
+and we observe comparing it to \eqref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
 However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are almost independently distributed.
 We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
-This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \ref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
+This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \eqref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
 \newline
 As the Poisson law is more convenient to work with than the binomial, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and binomial branching process.
 \begin{theorem}\label{th:poibin}
@@ -315,13 +315,13 @@ In the previous theorem, $I_{\lambda}$ stands for the large deviation rate funct
 	I_{\lambda} = \lambda - 1 - \log(\lambda)
 \end{equation}
 It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
-\begin{proof}[Proof of \ref{th:uplambda}]
+\begin{proof}[Proof of \eqref{th:uplambda}]
 	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
-	Using \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
+	Using \eqref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq \mathbb{P}(|A_t|>0) \leq \mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t)
 	\end{equation}
-	Using Bernoulli's inequality \ref{bernoulli} $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
+	Using Bernoulli's inequality \eqref{bernoulli} $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
 	\begin{equation}
 		\mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t) \leq \mathbb{P}(e^{s\text{Bin}(n-1, tp)} \geq e^{st}) 
 	\end{equation}
@@ -329,7 +329,7 @@ It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
 	\end{equation}
-	Replacing the moment generating function of the binomial with it's value \ref{binMGF}, we obtain 
+	Replacing the moment generating function of the binomial with it's value \eqref{binMGF}, we obtain 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s\frac{t\lambda}{n})^n \leq e^{-t(s - \lambda e^s + \lambda)}
 	\end{equation}
@@ -352,7 +352,7 @@ And we obtain
 \begin{equation}\label{eq:nexplambda}
 	\mathbb{E}_{\lambda}(Z_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
 \end{equation}
-Applying the theorem above \ref{th:uplambda} we immediately have the following result.
+Applying the theorem above \eqref{th:uplambda} we immediately have the following result.
 \begin{lemma}\label{lemmalambdainf}
 	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a > I_{\lambda}^{-1}, \quad \delta > 0$
 \end{lemma}
@@ -414,18 +414,18 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\begin{equation}
 		\chi_{k_n}(\lambda) = \sum_{t=k_n}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t) 
 	\end{equation}
-	And using \ref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
+	And using \eqref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
 	\begin{equation}
 		\chi_{k_n}(\lambda) \leq \sum_{t=k_n}^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-a I_{\lambda}})
 	\end{equation}
-	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \ref{eq:nexplambda} to obtain the formula of the expectation, 
-	\ref{th:lowbin} to obtain a lower bound and \ref{th:poibin} to convert our lower bound in the Poisson distribution.
+	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \eqref{eq:nexplambda} to obtain the formula of the expectation, 
+	\eqref{th:lowbin} to obtain a lower bound and \eqref{th:poibin} to convert our lower bound in the Poisson distribution.
 	So we have
 	\begin{equation}
 		\mathbb{E} Z_{\geq k} = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k) \geq n \mathbb{P}_{n-k, p}(T \geq k) 
 		= n(\mathbb{P}_{\lambda_n}^*(T^* \geq k) + o(1) )
 	\end{equation}
-	$T$ and $T^*$ being the total progeny of branching process ( Binomial and Poisson), and $\lambda_n = (n-k)p = \frac{n-k}{n}p$ from \ref{th:poibin}.
+	$T$ and $T^*$ being the total progeny of branching process ( Binomial and Poisson), and $\lambda_n = (n-k)p = \frac{n-k}{n}p$ from \eqref{th:poibin}.
 	\newline
 	And we can compute the term on the RHS as follows
 	\begin{equation}
@@ -461,7 +461,7 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\end{equation}
 	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ asymptotically almost surely.
 \end{proof}
-Now, simply combining the previous results \ref{lemmalambdainf} and \ref{lemmalambdasup} wehave our proof of our main theorem in this section \ref{th:subCritCV}.
+Now, simply combining the previous results \eqref{lemmalambdainf} and \eqref{lemmalambdasup} wehave our proof of our main theorem in this section \eqref{th:subCritCV}.
 Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
 This change of speed in the growth rate is called the phase transition.
 
@@ -511,7 +511,7 @@ The following simple lemma will give us information on the behaviour of our bino
 \end{lemma}
 \begin{proof}
 	Let's observe that $\mathbb{E}X_{N_0} = N_0 p = \frac{\epsilon(1+\epsilon)}{2}n$.
-	Simply using Chernoff inequality \ref{chernoff3}.
+	Simply using Chernoff inequality \eqref{chernoff3}.
 	\begin{equation}
 		\mathbb{P}(|X_{N_0} - \mathbb{E}X_{N_0}| > n^{\frac{2}{3}} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
 	\end{equation}
@@ -546,7 +546,7 @@ Now we can state and prove the following theorem making use of the previous lemm
 	Which means that there are still elements that can be added to the connected component.
 	We are going to use the same arguments as previously.
 	\newline
-	By lemma \ref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$.
+	By lemma \eqref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$.
 	Which gives that the number of active and explored vertices is at least as follows
 	\begin{equation}
 		|A_{N_0} \cup E_{N_0}| \geq \frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}
