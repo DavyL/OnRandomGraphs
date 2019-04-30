@@ -1,12 +1,12 @@
 \section{Galton-Watson trees and Karp's exploration process}
 A branching process is the simplest model that can be used to describe the evolution of a population over time.
 Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
-This number following a distribution, we call it the offspring distribution and denote it by $\{p_i\}_0^{\infty}$ such as
+The distribution of this number is called the offspring distribution and we denote it by $\{p_i\}_0^{\infty}$ such as
 \begin{equation}
 	p_i = \mathbb{P}(\text{ having i child })
 \end{equation}
 When we say that a branching process is a "something" branching process, that means that the offspring distribution follows the "something" law (typically a Poisson branching process).
-And we also denote by $Z_n$ the number of individuals in the n-th generation. 
+And we also denote by $Z_n$ the number of individuals in the $n$-th generation. 
 Then if we consider that the offspring distribution doesn't depend on the generation of the individual considered we have
 \begin{equation}
 	Z_n = \sum_{i=1}^{Z_{n-1}}X_{n, i} \quad, \text{ with } X = \{X_{n,i}\}_{n,i} \text{,  i.i.d.}
@@ -14,12 +14,88 @@ Then if we consider that the offspring distribution doesn't depend on the genera
 Observing this distribution, we observe that if for some generation $k_0$ we have $Z_{k_0} = 0$, then $Z_{k_0 + k} = 0$ for any $k$. We would say that that the population dies out at $k_0$ and one might be interested to study under which condition a population will die out.
 It was in fact this question that was studied by Galton and Watson (TODO : CHECK AND ADD HISTORICAL DETAILS ) that led to the study of branching processes. 
 Hence, we might refer to these branching processes as Galton-Watson processes or trees (GW).
+\newline
+We define $\mu = \mathbb{E} X_{1,1} < \infty$
+\begin{lemma}\label{martinGW}
+	$M_n = \frac{1}{\mu^n}Z_n$ is a Martingale. 
+	\footnote{We take $\mathcal{F}_n = \sigma(X_{i,j} , i,j \in \mathbb{N})$ as the filtration adapted to $M_n$ }
+\end{lemma}
+\begin{proof}
+	Let's first show the integrability property.
+	\begin{align}
+		\mathbb{E}Z_{n+1} 	&= \mathbb{E}(X_{n,1} + X_{n,2} + ... + X_{n, Z_n}) \\
+					&= \sum_{k=0}^{\infty} \mathbb{P}(Z_n = k)\mathbb{E}(X_{n,1} + ... + X_{n,k})\\
+					&= \sum_{k=0}^{\infty} \mathbb{P}(Z_n = k) \mu k = \mu \mathbb{E}Z_n \\
+					&= \mu ^{n+1} \mathbb{E} Z_0 = \mu^{n+1}
+	\end{align}
+	Then we have that $\mathbb{E}M_{n+1} = 1$.
+	\newline
+	Now let's prove the property on the conditional expectation.
+	\begin{align}
+		\mathbb{E}(Z_{n+1} | \mathcal{F}_n) 	&= \mathbb{E}( X_{n,1} + X_{n,2} + ... + X_{n, Z_n} | \mathcal{F}_n ) \\
+							&= \mathbb{E}X_{n, 1} \mathbb{E}(Z_n |\mathcal{F}_n ) = \mu Z_n
+	\end{align}
+	And we obtain,
+	\begin{equation}
+		\mathbb{E}(M_{n+1} | \mathcal{F}_n) = \mathbb{E}(\frac{Z_{n+1}}{\mu^{n+1}}) = \frac{Z_n}{\mu^n} = M_n
+	\end{equation}
+\end{proof}
+We now define the following generating function
+\begin{equation}
+	\phi(s) = \sum_{k=0}^{\infty} p_k s^k \quad , |s| <1
+\end{equation}
+Then if we define the extinction probability $\zeta$ as $\zeta = \mathbb{P}(\lim_{n \to \infty} Z_n = 0)$
+we have
+\begin{theorem}
+	The extinction probability is the fixed point of $\phi$.
+\end{theorem}
+\begin{proof}
+	For this proof we will rewrite the expression for $Z_{n+1}$ as a sum of independent Galton-Watson process. 
+	In order to do so we simply consider that the descendency of the second generation is a sum of $Z_1$ GW process.
+	For all of the $1 \leq j \leq Z_1$ child, we denote by $Z_n(j)$ as the number of descendants of $n$-th generation of $j$.
+	\begin{equation}\label{indepGW}
+		Z_{n+1} = \sum_{j=1}^{Z_1} Z_n(j)
+	\end{equation}
+	Each of these $Z_n(j)$ is a GW process independent from the others and for each we can then construct $M_n(j)$ as in \eqref{martinGW}.
+	As these are Martingales, using the convergence theorem of Martingales (TODO : ADD IT IN ANNEX ) we have that they converge to some random values that we denote by $M$ and $M(j)$.
+	Now if we divide both sides in \eqref{indepGW} by $\mu^{n+1}$.
+	\begin{equation}
+		\frac{Z_{n+1}}{\mu^{n+1}} = M_{n+1} = \mu^{-1} \sum_{j=1}^{Z_1} M_n(j)
+	\end{equation}
+	And by taking limits we have
+	\begin{equation}
+		M = \frac{1}{\mu} \sum_{j=1}^{Z_1}M(j)
+	\end{equation}
+	Which gives that $\mu M$ is distributed as $\sum_{j=1}^{Z_1}$ and we can finally obtain
+	\begin{align}
+		\mathbb{P}(M = 0) 	&= \mathbb{P}(\mu M = 0) = \mathbb{P}(\sum_{j=1}^{Z_1}(M_j = 0) \\
+					&= \sum_{k=1}^{\infty} p_k \mathbb{P}(\sum_{j=1}^{k} M(j) = 0 | Z_1 = k) \\
+					&= \sum_{k=1}^{\infty} p_k (\mathbb{P}(M=0))^k\\
+					&= \phi(\mathbb{P}(M=0))
+	\end{align}
+\end{proof}
+Using this result we can obtain the following result
+\begin{theorem}
+	The extinction probability of a Poisson branching process of parameter $\lambda$ is the solution of $x = e^{-\lambda(1-x)}$.
+\end{theorem}
+\begin{proof}
+	\begin{align}
+		\phi(s) &= \sum_{k=0}^{\infty} p_k s^k = e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda ^k}{k!} s^k\\
+			&= e^{-\lambda}e^{\lambda s} = e^{-\lambda(1 -s)}
+	\end{align}
+\end{proof}
+
+
 We can obtain the following theorem
 \begin{theorem}
 	If $\mathbb{E}X \leq 1$ then the population dies out almost surely.
 \end{theorem}
 \begin{proof}
-	TODO : ADD PROOF
+    If $\lambda < 1$
+	\begin{equation}
+	    \phi'(s) < \phi'(1) = \lambda < 1
+	\end{equation}
+	The only fixed point is 0.
 \end{proof}
 \begin{theorem}
 	If $\mathbb{E}X > 1$ then the population survives with a non-zero probability.
@@ -39,17 +115,20 @@ So in terms of set, we can consider that at time (step) $t$ we have :
 	E_t&: \text{ the set of explored vertices at time $t$ } \\
 	U_t&: \text{ the set of unseen vertices at time $t$ } 
 \end{align}
-The process starts as follows, at $t = 0$, no vertex has been seen yet, so $U_0 = V$ and the process has not started yet then $A_0 = \emptyset, E_0=\emptyset$.
-In the case of a branching process we consider a rooted tree and we denote the root as $r$, so at $t = 1$, $A_1 = r, U_1 = V\backslash\{r\}, E_1 = r$.
-The two-steps initialisation might seem redundant but we will use it in the future when we will extend this process to study any kind of graph. 
+The process starts as follows, at $t = 0$, we place one randomly chosen vertex $v_0$ in $A_0$, so $U_0 = V\backslash v_0$ and $A_0 = v_0, E_0=\emptyset $.
 \newline
-For the following steps, at time $t > 1$, the process is as follows, a vertex $v_t$ is picked \footnote{We use \emph{picked} in the sense that if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
-For convenience we will add the variable $\eta_t = |N_(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
+For the following steps, at time $t \geq 1$, the process is as follows, a vertex $v_t$ is picked \footnote{We use \emph{picked} in the sense that if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
+For convenience we will add the variable $\eta_t = |N(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
 And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$
-Finally, we move $v_t$ to $E_t$ and the process stops when all vertices are explored $|E_t|$ = n, equivalently $t=n$, equivalently $|U_t| = 0$.
+Finally, we move $v_t$ to $E_t$ and the process stops when all vertices in the connected component of order $n$ are explored $|E_t| = n$, equivalently $t=n$, equivalently $|A_t| = 0$.
+\footnote{This process can be very easily extended to explore every vertices simply by picking a vertex not yet explored when the set of active vertices is empty}
 \newline
-This process is called \emph{Breadth first search} and might be referred as BFS.
-\newline
+This process is called \emph{Breadth first search} and might be referred to as BFS and we may summarise, for $t\geq 1$  it as :
+\begin{align}
+    A_t &= (N(v_t) \cap U_{t-1})\cup A_{t-1} \backslash \{v_t\} \\
+    U_t &= U_{t-1}\backslash(\{v_t\}\cup N(v_t) ) \\
+    E_t &= E_{t-1}\cup \{v_t\}
+\end{align}
 Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out only if the algorithm finishes.
 \begin{align}\label{activatedV}
 	\left\{\begin{array}{rl}
@@ -65,7 +144,7 @@ We can then define $T$ as the instant the population dies out.
 \end{equation}
 If $T = \infty$ then we say that the population survives. 
 \newline
-We have that $\{A_t\}_t$ is a random walk on the tree and we also get the following evolution equation 
+We have that $\{v_t\}_t$ is a random walk on the tree under exploration and we also get the following evolution equation 
 \begin{equation}\label{eq:St}
 	|S_t| = |S_{t-1}| + \eta_t - 1
 \end{equation}
@@ -76,13 +155,15 @@ Studying the random walk in that case we observe that the number of vertices to 
 	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
 \end{equation}
 So we have
+\footnote{This is the conditional law on the number of neighbour of a vertex knowing $|A_{t-1}|$}
 \begin{equation}
 	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
-and we observe comparing it to \ref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
+(TODO : ADD A VISUAL EXPLANATION OF THE BFS)
+and we observe comparing it to \eqref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
 However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are almost independently distributed.
 We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
-This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \ref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
+This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \eqref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
 \newline
 As the Poisson law is more convenient to work with than the binomial, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and binomial branching process.
 \begin{theorem}\label{th:poibin}
@@ -178,7 +259,7 @@ Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one t
 	\begin{equation}
 		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \geq \mathbb{P}_{n-k,p}(T\geq k)
 	\end{equation}
-	Here $T$ is the total progeny of a branching process with parameter $n-k$ and $p$.
+	Here $T$ is the total progeny of a binomial branching process with parameter $n-k$ and $p$.
 \end{theorem}
 Here is a sketch of the proof, the following changes shall just be plugged in the previous proof and the result will appear.
 \begin{proof}
@@ -234,13 +315,13 @@ In the previous theorem, $I_{\lambda}$ stands for the large deviation rate funct
 	I_{\lambda} = \lambda - 1 - \log(\lambda)
 \end{equation}
 It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
-\begin{proof}
+\begin{proof}[Proof of \eqref{th:uplambda}]
 	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
-	Using \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
+	Using \eqref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq \mathbb{P}(|A_t|>0) \leq \mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t)
 	\end{equation}
-	Using Bernoulli's inequality \ref{bernoulli} $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
+	Using Bernoulli's inequality \eqref{bernoulli} $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
 	\begin{equation}
 		\mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t) \leq \mathbb{P}(e^{s\text{Bin}(n-1, tp)} \geq e^{st}) 
 	\end{equation}
@@ -248,7 +329,7 @@ It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
 	\end{equation}
-	Replacing the moment generating function of the binomial with it's value \ref{binMGF}, we obtain 
+	Replacing the moment generating function of the binomial with it's value \eqref{binMGF}, we obtain 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s\frac{t\lambda}{n})^n \leq e^{-t(s - \lambda e^s + \lambda)}
 	\end{equation}
@@ -261,19 +342,19 @@ Now using this result we will obtain a logarithmic bound on the largest connecte
 \newline
 For this we will use the random variable 
 \begin{equation}
-	\mathbb{Z}_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
+	Z_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
 \end{equation}
 Observing that $Z_{\geq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume uniqueness of the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
 \begin{equation}
-	|\mathcal{C}_{\max}| = \max\{k: \mathbb{Z}_{\geq k} \geq k\}
+	|\mathcal{C}_{\max}| = \max\{k: Z_{\geq k} \geq k\}
 \end{equation}
 And we obtain 
 \begin{equation}\label{eq:nexplambda}
-	\mathbb{E}_{\lambda}(\mathbb{Z}_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
+	\mathbb{E}_{\lambda}(Z_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
 \end{equation}
-Applying the theorem above \ref{th:uplambda} we immediately have the following result.
+Applying the theorem above \eqref{th:uplambda} we immediately have the following result.
 \begin{lemma}\label{lemmalambdainf}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a\geq I_{\lambda}^{-1}, \quad \delta > 0$
+	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a > I_{\lambda}^{-1}, \quad \delta > 0$
 \end{lemma}
 We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the sub-critical regime).
 \begin{lemma}\label{lemmalambdasup}
@@ -333,18 +414,18 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\begin{equation}
 		\chi_{k_n}(\lambda) = \sum_{t=k_n}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t) 
 	\end{equation}
-	And using \ref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
+	And using \eqref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
 	\begin{equation}
 		\chi_{k_n}(\lambda) \leq \sum_{t=k_n}^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-a I_{\lambda}})
 	\end{equation}
-	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \ref{eq:nexplambda} to obtain the formula of the expectation, 
-	\ref{th:lowbin} to obtain a lower bound and \ref{th:poibin} to convert our lower bound in the Poisson distribution.
+	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \eqref{eq:nexplambda} to obtain the formula of the expectation, 
+	\eqref{th:lowbin} to obtain a lower bound and \eqref{th:poibin} to convert our lower bound in the Poisson distribution.
 	So we have
 	\begin{equation}
 		\mathbb{E} Z_{\geq k} = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k) \geq n \mathbb{P}_{n-k, p}(T \geq k) 
 		= n(\mathbb{P}_{\lambda_n}^*(T^* \geq k) + o(1) )
 	\end{equation}
-	$T$ and $T^*$ being the total progeny of branching process ( Binomial and Poisson), and $\lambda_n = (n-k)p = \frac{n-k}{n}p$ from \ref{th:poibin}.
+	$T$ and $T^*$ being the total progeny of branching process ( Binomial and Poisson), and $\lambda_n = (n-k)p = \frac{n-k}{n}p$ from \eqref{th:poibin}.
 	\newline
 	And we can compute the term on the RHS as follows
 	\begin{equation}
@@ -380,7 +461,7 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\end{equation}
 	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ asymptotically almost surely.
 \end{proof}
-Now, simply combining the previous results \ref{lemmalambdainf} and \ref{lemmalambdasup} wehave our proof of our main theorem in this section \ref{th:subCritCV}.
+Now, simply combining the previous results \eqref{lemmalambdainf} and \eqref{lemmalambdasup} wehave our proof of our main theorem in this section \eqref{th:subCritCV}.
 Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
 This change of speed in the growth rate is called the phase transition.
 
@@ -395,7 +476,10 @@ For the beginning we will use the recent approach from Sudakov \cite{Sudakov} wh
 We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to it's active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
-More formally we will use the same partition of vertex as in the BFS, $A_t$ the set of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
+More formally we will use the same partition of vertex as in the BFS, $A_t$ the \emph{Last-In/First-Out stack}
+\footnote{A LIFO stack is a set in which elements are ordered according to the time they were added in the stack. 
+Only the last element added can be extracted from a LIFO stack. See Knuth TAOCP I (TODO: ADD REF ) for a detailed review of stacks, lists, ....}
+of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
 The interest of using DFS here is that $A_t$ is by construction always a path.
 \newline
 We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X_N = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge.
@@ -422,12 +506,12 @@ The following simple lemma will give us information on the behaviour of our bino
 \begin{lemma}\label{lemmaN0}
 	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{2}$. Then, 
 	\begin{equation}
-		|X_{N_0} - N_0 p| \leq n^{\frac{2}{3}} \quad, \text{a.a.s.}
+		|X_{N_0} - N_0 p| \leq n^{\frac{2}{3}} \quad \text{almost surely.}
 	\end{equation}
 \end{lemma}
 \begin{proof}
 	Let's observe that $\mathbb{E}X_{N_0} = N_0 p = \frac{\epsilon(1+\epsilon)}{2}n$.
-	Simply using Chernoff inequality \ref{chernoff3}.
+	Simply using Chernoff inequality \eqref{chernoff3}.
 	\begin{equation}
 		\mathbb{P}(|X_{N_0} - \mathbb{E}X_{N_0}| > n^{\frac{2}{3}} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
 	\end{equation}
@@ -438,7 +522,7 @@ The following simple lemma will give us information on the behaviour of our bino
 \end{proof}
 Now we can state and prove the following theorem making use of the previous lemma and of our knowledge of the depth first search algorithm.
 \begin{theorem}
-	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, $G \sim \mathcal{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$
+	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, $G \sim \mathcal{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$.
 \end{theorem}
 \begin{proof}
 	The proof will be done by contradiction.
@@ -447,7 +531,7 @@ Now we can state and prove the following theorem making use of the previous lemm
 	\newline
 	Let's first show that $E_{N_0} < \frac{n}{3}$.
 	\newline
-	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $E_t = \frac{n}{3}$. Also from \ref{eq:At} and \ref{lemmaN0} we would have
+	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $E_t = \frac{n}{3}$. Also from \eqref{eq:At} and \eqref{lemmaN0} we would have
 	\begin{equation}
 		|A_t| \leq 1 + \sum_{i=1}^{t} X_i < 1 + n^{\frac{2}{3}} < \frac{n}{3}.
 	\end{equation}
@@ -462,7 +546,7 @@ Now we can state and prove the following theorem making use of the previous lemm
 	Which means that there are still elements that can be added to the connected component.
 	We are going to use the same arguments as previously.
 	\newline
-	By lemma \ref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$.
+	By lemma \eqref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$.
 	Which gives that the number of active and explored vertices is at least as follows
 	\begin{equation}
 		|A_{N_0} \cup E_{N_0}| \geq \frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}
