@@ -579,7 +579,7 @@ We will now prove another lemma
 	\end{equation}
 	that proves the first part of the theorem. We can also prove the case with $d=1$ that gives
 	\begin{equation}
-		\mathbb{P}(\text{diam}(G) \leq 1) = \mathbb{P}(G = K_n) = p^{\binom{n}{2}} \longrightarrow 0
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) \leq 1) = \mathbb{P}(\mathbb{G}_{n,p} = K_n) = p^{\binom{n}{2}} \longrightarrow 0
 	\end{equation}
 	And to finish the proof we need to consider the two following cases
 	\begin{equation}
@@ -587,7 +587,7 @@ We will now prove another lemma
 	\end{equation}
 	And in that case we have $c_1 \longrightarrow \infty$.
 	\begin{equation}
-		\mathbb{P}(\text{diam}(G) \leq d+1) = e^{-\frac{c_1}{2}} \longrightarrow 0
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) \leq d+1) = e^{-\frac{c_1}{2}} \longrightarrow 0
 	\end{equation}
 	If we now consider
 	\begin{equation}
@@ -595,7 +595,7 @@ We will now prove another lemma
 	\end{equation}
 	we obtain $c_2 \longrightarrow 0$ which gives
 	\begin{equation}
-		\mathbb{P}(\text{diam}(G) \leq d+1) = e^{-\frac{c_2}{2}} \longrightarrow 1
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) \leq d+1) = e^{-\frac{c_2}{2}} \longrightarrow 1
 	\end{equation}
 	Finally, if we combine the last result with \eqref{eq:diamcv} it is clear that the proof if complete.
 \end{proof}
@@ -620,12 +620,12 @@ We will now prove another lemma
 	Then using the the first moment method.
 	\begin{align}
 		\mathbb{E}&(\text{ pairs not connected by a path of length 2})	\\
-				&= \binom{n}{2}(1-p^2)^{n-2} \geq \mathbb{P}(\text{diam}(G) > 2)
+				&= \binom{n}{2}(1-p^2)^{n-2} \geq \mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) > 2)
 	\end{align}
 	As from $i)$ the LHS converges to zero, we are almost sure that no graph is of diameter more than 2 and then we just have to prove that there is almost no graph of diameter 1.
 	A graph of diameter 1 being a complete graph we have
 	\begin{align}
-		\mathbb{P}(\text{diam}(G) = 1) = \mathbb{P}(G = K_n) 	
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) = 1) = \mathbb{P}(\mathbb{G}_{n,p} = K_n) 	
 				= p^{\binom{n}{2}} &\longrightarrow 0				\\
 		\text{iff  } \log p^{\binom{n}{2}} &\longrightarrow -\infty			\\
 			   \text{iff  } n^2 \log p &\longrightarrow -\infty			\\
