@@ -1,7 +1,7 @@
 \section{Galton-Watson trees and Karp's exploration process}
 A branching process is the simplest model that can be used to describe the evolution of a population over time.
 Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
-The distribution of this number is called the offspring distribution and denote it by $\{p_i\}_0^{\infty}$ such as
+The distribution of this number is called the offspring distribution and we denote it by $\{p_i\}_0^{\infty}$ such as
 \begin{equation}
 	p_i = \mathbb{P}(\text{ having i child })
 \end{equation}
@@ -342,15 +342,15 @@ Now using this result we will obtain a logarithmic bound on the largest connecte
 \newline
 For this we will use the random variable 
 \begin{equation}
-	\mathbb{Z}_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
+	Z_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
 \end{equation}
 Observing that $Z_{\geq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume uniqueness of the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
 \begin{equation}
-	|\mathcal{C}_{\max}| = \max\{k: \mathbb{Z}_{\geq k} \geq k\}
+	|\mathcal{C}_{\max}| = \max\{k: Z_{\geq k} \geq k\}
 \end{equation}
 And we obtain 
 \begin{equation}\label{eq:nexplambda}
-	\mathbb{E}_{\lambda}(\mathbb{Z}_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
+	\mathbb{E}_{\lambda}(Z_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
 \end{equation}
 Applying the theorem above \ref{th:uplambda} we immediately have the following result.
 \begin{lemma}\label{lemmalambdainf}
@@ -506,7 +506,7 @@ The following simple lemma will give us information on the behaviour of our bino
 \begin{lemma}\label{lemmaN0}
 	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{2}$. Then, 
 	\begin{equation}
-		|X_{N_0} - N_0 p| \leq n^{\frac{2}{3}} \quad, \text{a.a.s.}
+		|X_{N_0} - N_0 p| \leq n^{\frac{2}{3}} \quad \text{almost surely.}
 	\end{equation}
 \end{lemma}
 \begin{proof}
@@ -522,7 +522,7 @@ The following simple lemma will give us information on the behaviour of our bino
 \end{proof}
 Now we can state and prove the following theorem making use of the previous lemma and of our knowledge of the depth first search algorithm.
 \begin{theorem}
-	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, $G \sim \mathcal{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$
+	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, $G \sim \mathcal{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$.
 \end{theorem}
 \begin{proof}
 	The proof will be done by contradiction.
@@ -531,7 +531,7 @@ Now we can state and prove the following theorem making use of the previous lemm
 	\newline
 	Let's first show that $E_{N_0} < \frac{n}{3}$.
 	\newline
-	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $E_t = \frac{n}{3}$. Also from \ref{eq:At} and \ref{lemmaN0} we would have
+	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $E_t = \frac{n}{3}$. Also from \eqref{eq:At} and \eqref{lemmaN0} we would have
 	\begin{equation}
 		|A_t| \leq 1 + \sum_{i=1}^{t} X_i < 1 + n^{\frac{2}{3}} < \frac{n}{3}.
 	\end{equation}

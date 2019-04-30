@@ -104,7 +104,7 @@ with $t_n$ the number of spanning trees on $n$ vertices.
 \end{theorem}
 The proof will need to make use of directed trees.
 More generally, we define \emph{directed graphs} as graphs \footnote{Often simply called digraphs (or ditrees)} in which the adjacency relation is not symmetric
-\footnote{In a directed graph an edge can only be followed in one direction, we have if $T$ is a tree $\forall x,y \in V(T), x\to y \notimplies y \not\to x$}.
+\footnote{In a directed graph an edge can only be followed in one direction, we have if $T$ is a ditree, $\forall x,y \in V(T), x \neq y, x\to y \implies y \not\to x$}.
 We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices.
 In such a tree, for any vertex, there exists a path to the vertex labelled "End".
 We will call "SEL" the vertices that are in the path from "Start" to "End". 
