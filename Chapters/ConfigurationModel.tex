@@ -1,2 +1,85 @@
-\section{Random regular graphs}
+\section{Generalized Binomial Graph}
+We are now interested in a generalization of the ( binomial ) Erd\"os-R\'enyi model which was first considered by Kovalenko in (TODO : ADD REF ).
+In this model, often referred to as \emph{inhomogeneous}, the probability of appearance of the edge $(i,j)$, that we call $p_{ij}$, is not necessarily the same for all pairs of vertices $i,j$.
+\newline
+From this definition it is very natural to write those edge probabilities in an $n\times n$ matrix, which we denote by
+\begin{equation}
+	\bold{P} = [p_{ij}]
+\end{equation}
+As previously we consider graphs without loops, so $p_{ii} = 0$ for all $i \in V$, we also consider that the graph is not directed so the probability that $i$ connects to $j$ has to be the same as the probability that $j$ connects to $i$ (i.e. $p_{ij} = p_{ji}$), hence $\bold{P}$ is symmetric.
+In order to shorten the writing, we put $q_{ij} = 1 - p_{ij}$.
+\newline
+We denote the probability space of this generalized model as $\mathcal{G}_{n,\bold{P}}$ and as before we denote a random variable in this space as $\mathbb{G}_{n,\bold{P}}$.
+\newline
+We now define
+\begin{equation}
+	Q_i = \prod_{j=1}^n q_ij, \quad \lambda_n = \sum_{i=1}^nQ_i
+\end{equation}
+and we observe that $Q_i$ is the probability that vertex $i$ is isolated, hence $\lambda_n$ is the expected number of isolated vertices.
+\newline
+We also need to define
+\begin{equation}
+	R_{ik} = \min_{1\leq j_1<j_2<...<j_k\leq n} q_{ij_1}q_{ij_2}...q_{ij_k}
+\end{equation}
+In the following, we suppose that the edge probabilities $p_{ij}$ are chosen in such a way that the following equations are simultaneously satisfied as $n\to \infty$.
+\begin{align}
+	\max_{1\leq i \leq n} Q_i &\to 0 \label{eq:C1}\\
+	\lim_{n \to \infty} \lambda_n &= \lambda = \text{constant} \label{eq:C2} \\
+	\lim_{n\to \infty} \sum_{k=1}^{n/2} \frac{1}{k!}(\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k &= e^{\lambda} - 1 \label{eq:C3}
+\end{align}
+In this section we are interested in proving the following theorem.
+\begin{theorem}\label{th:CVIsolPoi}
+	Let $X_0$ denote the number of isolated vertices in $\mathbb{G}_{n, \bold{P}}$. If \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, 
+	then the number of isolated vertices is asymptotically Poisson distributed with mean $\lambda$.
+	\newline
+	i.e. for $k \in \mathbb{N}$, 
+	\begin{equation}
+		\lim_{n \to \infty} \mathbb{P}(X_0 = k) = \frac{\lambda^k}{k!}e^{-\lambda}
+	\end{equation}
+\end{theorem}
+Let's first show as a corollary that this theorem allows us to conclude the proof of \ref{th:connect}.
+\begin{corollary}\label{th:proofPoissonP}
+	If $p(n) = \frac{\log n + c}{n}$, then \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, 
+	and the number of isolated vertices is asymptotically Poisson distributed with mean $e^{-c}$.
+\end{corollary}
+\begin{proof}[Proof of \ref{th:proofPoissonP}]
+	We observe that $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n, \bold{P}}$ when $p_{ij} = p$ for all $i \neq j$.
+	\newline
+	We observe that $Q_i = Q = q^{n-1}$ (and \eqref{eq:C1} is obviously satisfied) and $R_{ik} = R_k = q^k$. 
+	From this we get
+	\begin{equation}
+		\lambda_n = n Q = nq^{n-1} = n(1-p)^{n-1}
+	\end{equation}
+	and we have $\lim \lambda_n = e^{-c} = \lambda$, so \eqref{eq:C2} is also satisfied.
+	\newline
+	Let's observe that it is enough to show $\sum_{i=1}^n \frac{Q_i}{R_{ik}}$ converges uniformly to $\lambda = e^{-c}$ for \eqref{eq:C3} to be satisfied.
+	\begin{equation}
+		\sum_{i=1}^n \frac{Q_i}{R_{ik}} = \sum_{i=1}^n \frac{Q}{R_k} = n \frac{Q}{R_k} = nq^{n-1-k}
+	\end{equation}
+	And $\lim_{n \to \infty}  nq^{n-1-k} = e^{-c}$ finally proves the corollary.
+\end{proof}
+\begin{proof}{Proof of \ref{th:CVIsolPoi}}
+	Let $Y_{ij}$ a random variable following a Bernoulli of parameter $p_{ij}$.
+	\footnote{ Recall that a Bernoulli of parameter $p$ is 1 with prob. $p$ and 0 with prob. $1-p$.}
+	We denote by $Y_i$ the indicator of the event that vertex $i$ is isolated, i.e. $Y_i = \mathbbm{1}_{\sum_{j=1}^n Y_{ij} = 0}$.
+	In order to show the convergence of $X_0$ in distribution to the Poisson random variable we will use the method of factorial moments.
+	So, we want to show that for any natural number $k$ we have
+	\begin{equation}\label{eq:EIsolMom}
+		\mathbb{E}(\sum_{1\leq i_1<i_2<...<i_k \leq n} X_{i_1}X_{i_2}...X_{i_k}) \to_{n \to \infty} \frac{\lambda^k}{k!}
+	\end{equation}
+	Let's observe that the LHS of \eqref{eq:EIsolMom} is the sum of $\mathbb{E}(X_{i_1}X_{i_2}...X_{i_k})$ over all $i_1 < i_2 < ... i_k$.
+	\begin{align}
+		\mathbb{E}(X_{i_1}X_{i_2}...X_{i_k}) 	&= \prod_{r=1}^k \mathbb{P}(X_{i_r} = 1 | X_{i_1} = ... = X_{i_{r-1}} = 1) \\
+							&= \prod_{r=1}^k\frac{ \prod_{j=1}^n q_{i_r j} }{ \prod_{s=1}^{r-1}q_{i_r i_s}}
+	\end{align}
+	From which we get,
+	\begin{equation}
+		Q_{i_r} \leq \mathbb{P}(X_{i_r} = 1 | X_{i_1} = ... = X_{i_{r-1}} = 1) \leq \frac{Q_{i_r}}{R_{i_r, r-1}} \leq \frac{Q_{i_r}}{R_{i_r k}} 
+	\end{equation}
+	Hence,
+	\begin{equation}
+		Q_{i_1}...Q_{i_k} \leq \mathbb{E}(X_{i_1}...X_{i_k}) \leq \frac{Q_{i_1}}{R_{i_1 k}} ... \frac{Q_{i_k}}{R_{i_k k}}
+	\end{equation}
+	TODO : FINISH PROOF
+\end{proof}
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
