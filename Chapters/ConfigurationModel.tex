@@ -13,13 +13,13 @@ We denote the probability space of this generalized model as $\mathcal{G}_{n,\bo
 \newline
 We now define
 \begin{equation}
-	Q_i = \prod_{j=1}^n q_ij, \quad \lambda_n = \sum_{i=1}^nQ_i
+	Q_i = \prod_{j=1}^n q_{ij}, \quad \lambda_n = \sum_{i=1}^nQ_i
 \end{equation}
 and we observe that $Q_i$ is the probability that vertex $i$ is isolated, hence $\lambda_n$ is the expected number of isolated vertices.
 \newline
 We also need to define
 \begin{equation}
-	R_{ik} = \min_{1\leq j_1<j_2<...<j_k\leq n} q_{ij_1}q_{ij_2}...q_{ij_k}
+	R_{ik} = \min_{1\leq j_1<j_2< \ldots <j_k\leq n} q_{ij_1}q_{ij_2}\ldots q_{ij_k}
 \end{equation}
 In the following, we suppose that the edge probabilities $p_{ij}$ are chosen in such a way that the following equations are simultaneously satisfied as $n\to \infty$.
 \begin{align}
@@ -65,21 +65,43 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	In order to show the convergence of $X_0$ in distribution to the Poisson random variable we will use the method of factorial moments.
 	So, we want to show that for any natural number $k$ we have
 	\begin{equation}\label{eq:EIsolMom}
-		\mathbb{E}(\sum_{1\leq i_1<i_2<...<i_k \leq n} X_{i_1}X_{i_2}...X_{i_k}) \to_{n \to \infty} \frac{\lambda^k}{k!}
+		\mathbb{E}(\sum_{1\leq i_1<i_2< \ldots < i_k \leq n} X_{i_1}X_{i_2}\ldots X_{i_k}) \to_{n \to \infty} \frac{\lambda^k}{k!}
 	\end{equation}
-	Let's observe that the LHS of \eqref{eq:EIsolMom} is the sum of $\mathbb{E}(X_{i_1}X_{i_2}...X_{i_k})$ over all $i_1 < i_2 < ... i_k$.
+	Let's observe that the LHS of \eqref{eq:EIsolMom} is the sum of $\mathbb{E}(X_{i_1}X_{i_2}\ldots X_{i_k})$ over all $i_1 < i_2 < \ldots i_k$.
 	\begin{align}
-		\mathbb{E}(X_{i_1}X_{i_2}...X_{i_k}) 	&= \prod_{r=1}^k \mathbb{P}(X_{i_r} = 1 | X_{i_1} = ... = X_{i_{r-1}} = 1) \\
+		\mathbb{E}(X_{i_1}X_{i_2}\ldots X_{i_k}) 	&= \prod_{r=1}^k \mathbb{P}(X_{i_r} = 1 | X_{i_1} = \ldots = X_{i_{r-1}} = 1) \\
 							&= \prod_{r=1}^k\frac{ \prod_{j=1}^n q_{i_r j} }{ \prod_{s=1}^{r-1}q_{i_r i_s}}
 	\end{align}
 	From which we get,
 	\begin{equation}
-		Q_{i_r} \leq \mathbb{P}(X_{i_r} = 1 | X_{i_1} = ... = X_{i_{r-1}} = 1) \leq \frac{Q_{i_r}}{R_{i_r, r-1}} \leq \frac{Q_{i_r}}{R_{i_r k}} 
+		Q_{i_r} \leq \mathbb{P}(X_{i_r} = 1 | X_{i_1} = \ldots = X_{i_{r-1}} = 1) \leq \frac{Q_{i_r}}{R_{i_r, r-1}} \leq \frac{Q_{i_r}}{R_{i_r k}} 
 	\end{equation}
 	Hence,
 	\begin{equation}
-		Q_{i_1}...Q_{i_k} \leq \mathbb{E}(X_{i_1}...X_{i_k}) \leq \frac{Q_{i_1}}{R_{i_1 k}} ... \frac{Q_{i_k}}{R_{i_k k}}
+		Q_{i_1} \ldots Q_{i_k} \leq \mathbb{E}(X_{i_1}\ldots X_{i_k}) \leq \frac{Q_{i_1}}{R_{i_1 k}} \ldots \frac{Q_{i_k}}{R_{i_k k}}
 	\end{equation}
-	TODO : FINISH PROOF
+	TODO : WHY IS THE FOLLOWING INEQ TRUE ?
+	\begin{align}\label{eq:CVDOWN}
+		&\sum_{1\leq i_1 < \ldots < i_k \leq n} Q_{i_1} \ldots Q_{i_k} = \frac{1}{k!}\sum_{1 \leq i_1 \neq \ldots \neq i_r \leq n} Q_{i_1} \ldots Q_{i_k} \geq\\
+										     & \frac{1}{k!} \sum_{1\leq i_1, \ldots, i_k \leq n} Q_{i_1}\ldots Q_{i_k} 
+			- \frac{k}{k!}\sum_{i=1}^n Q_i^2(\sum_{1 \leq i_1, \ldots, i_{k-2} \leq n} Q_{i_1} \ldots Q_{i_{k-2}})\\
+			&\geq \frac{\lambda_n^k}{k!} - (\max_i Q_i)\lambda_n^{k-1} \longrightarrow \frac{\lambda^k}{k!}
+	\end{align}
+	Now, by definition of $R_{ik}$, we have,
+	\begin{equation}
+		\sum_{i=1}^n \frac{Q_i}{R_{ik}} \geq \sum_{i=1}^n Q_i = \lambda_n
+	\end{equation}
+	If we suppose that $\limsup_{n\to \infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} > \lambda$, 
+	this would imply that $\limsup_{n\to \infty} \sum_{k=1}^{\frac{n}{2}} \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k > e^{\lambda} - 1$
+	which contradicts \eqref{eq:C3}.
+	It follows that 
+	\begin{equation}
+		\lim_{n\to\infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} = \lambda
+	\end{equation}
+	We obtain, 
+	\begin{equation}\label{eq:CVUP}
+		\sum_{1 \leq i_1 < \ldots < i_k \leq n} Q_{i_1} \ldots Q_{i_k} \leq \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k \longrightarrow \frac{\lambda^k}{k!}
+		\end{equation}
+	Combining \eqref{eq:CVUP} and \eqref{eq:CVDOWN} we have $\lim_{n\to\infty} \sum_{1 \leq i_1 < \ldots <i_k \leq n} Q_{i_1} \ldots Q_{i_k} = \frac{\lambda^k}{k!}$, which is the result we wanted to prove.
 \end{proof}
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
