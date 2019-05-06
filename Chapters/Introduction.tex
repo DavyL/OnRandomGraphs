@@ -3,7 +3,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 \section{Graph theory}\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}
-Formally a \emph{graph} $G$ is defined as $G = ( V(G), E(G) )$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges ( the lines ) of G. 
+Formally a \emph{graph} $G$ is defined as $G = (V(G), E(G))$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges ( the lines ) of $G$. 
 \newline
 This is the simplest way to define a graph, hence this kind of graph is usually called a \emph{simple graph}. 
 More general graphs can be defined, for instance the loopy graphs, multigraphs, directed graphs or hypergraphs. 
@@ -12,7 +12,7 @@ They are not of major importance in this report so they won't be detailed here, 
 We will call two vertices $u, v \in V(G)$ as \emph{adjacent} if $\{u, v\} \in E(G)$ and we will write it as $u \leftrightarrow v$. 
 We may also refer to edges being adjacent if they share a vertex.
 \newline
-As an example of a graph we can consider the following graph (TODO: ADD GRAPHICAL REPRESENTATION) with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7\}$ with : 
+As an example of a graph we can consider the following graph (TODO: ADD GRAPHICAL REPRESENTATION) with $ V(G) = \{a, b, c, d, e\}, E(G) = \{e_1,e_2, e_3, e_4, e_5, e_6, e_7\}$ for:
 \begin{align*}
 	e_1 = \{a, b\}\quad
 	e_2 = \{a, c\}\quad
@@ -34,7 +34,7 @@ The \emph{adjacency matrix} of a graph $G$ is the $n \times n$ matrix defined as
 	}
 \end{equation}
 
-It is interesting to note that an adjacency matrix is real and hermitian, thus all of its eigenvalues are real and the study of their distribution is a classical topic in graph theory.
+It is interesting to note that an adjacency matrix is real and Hermitian, thus all of its eigenvalues are real and the study of their distribution is a classical topic in graph theory.
 \newline
 An important property of graphs is the \emph{degree} of the vertices, so we will denote by $d_G(v)$ the number of edges incident with $v \in V(G)$.
 Observing that each edge has two ends and that the degree of a vertex is the number of edges having this vertex as an end. We obtain :
@@ -42,39 +42,39 @@ Observing that each edge has two ends and that the degree of a vertex is the num
 	\sum_{v\in V(G)} d_G(v) = 2 |E(G)|
 \end{equation}
 We also call the degree sequence the non-increasing sequence of its vertex degrees.
-And we can also define the two following notations that will prove useful in the following of this report, $\delta(G)$ as the minimal degree of $G$ and $\Delta(G)$ as the maximal degree of $G$.
+And we can also define the two following notations that will be useful in the following of this report, $\delta(G)$ as the minimal degree of $G$ and $\Delta(G)$ as the maximal degree of $G$.
 \newline
 We define a \emph{path} on a graph as a sequence of edges being two by two adjacent. 
 One of the most fundamental properties of graphs is also the connectivity.
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
 In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths because we are studying simple graphs.
 It is clear that if a path exists it is always possible to extract a simple path from it.
-There are two famous kinds of path, the \emph{hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used exactly once.
+There are two famous kinds of path, the \emph{Hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used exactly once.
 \newline
 If $v$ is a vertex, we will write $N(v)$ the set of vertices adjacent to $v$ which are called the \emph{neighbours} of $v$.
 From this definition we may observe that $d_G(v) = |N(v)|$ if $G$ is a graph without loops. 
 And we will call a (connected) \emph{component} of a vertex the set of vertices that can be reached from this vertex. 
 Then a connected graph is a graph with only one component.
 \newline
-Some interesting graphs to which we will often refer are the complete graph on n vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$ (TODO : ADD GRAPHICAL REPRESENTATION ). 
+Some interesting graphs to which we will often refer are the complete graph on $n$ vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$ (TODO : ADD GRAPHICAL REPRESENTATION ). 
 A \emph{complete graph} is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
-A graph is \emph{bipartite} if it's set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
+A graph is \emph{bipartite} if its set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
 The \emph{complete bipartite graph} is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
 This implies the same condition on the vertices in $Y$.
-We will also call a \emph{cycle}, of size $n \geq 3$, denoted $C_n$ a graph whose vertices can be arranged in a cyclic sequence in such a way that two vertices are adjacent if they are consecutive in the sequence.
+We will also call a \emph{cycle}, of size $n \geq 3$, denoted $C_n$ a graph whose vertices can be arranged in a cyclic sequence in such a way that two vertices are adjacent if and only if they are consecutive in the sequence.
 \newline
-As there is usually no confusion possible we will denote $V = V(G), E =E(G), \psi = \psi_G, ...$. 
+As there is usually no confusion possible we will denote $V = V(G), E =E(G), d = d_G, ...$. 
 
 
 \section{Random graphs}
-The study of random graphs is a flourishing area of mathematics since it's founding papers have been published by Erd\H{o}s and Renyi between 1959 and 1963 \cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
+The study of random graphs is a flourishing area of mathematics since its founding papers have been published by Erd\H{o}s and Renyi between 1959 and 1963 \cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
 (TODO : REVISE THIS WHOLE SECTION )
 Since then a lot of work has been done on random graphs, most of the questions on the Erd\H{o}s-Renyi model have found satisfying answers, and the model being simplistic, many new models have been developed.
 So we will use the very vague definition by Janson \cite{Janson14}.
 \begin{definition}
 	A \emph{random graph} is a graph where nodes, or edges, or both are selected by a random procedure.
 \end{definition}
-More formally, a random graph is a probability distribution on a space of graphs.
+More formally, a random graph is a random variable on a space of graphs.
 This means that when studying random graphs, we can not only change the distribution but also the space in which we sample.
 \newline
 Usually we make the choice of sampling on a space of graphs containing any graph with a specified number of vertices.
@@ -93,33 +93,35 @@ In this section we will prove an important result that will be used several time
 Indeed it will give an exact result on the number of spanning trees, which are the building blocks of connected graphs. 
 A \emph{tree} is a special case of graph structure that can be defined in several equivalent ways. 
 For instance, a tree is a connected graph such that upon removal of any of its edges, it becomes disconnected, equivalently it is a connected and acyclic graph
-\footnote{An acyclic graph is a graph that doesn't contain any cycle}.
-The adjective \emph{spanning} ( on the vertices ) meaning that those trees intersect the whole vertex set.
+\footnote{An acyclic graph is a graph that doesn't contain any cycle.}.
+We say of a tree that it is \emph{spanning} on its vertex set.
 
-\begin{theorem}{Cayley's formula}\label{cayley}
+\begin{theorem}[Cayley's formula]\label{cayley}
+	We have
 \begin{equation}
     t_n = n^{n-2}
 \end{equation}
-with $t_n$ the number of spanning trees on $n$ vertices.
+with $t_n$ the number of spanning trees of a given set of $n$ vertices.
 \end{theorem}
 The proof will need to make use of directed trees.
-More generally, we define \emph{directed graphs} as graphs \footnote{Often simply called digraphs (or ditrees)} in which the adjacency relation is not symmetric
-\footnote{In a directed graph an edge can only be followed in one direction, we have if $T$ is a ditree, $\forall x,y \in V(T), x \neq y, x\to y \implies y \not\to x$}.
+More generally, we define \emph{directed graphs} as graphs \footnote{Often simply called digraphs (or ditrees).} in which the adjacency relation is not assumed to be symmetric
+\footnote{In a directed graph an edge can only be followed in one direction.}.
 We also define doubly rooted trees as trees with two special labels "Start" and "End" that can be attached to any vertices.
-In such a tree, for any vertex, there exists a path to the vertex labelled "End".
-We will call "SEL" the vertices that are in the path from "Start" to "End". 
+In such a tree, for any vertex, there exists a path to the vertex labelled "End"
+\footnote{A tree with only the label "End" is called a \emph{rooted} tree, we observe that the corresponding directed tree is unique.}.
+We will call "$SEL$" the vertices that are in the path from "Start" to "End". 
 We also denote by $DRT_n$ the set of doubly rooted trees on $n$ vertices.
 \newline
-As a consequence of this definition we have $|DRT_n| = n^2 t_n$. With $|\ |$ denoting the cardinal. 
-To prove the theorem it is then be sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$.
-We will base our approach on Joyal's proof \cite{joyal} and show a bijection between the set of doubly rooted trees on n vertices and the the set of functions on $n$ elements.
+As a consequence of this definition we have $|DRT_n| = n^2 t_n$, with $|\ |$ denoting the cardinal. 
+To prove the theorem it is then sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$.
+We will base our approach on Joyal's proof \cite{joyal} and show a bijection between the set of doubly rooted trees on $n$ vertices and the the set of functions from $\{1, 2, \ldots, n\}$ to $\{1, 2, \ldots, n\}$.
 The presentation of the proof we use comes from \cite{JoyalProof}.
 \newline
 (TODO : ADD GRAPHICAL REPRESENTATION OF THE PROOF ON SOME EXAMPLE)
 \begin{proof}
 We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
-Let's take $f:V \longrightarrow V$, and let's consider the graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.
-Drawing such a graph for any function, and will appear two different kind of structures, first there will have directed line leading to cycles, and then cycles. 
+Let's take $f:V \longrightarrow V$, and let's consider the directed graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.
+Drawing such a graph for any function, and it will appear two different kind of structures: directed lines leading to cycles, and cycles. 
 And the whole graph will be a disjoint union of such components.
 It can be interesting to observe the case in which $f$ is a permutation and then observe that the graph of $f$ is a union of disjoint cycles as expected from the common group theory result.
 \newline
@@ -127,22 +129,22 @@ We now take $C \subseteq V$ the set of vertices that are part of a cycle under t
 \begin{align*}
     C = \{ x : \exists i \geq 1 s. t. f^i(x) = x \}
 \end{align*}
-Let $k = |C|$ and write $C_<$ as $C_< = \{c_1 < c_2 <...<c_k\}$ the ordered set 
+Let $k = |C|$ and write $C_<$ as $C_< = (c_1 < c_2 <...<c_k)$ the ordered set 
 \footnote{The $c_i$ being integers we simply order them in increasing order.}
-and now we will construct a graph with the vertex set $D = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(D, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End" which is an oriented graph.
+and now we will construct a graph with the vertex set $C = f(C)$, and the edge set $E = \bigcup_{i=1}^{k-1} f(c_i)f(c_{i+1})$. We now have $G=(C, E)$ as a line of $k$ vertices, and we will call $f(c_1)$ the "Start" and $f(c_k)$ the "End" which is an oriented graph.
 \newline
-Now we will just append to this line the set of vertices that are not in $G$. So we construct $\tilde{E} = \bigcup_{x \in V\\C} x f(x)$ and $\tilde{G} = (V, E\cup\tilde{E})$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
+Now we will just append to this line the set of vertices that are not in $G$. So we construct $\tilde{E} = \bigcup_{x \in V \backslash C} x f(x)$ and $\tilde{G} = (V, E\cup\tilde{E})$ is a (directed doubly rooted) tree as it doesn't contain any cycle by construction and is clearly connected. It's obviously directed and  doubly rooted.
 We have now done the biggest part of the proof, that is, going from a function to a doubly rooted tree.
 \newline
 We will now take a doubly rooted tree and transform it in a function. From the definition of trees there is a unique "Start" to "End" ( SEL ) path.
 \newline
-For vertices on not on the SEL, for instance some vertice $j$, we define $f(j)$ as the first neighbour on the $j$ to end line.
+For vertices not on the $SEL$, for instance some vertice $j$, we define $f(j)$ as the first neighbour on the $j$ to end line.
 \newline
-For vertices on the SEL, 
+For vertices on the $SEL$, 
 \begin{align}
-    SEL = \{x_1, x_2, ..., x_k\}, \text{ and } SEL_< = \{x_{\sigma_1}, x_{\sigma_2}, ..., x_{\sigma_k}\} 
+	SEL = (x_1, x_2, ..., x_k), \text{ and } SEL_< = (x_{\sigma_1}, x_{\sigma_2}, ..., x_{\sigma_k}) 
 \end{align}
 we define $f(x_{\sigma_i}) = x_i, \forall i \in [k]$.
 \newline
-Thus, we have two injective constructions, if composed give the identity, hence we have a bijection between the set of endomorphism of $[n]$ and the space of doubly rooted trees on n vertices. So the proof is complete.
+Thus, we have two injective constructions, if composed give the identity, hence we have a bijection between the set of endomorphism of $[n]$ and the space of doubly rooted trees on $n$ vertices. So the proof is complete.
 \end{proof}

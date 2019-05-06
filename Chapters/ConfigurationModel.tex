@@ -81,27 +81,10 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 		Q_{i_1} \ldots Q_{i_k} \leq \mathbb{E}(X_{i_1}\ldots X_{i_k}) \leq \frac{Q_{i_1}}{R_{i_1 k}} \ldots \frac{Q_{i_k}}{R_{i_k k}}
 	\end{equation}
 	TODO : WHY IS THE FOLLOWING INEQ TRUE ?
-	\begin{align}\label{eq:CVDOWN}
-		&\sum_{1\leq i_1 < \ldots < i_k \leq n} Q_{i_1} \ldots Q_{i_k} = \frac{1}{k!}\sum_{1 \leq i_1 \neq \ldots \neq i_r \leq n} Q_{i_1} \ldots Q_{i_k} \geq\\
-										     & \frac{1}{k!} \sum_{1\leq i_1, \ldots, i_k \leq n} Q_{i_1}\ldots Q_{i_k} 
-			- \frac{k}{k!}\sum_{i=1}^n Q_i^2(\sum_{1 \leq i_1, \ldots, i_{k-2} \leq n} Q_{i_1} \ldots Q_{i_{k-2}})\\
-			&\geq \frac{\lambda_n^k}{k!} - (\max_i Q_i)\lambda_n^{k-1} \longrightarrow \frac{\lambda^k}{k!}
+	\begin{align}
+		\sum_{1\leq i_1 < \ldots < i_k \leq n} Q_{i_1} \ldots Q_{i_k} &= \frac{1}{k!}\sum_{1 \leq i_1 \neq \ldots \neq i_r \leq n} Q_{i_1} \ldots Q_{i_k} \\
+			\frac{1}{k!} \sum_{1\leq i_1, \ldots, i_k \leq n} Q_{i_1}\ldots Q_{i_k} 
+			- \frac{k}{k!}\sum_{i=1}^n Q_i^2(\sum_{1 \leq i_1, \ldots, i_{k-2} \leq n} Q_{i_1} \ldots Q_{i_{k-2}})
 	\end{align}
-	Now, by definition of $R_{ik}$, we have,
-	\begin{equation}
-		\sum_{i=1}^n \frac{Q_i}{R_{ik}} \geq \sum_{i=1}^n Q_i = \lambda_n
-	\end{equation}
-	If we suppose that $\limsup_{n\to \infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} > \lambda$, 
-	this would imply that $\limsup_{n\to \infty} \sum_{k=1}^{\frac{n}{2}} \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k > e^{\lambda} - 1$
-	which contradicts \eqref{eq:C3}.
-	It follows that 
-	\begin{equation}
-		\lim_{n\to\infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} = \lambda
-	\end{equation}
-	We obtain, 
-	\begin{equation}\label{eq:CVUP}
-		\sum_{1 \leq i_1 < \ldots < i_k \leq n} Q_{i_1} \ldots Q_{i_k} \leq \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k \longrightarrow \frac{\lambda^k}{k!}
-		\end{equation}
-	Combining \eqref{eq:CVUP} and \eqref{eq:CVDOWN} we have $\lim_{n\to\infty} \sum_{1 \leq i_1 < \ldots <i_k \leq n} Q_{i_1} \ldots Q_{i_k} = \frac{\lambda^k}{k!}$, which is the result we wanted to prove.
 \end{proof}
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}

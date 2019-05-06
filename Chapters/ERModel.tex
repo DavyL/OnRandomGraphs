@@ -1,68 +1,69 @@
 \section{Different approaches of the same space}
 As said in the title of the section there are different ways to approach the Erd\H{o}s-Renyi model that we may call paradigms as they will give us the same kind of results but depending on the context, one might be much more convenient to use than the others.
 \newline
-The first paper published on random graphs that gained notoriety was from Erd\H{o}s and Renyi in 1959 \cite{erdos59}, in which they give the following construction :
+The first paper published on random graphs that gained notoriety was from Erd\H{o}s and Renyi in 1959 \cite{erdos59}, in which they give the following construction:
 \begin{definition}
-We call a random graph $\mathcal{G}_{n, M}$ having $n$ labelled vertices and $M$ edges. That is we choose at random ( with equal probability ) one of the $\binom{\binom{n}{2}}{M}$ possible graphs.
+We define by $\mathcal{G}_{n, M}$ a uniformly distributed graph among the graphs with $n$ given vertices and exactly $M$ edges.
 \end{definition}
-One may observe that some changes in notations are made between this paraphrasing of the article of Erd\H{o}s and Renyi, they are made in order to be more adapted with the modern study of random graphs. We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of edges possible on $n$ labelled vertices.
+One may observe that changes in notations are made compared to the articles from Erd\"os and R\'enyi in order to be more adapted with the modern study of random graphs.
+We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of possible edges on $n$ labelled vertices.
+From the previous definition, the probability of obtaining a chosen graph in with $n$ vertices and $M$ edges in $\mathcal{G}_{n, M}$ is $1/\binom{N}{M}$.
 \newline
-We then arrive to our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which the coin tosses are no longer necessarily fair, but the probability of drawing an edge is now $p$.
+We then arrive at our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which each of the $N$ possible edges is taken with probability $p \in [0, 1]$, independently of the others.
 This model was first introduced by Gilbert in 1959, see \cite{Gilbert59}\footnote{It is interesting to note that Gilbert's paper who was at the time working at Bell's laboratories formulated the question of connectivity based on real life phone networks.}.
-And the coin tosses are still independent. Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$. We have :
+Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$, we have :
 \begin{align}
 	\mathbb{P}(G) = p^{e_G}(1-p)^{N-e_G}
 \end{align}
-This model is called the \emph{binomial model}. It is easily seen that this model is asymptotically equivalent to the first one if $Np$ is close to $M$ on several aspects.
+This model is called the \emph{binomial model}. It is expected that this model is close to the first one if $Np$ is close to $M$.
 \newline
-The third model that we will investigate is on the form of a Markov process, see in Annex for a discussion on properties used here from Markov chains. 
-At time 0 there is no edge and an edge is selected at random among all of the possible edges. 
-At time $t$, the edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. 
-It is clear that this model is perfectly equivalent to the first model presented in the case $t = M$. 
+The third model that we will investigate is on the form of a Markov process, see in Appendix for a discussion on properties used here from Markov chains. 
+At time 0 there is no edge in the graph and an edge is selected at random among all of the possible edges. 
+At time $t$, an edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. 
+It is clear that this model is perfectly equivalent to the first model presented if we fix $t = M$. 
 This model was also introduced in 1959 by Erd\H{o}s and Renyi and is usually referred to as the \emph{random graph process}.
 The advantage of this model is that it allows one to study properties on the verge of their realisations.
-For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertices and the giant component. Equivalently, when $\delta(G) > 1$. But we will study this in the following.
+For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertex and the giant component. Equivalently, at the first time when $\delta(G) > 1$. But we will study this in the following.
 \newline
 The three models introduced above ( $\mathcal{G}_{n, M}$, $\mathcal{G}_{n, p}$ and $\{\mathcal{G}_{n, t}\}_t $) are usually designated in the literature as Erd\H{o}s-R\'enyi model.
 However, even if the first two are quite similar (static random graphs) the last one is of a different nature as it is dynamic.
 \newline
 In this report we will mainly focus on $\mathcal{G}_{n, p}$ which is in fact easier to study than $\mathcal{G}_{n,M}$.
 \footnote{There is usually no confusion possible on the model being studied.}
+We might also make use of the notation $\mathbb{P}_{p}$ (resp. $\mathbb{P}_{M}$ ) to designate the probability law associated with $\mathcal{G}_{n, p}$ (resp. $\mathcal{G}_{n,M}$).
 We will see in \eqref{th:linkMP} that there is a strong relation between those two models.
 
 \section{Connectivity}
 
-One of the most fundamental structure of a graph will be its number of components. 
-Hence, the first question we will try to ask is with which probability a random graph in the Erd\H{o}s-Renyi model is connected. 
+One of the most fundamental structure of a graph is its number of connected components. 
+Hence, the first question we will try to ask is with which probability a random graph following the Erd\H{o}s-Renyi model is connected. 
 It is essential to answer this question as many other questions might not make sense or have an obvious answer on a graph that is not connected ( for instance the diameter, the existence of Hamiltonian paths or the stability number of the graph ). 
 \newline
 It is also an interesting first topic to have an insight of the kind of elegant results that arise from the study of random graphs.
 The main aim of this section will be to prove the following theorem in a detailed way as it is the first random graphs proof that we will study.
 \begin{theorem}\label{th:connect}
-	Let $p = p(n) = \frac{\log(n) + c}{n}$ , $c \in \mathbb{R}$
+	Let $p = p(n) = \frac{\log(n) + c}{n}$ , $c \in \mathbb{R}$ independent of $n$.
 \newline
 Then $\lim_{n \to \infty} P(G \in \mathcal{G}_{n, p}\text{ is connected }) = e^{-e^{-c}}$ 
 \end{theorem}
-The proof of this theorem will be in two parts, first we will show that a graph will be connected if and only if there are no isolated vertices and then we will estimate the distribution that follows the number of isolated vertices.
-We designate by giant component a component with a size increasing linearly in $n$.
+The proof of this theorem will be in two parts, first we will show that a graph is connected with high probability if there are no isolated vertices and then we will estimate the distribution of the number of isolated vertices.
+We designate by giant component a component with a size larger than a constant times $n$.
 \begin{theorem}\label{th:isolcomp}
 	With $p = \frac{\log(n) + c}{n}$
-	 Almost every $G \in \mathcal{G}_{n, p}$ consists of a single giant component and isolated vertices. 
+	 A graph following $\mathcal{G}_{n, p}$ consists in a single giant component and isolated vertices with probability going to 1 when $n \to \infty$. 
 \end{theorem}
 \begin{proof}
 This proof can be found in \cite{Spencer14} or \cite{Bollob01}.
 \newline
-During this proof we will consider the random value $X_k$ that counts the number of vertices that are in components of size $k$.
-So, let's estimate the probability $P(X_2 > 0) = P(X_2 \geq 1 )$. In order to do so we will use the method of first moment.
+During this proof we will consider the random value $X_k$ that counts the number of connected components of size $k$.
+So, let's estimate the probability $\mathbb{P}(X_2 > 0) = \mathbb{P}(X_2 \geq 1 )$. In order to do so we will use the method of first moment.
 \begin{align}
 	\mathbb{P}(X_2 \geq 1) \leq \mathbb{E}(X_2) 	&= \binom{n}{2}\mathbb{P}(\text{"drawing an isolated edge"}) \\
 						    	&= \binom{n}{2}p((1-p)^{n-1})^2 \\
 							&\leq (\frac{ne}{2})^2p(e^{-p})^{2(n-2)} \\
-						    	&= \mathcal{O}\left(n^2p \frac{ e^2 e^{-2p(n+1)} }{4}\right) \\
-							&= \mathcal{O}(n^2p)
+						    	&= \mathcal{O}\left(n^2p e^{-2pn}\right) \\
+							    &= \mathcal{O}(n^2pe^{-2(\log(n) + c}) = \mathcal{O}(p)
 \end{align}
-So it's sufficient that $p = o(n^{-2})$ in order to have almost surely no edges in G. This is clearly satisfied by the $p$ we use in the theorem.
-\newline
 However, this is not sufficient to prove that there is no isolated component other than isolated vertices. We will observe that there can't have any component of size larger than $\lceil \frac{n}{2} \rceil$ that is not the largest component in the graph.
 Hence, we will study the probability that there is any component of intermediary size that is not the greatest component.
 \begin{align}
@@ -70,39 +71,46 @@ Hence, we will study the probability that there is any component of intermediary
 				&\leq \binom{n}{k} k^{k-2} q_k\\
 				&\leq \binom{n}{k} k^{k-2} p^{k-1} ((1-p)^{n-k})^k
 \end{align}
-In the above, $q_k$ represents the probability that a spanning tree on $k$ vertices doesn't connect to the greatest connected components, the total number of spanning trees on $k$-vertices being $k^{k-2}$ from Cayley's formula \eqref{cayley}.
-A tree on $k$ vertices having $k-1$ edges, this means in terms of probability that it must have $k-1$ "success" and on each of the $k$ vertices $n-k$ failures. Which leads to the following line.
+In the above, the "$n$ choose $k$" term represents the number of possible subsets for the $k$ vertices of a connected component. 
+The term $k^{k-2}$ is the number of possible spanning trees for each of these subset of $k$ vertices. 
+The $q_k$ is the probability that a set of $k$ vertices is not connected to any other of the $n-k$ vertices.
+Hence the term $p^{k-1}$ is the probability that the edges of the spanning tree are selected and the $((1-p)^{n-k})k$ is the probability that every vertex of the spanning tree are not connected to any of the other $n-k$ vertices.
 \newline 
 Now we will try to have an upper bound of the RHS such that the sum on $k$ will converges to a $o(n^{-\delta})$ for some $\delta >0$.
 \begin{align}
 	\mathbb{P}(X_k \geq 1) 	
-	            &\leq k^{-2}p^{-1}(\frac{ne}{k})^k k^{k} p^{k} e^{-p\frac{n}{2}(n-k))}\\
-	            &\leq k^{-2}p^{-1}((\frac{ne}{k}) k p e^{-p\frac{n}{2}})^k\\
-	            &\leq p^{-1}(nep e^{-p\frac{n}{2}})^k
+	            &\leq k^{-2}p^{-1}(\frac{ne}{k})^k k^{k} p^{k} e^{-pk(n-k))}\\
+			   &\leq k^{-2}p^{-1}((\frac{ne}{k}) k p e^{-p(n-k)})^k\\
+			   &\leq p^{-1}(nep e^{-p(n-k)})^k
 \end{align}
-If we denote the bracketed term by $A$, then
+If we denote the term in the parentheses by $A$, then, if $k \leq \frac{n}{2}$
 \begin{equation}
     A = \mathcal{O}(\log(n) n^{-\frac{1}{2}})
 \end{equation}
-Hence, $A$ goes to 0 without any condition on $k$, so we obtain
+Hence, we obtain
 \begin{equation}
-    \sum_{k=3}^{\lceil n/2\rceil} \mathbb{P}(X_k \geq 1)\leq p^{-1}\sum_{k=3}^{\lceil n/2\rceil} A^k = o(1)
+	\sum_{k=2}^{\lfloor n/2\rfloor} \mathbb{P}(X_k \geq 1)\leq o(1) + p^{-1}\sum_{k=3}^{\lfloor n/2\rfloor} A^k = o(1)
 \end{equation}
-This gives the fact that whether $\mathcal{G}_{n,p}$ is connected doesn't depend on the existence of isolated connected components of size 2 or more. So it only depends on the existence of isolated vertices.
-So we have proved \eqref{th:isolcomp}.
+Hence, the graph has, with probability tending to one, no component of size between 2 to $\lfloor \frac{n}{2} \rfloor$.
+Hence it has only isolated vertices and components of size at least $\lceil \frac{n}{2} \rceil$.
+Necessarily, there is at most one component of size at least $\lceil \frac{n}{2} \rceil$.
+\newline
+On the other hand, such component exists with probability going to 1. Otherwise, the graph would have only isolated vertices and then no edges, which occurs with probability $(1-p(n))^N \longrightarrow_{n\to \infty} 0$.
+
+This proves theorem \eqref{th:isolcomp}.
 \end{proof}
 
-The proof of \eqref{th:connect} can be done using the second moment method or Stein's method, see \cite{JLR}. (TODO : CHOOSE WHICH ONE TO PRESENT.).
+Theorem \eqref{th:connect} is proved in a more general setting later in this report in \ref{}, proofs restricted to the model $\mathcal{G}_{n,p}$ can be found in \cite{JLR}.
 
 
 \section{Existence of thresholds}\footnote{ The proofs and results from this section are from \cite{JLR} and \cite{Bollob01}}
 One of the most surprising features on random graphs, which seems to have motivated Erd\H{o}s to publish his results from 1959 ( TODO : FIND THE REF THAT SAID THAT...), is the existence of thresholds.
-Indeed the property of appearance of certain graph properties will be either 0 or 1 for a great range of functions $p$.
+Indeed the property of appearance of certain graph properties will be either close to 0 or close to 1 for a great range of functions $p$.
 \newline
 For instance from the previous theorem we observe that $\forall \epsilon > 0$  if $p = (1+\epsilon)\frac{\log(n)}{n}$ 
-or if $p = \frac{\log(n) + \omega(n)}{n}$ with $\lim_{n\to \infty} \omega(n) = \infty$ then $\lim_{n\to\infty}\mathbb{P}(G \in \mathcal{G}_{n,p} \text{is connected}) = 1$.
-We would say that for such $p$, $\mathcal{G}_{n,p}$ is almost surely connected.
-We also observe that if in the previous definitions of $p$ we changed the $+$ signs into $-$ signs, we would find that $\mathcal{G}_{n,p}$ is almost surely disconnected.
+or if $p = \frac{\log(n) + \omega(n)}{n}$ with $\lim_{n\to \infty} \omega(n) = \infty$ then $\lim_{n\to\infty}\mathbb{P}(G \in \mathcal{G}_{n,p} \text{ is connected}) = 1$.
+We would say that for such $p$, $\mathcal{G}_{n,p}$ is asymptotically almost surely connected.
+We also observe that if in the previous definitions of $p$ we changed the $+$ signs into $-$ signs, we would find that $\mathcal{G}_{n,p}$ is asymptotically almost surely disconnected.
 \newline
 Hence, the function $p$ from \eqref{th:connect} has some very peculiar behaviour on the property of connectivity.
 We will call such a function a \emph{threshold} (here, for connectivity).
@@ -127,20 +135,23 @@ Having exactly $k$ isolated vertices is an example of a convex not monotone prop
 \newline
 Here is a theorem showing that monotone increasing properties make probability distributions on these properties also monotone increasing.
 \begin{theorem}\label{th:QIncr}
-	Suppose $\mathcal{Q}$ is a monotone increasing property and $0 \leq M_1 \leq M_2 \leq N$ and $0 \leq p_1 \leq p_2 \leq 1$.
+	Suppose $\mathcal{Q}$ is a monotone increasing property, $0 \leq M_1 \leq M_2 \leq N$ and $0 \leq p_1 \leq p_2 \leq 1$.
 	\newline
 	Then
-	$$\mathbb{P}_{M_1}(\mathcal{Q}) \leq  \mathbb{P}_{M_2}(\mathcal{Q}) \text{  and  } \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$$
+	\begin{equation}
+		\mathbb{P}_{M_1}(\mathcal{Q}) \leq  \mathbb{P}_{M_2}(\mathcal{Q}) \text{  and  } \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})
+	\end{equation}
 \end{theorem}
 \begin{proof}
-	The first inequality is clear, as the only difference between the two spaces on which we evaluate the property $\mathcal{Q}$ is that on the RHS edges have been added, hence, the probability of realising a monotone increasing has been increased.
+	The first inequality is clear, as the only difference between the two spaces on which we evaluate the property $\mathcal{Q}$ is that on the RHS edges have been added, hence, the probability of realising a monotone increasing property has been increased.	
 	\newline
-	For the second inequality, let $p = \frac{p_2 - p_1}{1 - p_1}$. Let $G_1 \in \mathcal{G}_{n, p_1}, G_2 \in \mathcal{G}_{n, p}$
+	For the second inequality, let $p = \frac{p_2 - p_1}{1 - p_1}$. Let $G_1 \in \mathcal{G}_{n, p_1}, G \in \mathcal{G}_{n, p}$ independent to each other.
 	\newline
-	So if $G_2 = G_1 \cup G$ it's edges are chosen with probability $p_1 + p - p_1 p = p_2$. So $G_1$ is in $G_2$, the property being monotone increasing, we have $ \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$
+	So if $G_2 = G_1 \cup G$ it's edges are chosen with probability $p_1 + p - p_1 p = p_2$. 
+	So $G_2$ follows $\mathcal{G}_{n,p_2}$ and contains $G_1$, the property being monotone increasing, we have $ \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$
 \
 \end{proof}
-The following result follows from definition with $\mathcal{Q}$ a monotone increasing property
+The following result follows from definition, when $\mathcal{Q}$ is a monotone increasing property\footnote{It is in fact true for any property}:
 \begin{equation}\label{eq:QProp}
 	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
 \end{equation}
@@ -149,7 +160,7 @@ However this result requires to know all of the elements in $\mathcal{Q}$ and as
 The following theorem shows that if we know quite accurately $\mathbb{P}_M(\mathcal{Q})$ for every $M$ close to $pN$ then we know $\mathbb{P}_p(\mathcal{Q})$ with a comparable accuracy. The converse being clearly false, for instance the property of containing M edges.
 
 \begin{theorem}\label{th:linkMP}
-	Suppose $\mathcal{Q}$ is any property and $0 < p = M/N< 1$ 
+	Suppose $\mathcal{Q}$ is any property and $0 < p = M/N< 1$. 
 	\newline
 	Then $\mathbb{P}_M(\mathcal{Q}) \leq 3 \sqrt{M}\mathbb{P}_p(\mathcal{Q})$
 \end{theorem}
@@ -158,18 +169,18 @@ The following theorem shows that if we know quite accurately $\mathbb{P}_M(\math
 	\newline
 	So we have
 	$$\mathcal{Q} = \bigsqcup_{m=0}^{N} \mathcal{Q}_m \quad, \text{ with } \forall G \in \mathcal{Q}_m, e(G) = m$$
-	$\mathbb{P}_m(\mathcal{Q}) = |\mathcal{Q}_m| \binom{N}{M}^{-1}$
+	We have $\mathbb{P}_m(\mathcal{Q}) = |\mathcal{Q}_m| \binom{N}{m}^{-1}$
 	From this we can obtain, with $q = 1 - p$
 	\begin{align*}
 		\mathbb{P}_p(\mathcal{Q})	&= \sum_{A \in \mathcal{Q}} p^{|A|}q^{N-|A|}
 						= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{|A|}q^{N-|A|}\\
 						&= \sum_{m=0}^{N}\sum_{A \in \mathcal{Q}_m} p^{m}q^{N-m}
 						= \sum_{m=0}^{N}|\mathcal{Q}_m|p^{m}q^{N-m}\\
-						&= \sum_{m=0}^N p^mq^{N-m}\binom{N}{M}\mathbb{P}_m(\mathcal{Q}) 
+						&= \sum_{m=0}^N p^mq^{N-m}\binom{N}{m}\mathbb{P}_m(\mathcal{Q}) 
 						\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
 						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
-	So we have \eqref{binomTail} (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
+	Since \eqref{binomTail} (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
 	\begin{equation}
 		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi q M}
 	\end{equation}
@@ -200,12 +211,13 @@ Analogously, in $\mathcal{G}_{n, M}$, we call $\hat{M} = \hat{M}(n)$ a threshold
 In fact, thresholds are unique with respect to the multiplication by a positive constant. So for the following, we should denote a threshold for a property as \emph{the} threshold.
 \newline
 As said in the introduction of this section, the fact that thresholds could be found for many of the properties that where investigated is one of the main reason behind the study of random graphs.
-In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )confirms that we can always expect the existence of a threshold if the property investigated is non trivial.
+In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )confirms that we can always expect the existence of a threshold if the property investigated is non trivial
+\footnote{A property being trivial if it is always or never satisfied, for instance, having a specified number of vertices or the empty-set propery.}.
 \begin{theorem}
 	Every non-trivial monotone graph property has a threshold
 \end{theorem}
 \begin{proof}
-	We consider without loss of generality that $\mathcal{P}$ is a monotone increasing graph property.
+	We consider without loss of generality that $\mathcal{P}$ is a non-trivial monotone increasing graph property.
 	Given $0 < \epsilon < 1$ we define $p:[0,1] \to [0,1]$ such that :
 	\begin{equation}
 		\mathbb{P}(\mathcal{G}_{n, p} \in \mathcal{P}) = \epsilon
@@ -214,23 +226,17 @@ In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )con
 	Indeed, we know that it is increasing from \eqref{th:QIncr}.
 	\newline
 	We will show that $p^* = p(\frac{1}{2})$ is a threshold for $\mathcal{P}$ through a coupling argument.
-	We take $G_1, G_2, ..., G_k$ independent random variables in $\mathcal{G}_{n,p}$.
-	Then we claim that $G_1 \cup G_2 \cup ... \cup G_k$ is distributed as a random variable in $\mathcal{G}_{n, 1 - (1-p)^k}$.
-	Which is clear when we observe the following equivalence for $p_1 < p$ and $p_2$.
+	We take $G_1, G_2, ..., G_k$ independent random variables following $\mathcal{G}_{n,p}$.
+	Then we claim that $G_1 \cup G_2 \cup ... \cup G_k$ is distributed like $\mathcal{G}_{n, 1 - (1-p)^k}$.
+	This is clear by induction on $k$ since we observe the following equivalence for $p_1 < p$ and $p_2$.
 	\begin{equation}
 		1 - p = (1 - p_1)(1-p_2) \iff p = p_1 + p_2 - p_1p_2
 	\end{equation}
 	The previous equation being satisfied with $p = 1 -(1-p)^k$, $p_1 = 1 - (1-p)^{k-1}$ and $p_2 = p$.
 	\newline
-	We prove the claim by induction, the initialisation is clearly true, then if we write $G = G_1 \cup ... \cup G_{k-1}$.
-	\begin{align}
-		\mathbb{P}(G \cup G_k = H) 	&= \mathbb{P}(G=H) + \mathbb{P}(G_k = H) - \mathbb{P}(G \cap G_k = H) \\ 
-						&= \mathbb{P}(G=H) + \mathbb{P}(G_k = H) - \mathbb{P}(G = H)\mathbb{P}(G_k = H) 
-	\end{align}
-	And we can conclude in the same way as in \eqref{th:QIncr}.
-	We may now use Bernoulli's inequality \eqref{bernoulli}, $1 - (1-p)^k \leq kp$ to obtain
+	We may now use Bernoulli's inequality \eqref{bernoulli}, $1 - (1-p)^k \leq kp$ to obtain that we can couple the graphs in such a way that:
 	\begin{equation}
-		\mathbb{G}_{n,1 - (1-p)^k)} \subseteq \mathbb{G}_{n, kp}
+		\mathbb{G}_{n,1 - (1-p)^k} \subseteq \mathbb{G}_{n, kp}
 	\end{equation}
 	and so $\mathbb{G}_{n, kp} \not\in \mathcal{P}$ implies $G_1, G_2, ..., G_k \not\in \mathcal{P}$. 
 	We obtain
@@ -254,21 +260,21 @@ In fact, the following theorem from Bollob\'as and Thomason (TODO : ADD REF )con
 \end{proof}
 
 \section{The stability number}\footnote{This section is from \cite{Bondy08}}
-Another property of graphs that one might be interested to study is the stability number. The stability number of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
-One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the \emph{chromatic number}. Indeed, the chromatic number being the smallest number of colours\footnote{A colouring of a graph is just assigning to each edge a colour. Colours can be thought as "red, green, blue, ..." or as numbers.} that makes a \emph{proper colouring} of a graph. 
-That means a colouring on which there are no two adjacent vertices of the same colour. 
-We are then led to a similar question than finding the stability number of a graph.
-If we denote by $\alpha(G)$ the stability number of a graph, we have the simple lower bound \footnote{ We use this link with the chromatic as a simple motivation for studying the stability number. It is a number which is in fact of great importance in graph theory but on matters that are out of the scope of this report. See for instance Chapter 12 in \cite{Bondy08}.}
+Another property of graphs that one might be interested to study is the stability number. The \emph{stability number} of a graph is the size of the largest set of vertices we can choose in a graph such that no two vertices are adjacent. 
+One of the reasons that makes this an interesting property to study is that it is linked to one of the most fundamental property of graphs, $\chi (G)$, the \emph{chromatic number}. 
+Indeed, the chromatic number is the smallest number of colours\footnote{A colouring of a graph is just assigning to each edge a colour. Colours can be thought as "red, green, blue, ..." or as numbers.} that makes a \emph{proper colouring} of a graph, 
+that means a colouring on which there are no two adjacent vertices of the same colour. 
+If we denote by $\alpha(G)$ the stability number of a graph, it is not difficult to get \footnote{ We use this link with the chromatic as a simple motivation for studying the stability number. It is a number which is in fact of great importance in graph theory but on matters that are out of the scope of this report. See for instance Chapter 12 in \cite{Bondy08}.}
 \begin{equation}
 	\chi(G) \geq \frac{n}{\alpha(G)}
 \end{equation}
-Before giving a lower bound on the stability number of a graph it might be interesting to denote that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
+Before giving a lower bound on the stability number of a graph it might be interesting to notion that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
 Although the following theorem will give a bound that is quite tight in $\mathcal{G}_{n, p}$ the problem of finding the actual maximum stable set of a graph is a $NP$-hard problem.
 \begin{theorem}
-	The stability number of a graph in $\mathcal{G}_{n, p}$, is at most $\lceil 2p^{-1}\log(n)\rceil$.
+	The stability number of a graph in $\mathcal{G}_{n, p}$, is at most $\lceil 2p^{-1}\log(n)\rceil$, with probability going to 1 when $n \longrightarrow \infty$.
 \end{theorem}
 \begin{proof}
-	Let $G \in \mathcal{G}_{n,p}$ and $S \subseteq V$ such that $V$ contains $k+1$ vertices.
+	Let $G \in \mathcal{G}_{n,p}$ and $S \subseteq V$ such that $S$ contains $k+1$ vertices.
 	Then we have 
 	\begin{equation}
 		\mathcal{P}(\text{"S is a stable set"}) = (1-p)^{\binom{k+1}{2}  }
@@ -279,7 +285,7 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 	\begin{equation}
 		X_{k+1} = \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} X_S
 	\end{equation}
-	the random variable counting the number of stable sets of size $k+1$, so what we are investigating here is the rank $\alpha$ such that $X_k = 0, \forall k > \alpha$. Such an $\alpha$ would then be maximal stability number.
+	the random variable counting the number of stable sets of size $k+1$, so what we are investigating here is the smallest $\alpha$ such that $X_k = 0, \forall k > \alpha$. Such an $\alpha$ would then be the stability number.
 	\begin{align}
 		\mathbb{E}X_{k+1} &= \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} \mathbb{E} X_S 	
 				  = \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} \mathbb{P}(X_S = 1)	\\		
@@ -287,7 +293,7 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 		= (1-p)^{\binom{k+1}{2}} \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} 1 	\\	
 		&= \binom{n}{k+1} (1-p)^{\binom{k+1}{2}} 
 	\end{align}
-	Now we will use the common inequalities $  \binom{n}{k+1} \leq \frac{n^{k+1}}{(k+1)!} $ and $(1-p) \leq e^{-p}$. 
+	Now we will use the inequalities $  \binom{n}{k+1} \leq \frac{n^{k+1}}{(k+1)!} $ and $(1-p) \leq e^{-p}$ (see \ref{th:NChooseK}). 
 	And we have
 	\begin{align}
 		\mathbb{E}X_{k+1} 	&\leq  \frac{n^{k+1}}{(k+1)!} e^{-p \binom{k+1}{2}} = \frac{n^{k+1}}{(k+1)!} e^{-p \frac{k(k+1)}{2}}\\
@@ -298,7 +304,7 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 	\begin{equation}
 		\mathbb{E} X_{k+1} \longrightarrow_{n \to \infty} 0
 	\end{equation}
-	And then $X_{k+1} = 0$ almost surely which proves the theorem.
+	And then $X_{k+1} = 0$ with probability tending to 1 which proves the theorem.
 
 \end{proof}
 
@@ -309,13 +315,13 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 \end{definition}
 It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious ( and will be discussed later in this report ) but we can also think of optimisation problems in which the fact that two points are far apart might be of great consequences.
 This section won't be focused on real world applications of the diameter because as we will see we are studying a model which is not realistic for that. 
-Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will demonstrate it through several technical lemmas, some of which will be admitted. Finally some corollary will be obtained from the theorem.
+Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will prove it through several technical lemmas, some of which will be admitted. Finally some corollary will be obtained from the theorem.
 \newline
 One of the challenging questions in graph theory is estimating the following function
 \begin{equation}\label{eq:DDeltaProb}
 	n(D, \Delta) = max\{ |G|, \text{diam}(G) \leq D, \Delta(G) \leq \Delta\}
 \end{equation}
-$n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the graph with a maximal number of vertices that verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
+$n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the maximal number of vertices of a graph that verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
 \newline
 For instance if we take $\Delta = 2$ we obtain easily by construction that a graph that maximises the number of vertices with a diameter $D$ is a $(2D+1)$-cycle. Hence, 
 \begin{equation}
@@ -338,7 +344,7 @@ However, it is proved that no other graph of diameter 2 can be a Moore graph, se
 \newline
 In the end of this section we will give a quite good lower bound on $n$, in order to do so, we will see that we can select a probability function $p$ such that the value of the diameter is highly concentrated.
 \newline
-In the following we will consider that $d = d(n)$ is a natural number (representing the diameter) and $c$ is a positive real number.
+In the following we will consider that $d = d(n) \geq 2$ is a natural number (representing the diameter) and $c$ is a positive real number.
 \newline
 Now let's give some functions that will allow us to make a study of the diameter in random graphs. If we choose $x$ a vertex in a graph, then we define $\Gamma_k(x)$ as the set of vertices at distance $k$ from $x$. And from this we will define $N_k(x)$ as the set of vertices of distance less than or equal to $k$. 
 Formally, we have
@@ -356,13 +362,14 @@ Now we will define the probability function that we will use in the following of
 \begin{equation} \label{eq:pdiam}
 	p^d n^{d-1} = \log(\frac{n^2}{c}) \quad, \text{  for some } c >0
 \end{equation}
-In order for $d = d(n)$ to be finite we need \footnote{ See \eqref{eq:pnd}}
-\begin{equation}
+Moreover, we will assume
+\begin{equation}\label{eq:logtrois}
 	\frac{pn}{(\log(n))^3} \longrightarrow \infty
 \end{equation}
+Note that this condition is automatically satisfied id $d(n)$ is uniformly bounded.
 The aim of this section will be to prove the following theorem.
 \begin{theorem}\label{th:diam2}
-	Using all previous definitions on $p$, $d$ and $c$. We have,
+	Using all previous definitions and conditions on $p$, $d$ and $c$, we have,
 	\begin{equation}
 		\mathbb{P}(\text{diam}(\mathbb{G}_{n, p}) = d) \longrightarrow e^{-\frac{c}{2}}
 	\end{equation}	
@@ -382,27 +389,29 @@ As a corollary we clearly have
 In fact the number of values that the diameter can take has been fully resolved by Chung and Lu in \cite{ChungLu01}.
 \newline
 Before proving such a theorem we will need some technical lemmas and assumptions. So we will give here some equations for reference later.
-Also 
+Also from \eqref{eq:logtrois},
 \begin{equation}
 	p (\frac{\log(n)}{n})^{-1} \longrightarrow_{n \to \infty} \infty
 \end{equation}
 that should not be too surprising as the threshold for connectivity is $\frac{\log(n) + c}{n}$ as shown before.
-We may also consider that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon > 0$ as it can be shown that otherwise the diameter of $\mathcal{G}_{n,p}$ is lower or equal than 2. One might be interested in what $p(n, d, c)$ or $d(n , p, c)$ look like so here they are
+We may also observe, since $d(n) \geq 2$ that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon > 0$.
+We observe that $p$ and $d$ are connected as follows:
 \begin{equation}
 	p=n^{\frac{1}{d} - 1}(\log(\frac{n^2}{c}))^\frac{1}{d}
 \end{equation}
 \begin{align}\label{eq:pnd}
-	d &= \frac{1}{\log(pn)}(\log(n) + \log \log (n) + log(2) + \mathcal{O}(\frac{1}{\log(n)}))\\
+	d &= \frac{1}{\log(pn)}(\log(n) + \log \log (n) + \log(2) + \mathcal{O}(\frac{1}{\log(n)}))\\
 	  &= \mathcal{O}((1+o(1))\frac{\log(n)}{\log\log(n)})
 \end{align}
 And finally
 \begin{equation}
 	p(pn)^{d-2} = o(1)
 \end{equation}
-The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ conditionally on some space that we will now define. $\Omega_k \subseteq \mathcal{G}_{n, p}$ is a set of graphs with $a = |\Gamma_{k-1}(x)|$ and $b = |N_{k-1}(x)|$ that satisfy
+The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ conditionally on some space that we will now define. 
+In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma_{k-1}(x)|$ and $b = |N_{k-1}(x)|$ that satisfy
 \begin{align}
  \left\{\begin{array}{rl}
-		 \frac{1}{2}(pn)^{k-1} \leq a &\leq \frac{1}{2}(pn)^{k-1} \\
+		 \frac{1}{2}(pn)^{k-1} \leq a &\leq \frac{3}{2}(pn)^{k-1} \\
 		 			    b &\leq 2(pn)^{k-1}
 	 \end{array}
 	\right.
