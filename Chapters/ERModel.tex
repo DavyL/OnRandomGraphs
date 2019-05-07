@@ -450,11 +450,11 @@ In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma
 	\end{align}
 	Using, \eqref{eq:CondAB}, we obtain the following inequality:
 	\begin{equation}
-		\gamma_k - \frac{b}{n} = \frac{1}{n}(\frac{2\beta_k}{p} - b) = \frac{1}{n}(2(pn)^{k-1} -b) > 0$
+		\gamma_k - \frac{b}{n} = \frac{1}{n}(\frac{2\beta_k}{p} - b) = \frac{1}{n}(2(pn)^{k-1} -b) > 0
 	\end{equation}
 	From which we get:
 	\begin{equation}
-		 (\alpha_k + \beta_k + \gamma_k - \frac{b}{n})apn &\geq (\alpha_k + \beta_k)apn \geq (\alpha_k + \beta_k)apn_k  
+		 (\alpha_k + \beta_k + \gamma_k - \frac{b}{n})apn \geq (\alpha_k + \beta_k)apn \geq (\alpha_k + \beta_k)apn_k  
 	\end{equation}
 	From this first sequence of inequalities we managed to remove $\gamma_k$ and we used some $n_k$ that is less than $n$.
 	The point in evaluating these inequalities is that we now have
@@ -572,7 +572,7 @@ We will now prove another lemma
 	\end{equation}
 	In order to shorten the proof, we admit the following lemma that requires a quite long and technical proof. The proof can be found in \cite{Bollob81}.
 	\begin{lemma}
-		Let $K= \max\{r+2, e^7}$ and using all previous definitions on $p, d$ and $c$, in particular \eqref{eq:logtrois}.
+		Let $K= \max\{r+2, e^7\}$ and using all previous definitions on $p, d$ and $c$, in particular \eqref{eq:logtrois}.
 		With probability at least $1-n^{-K}$
 		\begin{equation}
 			(1-n^{-K})Q_r \leq \mathbb{F}_r \leq (1-n^{-K}) Q_r + n^{-K}
@@ -622,7 +622,7 @@ We will now prove another lemma
 		\mathbb{P}(\text{diam}(G) \leq d+1) \longrightarrow_{n\to\infty} 1
 	\end{equation}
 	Finally, if we combine the last result with \eqref{eq:diamcv} it is clear that the proof if complete.
-\end{proof}
+	\newline
 	To end this section we present two theorems that are much easier to prove with a similar flavor to the previous one.
 	\begin{theorem}\label{th:diam2}
 	Suppose 
@@ -644,7 +644,7 @@ We will now prove another lemma
 	\newline
 	Then using the the first moment method.
 	\begin{align}
-		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) > 2) 	&\leq \mathbb{E}(\text{number of pairs of vertices with distance > 2) \\
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) > 2) 	&\leq \mathbb{E}(\text{number of pairs of vertices with distance} > 2) \\
 								&\leq \binom{n}{2}(1-p)(1-p^2)^{n-2} = \mathcal{O}(n^2e^{-np^2}
 	\end{align}
 	Which tends to 0 by $i)$. Hence, with high proability, the diameter of $\mathbb{G}_{n,p}$ is less than 2. 
@@ -655,11 +655,10 @@ We will now prove another lemma
 				= p^{\binom{n}{2}} &\longrightarrow 0				\\
 		\text{iff  } \log p^{\binom{n}{2}} &\longrightarrow -\infty			\\
 			   \text{iff  } n^2 \log p &\longrightarrow -\infty			\\
-			    \text{iff  } n^2 (1-p) &\longrightarrow +\infty			
+	\text{iff  } n^2 (1-p) &\longrightarrow +\infty			
 	\end{align}	
 \end{proof}
-And simply if we remember the previous theorem \eqref{th:linkMP} linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary
-
+And simply if we remember the previous theorem \eqref{th:linkMP} linking $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n,M}$ we obtain the following corollary:
 \begin{corollary}
 	If $M=M(n) < \binom{n}{2}$ satisfies 
 	\begin{equation}
