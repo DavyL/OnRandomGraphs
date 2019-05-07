@@ -103,4 +103,27 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	\end{equation}
 	Combining \eqref{eq:CVUP} and \eqref{eq:CVDOWN} we have $\lim_{n\to\infty} \sum_{1 \leq i_1 < \ldots <i_k \leq n} Q_{i_1} \ldots Q_{i_k} = \frac{\lambda^k}{k!}$, which is the result we wanted to prove.
 \end{proof}
+It is interesting to note through the following theorem, which we will not prove, that under certain conditions, a similar behaviour appears between the binomial model $\mathcal{G}_{n,p}$ and the generalized binomial $\mathcal{G}_{n, \bold{P}}$ at the connectivity threshold.
+\begin{theorem}
+	If \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, then,
+	\begin{equation}
+		\lim_{n\to \infty} \mathbb{P}_(\mathbb{G}_{n, \bold{P}} \text{ is connected}) = e^{-\lambda}
+	\end{equation}
+\end{theorem}
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
+As seen in the previous section, an Erd\"os-R\'enyi random graph has degrees following a Poisson distribution. 
+However, in real world networks are more frequently observed power law distribution (TODO: ADD REF).
+Hence, the fraction of vertices of degree $k$ is $p_k = Ck^{-\beta}$, with $C$ the normalization constant and typically most of the observed networks which can be represented by a power-law distribution have $\beta$ between 2 and 3.
+We are here interested in constructing and investigating graphs following a specified degree distribution.
+We will use the approach of Newman, Strogats and Watts (TODO: ADD REF).
+\newline
+First of all, let's consider a finite case in which we have a sequence of degrees $d_1, d_2, \ldots, d_n$ such that $d_i = d(i)$.
+We need for this definition to be correct to make sure that the sum of the degrees is an even number.
+In order to build the graph, we will assign to each vertex $i$, $d_i$ "half-edges", and now connecting each of these edges will give a graph with the appropriate degree sequence.
+The way these "half-edges" are paired is not unique and we will here consider that the pairings are made at random, hence, loops and multi-edges might appear.
+We will investigate in the following the proportion of these loops and multi-edges and how they affect the model. 
+A realistic model having often no loops or multi-edge (for instance in a social network, one is not often friend with himself or friend several times with someone else).
+\newline
+The approach from Newman, Strogatz and Watts makes an extensive use of generating functions defining the degree sequence, we will here only proof some simple results and give some interesting results in order to give an insight of the efficiency of the model to mimic real-world phenomenoms.
+
+
