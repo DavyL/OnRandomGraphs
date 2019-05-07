@@ -409,7 +409,7 @@ And finally
 \end{equation}
 The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ conditionally on some space that we will now define. 
 In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma_{k-1}(x)|$ and $b = |N_{k-1}(x)|$ that satisfy
-\begin{align}
+\begin{align}\label{eq:CondAB}
  \left\{\begin{array}{rl}
 		 \frac{1}{2}(pn)^{k-1} \leq a &\leq \frac{3}{2}(pn)^{k-1} \\
 		 			    b &\leq 2(pn)^{k-1}
@@ -418,9 +418,9 @@ In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma
 \end{align}
 \begin{lemma}
 	Let $x$ be a fixed vertex.
-	\newline
-	$1 \leq k = k(n)  \leq d-1$
-	\newline
+	\begin{equation}
+		1 \leq k = k(n)  \leq d-1
+	\end{equation}
 	And $ K = K(n)$ that satisfy $ 6 \leq K \leq \frac{1}{12} \sqrt{pn\frac{1}{\log(n)}}$
 	We also define
 	\begin{equation}
@@ -429,33 +429,42 @@ In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma
 
 	Then
 	\begin{equation}
-		\mathbb{P}(|\gamma_k(x) - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \leq n^{-\frac{K^2}{9}}
+		\mathbb{P}(|\Gamma_k(x)| - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \leq n^{-\frac{K^2}{9}}
 	\end{equation}
 \end{lemma}
 
 \begin{proof}
-	Knowing that we are in the space $\Omega_k$, then the probability that some vertex $y$ is at distance $k$, that is the probability that $y$ is not in $N_{k-1}(x)$ but is connected to $\Gamma_{k-1}(x)$ is 
+	Conditionally on $|\Gamma_{k-1}(x)| = a$ and $|N_{k-1}(x)| = b$, $|\Gamma_k(x)|$ follows a binomial distribution of parameters $n_k = n-b$ and
 	\begin{equation}
-		p^a = 1 - (1-p)^a
+		p_a = 1 - (1-p)^a
 	\end{equation}
-	Hence, the random value $|\Gamma_k(x)|$ follows a binomial on $n-b$ elements, with a probability $p_a$.
-	In the following inequalities we will assume that $n$ is large enough, this will allow us to do certain inequalities that are not really precise but asymptotically satisfying. Also to make it more easy for the reader we consider that all of these inequalities take place in $\Omega_k$ without writing it explicitly.
+	Indeed $\Gamma_k(x)$ is the set of vertices not in $N_{k-1}(x)$ and connected to at least one element of $\Gamma_{k-1}(x)$.
+	\newline
+	In the following inequalities we will assume that $n$ is large enough, this will allow us to do certain inequalities that are only asymptotically satisfying. Also to make it more easy for the reader we consider that all of these inequalities take place in $\Omega_k$ without writing it explicitly.
+	Under the event we consider, we have:
 	\begin{align}
-		|\gamma_k(x) - apn| &\geq (\alpha_k + \beta_k + \gamma_k)apn \\
-		 &\geq (\alpha_k + \beta_k)apn + \gamma_k apn \\
-		 &\geq (\alpha_k + \beta_k)apn + ap(n-n_k) \\ 
-		 &\geq (\alpha_k + \beta_k + 1 - \frac{n_k}{n})apn \\ 
-		 &\geq (\alpha_k + \beta_k)apn \geq (\alpha_k + \beta_k)apn_k\\ 
+		|\Gamma_k(x)| - apn| &\geq (\alpha_k + \beta_k + \gamma_k)apn \\
+		 &\geq (\alpha_k + \beta_k + \gamma_k)apn + ap(n -n_k) \\
+		 &= (\alpha_k + \beta_k + \gamma_k + 1 - \frac{n_k}{n})apn \\ 
+		 &= (\alpha_k + \beta_k + \gamma_k - \frac{b}{n})apn \\  
 	\end{align}
+	Using, \eqref{eq:CondAB}, we obtain the following inequality:
+	\begin{equation}
+		\gamma_k - \frac{b}{n} = \frac{1}{n}(\frac{2\beta_k}{p} - b) = \frac{1}{n}(2(pn)^{k-1} -b) > 0$
+	\end{equation}
+	From which we get:
+	\begin{equation}
+		 (\alpha_k + \beta_k + \gamma_k - \frac{b}{n})apn &\geq (\alpha_k + \beta_k)apn \geq (\alpha_k + \beta_k)apn_k  
+	\end{equation}
 	From this first sequence of inequalities we managed to remove $\gamma_k$ and we used some $n_k$ that is less than $n$.
 	The point in evaluating these inequalities is that we now have
 	\begin{align}
-		\mathbb{P}(|\gamma_k(x) - apn| \geq (\alpha_k &+ \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \\&\leq \mathbb{P}(|\gamma_k(x) - apn_k| \geq (\alpha_k + \beta_k )apn_k \quad|\quad \Omega_k)
+		\mathbb{P}(|\Gamma_k(x)| - apn| \geq (\alpha_k &+ \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \\&\leq \mathbb{P}(|\Gamma_k(x)| - apn_k| \geq (\alpha_k + \beta_k )apn_k \quad|\quad \Omega_k)
 	\end{align}
 	Now using $ap -p_a \leq \beta_k ap$ and the triangular inequality we have
 	\begin{align}
-		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
-		&\leq \mathbb{P}(|\gamma_k(x) - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
+		&\leq \mathbb{P}(|\Gamma_k(x)| - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
+		&\leq \mathbb{P}(|\Gamma_k(x)| - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
 	\end{align}
 	And using Theorem 1.7 \eqref{binomTail} from Bollob\'as (TODO : ADD IT IN THE ANNEX AND PROVE IT, JUST A TAIL INEQ ON BINOM)we have
 	\begin{align}
@@ -468,7 +477,7 @@ In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma
 	\end{align}
 \end{proof}
 We will now prove another lemma
-\begin{lemma}\label{KLemma}
+\begin{lemma}\label{th:KLemma}
 	Let $K > 12$ a constant and $\alpha_k, \beta_k, \gamma_k, k=1,...,d-1$ as before.
 	\newline
 	Set 
@@ -485,25 +494,29 @@ We will now prove another lemma
 	As $\delta_{d-1} \longrightarrow_{n\to\infty} 0$ we may assume that $\delta_{d-1} < \frac{1}{4}$
 	For a fixed vertex $x$, we denote by $\Omega_k^*$ the set of graph for which 
 	\begin{equation}
-		||\Gamma_l(x) - (pn)^l| \leq \delta_l(pn)^l \quad , 0 \leq l \leq k
+		||\Gamma_l(x)| - (pn)^l| \leq \delta_l(pn)^l \quad , 0 \leq l \leq k
 	\end{equation}
 	And it is easy to verify that it is decreasing. Anf if one replaces $|\Gamma_l(x)|$ by $a$ it is clear that we have
 	\begin{equation}
 		\Omega_k^* \subseteq \Omega_{k-1}^* \subseteq \Omega_k
 	\end{equation}
-	Now, simply applying Bayes formula ( for the complementary ) we have
+	We shall now prove by induction that:
+	\begin{equation}\label{eq:InductionHyp}
+		1 - \mathbb{P}(\Omega_k^*)\leq 2kn^{-\frac{K^2}{9}}
+	\end{equation}
+	Now, simply applying Bayes formula (for the complementary) we have
 	\begin{equation}\label{eq:bayes}
 		1 - \mathbb{P}(\Omega_k^*)= 1-\mathbb{P}(\Omega_{k-1}^*)
-		+ \mathbb{P}(\Omega_{k-1}^*)\mathbb{P}(||\Gamma_k(x)| - (pn)^k| \leq \delta_k(pn)^k | \Omega_{k-1}^*)
+		+ \mathbb{P}(\Omega_{k-1}^*)\mathbb{P}(||\Gamma_k(x)| - (pn)^k| > \delta_k(pn)^k | \Omega_{k-1}^*)
 	\end{equation}
-	If $G \in \Omega_{k-1}^*$ and $|a| = |\Gamma_{k-1}(x)|$ and by applying the definition of belonging to $\Omega_{k-1}^*$ and multiplying both sides by $pn$ we have 
+	If $G \in \Omega_{k-1}^*$ and $|a| = |\Gamma_{k-1}(x)|$, then by applying the definition of belonging to $\Omega_{k-1}^*$ and multiplying both sides by $pn$ we have 
 	\begin{equation}
 		|(pn)^k - apn| \leq \delta_{k-1}(pn)^k
 	\end{equation}
 	And we obtain using the second triangular inequality
 	\begin{align}
 		\mathbb{P}(\neg\Omega_k^* | \Omega_{k-1}^*) 
-		&\leq \mathbb{P}(\Omega_{k-1}^*)^{-1}\mathbb{P}(||\gamma_k(x)| - apn| \geq (\delta_k - \delta_{k-1})(pn)^k | \Omega_k)\\
+		&\leq \mathbb{P}(\Omega_{k-1}^*)^{-1}\mathbb{P}(||\Gamma_k(x)| - apn| \geq (\delta_k - \delta_{k-1})(pn)^k | \Omega_k)\\
 		&\leq (1 - 2(k-1)n^{-\frac{K^2}{9}})^{-1}\mathbb{P}(||\Gamma_k(x)| - apn| \geq 2(\alpha_k + \beta_k + \gamma_k)(pn)^k | \Omega_k)
 	\end{align}
 	The last inequality being obtained from the hypothesis of induction and using $(1+x) \leq \exp(x)$. Now using the fact that $apn \leq \frac{3}{2} (pn)^k$ we have
@@ -511,13 +524,14 @@ We will now prove another lemma
 		&\leq 2\mathbb{P}(||\Gamma_k(x)| - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn | \Omega_k)\\
 		&\leq 2n^{-\frac{K^2}{9}}
 	\end{align}
+	which proves \eqref{eq:InductionHyp}.
 	If we combine the last inequality that is obtained applying the previous lemma with \eqref{eq:bayes} then we have the result.
 \end{proof}
 \begin{definition}
 	For $x$ and $y$ two vertices of $G$, we say that $x$ and $y$ are remote if $y \not\in N_d(x)$.
 \end{definition}
-\begin{proof}
-	From \eqref{KLemma} we can obtain the following equation.
+	We shall now prove that with high probability, two remote pairs of vertices in $\mathcal{G}_{n,p}$ do not share a vertex.
+	From \ref{th:KLemma} we can obtain the following equation.
 	\begin{equation}
 		\mathbb{P}(|N_{d-1}(x)| < \frac{5}{6}(pn)^{d-1}) < n^{-4}
 	\end{equation}
@@ -526,7 +540,7 @@ We will now prove another lemma
 	(1-p)^{|W|} \leq \exp(-|W|) \leq \exp(-p|W|) = \exp(-\frac{5}{6}\log(\frac{n^2}{c})) = c^{\frac{5}{6}}n^{-\frac{5}{3}}
 	\end{equation}
 
-	Hence, if $x, y, z$ are vertices we have
+	Hence, if $x, y, z$ are distinct vertices we have
 	\begin{align}
 		\mathbb{P}(x&\text{ is remote from $y$ and $z$ }) 						\\	
 		&\leq \mathbb{P}(|N_{d-1}(x)|\leq \frac{5}{6} (pn)^{d-1}) 					\\
@@ -539,7 +553,7 @@ We will now prove another lemma
 	So, we obtain
 	\begin{align}
 		\mathbb{P}(\mathcal{G}_{n, p} &\text{ contains two remote vertices pairs sharing a vertex })	\\
-			&\leq \sum_x\sum_{(y, z)}\mathbb{P}(\text{ $x$ is remote from $y$ and $z$ })		\\
+			&\leq \sum_x\sum_{(y \neq z)}\mathbb{P}(\text{ $x$ is remote from $y$ and $z$ })		\\
 			&\leq \sum_x \binom{n}{2}n^{-3-\frac{1}{4}} = n\binom{n}{2}n^{-3-\frac{1}{4}}		\\
 			&\leq n^{-\frac{1}{4}}
 	\end{align}
@@ -547,9 +561,9 @@ We will now prove another lemma
 	\begin{lemma}
 		From $r$ disjoint pair of vertices, there are $2^r$ $r$-tuples of vertices meeting each pair.
 	\end{lemma}
-	TODO : CHECK FOLLOWING LEMMA
+	As we have seen above, the number of remote pairs is within $o(1)$ the number of remote disjoint pairs, which gives the following lemma.
 	\begin{lemma}
-		The $r$-th factorial moment of $X$ ( $X$ being the number of remote pairs of vertices ) is within $o(1)$ of the expected number of ordered $r$-tuples of disjoint remote pairs.
+		The $r$-th factorial moment of $X$, $X$ being the number of remote pairs of vertices, is within $o(1)$ of the expected number of ordered $r$-tuples of disjoint remote pairs.
 	\end{lemma}
 	If we denote by $\mathbb{F}_r$ the probability that a fixed $r$-tuple consists of vertices remote from each other.
 	Then,
@@ -558,27 +572,38 @@ We will now prove another lemma
 	\end{equation}
 	In order to shorten the proof, we admit the following lemma that requires a quite long and technical proof. The proof can be found in \cite{Bollob81}.
 	\begin{lemma}
+		Let $K= \max\{r+2, e^7}$ and using all previous definitions on $p, d$ and $c$, in particular \eqref{eq:logtrois}.
 		With probability at least $1-n^{-K}$
 		\begin{equation}
 			(1-n^{-K})Q_r \leq \mathbb{F}_r \leq (1-n^{-K}) Q_r + n^{-K}
 		\end{equation}
-		With $Q_r = (\frac{c}{n})^r(1+o(1))$
-	\end{lemma}
+		with $Q_r = (\frac{c}{n})^r(1+o(1))$.
+		\newline
+		In particular:
+		\begin{equation}
+			\mathbb{F}_r = (\frac{c}{n})^r(1+o(1))
+		\end{equation}
 
-	
-	\begin{equation}
-		\mathbb{F}_r = (\frac{c}{n})^r(1+o(1))
-	\end{equation}
-	And we can obtain the asymptotical estimate
-	\begin{equation}
-		\mathbb{E}_r(X) = n^r2^{-r}(\frac{c}{n})^r(1+o(1)) + o(1)
-	\end{equation}
+		and we can obtain the asymptotical estimate
+		\begin{equation}
+			\mathbb{E}_r(X) = n^r2^{-r}(\frac{c}{n})^r(1+o(1)) + o(1)
+		\end{equation}
+	\end{lemma}
 	Using the following theorem 
 	\begin{theorem}\footnote{See \eqref{th:factPois} for a proof}
-		\begin{align}
-			\lim_{n\to\infty} \mathbb{E}_r(X_n) &- \lambda^r = 0 \\
-					&\implies X \longrightarrow_d \mathcal{P}_{\lambda}
-		\end{align}
+		Let $X_1, X_2, \ldots$ be non-negative integer valued random variables and $X$ a random variable following a Poisson distribution of parameter $\lambda$.
+		Suppose
+		\begin{equation}
+			\lim_{n\to\infty} \mathbb{E}_r(X_n) =\lambda^r , \quad r=0,1,\ldots
+		\end{equation}
+		and 
+		\begin{equation}
+			\lim_{r \to \infty} \frac{E_r(X) r^m}{r!} = 0,\quad m = 0, 1, \ldots
+		\end{equation}
+		Then 
+		\begin{equation}
+			X_n \longrightarrow_d X
+		\end{equation}
 	\end{theorem}
 	Then we have that $X$ converges in distribution to Poisson law of parameter $\frac{c}{2}$.
 	\newline
@@ -586,25 +611,15 @@ We will now prove another lemma
 	\begin{equation}\label{eq:diamcv}
 		\mathbb{P}(X=0) = \mathbb{P}(\text{diam}(G) \leq d) \longrightarrow e^{-\frac{c}{2}}
 	\end{equation}
-	that proves the first part of the theorem. We can also prove the case with $d=1$ that gives
+	that proves the first part of the theorem. 
+	For each fixed $c$, we have $p\geq p'$ where $(p')^{d+1}n^d = \log(\frac{n^2}{c})$, when $n$ is large enough.
+	Hence, by the previous estimates, with $d$ replaced by $d+1$, we get,
 	\begin{equation}
-		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) \leq 1) = \mathbb{P}(\mathbb{G}_{n,p} = K_n) = p^{\binom{n}{2}} \longrightarrow 0
+		\liminf_{n \to \infty} \mathbb{P}(\text{diam}(G) \leq d+1) \geq e^{-\frac{c}{2}}
 	\end{equation}
-	And to finish the proof we need to consider the two following cases
+	and since $c$ is arbitrary
 	\begin{equation}
-		p^{d-1}n^{d-2} = \log(\frac{n^2}{c_1(n)})
-	\end{equation}
-	And in that case we have $c_1 \longrightarrow \infty$.
-	\begin{equation}
-		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) \leq d+1) = e^{-\frac{c_1}{2}} \longrightarrow 0
-	\end{equation}
-	If we now consider
-	\begin{equation}
-		p^{d+1}n^d = \log(\frac{n^2}{c_2(n)})
-	\end{equation}
-	we obtain $c_2 \longrightarrow 0$ which gives
-	\begin{equation}
-		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) \leq d+1) = e^{-\frac{c_2}{2}} \longrightarrow 1
+		\mathbb{P}(\text{diam}(G) \leq d+1) \longrightarrow_{n\to\infty} 1
 	\end{equation}
 	Finally, if we combine the last result with \eqref{eq:diamcv} it is clear that the proof if complete.
 \end{proof}
@@ -617,21 +632,23 @@ We will now prove another lemma
 	\begin{equation}
 		ii) \quad n^2(1-p) \longrightarrow \infty
 	\end{equation}
-	Then almost every graph in $\mathcal{G}_p$ has diameter 2.
+	Then almost every graph in $\mathcal{G}_{n, p}$ has diameter 2.
 \end{theorem}
 
 \begin{proof}
+	for two distinct vertices $x$ and $y$,
 	\begin{equation}
-		\mathbb{P}(\text{dist}(x, y) > 2) = (1-p^2)^{n-2}
+		\mathbb{P}(\text{dist}(x, y) > 2) = (1-p^2)^{n-2}(1-p)
 	\end{equation}
-	as it is the probability that two vertices $x$ and $y$ are not connected by a path of length two.
+	as it is the probability that two vertices $x$ and $y$ are not connected by a path of length one or two.
 	\newline
 	Then using the the first moment method.
 	\begin{align}
-		\mathbb{E}&(\text{ pairs not connected by a path of length 2})	\\
-				&= \binom{n}{2}(1-p^2)^{n-2} \geq \mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) > 2)
+		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) > 2) 	&\leq \mathbb{E}(\text{number of pairs of vertices with distance > 2) \\
+								&\leq \binom{n}{2}(1-p)(1-p^2)^{n-2} = \mathcal{O}(n^2e^{-np^2}
 	\end{align}
-	As from $i)$ the LHS converges to zero, we are almost sure that no graph is of diameter more than 2 and then we just have to prove that there is almost no graph of diameter 1.
+	Which tends to 0 by $i)$. Hence, with high proability, the diameter of $\mathbb{G}_{n,p}$ is less than 2. 
+	In order to finish to prove the theorem we need to show that the diameter of $\mathbb{G}_{n,p}$ is not 1 with high probability.
 	A graph of diameter 1 being a complete graph we have
 	\begin{align}
 		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) = 1) = \mathbb{P}(\mathbb{G}_{n,p} = K_n) 	
@@ -648,7 +665,7 @@ And simply if we remember the previous theorem \eqref{th:linkMP} linking $\mathc
 	\begin{equation}
 		\frac{2M^2}{n^3} - \log(n) \longrightarrow \infty
 	\end{equation}
-	Then almost every graph in $\mathcal{G}_{n, M}$ is of diameter 2.
+	Then with high probability $\mathbb{G}_{n, M}$ is of diameter 2.
 \end{corollary}
 \begin{proof}
 	The first condition makes that we are not studying a complete graph then the diameter is not 1.
@@ -683,7 +700,7 @@ This informal reasoning gives motivation for the following corollary of \eqref{t
 \begin{proof}
 	Let $K_1$ and $K_2$ be positive constants and define $0<p_1<p_2<1$ by
 	\begin{equation}
-		p_1^{d+1}n^d = \log(\frac{n^2}{K_1}) \quad \text{and} \quad p_2^{d}n^{d-1} = \log(\frac{n^2}{K_2})	
+		p_2^{d-1}n^{d-2} = \log(\frac{n^2}{K_2}) \quad \text{and} \quad p_1^{d}n^{d-1} = \log(\frac{n^2}{K_2})	
 	\end{equation}
 	Then 
 	\begin{equation}
@@ -692,24 +709,22 @@ This informal reasoning gives motivation for the following corollary of \eqref{t
 	\end{equation}
 	\begin{equation}
 		\limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p} \leq d-1 )
-		\leq  \limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p_2} \geq d-1 ) = e^{-\frac{K_2}{2}}
+		\leq  \limsup_{n \to \infty} \mathbb{P}(\text{diam}\mathbb{G}_{n,p_2} \leq d-1 ) = e^{-\frac{K_2}{2}}
 	\end{equation}
 	As we can choose an arbitrary small $K_1$ and an arbitrarily large $K_2$ the assertion follows.
 \end{proof}
 
 
 Now, going back to the degree-diameter problem defined in \eqref{eq:DDeltaProb}, which is of finding the largest graph with fixed diameter and maximal degree.
-As we already have the Moore upper bound which is best possible, we are interested in finding a lower bound, and maybe hope that it would be close from Moore's bound in order to obtain precise estimate of $n(D, \Delta)$.
-To obtain such a bound here we will make use of the probabilistic method by sampling on an appropriate graph space (with known diameter and max degree), we will show that almost surely a specified propery doesn't appear (having less that a specified number of vertices).
+As we already have the Moore upper bound, we are interested in finding a lower bound, and maybe hope that it would be close from Moore's bound in order to obtain precise estimate of $n(D, \Delta)$.
+To obtain such a bound here we will make use of the probabilistic method by sampling on an appropriate graph space (with known diameter and max degree),
+we will show that a specified property appears with positive probability, which ensures the existence of at least one graph satisfying the property.
 \newline
-
-In other words, by choosing an appropriate function $p$ of $n$ we can obtain some estimates which are almost surely true on $D$ and $\Delta$. Thus $n$ would almost surely be a lower bound of the degree-diameter problem.
-\newline
-In order to have a relation between $n$, $p$ and $\Delta$ we admit the following result from \cite{Bollob01}.
+We admit the following result from \cite{Bollob01}.
 \begin{theorem}\label{th:deltap}
-	If $\frac{pn}{\log n} \to \infty$, then almost every graph in $\mathcal{G}_{n,p}$ satisfies 
+	If $\frac{pn}{\log n} \to \infty$, then with high probability, $\mathbb{G}_{n,p}$ satisfies 
 	\begin{equation}
-		\Delta(\mathbb{G}_{n,p} = (1+o(1))pn
+		\Delta(\mathbb{G}_{n,p}) = (1+o(1))pn
 	\end{equation}
 \end{theorem}
 We can obtain the following result :
@@ -724,16 +739,16 @@ We can obtain the following result :
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	As discussed before, to obtain such a proof we need to find the good function $p$ of $n$, luckily we may also choose to define $p$ on specific values of $n$ in order for the following argument to be true. 
-	So, we set 
+	We consider a random graph with $\mathcal{G}_{n_k, p_k}$, with:
 	\begin{equation}
 		n_k = \lceil \frac{((1-\epsilon)\Delta_k)^{D_k}}{2D_k\log \Delta_k} \rceil
 	\end{equation}
 	\begin{equation}
 		p_k = n_k^{\frac{1}{D_k} -1 }(2\log(n_k) + \log\log(n_k))^{1/D_k}
 	\end{equation}
-	From the previous corollary \eqref{th:aediam}, almost every graph in $\mathcal{G}_{n_k, p_k}$ has diameter ( at most ) $D_k$.
-	From \eqref{th:deltap}, almost every graph in $\mathcal{G}_{n_k,p_k}$ has maximal degree about $p_kn_k$. 
+	From the previous corollary \eqref{th:aediam}, $\mathbb{G}_{n_k, p_k}$ has diameter at most $D_k$ with probability going to 1.
+	By Theorem \eqref{th:deltap}, $\mathbb{G}_{n_k,p_k}$ has with high probability maximal degree $(1+o(1))p_kn_k$.
+	Which gives:
 	\begin{align}
 		\Delta(\mathbb{G}_{n_k,p_k}) 	&=(1+o(1))n_kp_k \\
 						&= (1+o(1))n_k^{1/D_k}(2\log n_k + \log\log n_k)^{1/D_k}	\\
@@ -742,7 +757,8 @@ We can obtain the following result :
 						&\leq (1+o(1))(1-\epsilon)\Delta_k \leq (1-\epsilon)\Delta_k \\
 						&< \Delta_k	
 	\end{align}	
-	Which gives,
+	This provides the existence of a graph with $n_k$ vertices, diameter at most $D_k$, degree at most $\Delta_k$.
+	Hence,
 	\begin{equation}
 		n(D_k, \Delta_k)\geq n_k \geq \frac{((1-\epsilon)\Delta_k)^{D_k}}{2D_k\log \Delta_k} 
 	\end{equation}
