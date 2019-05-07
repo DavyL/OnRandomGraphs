@@ -42,7 +42,7 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	If $p(n) = \frac{\log n + c}{n}$, then \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, 
 	and the number of isolated vertices is asymptotically Poisson distributed with mean $e^{-c}$.
 \end{corollary}
-\begin{proof}[Proof of \ref{th:proofPoissonP}]
+\begin{proof}[Proof of Corollary \ref{th:proofPoissonP}]
 	We observe that $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n, \bold{P}}$ when $p_{ij} = p$ for all $i \neq j$.
 	\newline
 	We observe that $Q_i = Q = q^{n-1}$ (and \eqref{eq:C1} is obviously satisfied) and $R_{ik} = R_k = q^k$. 
@@ -58,16 +58,16 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	\end{equation}
 	And $\lim_{n \to \infty}  nq^{n-1-k} = e^{-c}$ finally proves the corollary.
 \end{proof}
-\begin{proof}{Proof of \ref{th:CVIsolPoi}}
+\begin{proof}{Proof of Theorem \ref{th:CVIsolPoi}}
 	Let $Y_{ij}$ a random variable following a Bernoulli of parameter $p_{ij}$.
 	\footnote{ Recall that a Bernoulli of parameter $p$ is 1 with prob. $p$ and 0 with prob. $1-p$.}
-	We denote by $Y_i$ the indicator of the event that vertex $i$ is isolated, i.e. $Y_i = \mathbbm{1}_{\sum_{j=1}^n Y_{ij} = 0}$.
+	We denote by $Y_i$ the indicator of the event that the vertex $i$ is isolated, i.e. $Y_i = \mathbbm{1}_{\sum_{j=1}^n Y_{ij} = 0}$.
 	In order to show the convergence of $X_0$ in distribution to the Poisson random variable we will use the method of factorial moments.
 	So, we want to show that for any natural number $k$ we have
 	\begin{equation}\label{eq:EIsolMom}
 		\mathbb{E}(\sum_{1\leq i_1<i_2< \ldots < i_k \leq n} X_{i_1}X_{i_2}\ldots X_{i_k}) \to_{n \to \infty} \frac{\lambda^k}{k!}
 	\end{equation}
-	Let's observe that the LHS of \eqref{eq:EIsolMom} is the sum of $\mathbb{E}(X_{i_1}X_{i_2}\ldots X_{i_k})$ over all $i_1 < i_2 < \ldots i_k$.
+	Let's observe that the LHS of \eqref{eq:EIsolMom} is the sum of $\mathbb{E}(X_{i_1}X_{i_2}\ldots X_{i_k})$ over all $i_1 < i_2 < \ldots <i_k$.
 	\begin{align}
 		\mathbb{E}(X_{i_1}X_{i_2}\ldots X_{i_k}) 	&= \prod_{r=1}^k \mathbb{P}(X_{i_r} = 1 | X_{i_1} = \ldots = X_{i_{r-1}} = 1) \\
 							&= \prod_{r=1}^k\frac{ \prod_{j=1}^n q_{i_r j} }{ \prod_{s=1}^{r-1}q_{i_r i_s}}

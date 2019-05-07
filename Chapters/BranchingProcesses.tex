@@ -3,7 +3,7 @@ A branching process is the simplest model that can be used to describe the evolu
 Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
 The distribution of this number is called the offspring distribution and we denote it by $\{p_i\}_0^{\infty}$ such as
 \begin{equation}
-	p_i = \mathbb{P}(\text{ having i child })
+	p_i = \mathbb{P}(\text{ having i children })
 \end{equation}
 When we say that a branching process is a "something" branching process, that means that the offspring distribution follows the "something" law (typically a Poisson branching process).
 And we also denote by $Z_n$ the number of individuals in the $n$-th generation. 
@@ -15,7 +15,7 @@ Observing this distribution, we observe that if for some generation $k_0$ we hav
 It was in fact this question that was studied by Galton and Watson (TODO : CHECK AND ADD HISTORICAL DETAILS ) that led to the study of branching processes. 
 Hence, we might refer to these branching processes as Galton-Watson processes or trees (GW).
 \newline
-We define $\mu = \mathbb{E} X_{1,1} < \infty$
+We define $\mu = \mathbb{E} X_{1,1} < \infty$ which we assume to be finite and different from zero.
 \begin{lemma}\label{martinGW}
 	$M_n = \frac{1}{\mu^n}Z_n$ is a Martingale. 
 	\footnote{We take $\mathcal{F}_n = \sigma(X_{i,j} , i,j \in \mathbb{N})$ as the filtration adapted to $M_n$ }
@@ -47,16 +47,16 @@ We now define the following generating function
 Then if we define the extinction probability $\zeta$ as $\zeta = \mathbb{P}(\lim_{n \to \infty} Z_n = 0)$
 we have
 \begin{theorem}
-	The extinction probability is the fixed point of $\phi$.
+	The extinction probability is a fixed point of $\phi$.
 \end{theorem}
 \begin{proof}
 	For this proof we will rewrite the expression for $Z_{n+1}$ as a sum of independent Galton-Watson process. 
-	In order to do so we simply consider that the descendency of the second generation is a sum of $Z_1$ GW process.
-	For all of the $1 \leq j \leq Z_1$ child, we denote by $Z_n(j)$ as the number of descendants of $n$-th generation of $j$.
+	In order to do so we simply consider that the progeny of the second generation is a sum of $Z_1$ GW process.
+	For all of the $1 \leq j \leq Z_1$ children, we denote by $Z_n(j)$ as the number of descendants of $n$-th generation of $j$.
 	\begin{equation}\label{indepGW}
 		Z_{n+1} = \sum_{j=1}^{Z_1} Z_n(j)
 	\end{equation}
-	Each of these $Z_n(j)$ is a GW process independent from the others and for each we can then construct $M_n(j)$ as in \eqref{martinGW}.
+	Each of these $Z_n(j)$ is a GW process independent from the others and for each of them we can then construct $M_n(j)$ as in \eqref{martinGW}.
 	As these are Martingales, using the convergence theorem of Martingales (TODO : ADD IT IN ANNEX ) we have that they converge to some random values that we denote by $M$ and $M(j)$.
 	Now if we divide both sides in \eqref{indepGW} by $\mu^{n+1}$.
 	\begin{equation}
@@ -66,9 +66,9 @@ we have
 	\begin{equation}
 		M = \frac{1}{\mu} \sum_{j=1}^{Z_1}M(j)
 	\end{equation}
-	Which gives that $\mu M$ is distributed as $\sum_{j=1}^{Z_1}$ and we can finally obtain
+	Which gives that $\mu M$ is distributed as $\sum_{j=1}^{Z_1}M(j)$ and we can finally obtain
 	\begin{align}
-		\mathbb{P}(M = 0) 	&= \mathbb{P}(\mu M = 0) = \mathbb{P}(\sum_{j=1}^{Z_1}(M_j = 0) \\
+		\mathbb{P}(M = 0) 	&= \mathbb{P}(\mu M = 0) = \mathbb{P}(\sum_{j=1}^{Z_1}M_j = 0) \\
 					&= \sum_{k=1}^{\infty} p_k \mathbb{P}(\sum_{j=1}^{k} M(j) = 0 | Z_1 = k) \\
 					&= \sum_{k=1}^{\infty} p_k (\mathbb{P}(M=0))^k\\
 					&= \phi(\mathbb{P}(M=0))
@@ -76,7 +76,7 @@ we have
 \end{proof}
 Using this result we can obtain the following result
 \begin{theorem}
-	The extinction probability of a Poisson branching process of parameter $\lambda$ is the solution of $x = e^{-\lambda(1-x)}$.
+	The extinction probability of a Poisson branching process of parameter $\lambda$ is a solution of $x = e^{-\lambda(1-x)}$.
 \end{theorem}
 \begin{proof}
 	\begin{align}
@@ -85,23 +85,24 @@ Using this result we can obtain the following result
 	\end{align}
 \end{proof}
 
-
 We can obtain the following theorem
 \begin{theorem}
 	If $\mathbb{E}X \leq 1$ then the population dies out almost surely.
 \end{theorem}
 \begin{proof}
-    If $\lambda < 1$
+    If $\lambda \leq 1$
 	\begin{equation}
-	    \phi'(s) < \phi'(1) = \lambda < 1
+	    \phi'(s) < \phi'(1) = \lambda \leq 1
 	\end{equation}
-	The only fixed point is 0.
+	The only fixed point is 1. Hence, the probability of survival is 0.
 \end{proof}
 \begin{theorem}
 	If $\mathbb{E}X > 1$ then the population survives with a non-zero probability.
 \end{theorem}
 \begin{proof}
-	TODO : ADD PROOF
+	If $\mathbb{E}X > 1$ then $\phi(s) < s$ when $s$ is slightly less than 1, but $\phi(0) \geq 0$, hence there must have a solution to $s = \phi(s)$ in $[0,1)$.
+	By convexity of $\phi$ and Rolle's theorem this solution is unique.
+	Moreover, the iterates $\phi^k(0)$ are non decreasing, which gives that the probability of survival is $\lim_{k \to \infty} \phi^k(0)$ which is the smallest fixed point of $\phi$.
 \end{proof}
 We will now define an exploration process of such a branching process. We will use the model and notations from Bollob\'as and Riordan \cite{BollobRiordan12}, which is in fact an extension of the process introduced by Karp in \cite{Karp90}.
 In this model we consider a graph with $n$ vertices and the exploration will take $n$ steps. 
@@ -115,21 +116,21 @@ So in terms of set, we can consider that at time (step) $t$ we have :
 	E_t&: \text{ the set of explored vertices at time $t$ } \\
 	U_t&: \text{ the set of unseen vertices at time $t$ } 
 \end{align}
-The process starts as follows, at $t = 0$, we place one randomly chosen vertex $v_0$ in $A_0$, so $U_0 = V\backslash v_0$ and $A_0 = v_0, E_0=\emptyset $.
+The process starts as follows, at $t = 0$, we place one randomly chosen vertex $v_0$ in $A_0$, so $U_0 = V\backslash \{v_0\}$ and $A_0 = \{v_0\}, E_0=\emptyset $.
 \newline
-For the following steps, at time $t \geq 1$, the process is as follows, a vertex $v_t$ is picked \footnote{We use \emph{picked} in the sense that if an element $x$ is picked in  $X_{t}$ then $x \not\in X_{t+1}$.} at random in $A_{t-1}$. 
-For convenience we will add the variable $\eta_t = |N(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
-And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$
+For the following steps, at time $t \geq 1$, the process is as follows: a vertex $v_t$ is picked at random in $A_{t-1}$. 
+For convenience we will define the variable $\eta_t = |N(v_t) \cap U_{t-1}|$ the number of vertices not yet seen that are neighbours from $v_t$.
+And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$.
 Finally, we move $v_t$ to $E_t$ and the process stops when all vertices in the connected component of order $n$ are explored $|E_t| = n$, equivalently $t=n$, equivalently $|A_t| = 0$.
 \footnote{This process can be very easily extended to explore every vertices simply by picking a vertex not yet explored when the set of active vertices is empty}
 \newline
-This process is called \emph{Breadth first search} and might be referred to as BFS and we may summarise, for $t\geq 1$  it as :
+This process is called \emph{Breadth first search} and might be referred to as BFS and we may summarise it by the following expression:
 \begin{align}
     A_t &= (N(v_t) \cap U_{t-1})\cup A_{t-1} \backslash \{v_t\} \\
-    U_t &= U_{t-1}\backslash(\{v_t\}\cup N(v_t) ) \\
+    U_t &= U_{t-1}\backslash N(v_t)  \\
     E_t &= E_{t-1}\cup \{v_t\}
 \end{align}
-Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out only if the algorithm finishes.
+Notice that we have:
 \begin{align}\label{activatedV}
 	\left\{\begin{array}{rl}
 			|A_0| &= 1\\
@@ -137,59 +138,58 @@ Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$
 	 \end{array}
 	\right.
 \end{align}
-With all the $\eta_i$ independent and identically distributed random variables.
+In this case all the $\eta_i$ are independent and identically distributed random variables.
 We can then define $T$ as the instant the population dies out.
-\begin{equation}
+Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out if and only if the algorithm finishes.
+We can then define $T$ as the instant the population dies out.
+\begin{equation}\label{eq:defT}
 	T := \min\{t: A_t = 0\}
 \end{equation}
+Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out if and only if the algorithm finishes.
 If $T = \infty$ then we say that the population survives. 
 \newline
 We have that $\{v_t\}_t$ is a random walk on the tree under exploration and we also get the following evolution equation 
 \begin{equation}\label{eq:St}
-	|S_t| = |S_{t-1}| + \eta_t - 1
+	|A_t| = |A_{t-1}| + \eta_t - 1
 \end{equation}
 \newline
 When we are considering the Erd\H{o}s Renyi model as a random graph process, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
 Studying the random walk in that case we observe that the number of vertices to which we can connect the vertex $v$ is
 \begin{equation}
-	|U_t| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
+	|U_{t-1}| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
 \end{equation}
-So we have
+So we have, conditionally on $|A_{t-1}|$,
 \footnote{This is the conditional law on the number of neighbour of a vertex knowing $|A_{t-1}|$}
 \begin{equation}
 	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
 (TODO : ADD A VISUAL EXPLANATION OF THE BFS)
 and we observe comparing it to \eqref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
-However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are almost independently distributed.
+However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are "almost independently distributed".
 We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
-This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From \eqref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
+This will be the point of this chapter, studying links between random graphs and branching process, so we will consider that our probability $p$ has to be small enough such that there is not a single connected component. From Theorem \ref{th:isolcomp} we will consider that $p=\frac{\lambda}{n}$.
 \newline
-As the Poisson law is more convenient to work with than the binomial, and also being it's limit in distribution, let's observe through a few theorems the connecting between Poisson and binomial branching process.
+As the Poisson law is more convenient to work with than the binomial, and also being its limit in distribution, let's observe through a few theorems the connecting between Poisson and binomial branching process.
 \begin{theorem}\label{th:poibin}
 For a branching process with a binomial offspring distribution with parameter $n$ and $p$ and a branching process with a Poisson offspring distribution with parameter $\lambda = np$
 	\begin{equation}
 		\mathbb{P}_{n,p}(T \geq k) = \mathbb{P}_{\lambda}^*(T^* \geq k) + e_k(n)\quad, \forall k \geq 1
 	\end{equation}
-	With $T$ (resp. $T^*$) the size of the binomial (resp. Poisson) resulting branching process.
-	And 
+	with $T$ (resp. $T^*$) the total progeny of the binomial (resp. Poisson) resulting branching process, and 
 	\begin{equation}
 		|e_k(n)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}_{\lambda}^*(T^* \geq s) \leq \frac{2\lambda ^2k}{n}
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	The proof makes use of couplings, see Annex (TODO : WRITE ON COUPLINGS IN THE ANNEX), they are a way to define distinct random values on a common probability space giving information on the inter-twinning of both.
+	From the result of the appendix (TODO: ADD REF), one can couple independent binomial random variables $X_i \sim \text{Bin}(n, \frac{\lambda}{n})$
+	and independent Poisson random variables $X_i^* \sim \text{Poi}(\lambda)$ in such a way that
 	\begin{equation}
-		X_i\sim\text{Bin}(n, \frac{\lambda}{n})\quad,\quad X_i^* \sim\text{Poi}(\lambda)
+		\mathbb{P}(X_i \neq X_i^*) \leq \frac{\lambda^2}{n}.
 	\end{equation}
-	If we denote by $\mathbb{P}$ the joint probability distribution of $X_i$ and $X_i^*$n then according to the theorem (TODO : ADD THE THEOREM IN ANNEX + PROVE IT) then
-	\begin{equation}
-		\mathbb{P}(X_i \neq X_i^*) \leq \frac{\lambda^2}{n}
-	\end{equation}
-	Also, 
+	Also, with $T$ (resp. $T^*$) defined as in \eqref{defT} for a binomial (resp. Poisson) branching process.
 	\begin{align}
-		\mathbb{P}_{n,p}(t\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T\geq k, T^* < k)\\
-		\mathbb{P}_{\lambda}^*(t\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T< k, T^* \geq k)
+		\mathbb{P}_{n,p}(T\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T\geq k, T^* < k)\\
+		\mathbb{P}_{\lambda}^*(T^*\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T< k, T^* \geq k)
 	\end{align}
 	Which gives,
 	\begin{align}
@@ -235,42 +235,26 @@ Now we want to investigate the typical size of a connected component in $\mathca
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	We consider $|U_i| = n - i - |A_i|$ the number of vertices at step $t = i$ and the random variable $X_i$ that is the offspring distribution on vertices that make the branching process stay a tree.
-	And $Y_i$ the converse of $X_i$ that is, the offspring distribution for elements that have already appeared in our branching process. We then have
-	\begin{equation}
-		X_i \sim \text{Bin}(|U_{i-1}|, p) \quad, \quad Y_i \sim \text{Bin}(n-|U_{i-1}|, p)
-	\end{equation}
-	And we construct the random variable $X_i^{\geq} = X_i + Y_i$ Then we have that $X_i{\geq} ~ \text{Bin}(n, p)$ if $X_i$ and $Y_i$ are independent, so it is true if we consider $X_i{\geq}$ conditionally on $\{X_j\}_{j=1}^{i-1}$. Which gives that they are i.i.d. variables.
+	Since conditionally on $|A_{t-1}|$, $\eta_t$ is binomial with parameters $n - (t-1) -|A_{t-1}| \leq n$ and $p$, 
+	one can couple $(\eta_t)_{t \geq 1}$ with i.i.d. random variables $(\eta_t')_{t\geq 1}$ such that $\eta_t \sim \text{Bin}(n,p)$ and $\eta_t \leq \eta_t'$.
 	\newline
-	Also, as $Y_i \geq 0$, then $X_j{\geq} \geq X_i$.
-	And if we denote by 
-	\begin{equation}
-		A_i^{\geq} = X_1 + ... + X_i^{\geq} - (i-1)
-	\end{equation}
-	Then, 
-	\begin{equation}
-		\mathbb{P}_{n,p}(|\mathcal{C}(1)|\geq k) = \mathbb{P}(|A_t| > 0, \forall t \leq k-1) 
-		\leq \mathbb{P}(|A_t^{\geq}| > 0, \forall t \leq k-1) = \mathbb{P}(T\geq k)
-	\end{equation}
-\end{proof}
+	The size of the component of 1 is the first index $i$ such that $\eta_1 + \ldots + \eta_i - (i-1) \leq 0$, 
+	and then it is at most the first index $i$ such that $\eta_1' + \ldots + \eta_i' - (i-1) \leq 0$.
+	Hence, $|\mathcal{C}(1)|$ is smaller than the total progeny of a Galton-Watson tree with offspring distribution $\text{Bin}(n,p)$.
+	\end{proof}
 Another similar theorem ( TODO : PROVE IT CORRECTLY  ?? ) is the following one that gives a lower bound on the size of a typical connected component although it is less useful than the previous because it is less fit for asymptotic evaluations.
 
 \begin{theorem}\label{th:lowbin}
+	We have
 	\begin{equation}
-		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \geq \mathbb{P}_{n-k,p}(T\geq k)
+		\mathbb{P}_{n,p}(|\mathcal{C}(1)| \geq k) \geq \mathbb{P}_{n-k,p}(T\geq k),
 	\end{equation}
-	Here $T$ is the total progeny of a binomial branching process with parameter $n-k$ and $p$.
+	where $T$ is the total progeny of a binomial branching process with parameter $n-k$ and $p$.
 \end{theorem}
-Here is a sketch of the proof, the following changes shall just be plugged in the previous proof and the result will appear.
 \begin{proof}
-	The proof is very similar to the previous one but the following random variables are used
-	\begin{equation}
-		Y_i \sim \text{Bin}(N_{i-1} - (n-k), p)
-	\end{equation}
-	then 
-	\begin{equation}
-		X_i = X_i^{\leq}+Y_i
-	\end{equation}
+	In this case, we couple $\eta_t$ with i.i.d. random variables $\eta_t''$ which are binomial with parameters $n-k$ and $p$ in such a way that $\eta_t \geq \eta_t''$ when $n-(t-1)-|A_{t-1}| \geq n-k$.
+	On the event $T<k$ this condition is always satisfied since the number of unseen vertices in the graph is larger that $n-k$. 
+	Since in this event, $\eta_i + \ldots + \eta_{i-1} - (i-1) \leq 0$, which implies that the total progeny of a Galton-Watson tree is smaller than $k$.
 \end{proof}
 Before finishing this section, here is a theorem that gives the probability law of $|A_t|$ in a random graph branching process.
 \begin{theorem}\label{th:Atlaw}
@@ -287,7 +271,7 @@ Before finishing this section, here is a theorem that gives the probability law 
 	\begin{equation}
 		n-t-|A_t| = |U_t| \sim \text{Bin}(n-1, (1-p)^t)
 	\end{equation}
-	Indeed, 
+	Indeed, conditionally on $|A_{t-1}|$
 	\begin{align}
 		|U_t| &= n - t - |A_t| = n - t - |A_{t-1}| - |\eta_t| + 1 \\
 		      &= n - (t-1) - A_{t-1} -\eta_t \\
@@ -298,38 +282,38 @@ Before finishing this section, here is a theorem that gives the probability law 
 \end{proof}
 
 \section{The subcritical case}
-Now we will apply the results from the previous section in order to prove the following theorem.
+Now we will apply the results from the previous section in order to prove the following theorem, with $C_{\max}$ the size of the largest connected component of the graph $\mathcal{G}_{n, \frac{\lambda}{n}}$.
 \begin{theorem}\label{th:subCritCV}
 	If $\lambda < 1$
 	\newline
 	Then
 	\begin{equation}
-		\frac{|\mathcal{C}_{\max}|}{\log(n)} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
+		\frac{C_{\max}}{\log(n)} \longrightarrow_\mathbb{P} I_{\lambda}^{-1}
 	\end{equation}
 \end{theorem}
 \begin{theorem}\label{th:uplambda}
 	$\mathbb{P}_{\lambda}(|\mathcal{C}(1)| >t) \leq e^{-I_{\lambda}t}$
 \end{theorem}
-In the previous theorem, $I_{\lambda}$ stands for the large deviation rate function and is defined as follows.
+In the previous theorem, $I_{\lambda}$ stands for the large deviation rate function corresponding to the Poisson random variables and is defined as follows.
 \begin{equation}
 	I_{\lambda} = \lambda - 1 - \log(\lambda)
 \end{equation}
 It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
-\begin{proof}[Proof of \eqref{th:uplambda}]
+\begin{proof}[Proof of Theorem \ref{th:uplambda}]
 	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
-	Using \eqref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
+	Using Theorem \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq \mathbb{P}(|A_t|>0) \leq \mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t)
 	\end{equation}
 	Using Bernoulli's inequality \eqref{bernoulli} $ 1- (1-p)^t \leq tp$ and observing that for all $s$ positive the following is true
 	\begin{equation}
-		\mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t) \leq \mathbb{P}(e^{s\text{Bin}(n-1, tp)} \geq e^{st}) 
+		\mathbb{P}(\text{Bin}(n-1, 1-(1-p)^t) \geq t) \leq \mathbb{P}(e^{s\text{Bin}(n-1, tp)} \geq e^{st}),
 	\end{equation}
-	Then we can apply Markov inequality which gives, $\forall s \geq 0$ 
+	then we can apply Markov inequality which gives, $\forall s \geq 0$, 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}\mathbb{E}(e^{s\text{Bin}(n, \frac{t\lambda}{n})})
 	\end{equation}
-	Replacing the moment generating function of the binomial with it's value \eqref{binMGF}, we obtain 
+	Replacing the moment generating function of the binomial with its value \eqref{binMGF}, we obtain 
 	\begin{equation}
 		\mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t ) \leq e^{-st}(1 - \frac{t\lambda}{n} + e^s\frac{t\lambda}{n})^n \leq e^{-t(s - \lambda e^s + \lambda)}
 	\end{equation}
@@ -344,30 +328,37 @@ For this we will use the random variable
 \begin{equation}
 	Z_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
 \end{equation}
-Observing that $Z_{\geq k}$ is equal to 0 if $k$ is larger that the size of the greatest connected component \footnote{ we assume uniqueness of the greatest connected component as asymptotically it is almost surely unique } and we denote it by $\mathcal{C}_{\max}$. Hence we have
+Observing that $Z_{\geq k}$ is equal to 0 if $k$ is larger than $C_{\max}$, the size of the greatest connected components, and we denote it by $\mathcal{C}_{\max}$. Hence we have
 \begin{equation}
-	|\mathcal{C}_{\max}| = \max\{k: Z_{\geq k} \geq k\}
+	C_{\max} = \max\{k: Z_{\geq k} \geq k\}
 \end{equation}
-And we obtain 
+and we obtain 
 \begin{equation}\label{eq:nexplambda}
 	\mathbb{E}_{\lambda}(Z_{\geq k}) = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k)
 \end{equation}
-Applying the theorem above \eqref{th:uplambda} we immediately have the following result.
+Applying theorem \ref{th:uplambda} we immediately have the following result.
 \begin{lemma}\label{lemmalambdainf}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| > a \log n) = \mathcal{O}(n^{-\delta}) \quad, a > I_{\lambda}^{-1}, \quad \delta > 0$
+	For $a>I_{\lambda}^{-1}$, there exists $\delta > 0$ such that:
+	\begin{equation}
+		\mathbb{P}_{\lambda}(C_{\max} > a \log n) = \mathcal{O}(n^{-\delta}) 
+	\end{equation}
 \end{lemma}
 We will now prove the next lemma that is similar to the previous one but gives an upper bound on the greatest connected component instead (in the sub-critical regime).
+These two lemmas together imply Theorem \ref{th:subCritCV}.
 \begin{lemma}\label{lemmalambdasup}
-	$\mathbb{P}_{\lambda}(|\mathcal{C}_{\max}| < a\log(n)) = \mathcal{O}(n^{-\delta})\quad, a\leq I_{\lambda}^{-1}, \quad \delta >0$
+	For $a<I_{\lambda}^{-1}$, there exists $\delta >0$ such that
+	\begin{equation}
+		\mathbb{P}_{\lambda}(C_{\max} < a\log(n)) = \mathcal{O}(n^{-\delta})
+	\end{equation}
 \end{lemma}
 \begin{proof}
-	This prove will be a little bit more technical as it uses the second moment methods.
+	This proof will be a little bit more technical as it uses the second moment methods.
 	First of all we will need an estimate of the variance on $Z_{\geq}$, for this purpose we will use the following function
 	\begin{equation}
-		\chi_k(\lambda) = \mathbb{E}_{\lambda}(|\mathcal{C}(v)|\mathbbm{1}_{\{|\mathcal{C}(v)| \geq k\}})
+		\chi_k(\lambda) = \mathbb{E}_{\lambda}(|\mathcal{C}(1)|\mathbbm{1}_{\{|\mathcal{C}(1)| \geq k\}})
 	\end{equation}
 	\begin{lemma}
-		$\mathbb{V}_{\lambda}(Z_{\geq k}) \leq n\chi_k(\lambda)$
+		$\mathbb{V}_{\lambda}(Z_{\geq k}) \leq n\chi_k(\lambda)$, where $\mathbb{V}$ denotes the variance.
 	\end{lemma}
 	\begin{proof}
 		By definition of the variance
@@ -375,51 +366,48 @@ We will now prove the next lemma that is similar to the previous one but gives a
 			\mathbb{V}_{\lambda}(Z_{\geq k}) = \sum_{i,j \in V}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
 				-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)
 		\end{equation}
-		And we can split those probabilities as components form an obvious partition of the vertex set as follow
+		And we can split those probabilities as components form an obvious partition of the vertex set as follows
 		\begin{equation}
 			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
 			= (\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, i \leftrightarrow j) 
 			+ (\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k, i \not\leftrightarrow j)
 		\end{equation}
-		Furthermore, 
-		\begin{align}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k) 
-			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l, |\mathcal{C}(j)| \geq k) \\
-			&= \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l)\mathbb{P}( |\mathcal{C}(j)| \geq k | |\mathcal{C}(i)| = l) 
-		\end{align}
-		And simply observing that in $\mathcal{G}_{n,p}$, the event $\{|\mathcal{C}(j)| \geq k\}$ naturally increases with $n$, thus decreases if $l$ vertices are removed, we have in the event where $i$ and $j$ are not connected.
-		\begin{align}\label{negval}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \not\leftrightarrow j) 
-			&\leq \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l)\mathbb{P}( |\mathcal{C}(j)| \geq k ) \\
-			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \sum_{l=k}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(i)| = l) \\
-			&\leq \mathbb{P}( |\mathcal{C}(j)| \geq k ) \mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k) 
-		\end{align}
-		And in the case where $i$ and $j$ are part of the same connected component then
-		\begin{equation}\label{posval}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | i \leftrightarrow j)
-			=\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)
+		where $i\leftrightarrow j$ means that $i$ and $j$ are in the same connected component of the graph.
+		Furthermore, conditionally to $\mathcal{C}(i)$, in the event $i \not\leftrightarrow j$, the order of $\mathcal{C}(j)$ is stochastically smaller than the order of $\mathcal{C}(j)$ without conditionning.
+		Hence,
+		\begin{equation}
+			\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k | \mathcal{C}(i), i \not\leftrightarrow j) \leq \mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k).
 		\end{equation}
-		Which gives, removing all negative terms
+		Multiplying both sides by $\mathbbm{1}_{\mathcal{C}(i)| \geq k}$ we have
+		\begin{align}
+			\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k, |\mathcal{C}(j)| \geq k | \mathcal{C}(i), i \not\leftrightarrow j) 
+			&\leq \mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)\mathbbm{1}_{|\mathcal{C}(i)| \geq k}\\
+			&\leq \mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k).
+		\end{align}
+		We deduce:
 		\begin{equation}
 			\mathbb{V}(Z_{\geq k}) \leq \sum_{i,j \in V} \mathbb{P}_{\lambda}(|\mathcal{C}(i)|\geq k, i \leftrightarrow j)
 		\end{equation}
-		And using properties of the expectation (linearity and behaviour in regard of indicator function ) we have
+		and then,
 		\begin{align}
 			\mathbb{V}(Z_{\geq k}) &\leq \sum_{i \in V}\sum_{j \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{|\mathcal{C}(i)|\geq k} \mathbbm{1}_{j \in \mathcal{C}(i)})\\
 				&\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{|\mathcal{C}(i)|\geq k} \sum_{j\in V} \mathbbm{1}_{j \in \mathcal{C}(i)}) \\
 				&\leq \sum_{i \in V} \mathbb{E}_{\lambda} ( \mathbbm{1}_{|\mathcal{C}(i)|\geq k}  |\mathcal{C}(i)|) = n\chi_k(\lambda) 
 		\end{align}
 	\end{proof}
-	As we want to prove that $\mathbb{P}_{\lambda}(Z_{\geq k_n} = 0)$ goes to 0 for $n$ sufficiently large using Bienaymé-Tchebychev inequality, we will give an upper bound on the variance and a lower bound on the expectation of $Z_{\geq k_n}$.
+	As we want to prove for $k_n = \lceil a\log n\rceil$ that $\mathbb{P}_{\lambda}(Z_{\geq k_n} = 0)$ goes to 0 for $n$ going to infinity using Bienaymé-Tchebychev inequality, we use the previous upper bound on the variance and a lower bound on the expectation of $Z_{\geq k_n}$.
+	\newline
+	We have,
 	\begin{equation}
-		\chi_{k_n}(\lambda) = \sum_{t=k_n}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t) 
+		\chi_{k_n}(\lambda) = k_n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k_n) + \sum_{t=k_n+1}^{n} \mathbb{P}_{\lambda}(|\mathcal{C}(1)| > t) 
 	\end{equation}
-	And using \eqref{th:uplambda}\footnote{The inequality being strict the -1 appears}  we obtain
+	And using Theorem \ref{th:uplambda} we obtain
 	\begin{equation}
-		\chi_{k_n}(\lambda) \leq \sum_{t=k_n}^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-a I_{\lambda}})
+		\chi_{k_n}(\lambda) \leq k_ne^{-I_{\lambda}(k_n - 1)} +\sum_{t=k_n +1 }^{n} e^{-I_{\lambda}(t-1)} \leq \frac{e^{-(k_n -1)I_{\lambda}}}{1-e^{-I_{\lambda}}} = \mathcal{O}(n^{-u})
 	\end{equation}
-	And now we need to find a lower bound on the expectation of $Z_{\geq k}$ So we will make use of \eqref{eq:nexplambda} to obtain the formula of the expectation, 
-	\eqref{th:lowbin} to obtain a lower bound and \eqref{th:poibin} to convert our lower bound in the Poisson distribution.
+	for all $u < aI_{\lambda}$.
+	And now we need to find a lower bound on the expectation of $Z_{\geq k}$.
+	In the following inequality we make use of \eqref{eq:nexplambda}, then lemmas \ref{th:lowbin} and \ref{th:poibin}.
 	So we have
 	\begin{equation}
 		\mathbb{E} Z_{\geq k} = n \mathbb{P}_{\lambda}(|\mathcal{C}(1)| \geq k) \geq n \mathbb{P}_{n-k, p}(T \geq k) 
@@ -427,7 +415,7 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\end{equation}
 	$T$ and $T^*$ being the total progeny of branching process ( Binomial and Poisson), and $\lambda_n = (n-k)p = \frac{n-k}{n}p$ from \eqref{th:poibin}.
 	\newline
-	And we can compute the term on the RHS as follows
+	And we can compute the term on the RHS as follows (TODO: PROVE/EXPLAIN/GIVE REF FOR THE FOLLOWING EQ)
 	\begin{equation}
 		\mathbb{P}_{\lambda_n}^*(T^* \geq k)
 		 = \sum_{t=k}^{\infty} \mathbb{P}_{\lambda_n}^*(T^* = k)
@@ -456,14 +444,16 @@ We will now prove the next lemma that is similar to the previous one but gives a
 	\end{equation}
 	And finally we have
 	\begin{equation}
-		\mathbb{P}(Z_{k_n} = 0) \leq \frac{\mathbb{V}Z_{k_n}}{(\mathbb{E}Z_{k_n})^2} \leq \frac{\mathcal{O}(n^{-I_{\lambda}a + 1})}{n^{-2I_{\lambda}a + 2} \lambda I_{\lambda}} 
-			= \mathcal{O}(n^{I_{\lambda}a - 1})
+		\mathbb{P}(Z_{k_n} = 0) \leq \frac{\mathbb{V}Z_{k_n}}{(\mathbb{E}Z_{k_n})^2} \leq \frac{\mathcal{O}(n^{ 1 - u})}{n^{-2I_{\lambda}a + 2} \lambda I_{\lambda}} 	
+		= \mathcal{O}(n^{ -\delta})
 	\end{equation}
-	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ asymptotically almost surely.
+	When $u$ is close enough to $aI_{\lambda}$ and $\delta >0$ small enough.
+	\newline
+	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ with probability going to one.
 \end{proof}
-Now, simply combining the previous results \eqref{lemmalambdainf} and \eqref{lemmalambdasup} wehave our proof of our main theorem in this section \eqref{th:subCritCV}.
+Now, simply combining the previous results \eqref{lemmalambdainf} and \eqref{lemmalambdasup} we have our proof of our main theorem in this section \eqref{th:subCritCV}.
 Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
-This change of speed in the growth rate is called the phase transition.
+This change of speed in the growth rate is called a phase transition.
 
 \section{The supercritical case : $\lambda > 1 $ }
 First we will show that that in the supercritical case there is a component of linear size (in $n$). In order to show this result we will use the fact that if there exists a path of a linear size, then it is contained in a component of linear size too. Then we will make this result a little bit better with a very similar proof.
@@ -473,7 +463,7 @@ In fact there exists stronger results that use the same method but make a use of
 Here we will consider $p = \frac{1 + \epsilon}{n}$. 
 For the beginning we will use the recent approach from Sudakov \cite{Sudakov} which makes use of an algorithm of graph exploration called the \emph{depth first search} (DFS).
 (TODO: ADD GRAPHICAL COMPARISON BETWEEN DFS AND BFS)
-We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to it's active stack.
+We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to its active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
 More formally we will use the same partition of vertex as in the BFS, $A_t$ the \emph{Last-In/First-Out stack}
@@ -482,7 +472,7 @@ Only the last element added can be extracted from a LIFO stack. See Knuth TAOCP 
 of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
 The interest of using DFS here is that $A_t$ is by construction always a path.
 \newline
-We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X_N = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge.
+We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge, recall that $N = \frac{n(n-1)}{2}$.
 So the algorithm starts at some specified vertex. From there it checks for edges using each time one of the $X_i$, the number of evaluations is what we refer to as time.
 If $X_t = 1$, then the new vertex under evaluation is moved from $U_t$ into $A_t$ and the same procedure repeats. 
 In the case that all possible edges from a vertex have been tested and answered negatively, then the vertex is moved to set of explored vertices of corresponding time, so it is moved from $A_t$ to $E_t$.
@@ -502,11 +492,11 @@ And for the set of active vertices we have
 \end{equation}
 From these two inequalities we understand that having knowledge on $X$ will give us knowledge on the behaviour of our depth first search algorithm. And we might make use of this knowledge to obtain information on our connected component.
 \newline
-The following simple lemma will give us information on the behaviour of our binomial. It is the only probabilistic tool that we will use to show our theorem on the growth rate of the giant component.
+The following simple lemma will give us information on the behaviour of binomial random variables. It is the only probabilistic tool that we will use to show our theorem on the growth rate of the giant component.
 \begin{lemma}\label{lemmaN0}
-	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{2}$. Then, 
+	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \lceil\frac{\epsilon n^2}{2}\rceil$. Then, 
 	\begin{equation}
-		|X_{N_0} - N_0 p| \leq n^{\frac{2}{3}} \quad \text{almost surely.}
+	|\sum_{i=1}^{N_0} X_{i} - N_0 p| \leq n^{\frac{2}{3}} \quad \text{with probability tending to 1 when $n\to \infty$.}
 	\end{equation}
 \end{lemma}
 \begin{proof}
@@ -515,23 +505,23 @@ The following simple lemma will give us information on the behaviour of our bino
 	\begin{equation}
 		\mathbb{P}(|X_{N_0} - \mathbb{E}X_{N_0}| > n^{\frac{2}{3}} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
 	\end{equation}
-	So asymptotically almost surely we have 
+	So with high probability we have 
 	\begin{equation}
 		|X_{N_0} - \mathbb{E}X_{N_0}| \leq n^{\frac{2}{3}}
 	\end{equation}
 \end{proof}
 Now we can state and prove the following theorem making use of the previous lemma and of our knowledge of the depth first search algorithm.
 \begin{theorem}
-	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, $G \sim \mathcal{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$.
+	Let $p = \frac{1+\epsilon}{n}$. Then, $\mathbb{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$.
 \end{theorem}
 \begin{proof}
 	The proof will be done by contradiction.
 	\newline
 	We consider $X_N$ with parameter $p = \frac{1+\epsilon}{n}$. We claim that if $N_0 = \frac{\epsilon n^2}{2}$ then $|A_{N_0}| \geq \frac{\epsilon^2 n}{5}$.
 	\newline
-	Let's first show that $E_{N_0} < \frac{n}{3}$.
+	Let's first show that $|E_{N_0}| < \frac{n}{3}$.
 	\newline
-	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $E_t = \frac{n}{3}$. Also from \eqref{eq:At} and \eqref{lemmaN0} we would have
+	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $|E_t| = \lfloor\frac{n}{3}\rfloor$. Also from \eqref{eq:At} and Lemma \ref{lemmaN0} we would have with high probability for $n$ large enough,
 	\begin{equation}
 		|A_t| \leq 1 + \sum_{i=1}^{t} X_i < 1 + n^{\frac{2}{3}} < \frac{n}{3}.
 	\end{equation}
