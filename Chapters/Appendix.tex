@@ -81,6 +81,18 @@ See Theorem 2.3 from \cite{Hofstad16} for a proof.
 \begin{proof}
     Apply \eqref{markov} using the random variable $(X-\mathbb{E}X)^2$
 \end{proof}
+Now let's prove the following Theorem on couplings:
+\begin{theorem}
+	Let $\{I_i\}_{i=1}^n$ be independent with $I_i \sim \text{Be}(p_i)$, and let $\lambda = \sum_{i=1}^n p_i$.
+Let $X = \sum_{i=1}^n I_i$ and let $Y$ be a Poisson random variable with parameter $\lambda$.
+Then there exists a coupling $(\hat{X}, \hat{Y})$ of $(X, Y)$ such that
+\begin{equation}
+	\mathbb{P}(\hat{X} \neq \hat{Y}) \leq \sum_{i=1}^n p_i^2.
+\end{equation}
+\end{theorem}
+\begin{proof}
+	See Van Der Hofstadt page 35.
+\end{proof}
 \section{Tail inequalities}
 The following inequalities are designated as Chernoff inequalities.
 \begin{theorem}[Chernoff bound]\label{chernoff1}

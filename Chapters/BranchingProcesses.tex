@@ -22,8 +22,7 @@ We define $\mu = \mathbb{E} X_{1,1} < \infty$ which we assume to be finite and d
 	\footnote{We take $\mathcal{F}_n = \sigma(X_{i,j} , i,j \in \mathbb{N})$ as the filtration adapted to $M_n$ }
 \end{lemma}
 \begin{proof}
-	Recall that a Martingale satisfies the following properties:
-	(TODO: ADD PROPS)
+	Recall that a Martingale satisfies for all $n\geq0$, $\mathbb{E}(|M_n|) < \infty$ and $\mathbb{E}(M_{n+1} | \mathcal{F}_n) = M_n$.
 	Let's first show the integrability property.
 	\begin{align}
 		\mathbb{E}Z_{n+1} 	&= \mathbb{E}(X_{n,1} + X_{n,2} + ... + X_{n, Z_n}) \\
