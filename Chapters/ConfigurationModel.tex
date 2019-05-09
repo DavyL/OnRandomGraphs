@@ -9,7 +9,7 @@ From this definition it is very natural to write those edge probabilities in an 
 As previously we consider graphs without loops, so $p_{ii} = 0$ for all $i \in V$, we also consider that the graph is not directed so the probability that $i$ connects to $j$ has to be the same as the probability that $j$ connects to $i$ (i.e. $p_{ij} = p_{ji}$), hence $\bold{P}$ is symmetric.
 In order to shorten the writing, we put $q_{ij} = 1 - p_{ij}$.
 \newline
-We denote the probability space of this generalized model as $\mathcal{G}_{n,\bold{P}}$ and as before we denote a random variable in this space as $\mathbb{G}_{n,\bold{P}}$.
+We denote the probability space of this generalised model as $\mathcal{G}_{n,\bold{P}}$ and as before we denote a random variable in this space as $\mathbb{G}_{n,\bold{P}}$.
 \newline
 We now define
 \begin{equation}
@@ -103,7 +103,7 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	\end{equation}
 	Combining \eqref{eq:CVUP} and \eqref{eq:CVDOWN} we have $\lim_{n\to\infty} \sum_{1 \leq i_1 < \ldots <i_k \leq n} Q_{i_1} \ldots Q_{i_k} = \frac{\lambda^k}{k!}$, which is the result we wanted to prove.
 \end{proof}
-It is interesting to note through the following theorem, which we will not prove, that under certain conditions, a similar behaviour appears between the binomial model $\mathcal{G}_{n,p}$ and the generalized binomial $\mathcal{G}_{n, \bold{P}}$ at the connectivity threshold.
+It is interesting to note through the following theorem, which we will not prove, that under certain conditions, a similar behaviour appears between the binomial model $\mathcal{G}_{n,p}$ and the generalised binomial $\mathcal{G}_{n, \bold{P}}$ at the connectivity threshold.
 \begin{theorem}
 	If \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, then,
 	\begin{equation}
@@ -111,7 +111,7 @@ It is interesting to note through the following theorem, which we will not prove
 	\end{equation}
 \end{theorem}
 
-Above we have seen a generalized binomial model which changed the probability distribution on the set of all edges, now we will describe models in which we change the edge set}
+Above we have seen a generalised binomial model which changed the probability distribution on the set of all edges, now we will describe models in which we change the edge set.
 \paragraph{Bipartite random graphs}
 Bipartite graphs are formally defined as $K_{n,m} = G([n] \times [m], E)$ with $E=\{\{x,y\} : x\in[n], y\in[m]\}$.
 They are an appropriate way to describe many networks, for instance if you consider a graph in which you consider a graph on the set of movie actors and you draw an edge linking two actors if they have collaborated in a movie.
@@ -119,12 +119,12 @@ The resulting graph looks very convoluted, with many cliques and doesn't seem to
 However, is you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
 This graph would give much more information on the nature of this network.
 \newline
-Hence, an important part of research has been studying random bipartite graph that we can naturally describe the generalized model as follows:
+Hence, an important part of research has been studying random bipartite graph that we can naturally describe the generalised model as follows:
 consider the edges matrix of probabilities $\bold{P}_n$ and $\bold{P}_m$ respectively defined for $\mathcal{G}_{n, \bold{P_n}}$ and $\mathcal{G}_{m, \bold{P_m}}$,
 then the associated random bipartite graph is defined as $\mathcal{G}_{n+m, \bold{P_n}\bigotimes \bold{P_m}}$.
 (TODO : ADD A FIGURE OF DIRECT SUM)
 From this it is possible to obtain a relationship between $\mathcal{G}_{n,m,p}$ and $\mathcal{G}_{n+m,pI_n\bigotimes I_m}$.
-This raises interest in studying the random generalized binomial model through the point of view of the generalized model.
+This raises interest in studying the random generalised binomial model through the point of view of the generalised model.
 For instance we will prove the following theorem for connectivity in $\mathcal{G}_{n,m,p}$:
 \begin{theorem}
 	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices follows a Poisson of mean $2e^{-c}$.
@@ -151,7 +151,7 @@ For instance we will prove the following theorem for connectivity in $\mathcal{G
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
 As seen in the previous section, an Erd\"os-R\'enyi random graph has degrees following a Poisson distribution. 
 However, in real world networks are more frequently observed power law distribution (TODO: ADD REF).
-Hence, the fraction of vertices of degree $k$ is $p_k = Ck^{-\beta}$, with $C$ the normalization constant and typically most of the observed networks which can be represented by a power-law distribution have $\beta$ between 2 and 3.
+Hence, the fraction of vertices of degree $k$ is $p_k = Ck^{-\beta}$, with $C$ the normalisation constant and typically most of the observed networks which can be represented by a power-law distribution have $\beta$ between 2 and 3.
 We are here interested in constructing and investigating graphs following a specified degree distribution.
 \newline
 First of all, let's consider a finite case in which we have a sequence of degrees $d_1, d_2, \ldots, d_n$ such that $d_i = d(i)$.
@@ -167,14 +167,14 @@ First of all, let's consider that $p_k$ is the probability that a vertex is of d
 \begin{equation}\label{eq:G0def}
 	G_0(x) = \sum_k p_k x^k
 \end{equation}
-We may here observe that \eqref{eq:G0def} satisfies a condition of normalization with $G_0(1) = 1$.
-As in the following we will base our approach on this generating function it is interesting to note that this normalization condition is the only we require.
+We may here observe that \eqref{eq:G0def} satisfies a condition of normalisation with $G_0(1) = 1$.
+As in the following we will base our approach on this generating function it is interesting to note that this normalisation condition is the only we require.
 Hence, it is very convenient to work with if the only knowledge we have on our random graph is the degree of each vertex, which is often the case.
 For instance, if we consider that we have $n_k$ vertices of degree $k$, we naturally define $G_0$ as:
 \begin{equation}
 	G_0(x) = \frac{\sum_k n_k x^k}{\sum_k n_k},
 \end{equation}
-which satisfies the normalization condition. 
+which satisfies the normalisation condition. 
 As an example, suppose that in a network of 100 nodes, you observe that there are 20 nodes of degree 0, 10 nodes of degree 1, 30 nodes of degree 3 and 40 nodes of degree 5, then the generating function is defined as:
 \begin{equation}
 	G_0(x) = \frac{ 20 + 10x + 30 x^3 + 40x^5}{100}
@@ -189,7 +189,7 @@ In this section we will investigate the probability distribution of the cluster 
 \newline
 Let's remark that if we take an edge chosen at random, then it arrives at a vertex with a probability that is proportional to its degree.
 Hence, such a vertex has a probability distribution on its degree proportional to $kp_k$. 
-Which give that the normalized generating function of the degree of vertices that we arrive at by a randomly chosen edge is:
+Which give that the normalised generating function of the degree of vertices that we arrive at by a randomly chosen edge is:
 \begin{equation}\label{eq:kpk}
 	\frac{\sum_k kp_kx^k}{\sum_k kp_k} = x\frac{G_0'(x)}{G_0'(1)}.
 \end{equation}
@@ -229,8 +229,8 @@ with $G_1^{n-1}$ denoting the $n-1$ composed of $G_1$.
 \newline
 We now define $H_1$ as the generating function for the distribution of the size of the connected component reached by an edge chosen at random.
 \paragraph{No giant component}
-We consider for the moment that there is no giant component with the degree distribution we investigate, removing this component growing linearly in $n$ allows us to set a normalization condition on $H_1$ such that $H_1(1) = 1$.
-Note that the following results are also formally true ( in the ring of formal power series ?? (TODO: ASK)) if there is a giant component as long as we do not consider that $H_1$ is not normalized.
+We consider for the moment that there is no giant component with the degree distribution we investigate, removing this component growing linearly in $n$ allows us to set a normalisation condition on $H_1$ such that $H_1(1) = 1$.
+Note that the following results are also formally true ( in the ring of formal power series ?? (TODO: ASK)) if there is a giant component as long as we do not consider that $H_1$ is not normalised.
 Defining $q_k$ as the probability that the initial site has $k$-edges coming out, excluding the edge from which we came along, then
 \begin{align}\label{eq:H1}
 	H_1(x) 	&= xq_0 + xq_1H_1(x) + xq_2 (H_1(x))^2 + \ldots\\
