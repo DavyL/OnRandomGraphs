@@ -113,10 +113,10 @@ It is interesting to note through the following theorem, which we will not prove
 
 Above we have seen a generalised binomial model which changed the probability distribution on the set of all edges, now we will describe models in which we change the edge set.
 \paragraph{Bipartite random graphs}
-Bipartite graphs are formally defined as $K_{n,m} = G([n] \times [m], E)$ with $E=\{\{x,y\} : x\in[n], y\in[m]\}$.
+Bipartite graphs are formally defined as $K_{n,m} = G([n+m], E)$ with $E=\{\{x,y\} : x\in[n], y\in[m]\}$.
 They are an appropriate way to describe many networks, for instance if you consider a graph in which you consider a graph on the set of movie actors and you draw an edge linking two actors if they have collaborated in a movie.
 The resulting graph looks very convoluted, with many cliques and doesn't seem to give much information on what we might be interested for.
-However, is you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
+However, if you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
 This graph would give much more information on the nature of this network.
 \newline
 Hence, an important part of research has been studying random bipartite graph that we can naturally describe the generalised model as follows:
@@ -125,29 +125,34 @@ then the associated random bipartite graph is defined as $\mathcal{G}_{n+m, \bol
 (TODO : ADD A FIGURE OF DIRECT SUM)
 From this it is possible to obtain a relationship between $\mathcal{G}_{n,m,p}$ and $\mathcal{G}_{n+m,pI_n\bigotimes I_m}$.
 This raises interest in studying the random generalised binomial model through the point of view of the generalised model.
-For instance we will prove the following theorem for connectivity in $\mathcal{G}_{n,m,p}$:
+For instance we will prove the following theorem for connectivity in $\mathcal{G}_{n,n,p}$:
 \begin{theorem}
-	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices follows a Poisson of mean $2e^{-c}$.
+	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices of $\mathcal{G}_{n,n,p}$  follows a Poisson of mean $2e^{-c}$.
 \end{theorem}
 \begin{proof}
-	Let $n\geq m$, $\bold{P} = pI_n\bigotimes I_m$, then in the proof of corollary (TODO : ADD REF), we have:
+	Let $\bold{P} = p(I_n\bigotimes I_n)^\intercal$, and let's show that the conditions \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} of Theorem \ref{th:CVIsolPoi} are satisfied. 
 	\begin{equation}
-		Q_i = q^{q_i}, \text{ with } q_i = q^n \text{ if } i\leq n, .... (TODO : WRITE WITH ARRAY)
+		Q_i = Q = q^{n}
 	\end{equation}
-	Then, we can bound $Q$ as follows:
+	And,
 	\begin{equation}
-		Q \leq q^{m},
+		\lambda_n = 2n q^{n}= 2n(1-p)^n \longrightarrow 2 e^{-c},
 	\end{equation}
-	then,
+	and noticing 
 	\begin{align}
-		\lambda_{n+m} = (n+m)Q = (n+m)q^{n+m} 
+		R_{ik} = R_k = \left\{	\begin{array}{rl}
+						q^k & \text{if } k\leq n,\\
+						q^{k-n} & \text{if } k > n.
+					 \end{array}
+				\right.
 	\end{align}
-	And we have,
+	And as the sum in \eqref{eq:C3} only goes to $n$ in the sum we evaluate we have $R_k = q^k$, and as in the corollary we simply evaluate the following:
 	\begin{equation}
-		\lim_{n,m \to \infty} \lambda_{n+m} = 2e^{-c}
+		\sum_{i=1}^{2n} \frac{Q}{R_k} =2n q^{n-k} \longrightarrow_{n\to\infty} 2e^{-c} = \lambda.
 	\end{equation}
-	The convergence of the sum also follows which concludes the proof.
+	Hence as a consequence of Theorem \ref{th:CVIsolPoi}, the number of isolated vertices follows a Poisson of mean $2e^{-c}$.
 \end{proof}
+As shown in Bollobas 2001 (TODO : ADD REF), there is the same hitting time for connectivity and $\delta \geq 1$ with high probability, as a consequence of the previous Theorem one could prove that the probability of connectivity of $\mathcal{G}_{n,n, p}$ is $e^{-2e^{-c}}$. 
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
 As seen in the previous section, an Erd\"os-R\'enyi random graph has degrees following a Poisson distribution. 
 However, in real world networks are more frequently observed power law distribution (TODO: ADD REF).
