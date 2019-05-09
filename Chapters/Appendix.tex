@@ -21,21 +21,33 @@ This section presents inequalities that are used in this report and proves most 
 		X_n \longrightarrow_d X
 	\end{equation}
 \end{theorem}
+See Theorem 2.3 from \cite{Hofstad16} for a proof.
 \begin{theorem}[Factorial moments of a Poisson ]\label{th:factPois}
 	If $X \sim \text{Poi}(\lambda)$ then
 	\begin{equation}
 		\mathbb{E}_r(X) = \lambda^r
 	\end{equation}
 \end{theorem}
+\begin{proof}
+	\begin{align}
+		\mathbb{E}_r(X) &= \mathbb{E}(X(X-1)\ldots(X-r+1)) \\
+		&= \sum_{k=0}^{\infty} (k)_r e^{-\lambda} \frac{\lambda^k}{k!} \\
+	\end{align}
+	With $(k)_r = k(k-1)\ldots(k-r+1)$ and $(k)_r = 0$ if $k<r$, then,
+	\begin{equation}
+		\mathbb{E}_r(X) = e^{-\lambda}\sum_{j=0}^{\infty} \lambda^r \frac{\lambda^j}{j!} = \lambda^r
+	\end{equation}
+\end{proof}
 \begin{theorem}[Bernoulli's inequality]\label{bernoulli}
 	\begin{equation}
 		1 - (1-p)^t \leq tp
 	\end{equation}
 \end{theorem}
 
-\begin{theorem}[Stirling's formula]\label{stirling}
+\begin{theorem}[Stirling's formula]\label{stirling} 
+	We have for all integer $n\geq 1$:
 	\begin{equation}
-		n! \sim (\frac{n}{e})^n \sqrt{2\pi n}
+		n! \geq (\frac{n}{e})^n ,\quad	n! \sim (\frac{n}{e})^n \sqrt{2\pi n}
 	\end{equation}
 \end{theorem}
 
@@ -45,11 +57,10 @@ This section presents inequalities that are used in this report and proves most 
 	\end{equation}
 \end{corollary}
 \begin{proof}
-	\begin{align}
-		\binom{n}{k} 	&= \frac{n!}{k!(n-k)!}  \\
-				&\leq \frac{n^n\sqrt(n) e^{-n} }{\sqrt{n-k} e^{-(n-k)} (n-k)^{n-k} k!} \leq \frac{n^k}{k!} \\
-				&\leq \frac{ n^k }{\sqrt{2\pi k} k^k e^{-k}} = (\frac{ne}{\sqrt{2\pi k} k})^k
-	\end{align}
+	\begin{equation}
+		\binom{n}{k} 	= \frac{n!}{k!(n-k)!} = \frac{n(n-1)\ldots(n-k+1)}{k!} \leq \frac{n^k}{k!}  
+	\end{equation}
+	Using $\frac{1}{k!} \leq (\frac{e}{k})^k$ we can conclude the proof.
 \end{proof}
 	\begin{theorem}[Markov's inequality]\label{markov}
 	\begin{equation}
@@ -58,12 +69,11 @@ This section presents inequalities that are used in this report and proves most 
 \end{theorem}
 \begin{proof}
     \begin{equation}
-        \mathbb{E}X = \int_0^{\infty}x f(x)dx \geq \int_a^{\infty} xf(x)dx \geq  a\int_a^{\infty} f(x)dx =a \mathbb{P}(X\geq a)
+	    \mathbb{E}X \geq \mathbb{E}(a\mathbbm{1}_{X\geq a} ) = a \mathbb{P}(X \geq a)
     \end{equation}
 \end{proof}
-
-
-\begin{corollary}[Chebyshev's inequality]\label{cheby}
+\begin{corollary}[Chebyshev's inequality]\label{cheby} 
+	For all positive random variables X, and all $a>0$,
 	\begin{equation}
 		\mathbb{P}(|X - \mathbb{E}X| \geq k \mathbb{V}X ) \leq \frac{1}{k^2}
 	\end{equation}

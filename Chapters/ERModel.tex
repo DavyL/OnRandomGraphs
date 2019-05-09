@@ -23,14 +23,14 @@ At time $t$, an edge is chosen among all the edges not already present in the gr
 It is clear that this model is perfectly equivalent to the first model presented if we fix $t = M$. 
 This model was also introduced in 1959 by Erd\H{o}s and Renyi and is usually referred to as the \emph{random graph process}.
 The advantage of this model is that it allows one to study properties on the verge of their realisations.
-For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertex and the giant component. Equivalently, at the first time when $\delta(G) > 1$. But we will study this in the following.
+For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertex and the giant component. Equivalently, at the first time when $\delta(G) > 1$.
 \newline
 The three models introduced above ( $\mathcal{G}_{n, M}$, $\mathcal{G}_{n, p}$ and $\{\mathcal{G}_{n, t}\}_t $) are usually designated in the literature as Erd\H{o}s-R\'enyi model.
 However, even if the first two are quite similar (static random graphs) the last one is of a different nature as it is dynamic.
 \newline
 In this report we will mainly focus on $\mathcal{G}_{n, p}$ which is in fact easier to study than $\mathcal{G}_{n,M}$.
 \footnote{There is usually no confusion possible on the model being studied.}
-We might also make use of the notation $\mathbb{P}_{p}$ (resp. $\mathbb{P}_{M}$ ) to designate the probability law associated with $\mathcal{G}_{n, p}$ (resp. $\mathcal{G}_{n,M}$).
+We might also make use of the notation $\mathbb{P}_{p}$ (resp. $\mathbb{P}_{M}$) to designate the probability law associated with $\mathcal{G}_{n, p}$ (resp. $\mathcal{G}_{n,M}$).
 We will see in \eqref{th:linkMP} that there is a strong relation between those two models.
 
 \section{Connectivity}
@@ -180,9 +180,10 @@ The following theorem shows that if we know quite accurately $\mathbb{P}_M(\math
 						\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
 						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
-	Since \eqref{binomTail} (TODO : PROVE LAST INEQ IN ANNEX OR ADD REF )
+	The last inequality coming from inequality (1.5) of chapter 1 in \cite{Bollob01}. The proof of the inequality uses the sharp estimates of Stirling's $n! \sim (\frac{n}{e})^n\sqrt{2\pi n}e^{\alpha_n}$ proved in Robinson ( TODO: ADD REF). 
+	The proof being rather lengthy and out of the topic of this report we will admit it.
 	\begin{equation}
-		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi q M}
+		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi pq N}
 	\end{equation}
 	Observing that $q \leq 1$ and $\sqrt{2\pi}e^{\frac{1}{6}} \approx 2.961... < 3$ the proof is complete.
 \end{proof}
@@ -366,7 +367,7 @@ Moreover, we will assume
 \begin{equation}\label{eq:logtrois}
 	\frac{pn}{(\log(n))^3} \longrightarrow \infty
 \end{equation}
-Note that this condition is automatically satisfied id $d(n)$ is uniformly bounded.
+Note that this condition is automatically satisfied if $d(n)$ is uniformly bounded.
 The aim of this section will be to prove the following theorem.
 \begin{theorem}\label{th:diam2}
 	Using all previous definitions and conditions on $p$, $d$ and $c$, we have,
@@ -466,7 +467,7 @@ In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma
 		&\leq \mathbb{P}(|\Gamma_k(x)| - p_an_k| \geq \alpha_k apn_k \quad|\quad \Omega_k)\\
 		&\leq \mathbb{P}(|\Gamma_k(x)| - p_an_k| \geq \alpha_k p_an_k \quad|\quad \Omega_k)\\
 	\end{align}
-	And using Theorem 1.7 \eqref{binomTail} from Bollob\'as (TODO : ADD IT IN THE ANNEX AND PROVE IT, JUST A TAIL INEQ ON BINOM)we have
+	And using the tail inequality of Theorem 1.7 from Bollob\'as \cite{Bollob01} which we admit, we have,
 	\begin{align}
 		&\leq \frac{1}{\sqrt{\alpha_k^2p_an_k}}\exp(-\frac{1}{3}\alpha_k^2p_an_k) \\
 		&\leq \exp(-\frac{1}{3}\alpha_k^2p_an_k)

@@ -12,8 +12,9 @@ Then if we consider that the offspring distribution doesn't depend on the genera
 	Z_n = \sum_{i=1}^{Z_{n-1}}X_{n, i} \quad, \text{ with } X = \{X_{n,i}\}_{n,i} \text{,  i.i.d.}
 \end{equation}
 Observing this distribution, we observe that if for some generation $k_0$ we have $Z_{k_0} = 0$, then $Z_{k_0 + k} = 0$ for any $k$. We would say that that the population dies out at $k_0$ and one might be interested to study under which condition a population will die out.
-It was in fact this question that was studied by Galton and Watson (TODO : CHECK AND ADD HISTORICAL DETAILS ) that led to the study of branching processes. 
-Hence, we might refer to these branching processes as Galton-Watson processes or trees (GW).
+It was in fact this question that was studied by Galton and Watson in 1874 regarding the fact that aristocratic surnames seemed to disappear.
+We will refer to these branching processes as Galton-Watson processes or trees (GW).
+Branching processes have not only been applied to genealogy but also for such objects as genes, neutrons or cosmic rays, see \cite{Harris64}.
 \newline
 We define $\mu = \mathbb{E} X_{1,1} < \infty$ which we assume to be finite and different from zero.
 \begin{lemma}\label{martinGW}
@@ -21,6 +22,8 @@ We define $\mu = \mathbb{E} X_{1,1} < \infty$ which we assume to be finite and d
 	\footnote{We take $\mathcal{F}_n = \sigma(X_{i,j} , i,j \in \mathbb{N})$ as the filtration adapted to $M_n$ }
 \end{lemma}
 \begin{proof}
+	Recall that a Martingale satisfies the following properties:
+	(TODO: ADD PROPS)
 	Let's first show the integrability property.
 	\begin{align}
 		\mathbb{E}Z_{n+1} 	&= \mathbb{E}(X_{n,1} + X_{n,2} + ... + X_{n, Z_n}) \\
@@ -57,7 +60,9 @@ we have
 		Z_{n+1} = \sum_{j=1}^{Z_1} Z_n(j)
 	\end{equation}
 	Each of these $Z_n(j)$ is a GW process independent from the others and for each of them we can then construct $M_n(j)$ as in \eqref{martinGW}.
-	As these are Martingales, using the convergence theorem of Martingales (TODO : ADD IT IN ANNEX ) we have that they converge to some random values that we denote by $M$ and $M(j)$.
+	As these are Martingales, using the convergence theorem of Martingales
+	\footnote{See Theorem 9.4.4 from Chung74 (TODO: ADD REF) for a proof.}
+	we have that they converge to some random values that we denote by $M$ and $M(j)$.
 	Now if we divide both sides in \eqref{indepGW} by $\mu^{n+1}$.
 	\begin{equation}
 		\frac{Z_{n+1}}{\mu^{n+1}} = M_{n+1} = \mu^{-1} \sum_{j=1}^{Z_1} M_n(j)
@@ -124,7 +129,7 @@ And then $A_t = (N(v_t)\cap U_{t-1} ) \cup A_{t-1} \backslash \{v_t\}$.
 Finally, we move $v_t$ to $E_t$ and the process stops when all vertices in the connected component of order $n$ are explored $|E_t| = n$, equivalently $t=n$, equivalently $|A_t| = 0$.
 \footnote{This process can be very easily extended to explore every vertices simply by picking a vertex not yet explored when the set of active vertices is empty}
 \newline
-This process is called \emph{Breadth first search} and might be referred to as BFS and we may summarise it by the following expression:
+This process is called \emph{Breadth First Search} and might be referred to as BFS and we may summarise it by the following expression:
 \begin{align}
     A_t &= (N(v_t) \cap U_{t-1})\cup A_{t-1} \backslash \{v_t\} \\
     U_t &= U_{t-1}\backslash N(v_t)  \\
