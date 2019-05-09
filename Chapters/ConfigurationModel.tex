@@ -110,12 +110,49 @@ It is interesting to note through the following theorem, which we will not prove
 		\lim_{n\to \infty} \mathbb{P}(\mathbb{G}_{n, \bold{P}} \text{ is connected}) = e^{-\lambda}
 	\end{equation}
 \end{theorem}
+
+Above we have seen a generalized binomial model which changed the probability distribution on the set of all edges, now we will describe models in which we change the edge set}
+\paragraph{Bipartite random graphs}
+Bipartite graphs are formally defined as $K_{n,m} = G([n] \times [m], E)$ with $E=\{\{x,y\} : x\in[n], y\in[m]\}$.
+They are an appropriate way to describe many networks, for instance if you consider a graph in which you consider a graph on the set of movie actors and you draw an edge linking two actors if they have collaborated in a movie.
+The resulting graph looks very convoluted, with many cliques and doesn't seem to give much information on what we might be interested for.
+However, is you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
+This graph would give much more information on the nature of this network.
+\newline
+Hence, an important part of research has been studying random bipartite graph that we can naturally describe the generalized model as follows:
+consider the edges matrix of probabilities $\bold{P}_n$ and $\bold{P}_m$ respectively defined for $\mathcal{G}_{n, \bold{P_n}}$ and $\mathcal{G}_{m, \bold{P_m}}$,
+then the associated random bipartite graph is defined as $\mathcal{G}_{n+m, \bold{P_n}\bigotimes \bold{P_m}}$.
+(TODO : ADD A FIGURE OF DIRECT SUM)
+From this it is possible to obtain a relationship between $\mathcal{G}_{n,m,p}$ and $\mathcal{G}_{n+m,pI_n\bigotimes I_m}$.
+This raises interest in studying the random generalized binomial model through the point of view of the generalized model.
+For instance we will prove the following theorem for connectivity in $\mathcal{G}_{n,m,p}$:
+\begin{theorem}
+	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices follows a Poisson of mean $2e^{-c}$.
+\end{theorem}
+\begin{proof}
+	Let $n\geq m$, $\bold{P} = pI_n\bigotimes I_m$, then in the proof of corollary (TODO : ADD REF), we have:
+	\begin{equation}
+		Q_i = q^{q_i}, \text{ with } q_i = q^n \text{ if } i\leq n, .... (TODO : WRITE WITH ARRAY)
+	\end{equation}
+	Then, we can bound $Q$ as follows:
+	\begin{equation}
+		Q \leq q^{m},
+	\end{equation}
+	then,
+	\begin{align}
+		\lambda_{n+m} = (n+m)Q = (n+m)q^{n+m} 
+	\end{align}
+	And we have,
+	\begin{equation}
+		\lim_{n,m \to \infty} \lambda_{n+m} = 2e^{-c}
+	\end{equation}
+	The convergence of the sum also follows which concludes the proof.
+\end{proof}
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
 As seen in the previous section, an Erd\"os-R\'enyi random graph has degrees following a Poisson distribution. 
 However, in real world networks are more frequently observed power law distribution (TODO: ADD REF).
 Hence, the fraction of vertices of degree $k$ is $p_k = Ck^{-\beta}$, with $C$ the normalization constant and typically most of the observed networks which can be represented by a power-law distribution have $\beta$ between 2 and 3.
 We are here interested in constructing and investigating graphs following a specified degree distribution.
-We will use the approach of Newman, Strogats and Watts (TODO: ADD REF).
 \newline
 First of all, let's consider a finite case in which we have a sequence of degrees $d_1, d_2, \ldots, d_n$ such that $d_i = d(i)$.
 We need for this definition to be correct to make sure that the sum of the degrees is an even number.
@@ -124,8 +161,7 @@ The way these "half-edges" are paired is not unique and we will here consider th
 We will investigate in the following the proportion of these loops and multi-edges and how they affect the model. 
 A realistic model having often no loops or multi-edge (for instance in a social network, one is not often friend with himself or friend several times with someone else).
 \newline
-The approach from Newman, Strogatz and Watts makes an extensive use of generating functions defining the degree sequence, we will here only proof some simple results and give some interesting results in order to give an insight of the efficiency of the model to mimic real-world phenomenoms.
-\newline
+The approach from Newman, Strogatz and Watts makes an extensive use of generating functions defining the degree sequence, we will here only prove some simple results on the average cluster size.
 In the following we will make use of generating functions in order to obtain several distributions of interest in a general setting. 
 First of all, let's consider that $p_k$ is the probability that a vertex is of degree $k$, then we naturally define the associated generating function, for $x<1$:
 \begin{equation}\label{eq:G0def}
@@ -148,9 +184,10 @@ Returning to the general case, the average degree of a vertex is:
 	z = \sum_k kp_k = G_0'(1),
 \end{equation}
 so once we can compute a generating function, we can also calculate the mean of the probability distribution it generates.
+It is in fact clear from the distribution that when $G$ is a generating function of a probability distribution, then $G'(1)$ is the expectation of the probability distribution it defines.
 In this section we will investigate the probability distribution of the cluster (connected component) size.
 \newline
-Let's remark that if we take an edge chosen at random, then it arrives at a vertex with a probaility that is proportional to its degree.
+Let's remark that if we take an edge chosen at random, then it arrives at a vertex with a probability that is proportional to its degree.
 Hence, such a vertex has a probability distribution on its degree proportional to $kp_k$. 
 Which give that the normalized generating function of the degree of vertices that we arrive at by a randomly chosen edge is:
 \begin{equation}\label{eq:kpk}
@@ -171,7 +208,7 @@ we obtain $G_0'(x) = zG_0(x)$ and
 \begin{equation}
 	G_1(x) = G_0(x).
 \end{equation}
-This means that in the case of a random graph following a Poisson distribution on its degree has the same distribution of outgoing edges at a vertex whether we arrived by a randomly chosen edge or if we picked a vertex at random.
+This means that a random graph following a Poisson distribution on its degree has the same distribution of outgoing edges at a vertex whether we arrived by a randomly chosen edge or if we picked a vertex at random.
 This being not true in general makes that studying an Erd\"os R\'enyi graph is much easier than most of the other models.
 \newline
 Let's now investigate the distribution of the number of neighbours.
@@ -191,7 +228,9 @@ As a matter of fact, the generating function for the distribution of the number 
 with $G_1^{n-1}$ denoting the $n-1$ composed of $G_1$.
 \newline
 We now define $H_1$ as the generating function for the distribution of the size of the connected component reached by an edge chosen at random.
+\paragraph{No giant component}
 We consider for the moment that there is no giant component with the degree distribution we investigate, removing this component growing linearly in $n$ allows us to set a normalization condition on $H_1$ such that $H_1(1) = 1$.
+Note that the following results are also formally true ( in the ring of formal power series ?? (TODO: ASK)) if there is a giant component as long as we do not consider that $H_1$ is not normalized.
 Defining $q_k$ as the probability that the initial site has $k$-edges coming out, excluding the edge from which we came along, then
 \begin{align}\label{eq:H1}
 	H_1(x) 	&= xq_0 + xq_1H_1(x) + xq_2 (H_1(x))^2 + \ldots\\
@@ -206,22 +245,30 @@ Denoting by $s$ the expected cluster size, then,
 	s &= H_0'(1) =  \sum_k p_k H_1(1)^k + \sum_k x k p_k H_1'(1) H_1(1)^{k-1} \\
 		 &= G_0(H_1(1)) + H_1'(1)G_0'(1)
 \end{align}
-With $H_1(1) = 1$ we have $s = 1 + H_1'(1)G_0'(1)$.
+With $H_1(1) = 1$ we have
+\begin{equation}\label{eq:sSub}
+	s = 1 + H_1'(1)G_0'(1).
+\end{equation}
+\newline
 Similarly for $H_1'$ we can get from \eqref{eq:H1}
 \begin{equation}\label{eq:sH1}
 	H_1'(1) = G_1(H_1(1)) + G_1'(1)H_1'(1)
 \end{equation}
-which gives
+which gives when $H_1(1) = 1$,
 \begin{equation}
 	H_1'(1) = \frac{1}{1- G_1'(1)}.
 \end{equation}
-Replacing the above in \eqref{eq:sH0} we obtain
+Replacing the above in \eqref{eq:sSub} we obtain
 \begin{equation}\label{eq:ExpCluster}
 	s = 1 + \frac{G_0'(1)}{1-G_1'(1)} = 1 + \frac{z_1^2}{z_1 - z_2}.
 \end{equation}
 The above formula \eqref{eq:ExpCluster} gives the expected cluster size in the "subcritical" case $G_1'(1) < 1$, as we could have expected from the study we lead on the phase transition, it is finite.
+It is interesting to note that the expression above diverges when $G_1'(1) \geq 1$ which corresponds to the result we found investigating branching processes through other methods.
+We also observe the equivalent condition in the rightmost part which gives the divergence when $z_2 \geq z_1$ which translated in usual languages states that the phase transition between guaranteed extinction and possible survival happens when the expected number of neighbours at distance 2 is larger than the expected number of neighbours at distance 1.
+This formulation should not be too surprising.
 \newline
-As what we did above would not have worked in the event $G_'(1) > 1$ we will here get an answer using the fact that an analysis of \eqref{eq:H1} gives that $H_1(1)$ is a fixed point of $G_1$.
+\paragraph{Above the phase transition}
+As what we did above would not have worked in the event $G_1'(1) > 1$ we will here get an answer using the fact that an analysis of \eqref{eq:H1} gives that $H_1(1)$ is a fixed point of $G_1$.
 We will denote it by $\rho_1 = G_1(\rho_1) = H_1(1)$.
 Using \eqref{eq:sH1} we obtain,
 \begin{equation}
@@ -235,7 +282,7 @@ Now using the definition of $H_0$ in \eqref{eq:defH0} we have $G_0(H_1(1)) = H_0
 Replacing that in \eqref{eq:sH0}, dividing by $H_0(1)$ and using \eqref{eq:HPrime} we have
 \begin{align}
 	\frac{H_0'(1)}{H_0(1)} &= 1 + \frac{H_1'(1)G_0'(\rho_1)}{H_0(1)} \\
-				&= 1 +\frac{G_0'(\rho_1)H_1(1)}{H_0(1)(1-G_1'(\rho_1}.
+		&= 1 +\frac{G_0'(\rho_1)H_1(1)}{H_0(1)(1-G_1'(\rho_1))}.
 \end{align}
 
 
