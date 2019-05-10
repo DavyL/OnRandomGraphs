@@ -210,7 +210,7 @@ then the moment generating function of a Poisson distribution being\footnote{It 
 	G_0(x) = e^{z(x-1)},
 \end{equation}
 we obtain $G_0'(x) = zG_0(x)$ and
-\begin{equation}
+\begin{equation}\label{eq:PoiGen}
 	G_1(x) = G_0(x).
 \end{equation}
 This means that a random graph following a Poisson distribution on its degree has the same distribution of outgoing edges at a vertex whether we arrived by a randomly chosen edge or if we picked a vertex at random.
@@ -272,22 +272,55 @@ It is interesting to note that the expression above diverges when $G_1'(1) \geq 
 We also observe the equivalent condition in the rightmost part which gives the divergence when $z_2 \geq z_1$ which translated in usual languages states that the phase transition between guaranteed extinction and possible survival happens when the expected number of neighbours at distance 2 is larger than the expected number of neighbours at distance 1.
 This formulation should not be too surprising.
 \newline
+Now that we have defined those generating functions and variables, we main state the theorem from this section which includes the cases treated above without a giant component and the event of the existence of a giant component.
+\begin{theorem}\label{th:NWS}
+	\begin{enumerate}
+		\item  $G_1'(1) < 1$:
+			\begin{itemize}
+				\item	There is with high probability no giant component.
+				\item	The average cluster size is : $H_0'(1) = 1 + \frac{G_0'(1)}{1 - G_1'(1)}$
+			\end{itemize}
+		\item	$G_1'(1) > 1$:
+			\begin{itemize}
+				\item	There is with high probability a giant component.
+				\item	The fraction of vertices in the giant component is asymptotically: $1-G_0(\rho_1)$, with $\rho_1$ the smallest fixed point of $G_1$,
+				\item	i.e. $\frac{C_{max}}{n} \longrightarrow 1 - G_0(\rho_1)$.
+			\end{itemize}
+	\end{enumerate}
+\end{theorem}
 \paragraph{Above the phase transition}
-As what we did above would not have worked in the event $G_1'(1) > 1$ we will here get an answer using the fact that an analysis of \eqref{eq:H1} gives that $H_1(1)$ is a fixed point of $G_1$.
-We will denote it by $\rho_1 = G_1(\rho_1) = H_1(1)$.
-Using \eqref{eq:sH1} we obtain,
+We consider the two steps branching process starting from a half edge which has a probability distribution defined by $G_1$.
+Using Theorem \ref{th:ProbExtinction} on general branching processes, we know that the probability of extinction starting from an edge is the smallest fixed point of $G_1$ which we denote by $\rho_1$.
+So the probability that $k$ edges will be extinct if we wait long enough is $\rho_1^k$ as each branching process is independent from the others.
+From which we get the following formula on the probability of survival:
 \begin{equation}
-	H_1'(1) = \rho_1 + H_1'(x)G_1'(\rho_1)
+	\sum_k p_k(1-\rho_1^k) 
 \end{equation}
-from which we get
-\begin{equation}\label{eq:HPrime}
-	H_1'(1) = \frac{\rho_1}{1 - G_1'(\rho_1)}.
+which is equal to
+\begin{equation}
+	1 - G_0(\rho_1).
 \end{equation}
-Now using the definition of $H_0$ in \eqref{eq:defH0} we have $G_0(H_1(1)) = H_0(1)$.
-Replacing that in \eqref{eq:sH0}, dividing by $H_0(1)$ and using \eqref{eq:HPrime} we have
-\begin{align}
-	\frac{H_0'(1)}{H_0(1)} &= 1 + \frac{H_1'(1)G_0'(\rho_1)}{H_0(1)} \\
-		&= 1 +\frac{G_0'(\rho_1)H_1(1)}{H_0(1)(1-G_1'(\rho_1))}.
-\end{align}
+The probability of survival being asymptotically equivalent to the ratio of infinite components compared to the whole vertex set we can write
+\begin{equation}
+	\frac{C_{max}}{n} \longrightarrow 1 - G_0(\rho_1).
+\end{equation}
+Hence, $C_{max}$ is growing linearly which means that $C_{max}$ is a giant component as long as $G_0(\rho_1)$ is different from 1.
+One may observe that what we proved here doesn't depend on the value of $G_1'(1)$, however in that case we would have that $\rho_1 = 1$ and then using the fact that $G_0(1) = 1$ we have that 
+\begin{equation}
+	\frac{C_{max}}{n} \longrightarrow 0, \quad \text{if } G_1'(1) < 1
+\end{equation}
+which concludes the proof of \ref{th:NWS}.
+
+\paragraph{The Poisson Case}
+As seen above if the degree sequence follows a Poisson distribution as it is the case in the Erd\"os-R\'enyi model, as observed in \eqref{eq:PoiGen} then $G_0 = G_1$, hence they have the same fixed points.
+From this observation and considering that $np \longrightarrow \lambda$, we can apply Theorem \ref{th:NWS}.
+So we obtain that the average cluster size if $\lambda = 1-\epsilon$ for any $\epsilon >0$ in $\mathcal{G}_{n,\frac{1-\epsilon}{n}}$ is
+\begin{equation}
+	1 + \frac{\lambda}{1-\lambda} = \frac{1}{\epsilon}.
+\end{equation}
+In the event $\lambda > 1$ and $\rho_1$ is the solution of the equation $x=e^{\lambda(x-1)}$ then we have
+\begin{equation}
+	C_{max} \longrightarrow (1-\rho_1)n.
+\end{equation}
 
 
