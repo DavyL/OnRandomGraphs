@@ -4,7 +4,7 @@ In this model, often referred to as \emph{inhomogeneous}, the probability of app
 \newline
 From this definition it is very natural to write those edge probabilities in an $n\times n$ matrix, which we denote by
 \begin{equation}
-	\bold{P} = [p_{ij}]
+	\bold{P} = [p_{ij}]_{1\leq i,j \leq n}
 \end{equation}
 As previously we consider graphs without loops, so $p_{ii} = 0$ for all $i \in V$, we also consider that the graph is not directed so the probability that $i$ connects to $j$ has to be the same as the probability that $j$ connects to $i$ (i.e. $p_{ij} = p_{ji}$), hence $\bold{P}$ is symmetric.
 In order to shorten the writing, we put $q_{ij} = 1 - p_{ij}$.
@@ -42,7 +42,7 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	If $p(n) = \frac{\log n + c}{n}$, then \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, 
 	and the number of isolated vertices is asymptotically Poisson distributed with mean $e^{-c}$.
 \end{corollary}
-\begin{proof}[Proof of \ref{th:proofPoissonP}]
+\begin{proof}[Proof of Corollary \ref{th:proofPoissonP}]
 	We observe that $\mathcal{G}_{n,p}$ and $\mathcal{G}_{n, \bold{P}}$ when $p_{ij} = p$ for all $i \neq j$.
 	\newline
 	We observe that $Q_i = Q = q^{n-1}$ (and \eqref{eq:C1} is obviously satisfied) and $R_{ik} = R_k = q^k$. 
@@ -58,7 +58,7 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	\end{equation}
 	And $\lim_{n \to \infty}  nq^{n-1-k} = e^{-c}$ finally proves the corollary.
 \end{proof}
-\begin{proof}{Proof of \ref{th:CVIsolPoi}}
+\begin{proof}[Proof of Theorem \ref{th:CVIsolPoi}]
 	Let $Y_{ij}$ a random variable following a Bernoulli of parameter $p_{ij}$.
 	\footnote{ Recall that a Bernoulli of parameter $p$ is 1 with prob. $p$ and 0 with prob. $1-p$.}
 	We denote by $Y_i$ the indicator of the event that vertex $i$ is isolated, i.e. $Y_i = \mathbbm{1}_{\sum_{j=1}^n Y_{ij} = 0}$.
@@ -91,11 +91,14 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	\sum_{i=1}^n \frac{Q_i}{R_{ik}} \geq \sum_{i=1}^n Q_i = \lambda_n
 	\end{equation}
 	If we suppose that $\limsup_{n\to \infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} > \lambda$, 
-	this would imply that $\limsup_{n\to \infty} \sum_{k=1}^{\frac{n}{2}} \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k > e^{\lambda} - 1$
+	this would imply that
+	\begin{equation}
+		\limsup_{n\to \infty} \sum_{k=1}^{\frac{n}{2}} \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k > e^{\lambda} - 1
+	\end{equation}
 	which contradicts \eqref{eq:C3}.
 	It follows that 
 	\begin{equation}
-	\lim_{n\to\infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} = \lambda
+		\lim_{n\to\infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} = \lambda
 	\end{equation}
 	We obtain, 
 	\begin{equation}\label{eq:CVUP}

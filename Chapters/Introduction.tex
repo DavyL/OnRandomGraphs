@@ -56,13 +56,43 @@ From this definition we may observe that $d_G(v) = |N(v)|$ if $G$ is a graph wit
 And we will call a (connected) \emph{component} of a vertex the set of vertices that can be reached from this vertex. 
 Then a connected graph is a graph with only one component.
 \newline
-Some interesting graphs to which we will often refer are the complete graph on $n$ vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$ (TODO : ADD GRAPHICAL REPRESENTATION ). 
+Some interesting graphs to which we will often refer are the complete graph on $n$ vertices, denoted by $K_n$, and the complete bipartite graph $K_{n,m}$. 
+\begin{figure}
+	\subfloat[][a]{
+	\centering
+	\begin{tikzpicture}
+			\tikzstyle{LabelStyle}=[fill=white,sloped]
+			\tikzstyle{EdgeStyle}=[]
+			\SetVertexMath
+			\grComplete[RA=1.5]{5}
+	\end{tikzpicture}
+	}
+	\subfloat[][b]{
+		\centering
+		\begin{tikzpicture}
+			\tikzstyle{LabelStyle}=[fill=white,sloped]
+			\tikzstyle{EdgeStyle}=[]
+			\SetVertexMath
+			\grCompleteBipartite[RA=2.5, RB=3, RS=3]{3}{3}
+		\end{tikzpicture}
+	}
+	\caption{ (a) The complete graph $K_5$ and (b) the complete bipartite graph $K_{3,3}$.}
+\end{figure}
 A \emph{complete graph} is a graph in which for any vertex, the set of neighbours is the rest of the graph. 
 A graph is \emph{bipartite} if its set of vertices can be partitioned in two subsets $X$ and $Y$ such that every edge has one end in $X$ and one in $Y$. 
 The \emph{complete bipartite graph} is a bipartite graph such that for all $x \in X$ we have $N(x) = Y$. 
 This implies the same condition on the vertices in $Y$.
 We will also call a \emph{cycle}, of size $n \geq 3$, denoted $C_n$ a graph whose vertices can be arranged in a cyclic sequence in such a way that two vertices are adjacent if and only if they are consecutive in the sequence.
 \newline
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+			\tikzstyle{LabelStyle}=[fill=white,sloped]
+			\tikzstyle{EdgeStyle}=[]
+			\SetVertexMath
+			\grPath[RA=1.5]{5}
+	\end{tikzpicture}
+\end{figure}	
 As there is usually no confusion possible we will denote $V = V(G), E =E(G), d = d_G, ...$. 
 
 
