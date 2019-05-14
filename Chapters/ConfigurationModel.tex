@@ -1,5 +1,5 @@
 \section{Generalized Binomial Graph}
-We are now interested in a generalization of the ( binomial ) Erd\"os-R\'enyi model which was first considered by Kovalenko in (TODO : ADD REF ).
+We are now interested in a generalization of the ( binomial ) Erd\"os-R\'enyi model which was first considered by Kovalenko in \cite{Kovalenko71}.
 In this model, often referred to as \emph{inhomogeneous}, the probability of appearance of the edge $(i,j)$, that we call $p_{ij}$, is not necessarily the same for all pairs of vertices $i,j$.
 \newline
 From this definition it is very natural to write those edge probabilities in an $n\times n$ matrix, which we denote by
@@ -122,18 +122,35 @@ The resulting graph looks very convoluted, with many cliques and doesn't seem to
 However, if you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
 This graph would give much more information on the nature of this network.
 \newline
-Hence, an important part of research has been studying random bipartite graph that we can naturally describe the generalised model as follows:
-consider the edges matrix of probabilities $\bold{P}_n$ and $\bold{P}_m$ respectively defined for $\mathcal{G}_{n, \bold{P_n}}$ and $\mathcal{G}_{m, \bold{P_m}}$,
-then the associated random bipartite graph is defined as $\mathcal{G}_{n+m, \bold{P_n}\bigotimes \bold{P_m}}$.
-(TODO : ADD A FIGURE OF DIRECT SUM)
-From this it is possible to obtain a relationship between $\mathcal{G}_{n,m,p}$ and $\mathcal{G}_{n+m,pI_n\bigotimes I_m}$.
+Hence, an important part of research has been studying random bipartite graph and we can very naturally define $\mathcal{G}_{n,n, p}$ with the generalised binomial model.
+Indeed, a $n,n$bipartite graph represented through its adjacency matrix has the following block representation:
+\begin{equation}
+    \left[
+\begin{array}{c|c}
+        0 & A \\
+         \hline
+        A & 0
+        \end{array}
+\right]
+\end{equation}
+with $A$ a $n$ by $n$ matrix containing only zeros and ones.
+Hence, if we consider $1_n$ the $n$ by $n$ matrix made only of 1, then we have $\mathcal{G}_{n,n,p} = \mathcal{G}_{2n,\bold{p}}$ with
+\begin{equation}\label{eq:pMat}
+    \bold{p} = p\left[
+\begin{array}{c|c}
+        0 & 1_n \\
+         \hline
+        1_n & 0
+        \end{array}
+\right]
+\end{equation}
 This raises interest in studying the random generalised binomial model through the point of view of the generalised model.
 For instance we will prove the following theorem for connectivity in $\mathcal{G}_{n,n,p}$:
 \begin{theorem}
 	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices of $\mathcal{G}_{n,n,p}$  follows a Poisson of mean $2e^{-c}$.
 \end{theorem}
 \begin{proof}
-	Let $\bold{P} = p(I_n\bigotimes I_n)^\intercal$, and let's show that the conditions \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} of Theorem \ref{th:CVIsolPoi} are satisfied. 
+	Let $\bold{p}$ as in \ref{eq:pMat}, and let's show that the conditions \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} of Theorem \ref{th:CVIsolPoi} are satisfied. 
 	\begin{equation}
 		Q_i = Q = q^{n}
 	\end{equation}
@@ -155,10 +172,12 @@ For instance we will prove the following theorem for connectivity in $\mathcal{G
 	\end{equation}
 	Hence as a consequence of Theorem \ref{th:CVIsolPoi}, the number of isolated vertices follows a Poisson of mean $2e^{-c}$.
 \end{proof}
-As shown in Bollobas 2001 (TODO : ADD REF), there is the same hitting time for connectivity and $\delta \geq 1$ with high probability, as a consequence of the previous Theorem one could prove that the probability of connectivity of $\mathcal{G}_{n,n, p}$ is $e^{-2e^{-c}}$. 
+As shown in Bollobas 2001 \cite{Bollob01}, there is the same hitting time for connectivity and $\delta \geq 1$ with high probability, as a consequence of the previous Theorem one could prove that the probability of connectivity of $\mathcal{G}_{n,n, p}$ is $e^{-2e^{-c}}$. 
+
 \section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
 As seen in the previous section, an Erd\"os-R\'enyi random graph has degrees following a Poisson distribution. 
-However, in real world networks are more frequently observed power law distribution (TODO: ADD REF).
+However, in practice networks usually have a degree sequence following a power-law, these are usually referred to as scale free networks.
+Recent interest in scale free models started with \cite{Barabasi99} by Barabasi and Albert in which they exhibited that the world wide web and several social networks were scale free.
 Hence, the fraction of vertices of degree $k$ is $p_k = Ck^{-\beta}$, with $C$ the normalisation constant and typically most of the observed networks which can be represented by a power-law distribution have $\beta$ between 2 and 3.
 We are here interested in constructing and investigating graphs following a specified degree distribution.
 \newline
@@ -169,7 +188,8 @@ The way these "half-edges" are paired is not unique and we will here consider th
 We will investigate in the following the proportion of these loops and multi-edges and how they affect the model. 
 A realistic model having often no loops or multi-edge (for instance in a social network, one is not often friend with himself or friend several times with someone else).
 \newline
-The approach from Newman, Strogatz and Watts makes an extensive use of generating functions defining the degree sequence, we will here only prove some simple results on the average cluster size.
+The approach from Newman, Strogatz and Watts \cite{Newman01} makes an extensive use of generating functions defining the degree sequence, we will here only prove some simple results on the average cluster size. We may refer the reader to \cite{Hofstad16} and \cite{Durrett06} for a similar approach as Newman, Watts and Strogatz
+or to \cite{Molloy95} and\cite{frieze15} for a more probabilistic approach. 
 In the following we will make use of generating functions in order to obtain several distributions of interest in a general setting. 
 First of all, let's consider that $p_k$ is the probability that a vertex is of degree $k$, then we naturally define the associated generating function, for $x<1$:
 \begin{equation}\label{eq:G0def}
