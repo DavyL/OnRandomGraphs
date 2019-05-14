@@ -336,12 +336,21 @@ From this very simple construction we can obtain the following upper bound
 	n(D, \Delta) \leq 1 + \Delta \sum_{j=1}^{D}(\Delta - 1)^{j-1} = \frac{\Delta(\Delta - 1)^D - 2}{\Delta - 2} = n_0(D, \Delta)
 \end{equation}
 $n_0$ is called the Moore bound and a graph for which the Moore bound is best possible is called a Moore graph. 
-The \emph{Petersen's graph} is such a graph with parameter $D= 2$ and $\Delta = 3$. (TODO : ADD A DRAWING OF PETERSEN'S GRAPH).
-\newline
+The \emph{Petersen's graph} is such a graph with parameter $D= 2$ and $\Delta = 3$, see Figure \ref{fig:petG}.
+\begin{figure}\label{fig:petG}
+	\centering
+	\begin{tikzpicture}
+			\tikzstyle{LabelStyle}=[fill=white,sloped]
+			\tikzstyle{EdgeStyle}=[]
+			\SetVertexMath
+			\grPetersen[form=1,RA=3.6,RB=1.8]
+	\end{tikzpicture}
+    \caption{A representation of Petersen's graph, $D=2$, $\Delta =3$}
+\end{figure}
 When $D=2$ explicit constructions of Moore graphs have been found with $\Delta = 2$ (pentagon) and $\Delta = 3$ (Petersen's graph) as we have seen above.
 There also exists an explicit construction with $\Delta = 7$, the Hoffman-Singleton graph on 50 vertices.
 There might exist a graph with $\Delta = 57$ on 3250 vertices but its existence is still an open-question.
-However, it is proved that no other graph of diameter 2 can be a Moore graph, see Hoffman Singleton (TODO: ADD REF).
+However, it is proved that no other graph of diameter 2 can be a Moore graph, see \cite{Hoffman60}.
 \newline
 In the end of this section we will give a quite good lower bound on $n$, in order to do so, we will see that we can select a probability function $p$ such that the value of the diameter is highly concentrated.
 \newline
