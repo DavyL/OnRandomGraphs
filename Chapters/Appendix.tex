@@ -81,19 +81,84 @@ See Theorem 2.3 from \cite{Hofstad16} for a proof.
 \begin{proof}
     Apply \eqref{markov} using the random variable $(X-\mathbb{E}X)^2$
 \end{proof}
-Now let's prove the following Theorem on couplings:
+\section{Couplings}
+Two random variables, for instance $X$ and $Y$, are coupled if they are defined on the same probability space.
+If we are given two random variables $X$ and $Y$ and we want to couple them, we define the random pair $(\hat{X}, \hat{Y})$ with a joint probability $\mathbb{P}$ 
+such that the marginal distribution of $\hat{X}$ (resp. $\hat{Y}$) coincides with the distribution of $X$ (resp. $Y$).
+We consider $P$ and $Q$ the probability measures associated with $X$ and $Y$.
+$P$ and $Q$ are defined on a $\sigma$-algebra $\mathcal{F}$ of subsets of the countable sample space $\Omega$.
+We define the \emph{total variation distance} as:
+\begin{equation}
+	d_{TV} = \sup_{A \in \mathcal{F}} |P(A) - Q(A)|
+\end{equation}
+First of all, let's observe that the absolute value can be removed as $P(A^c) - Q(A^c) = -(P(A) - Q(A))$ for any $A \in \mathcal{F}$.
+using the fact that $\Omega$ is countable we can construct the set reaching the supremum as $A = \{x\in \Omega: P((x) \geq Q(x)\}$.
+We have $P(A) - Q(A) = \sum_{x \in A} |P(x) - Q(x)|$
+and we obtain the simple formula:
+\begin{equation}
+	d_{TV}(P, Q) = \frac{1}{2} \sum_{x \in \Omega} |P(x) - Q(x)|
+\end{equation}
+simply using the "complementary" remark above which makes that we need the one half factor otherwise we would obtain a value two times larger.
+We can now obtain the following lemma,
+\begin{lemma}[Coupling inequality]\label{th:coupIneq}
+	With all the definitions and notations above, we have,
+	\begin{equation}
+		d_{TV}(P, Q) \leq \mathbb{P}(\hat{X} \neq \hat{Y}).
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	For $A \in \mathcal{F}$, 
+	\begin{align}
+		P(A) - Q(A) &= \mathbb{E}(\mathbbm{1}(X\in A)- \mathbbm{1}(Y\in A)) \\
+				   &= \mathbb{E}((\mathbbm{1}(X\in A)- \mathbbm{1}(Y\in A))\mathbbm{1}(X \neq Y))\\ 
+		     &\leq \mathbb{E}(\mathbbm{1}(X \neq Y)).
+	\end{align}
+\end{proof}
+Now let's prove the following Theorem from \cite{Hofstad16} on couplings:
 \begin{theorem}
 	Let $\{I_i\}_{i=1}^n$ be independent with $I_i \sim \text{Be}(p_i)$, and let $\lambda = \sum_{i=1}^n p_i$.
-Let $X = \sum_{i=1}^n I_i$ and let $Y$ be a Poisson random variable with parameter $\lambda$.
-Then there exists a coupling $(\hat{X}, \hat{Y})$ of $(X, Y)$ such that
-\begin{equation}
-	\mathbb{P}(\hat{X} \neq \hat{Y}) \leq \sum_{i=1}^n p_i^2.
-\end{equation}
+	Let $X = \sum_{i=1}^n I_i$ and let $Y$ be a Poisson random variable with parameter $\lambda$.
+	Then there exists a coupling $(\hat{X}, \hat{Y})$ of $(X, Y)$ such that
+	\begin{equation}
+		\mathbb{P}(\hat{X} \neq \hat{Y}) \leq \sum_{i=1}^n p_i^2.
+	\end{equation}
 \end{theorem}
 \begin{proof}
-	Throughout thhis proof we will consider $I_i \sim \text{Be}(p_i)$
-	See Van Der Hofstadt page 35.
+	Throughout this proof we will consider for $i\leq n$,  $I_i \sim \text{Be}(p_i)$ are independent, and we let $J_i \sim \text{Poi}(p_i)$ also independent.
+	We define
+	\begin{equation}
+		p_{i,1} = \mathbb{P}(I_i = 1) = 1-p_{i,0}, \quad q_{i,x} = \mathbb{P}(J_i = x) = e^{-p_i}\frac{p_i^x}{x!}
+	\end{equation}
+	which are the Bernoulli and Poisson probability mass function\footnote{A probability mass function of a $X$ is the probability density function of $X$ with respect to the counting measure.}.
+	\newline
+	For each pair $I_i, J_i$, we consider the (maximal) coupling $(\hat{I}_i, \hat{J}_i)$:
+	\begin{equation}
+		\mathbb{P}(\hat{I}_i = \hat{J}_i =x) = \min\{p_{1,x}, q_{1, x}\} = \left\{	\begin{array}{rl}
+												1-p_i  &\text{for $x = 0$,}\\
+												p_ie^{-p_i} &\text{for $x= 1$,}\\
+												0 &\text{for $x\geq 2$}\\
+											\end{array}
+										\right.
+	\end{equation}
+	Thus we have,
+	\begin{equation}
+		\mathbb{P}(\hat{I}_i \neq \hat{J}_i) = 1 - \mathbb{P}(\hat{I}_i = \hat{J}_i) = 1 - (1-p_i) - p_ie^{-p_i} = p_i(1-e^{-p_i}) \leq p_i^2.
+	\end{equation}
+	Using $\hat{X} = \sum_{i=1}^n \hat{I}_i$ and $\hat{Y} = \sum_{i=1}^n \hat{J}_i$ the proof can be easily completed.
 \end{proof}
+We can obtain the following result as a corollary,
+\begin{corollary}\label{th:poiIneqCoup}
+	For every $\lambda > 0$ and $n\in \mathbb{N}$, there exists a coupling $(\hat{X}, \hat{Y})$ where $\hat{X} \sim \text{Bin}(n, \frac{\lambda}{n})$ and 
+	$\hat{Y} \sim \text{Poi}(\lambda)$ there exists a coupling $(\hat{X}, \hat{Y})$ such that 
+	\begin{equation}
+		\mathbb{P}(\hat{X} \neq \hat{Y}) \leq \frac{\lambda^2}{n},
+	\end{equation}
+which in turn implies, for every $i\in \mathbb{N}$
+	\begin{equation}
+		|\mathbb{P}(X = i) - \mathbb{P}(Y=i)| \leq \frac{\lambda^2}{n}.
+	\end{equation}
+\end{corollary}
+The first claim should be clear using the previous theorem. The second claim comes from the coupling inequality \ref{th:coupIneq}.
 \section{Tail inequalities}
 The following inequalities are designated as Chernoff inequalities.
 \begin{theorem}[Chernoff bound]\label{chernoff1}

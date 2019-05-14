@@ -185,7 +185,7 @@ For a branching process with a binomial offspring distribution with parameter $n
 	\end{equation}
 \end{theorem}
 \begin{proof}
-	From the result of the appendix (TODO: ADD REF), one can couple independent binomial random variables $X_i \sim \text{Bin}(n, \frac{\lambda}{n})$
+	From the result of the appendix \ref{th:poiIneqCoup}, one can couple independent binomial random variables $X_i \sim \text{Bin}(n, \frac{\lambda}{n})$
 	and independent Poisson random variables $X_i^* \sim \text{Poi}(\lambda)$ in such a way that
 	\begin{equation}
 		\mathbb{P}(X_i \neq X_i^*) \leq \frac{\lambda^2}{n}.
@@ -220,10 +220,10 @@ For a branching process with a binomial offspring distribution with parameter $n
 	Combining these elements we obtain,
 	\begin{align}
 		\mathbb{P}(T\geq k, T^* < k) &\leq \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s, X_s \neq X_s^*) 	\\
-					     &\leq  \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)(X_s \neq X_s^*) 	\\
+					&\leq  \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)\mathbb{P}(X_s \neq X_s^*) 	\\
 					     &\leq  \frac{\lambda ^2}{n} \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s) 
 	\end{align}
-	The last inequality being obtained by the theorem on couplings (TODO : ADD REFERENCE ).
+	The last inequality being obtained by the theorem on couplings \ref{th:poiIneqCoup}.
 	Using the remark on the fact that this portion of the proof is valid for both the binomial and the Poisson case we obtain the following inequality which finishes the proof.
 	\begin{equation}
 		e_k(n) = |\mathbb{P}_{n, p}(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)| \leq \frac{2\lambda ^2}{n}\sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)
