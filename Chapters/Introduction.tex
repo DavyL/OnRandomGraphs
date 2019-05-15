@@ -1,7 +1,36 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
-
+\section{Reader's notes}
+This report has been written as a survey on random graphs and the different ways to approach them.
+This section gives an overview of the structure of the report and different notations that are used in this report.
+\paragraph{Structure of the report}
+It is structured in three different chapters, the first one you are reading is mostly an introduction to the language of graph theory followed by a very short introduction to what is a random graph.
+The last part of the introduction is a proof of Cayley's formula, formula which is central in many enumerative proofs on random graphs.
+\newline
+The second chapter gives a description of the Erd\"os-R\'enyi model. 
+Different techniques to solve graph problems are used, the theorem on connectivity and the stability number use enumerative techniques. 
+The section on the diameter contains a long proof which is applied in the end using the probabilistic method which exhibits the existence of graphs satisfying certain properties.
+The second chapters also contains a formal characterisation of properties and a theorem on the existence of thresholds.
+\newline
+The third chapter is focused on the phase transition of random graphs and it uses many different exploration techniques.
+The first part is on a formal definition of a Galton-Watson process and the probability of survival of such a process using martingales.
+It also contains important results on the links between different kinds of Galton-Watson process and random graphs.
+Then a study is done on the subcritical case using the Breadth-First search algorithm and a study of the supercritical case 
+is done using the recent approach which uses the Depth-First search algorithm.
+\newline
+The last chapter is quite different, first of all a generalised model of Erd\"os-R\'enyi is introduced and a simple result is proved which gives a result on the classical Erd\"os-R\'enyi model and on Bipartite random graphs.
+The last section is an overview of an approach of random graphs defined by their degree sequence using generating functions, several results on the phase transition are found and they are applied to the Erd\"os-R\'enyi model and results from chapter 3 are obtained again.
+\newline
+This report also contains an Appendix in which several results used in the report are detailed and most of them are proved.
+\newline
+In this report most of the results are proved and it is nearly self-contained.
+However some results are admitted otherwise the report would have vastly exceeded the expected length.
+\paragraph{Notations} The author has tried to be as close as possible from standard notations. 
+Here some notations are presented, $\mathbb{P}, \mathbb{E}, \mathbb{V}$ respectively define a probability measure, the expectation and the variance.
+$\mathcal{G}_n$ will define a probability space of random graphs on $n$ vertices and $\mathbb{G}_n$ will be a random (graph) variable in a specified space of random graphs.
+The distinction between $\mathcal{G}$ and $\mathbb{G}$ is not necessarily done.
+We will say that a property is satisfied with high probability if the probability is tending to one as $n$ goes to infinity.
 \section{Graph theory}\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}
 Formally a \emph{graph} $G$ is defined as $G = (V(G), E(G))$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges ( the lines ) of $G$. 
 \newline

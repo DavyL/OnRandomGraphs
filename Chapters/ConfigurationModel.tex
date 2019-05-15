@@ -116,7 +116,7 @@ It is interesting to note through the following theorem, which we will not prove
 
 Above we have seen a generalised binomial model which changed the probability distribution on the set of all edges, now we will describe models in which we change the edge set.
 \paragraph{Bipartite random graphs}
-Bipartite graphs are formally defined as $K_{n,m} = G([n+m], E)$ with $E=\{\{x,y\} : x\in[n], y\in[m]\}$.
+Bipartite graphs are formally defined as $K_{n,m} = G([n+m], E)$ with $E=\{\{x,y\} : x\in[n], y\in n+[m]\}$.
 They are an appropriate way to describe many networks, for instance if you consider a graph in which you consider a graph on the set of movie actors and you draw an edge linking two actors if they have collaborated in a movie.
 The resulting graph looks very convoluted, with many cliques and doesn't seem to give much information on what we might be interested for.
 However, if you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
@@ -174,7 +174,7 @@ For instance we will prove the following theorem for connectivity in $\mathcal{G
 \end{proof}
 As shown in Bollobas 2001 \cite{Bollob01}, there is the same hitting time for connectivity and $\delta \geq 1$ with high probability, as a consequence of the previous Theorem one could prove that the probability of connectivity of $\mathcal{G}_{n,n, p}$ is $e^{-2e^{-c}}$. 
 
-\section{An arbitrary degree sequence - the Newman-Watts-Strogatz model}
+\section{An arbitrary degree sequence}
 As seen in the previous section, an Erd\"os-R\'enyi random graph has degrees following a Poisson distribution. 
 However, in practice networks usually have a degree sequence following a power-law, these are usually referred to as scale free networks.
 Recent interest in scale free models started with \cite{Barabasi99} by Barabasi and Albert in which they exhibited that the world wide web and several social networks were scale free.
@@ -187,11 +187,15 @@ In order to build the graph, we will assign to each vertex $i$, $d_i$ "half-edge
 The way these "half-edges" are paired is not unique and we will here consider that the pairings are made at random, hence, loops and multi-edges might appear.
 We will investigate in the following the proportion of these loops and multi-edges and how they affect the model. 
 A realistic model having often no loops or multi-edge (for instance in a social network, one is not often friend with himself or friend several times with someone else).
+Here we are not interested in the way such graphs are constructed, see the following works cited in which there is a formal construction of the model, however it is important to note that it is possible to prove that there is a positive probability of obtaining a simple graph using this construction.
+The fact that the probability is positive ensures that results which are true with high probability are also true with high probability on simple graphs which follow the specified degree sequence.
 \newline
 The approach from Newman, Strogatz and Watts \cite{Newman01} makes an extensive use of generating functions defining the degree sequence, we will here only prove some simple results on the average cluster size. We may refer the reader to \cite{Hofstad16} and \cite{Durrett06} for a similar approach as Newman, Watts and Strogatz
 or to \cite{Molloy95} and\cite{frieze15} for a more probabilistic approach. 
 In the following we will make use of generating functions in order to obtain several distributions of interest in a general setting. 
-First of all, let's consider that $p_k$ is the probability that a vertex is of degree $k$, then we naturally define the associated generating function, for $x<1$:
+First of all, let's consider that $p_k$ is the probability that a vertex is of degree $k$, then we naturally define the associated generating function
+\footnote{See \cite{Wilf06} for a study of generating functions and their use in discrete mathematics.}
+, for $|x|<1$:
 \begin{equation}\label{eq:G0def}
 	G_0(x) = \sum_k p_k x^k
 \end{equation}
@@ -258,7 +262,7 @@ with $G_1^{n-1}$ denoting the $n-1$ composed of $G_1$.
 We now define $H_1$ as the generating function for the distribution of the size of the connected component reached by an edge chosen at random.
 \paragraph{No giant component}
 We consider for the moment that there is no giant component with the degree distribution we investigate, removing this component growing linearly in $n$ allows us to set a normalisation condition on $H_1$ such that $H_1(1) = 1$.
-Note that the following results are also formally true ( in the ring of formal power series ?? (TODO: ASK)) if there is a giant component as long as we do not consider that $H_1$ is not normalised.
+Note that the following results are also formally true if there is a giant component as long as we do not consider that $H_1$ is not normalised.
 Defining $q_k$ as the probability that the initial site has $k$-edges coming out, excluding the edge from which we came along, then
 \begin{align}\label{eq:H1}
 	H_1(x) 	&= xq_0 + xq_1H_1(x) + xq_2 (H_1(x))^2 + \ldots\\
