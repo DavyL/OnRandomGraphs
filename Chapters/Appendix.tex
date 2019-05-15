@@ -1,5 +1,5 @@
 \section{Common inequalities and simple probabilistic results}
-This section presents inequalities that are used in this report and proves most of them. (TODO : PROVE THEM)
+This section presents inequalities that are used in this report and proves most of them.
 \begin{theorem}[The moment generating function of a binomial]\label{binMGF}
 	If $X \sim \text{Bin}(n, p)$, then 
 	\begin{equation}
@@ -14,6 +14,11 @@ This section presents inequalities that are used in this report and proves most 
 					&=(1 - p + e^t p)^n
 	\end{align}
 \end{proof}
+From this theorem we can obtain the moment generating function of $Y$ following a Poisson distribution of parameter $\lambda = \lim_{n\to \infty} np$ as
+\begin{equation}
+	\mathbb{E}(e^{tY}) = e^{\lambda(1-e^t)}
+\end{equation}
+simply by taking the limit in the previous theorem.
 \begin{theorem}[Convergence of factorial moments implies convergence in distribution]
 	Let $X$ be a random variable with a distribution that is determined by its moments. If $X_1, X_2, ...$ are random variables with finite moments such that
 	$\mathbb{E}_k(X_n) \longrightarrow \mathbb{E}_k(X)$ when $ n \to \infty$ for every integer $k \geq 1$ then
@@ -81,6 +86,17 @@ See Theorem 2.3 from \cite{Hofstad16} for a proof.
 \begin{proof}
     Apply \eqref{markov} using the random variable $(X-\mathbb{E}X)^2$
 \end{proof}
+\begin{theorem}\label{chernoff3}
+	Let $X_1, \ldots, X_n$ be independent random variables (not necessariliy with the same distribution).
+	Assume $0 \leq X_i \leq 1$ for each $i$.
+	Let $X = X_1 + \ldots X_n$ and $\mu = \mathbb{E}(X)$,
+	then for any $0 \leq \epsilon \leq 1$,
+	\begin{equation}
+		\mathbb{P}( |X - \mathbb{E}(X)| \geq \epsilon \mu ) \leq 2\exp(-\frac{\epsilon^2}{3}\mu).
+	\end{equation}
+\end{theorem}
+This inequality can be obtained in many ways, for instance it can be derived Chernoff's bound or Hoeffding-Azuma's inequality.
+We refer the reader to Section A.1. of \cite{Alon16} for a formal proof.
 \section{Couplings}
 Two random variables, for instance $X$ and $Y$, are coupled if they are defined on the same probability space.
 If we are given two random variables $X$ and $Y$ and we want to couple them, we define the random pair $(\hat{X}, \hat{Y})$ with a joint probability $\mathbb{P}$ 
@@ -129,7 +145,7 @@ Now let's prove the following Theorem from \cite{Hofstad16} on couplings:
 	\begin{equation}
 		p_{i,1} = \mathbb{P}(I_i = 1) = 1-p_{i,0}, \quad q_{i,x} = \mathbb{P}(J_i = x) = e^{-p_i}\frac{p_i^x}{x!}
 	\end{equation}
-	which are the Bernoulli and Poisson probability mass function\footnote{A probability mass function of a $X$ is the probability density function of $X$ with respect to the counting measure.}.
+	which are the Bernoulli and Poisson probability mass function\footnote{The probability mass function of $X$ is the probability density function of $X$ with respect to the counting measure.}.
 	\newline
 	For each pair $I_i, J_i$, we consider the (maximal) coupling $(\hat{I}_i, \hat{J}_i)$:
 	\begin{equation}
@@ -159,32 +175,3 @@ which in turn implies, for every $i\in \mathbb{N}$
 	\end{equation}
 \end{corollary}
 The first claim should be clear using the previous theorem. The second claim comes from the coupling inequality \ref{th:coupIneq}.
-\section{Tail inequalities}
-The following inequalities are designated as Chernoff inequalities.
-\begin{theorem}[Chernoff bound]\label{chernoff1}
-	If $X \sim \text{Bin}(n, p)$, and $\lambda = np$ then $\forall t \geq 0$
-	\begin{equation}
-		\mathbb{P}( X \geq \mathbb{E}X + t) \leq e^{-\frac{t^2}{2(\lambda + t/3)}}
-	\end{equation}
-	\begin{equation}
-		\mathbb{P}( X \geq \mathbb{E}X + t) \leq e^{-\frac{t^2}{2\lambda}}
-	\end{equation}
-\end{theorem}
-\begin{corollary}\label{chernoff2}
-	If $X \sim \text{Bin}(n, p)$, and $\lambda = np$ then $\forall t \geq 0$
-	\begin{equation}
-		\mathbb{P}( |X - \mathbb{E}X| \geq t) \leq 2e^{-\frac{t^2}{2(\lambda + t/3)}}
-	\end{equation}
-\end{corollary}
-\begin{corollary}\label{chernoff3}
-	If $X \sim \text{Bin}(n, p)$, and $0<\epsilon \leq 3/2$ then
-	\begin{equation}
-		\mathbb{P}( |X - \mathbb{E}X| \geq \epsilon \mathbb{E}X) \leq 2e^{-\frac{\epsilon^2}{3}\mathbb{E}X }
-	\end{equation}
-\end{corollary}
-\begin{theorem}[Binomial tail]\label{binomTail}
-
-\end{theorem}
-
-\section{Markov chains}
-\section{Martingales}

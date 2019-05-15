@@ -60,7 +60,7 @@ we have
 	\end{equation}
 	Each of these $Z_n(j)$ is a GW process independent from the others and for each of them we can then construct $M_n(j)$ as in \eqref{martinGW}.
 	As these are Martingales, using the convergence theorem of Martingales
-	\footnote{See Theorem 9.4.4 from Chung74 (TODO: ADD REF) for a proof.}
+	\footnote{See Theorem 9.4.6 from \cite{Chung00} for a proof.}
 	we have that they converge to some random values that we denote by $M$ and $M(j)$.
 	Now if we divide both sides in \eqref{indepGW} by $\mu^{n+1}$.
 	\begin{equation}
@@ -518,7 +518,7 @@ Here the approach is quite different as instead of adding all of the neighbours,
 \newline
 More formally we will use the same partition of vertex as in the BFS, $A_t$ the \emph{Last-In/First-Out stack}
 \footnote{A LIFO stack is a set in which elements are ordered according to the time they were added in the stack. 
-Only the last element added can be extracted from a LIFO stack. See Knuth TAOCP I (TODO: ADD REF ) for a detailed review of stacks, lists, ....}
+Only the last element added can be extracted from a LIFO stack.}
 of active vertices, $E_t$ the sorted vertices that we do not have to treat anymore and $U_t$ the vertices that have not yet been added to $A_t$.
 The interest of using DFS here is that $A_t$ is by construction always a path.
 \newline
