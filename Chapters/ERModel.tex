@@ -8,14 +8,17 @@ We define by $\mathcal{G}_{n, M}$ a uniformly distributed graph among the graphs
 One may observe that changes in notations are made compared to the articles from Erd\"os and R\'enyi in order to be more adapted with the modern study of random graphs.
 We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of possible edges on $n$ labelled vertices.
 From the previous definition, the probability of obtaining a chosen graph in with $n$ vertices and $M$ edges in $\mathcal{G}_{n, M}$ is $1/\binom{N}{M}$.
+The associated probability measure is denoted by $\mathcal{P}_M$.
 \newline
 We then arrive at our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which each of the $N$ possible edges is taken with probability $p \in [0, 1]$, independently of the others.
 This model was first introduced by Gilbert in 1959, see \cite{Gilbert59}\footnote{It is interesting to note that Gilbert's paper who was at the time working at Bell's laboratories formulated the question of connectivity based on real life phone networks.}.
 Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$, we have :
 \begin{align}
-	\mathbb{P}(G) = p^{e_G}(1-p)^{N-e_G}
+	\mathbb{P}_p(G) = p^{e_G}(1-p)^{N-e_G}
 \end{align}
-This model is called the \emph{binomial model}. It is expected that this model is close to the first one if $Np$ is close to $M$.
+This model is called the \emph{binomial model}.
+When there is no confusion possible, in order to shorten the writings we consider $\mathbb{P}=\mathbb{P}_p$.
+It is expected that this model is close to the first one if $Np$ is close to $M$.
 \newline
 The third model that we will investigate is on the form of a Markov process, see in Appendix for a discussion on properties used here from Markov chains. 
 At time 0 there is no edge in the graph and an edge is selected at random among all of the possible edges. 
@@ -139,7 +142,7 @@ Here is a theorem showing that monotone increasing properties make probability d
 	\newline
 	Then
 	\begin{equation}
-		\mathbb{P}_{M_1}(\mathcal{Q}) \leq  \mathbb{P}_{M_2}(\mathcal{Q}) \text{  and  } \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})
+		\mathbb{P}_{M_1}(\mathcal{Q}) \leq  \mathbb{P}_{M_2}(\mathcal{Q}) \text{  and  } \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q}).
 	\end{equation}
 \end{theorem}
 \begin{proof}

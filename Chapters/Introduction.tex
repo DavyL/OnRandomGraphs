@@ -3,9 +3,9 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \section{Reader's notes}
 This report has been written as a survey on random graphs and the different ways to approach them.
-This section gives an overview of the structure of the report and different notations that are used in this report.
+This section gives an overview of the structure of the report and different notations that are used in this report, all of the vocabulary introduced here will be properly defined is the following of this report.
 \paragraph{Structure of the report}
-It is structured in three different chapters, the first one you are reading is mostly an introduction to the language of graph theory followed by a very short introduction to what is a random graph.
+It is structured in three different chapters, the first one is mostly an introduction to the language of graph theory followed by a very short introduction to what is a random graph.
 The last part of the introduction is a proof of Cayley's formula, formula which is central in many enumerative proofs on random graphs.
 \newline
 The second chapter gives a description of the Erd\"os-R\'enyi model. 
@@ -236,7 +236,7 @@ We have now done the biggest part of the proof, that is, going from a function t
 \newline
 We will now take a doubly rooted tree and transform it in a function. From the definition of trees there is a unique "Start" to "End" ( SEL ) path.
 \newline
-For vertices not on the $SEL$, for instance some vertice $j$, we define $f(j)$ as the first neighbour on the $j$ to end line.
+For vertices not on the $SEL$, for instance some vertex $j$, we define $f(j)$ as the first neighbour on the $j$ to end line.
 \newline
 For vertices on the $SEL$, 
 \begin{align}
@@ -276,6 +276,6 @@ The corresponding doubly rooted tree is then:
 		\Edge[](8)(4)
 	\end{tikzpicture}
 	\label{fig:exampleJoyal}
-	\caption{The corresponding doubly-rooted tree of \eqref{eq:functionJoyal}, the "Start" root is vertex 1, the "End" root is vertex 4.}
+	\caption{The corresponding doubly-rooted tree of \eqref{eq:functionJoyal}, the "Start" root is vertex 3, the "End" root is vertex 4.}
 \end{figure}
 
