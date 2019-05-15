@@ -134,6 +134,21 @@ This process is called \emph{Breadth First Search} and might be referred to as B
     U_t &= U_{t-1}\backslash N(v_t)  \\
     E_t &= E_{t-1}\cup \{v_t\}
 \end{align}
+\begin{figure}
+    \centering
+    \includesvg[%
+  width=15cm,height=6cm,%inkscapelatex=false
+%  inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+  angle=0,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{Breadth-first-tree}%
+    \caption{Order in which nodes are explored using BFS}
+    \label{fig:BFS}
+\end{figure}
+See Figure \ref{fig:BFS} for a visual representation of the BFS \footnote{This is a visual representation of an exploration as it would be done by a computer. In this study we consider that all neighbours are explored at once.}.
 Notice that we have:
 \begin{align}\label{activatedV}
 	\left\{\begin{array}{rl}
@@ -167,7 +182,6 @@ So we have, conditionally on $|A_{t-1}|$,
 \begin{equation}
 	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
-(TODO : ADD A VISUAL EXPLANATION OF THE BFS)
 and we observe comparing it to \eqref{activatedV} that our random values $\eta_i$ are no longer independently distributed. 
 However we notice that if $A_{t-1}$ is "small enough" and $n$ "large enough" the r.v. are "almost independently distributed".
 We also denote that the random walk we defined explores only a connected component so intuitively we want to say that if the connected components are small enough and sparse enough, then, they follow a Galton Watson process, hence our random graph would be made of Galton Watson trees.
@@ -485,7 +499,20 @@ In fact there exists stronger results that use the same method but make a use of
 \newline
 Here we will consider $p = \frac{1 + \epsilon}{n}$. 
 For the beginning we will use the recent approach from Sudakov \cite{Sudakov} which makes use of an algorithm of graph exploration called the \emph{depth first search} (DFS).
-(TODO: ADD GRAPHICAL COMPARISON BETWEEN DFS AND BFS)
+\begin{figure}
+    \centering
+    \includesvg[%
+  width=15cm,height=6cm,%inkscapelatex=false
+%  inkscapeformat=pdf,
+%  inkscapelatex=false,
+%  distort=true,
+  angle=0,
+%  extractdistort=false,
+%  extractangle=inherit,
+]{Depth-first-tree}%
+    \caption{Order in which nodes are explored using DFS}
+    \label{fig:DFS}
+\end{figure}
 We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to its active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
