@@ -264,7 +264,7 @@ We will now admit the following theorem which gives a way to obtain the probabil
 \begin{theorem}[Hitting-time Theorem]
 	Let $(Z_t)$ be a Galton-Watson branching process with total progeny $T$. Then,
 	\begin{equation}
-		\mathbb{P}(T = t) = \frac{1}{t} \mathbb{P}(X_1 + X_2 + \ldots + X_t = t-1,
+		\mathbb{P}(T = t) = \frac{1}{t} \mathbb{P}(X_1 + X_2 + \ldots + X_t = t-1),
 	\end{equation}
 	for all $t\geq 1$.
 \end{theorem}
@@ -275,7 +275,7 @@ However we will use the hitting-time Theorem to obtain the following corollary,
 \begin{corollary}\label{th:sizePoi}
 	Let $(Z_t)$ be a Poisson branching process with offspring distribution $\text{Poi}(\lambda)$,
 	\begin{equation}
-		\mathbb{P}_{\lambda}(T^* = k) = e^{-\lambda^t}\frac{(\lambda t)^{t-1}}{(t-1)!}.
+		\mathbb{P}_{\lambda}(T^* = k) = e^{-\lambda t}\frac{(\lambda t)^{t-1}}{(t-1)!}.
 	\end{equation}
 \end{corollary}
 To obtain the previous corollary simply notice that a sum of $t$ independent Poisson random variables of parameter $\lambda$ is a Poisson random variable of parameter $\lambda t$.
