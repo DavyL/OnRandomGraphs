@@ -134,20 +134,34 @@ This process is called \emph{Breadth First Search} and might be referred to as B
     U_t &= U_{t-1}\backslash N(v_t)  \\
     E_t &= E_{t-1}\cup \{v_t\}
 \end{align}
-\begin{figure}
-    \centering
-    \includesvg[%
-  width=15cm,height=6cm,%inkscapelatex=false
-%  inkscapeformat=pdf,
-%  inkscapelatex=false,
-%  distort=true,
-  angle=0,
-%  extractdistort=false,
-%  extractangle=inherit,
-]{Breadth-first-tree}%
-    \caption{Order in which nodes are explored using BFS}
-    \label{fig:BFS}
-\end{figure}
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+			\tikzstyle{every node} = [node distance = 40cm]
+		\SetVertexMath
+		\Vertex[L=1]{a}
+		\SOWE[L=2](a){b}
+		\SO[L=2](a){i}
+		\SOEA[L=2](a){c}
+		\SOWE[L=3](b){d}
+		\SO[L=3](b){e}
+		\SO[L=4](c){f}
+		\SOWE[L=5](e){g}
+		\SOEA[L=5](e){h}
+
+		\tikzstyle{EdgeStyle} = [post]
+		\Edge[](a)(b)	
+		\Edge[](b)(d)	
+		\Edge[](b)(e)	
+		\Edge[](e)(g)
+		\Edge[](e)(h)
+		\Edge[](a)(c)	
+		\Edge[](c)(f)	
+		\Edge[](a)(i)
+	\end{tikzpicture}
+	\caption{Order in which BFS explores a fixed tree.}
+	\label{fig:BFS}
+\end{figure}	
 See Figure \ref{fig:BFS} for a visual representation of the BFS \footnote{This is a visual representation of an exploration as it would be done by a computer. In this study we consider that all neighbours are explored at once.}.
 Notice that we have:
 \begin{align}\label{activatedV}
@@ -499,20 +513,35 @@ In fact there exists stronger results that use the same method but make a use of
 \newline
 Here we will consider $p = \frac{1 + \epsilon}{n}$. 
 For the beginning we will use the recent approach from Sudakov \cite{Sudakov} which makes use of an algorithm of graph exploration called the \emph{depth first search} (DFS).
-\begin{figure}
-    \centering
-    \includesvg[%
-  width=15cm,height=6cm,%inkscapelatex=false
-%  inkscapeformat=pdf,
-%  inkscapelatex=false,
-%  distort=true,
-  angle=0,
-%  extractdistort=false,
-%  extractangle=inherit,
-]{Depth-first-tree}%
-    \caption{Order in which nodes are explored using DFS}
-    \label{fig:DFS}
-\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+			\tikzstyle{every node} = [node distance = 40cm]
+		\SetVertexMath
+		\Vertex[L=1]{a}
+		\SOWE[L=2](a){b}
+		\SO[L=7](a){i}
+		\SOEA[L=8](a){c}
+		\SOWE[L=3](b){d}
+		\SO[L=4](b){e}
+		\SO[L=9](c){f}
+		\SOWE[L=5](e){g}
+		\SOEA[L=6](e){h}
+
+		\tikzstyle{EdgeStyle} = [post]
+		\Edge[](a)(b)	
+		\Edge[](b)(d)	
+		\Edge[](b)(e)	
+		\Edge[](e)(g)
+		\Edge[](e)(h)
+		\Edge[](a)(c)	
+		\Edge[](c)(f)	
+		\Edge[](a)(i)
+	\end{tikzpicture}
+	\caption{Order in which DFS explores a fixed tree.}
+	\label{fig:DFS}
+\end{figure}	
 We made use of the breadth first search (BFS) which when exploring a vertex added all the set of neighbours to its active stack.
 Here the approach is quite different as instead of adding all of the neighbours, we check for existence of neighbours one by one, and if one is found then the algorithms moves to this new vertex. If no adjacent vertex can be found then it goes back to the previous vertex.
 \newline
