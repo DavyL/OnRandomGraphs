@@ -5,6 +5,7 @@ The distribution of this number is called the offspring distribution and we deno
 \begin{equation}
 	p_i = \mathbb{P}(\text{ having i children })
 \end{equation}
+In order to avoid trivialities we assume in the following $p_0>0$.
 When we say that a branching process is a "something" branching process, that means that the offspring distribution follows the "something" law (typically a Poisson branching process).
 And we also denote by $Z_n$ the number of individuals in the $n$-th generation. 
 Then if we consider that the offspring distribution doesn't depend on the generation of the individual considered we have
@@ -641,9 +642,9 @@ We have in the two previous sections investigated the different behaviours of $\
 We have seen that if $\lambda < 1$ then the largest component is growing in size as a logarithm of $n$ and the components will be trees or isolated vertices.
 Moreover, if $\lambda > 1$ then many components will have merged compared to $\lambda <1$ and the largest component will be growing as a linear function of $n$.
 The transition from tree components to a giant component will be made through the creation of \emph{complex} components
-\footnote{A $l$-complex component is a component of $k$ vertices with $k+l$ edges for all $l \geq 1$.}
+\footnote{An $l$-complex component is a component of $k$ vertices with $k+l$ edges for some $l \geq 1$.}
 in the critical window $\lambda(n) = 1 + \theta n^{-\frac{1}{3}}$ for some fixed $\theta \in \mathbb{R}$.
-In this critical window there will be with positive probability there is never more than one complex component (Janson, Knuth, Luczak and Pittel \cite{JansonKnuth}, proved that this probability is exactly $\frac{5\pi}{18}$), and the largest component will be of size about $n^{2/3}$.
+In this critical window there will be with positive probability never more than one complex component (Janson, Knuth, Luczak and Pittel \cite{JansonKnuth}, proved that this probability is exactly $\frac{5\pi}{18}$), and the largest component will be of size about $n^{2/3}$.
 A brief introductory review on the phase transition of Erd\"os-Renyi random graphs and other settings in which a similar phase transition can be observed (bond percolation, $d$-regular random graphs, specified degree sequence, ...) can be found in \cite{Spencer09}.
 
 
