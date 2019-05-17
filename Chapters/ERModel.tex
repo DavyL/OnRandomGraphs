@@ -3,7 +3,7 @@ As said in the title of the section there are different ways to approach the Erd
 \newline
 The first paper published on random graphs that gained notoriety was from Erd\H{o}s and Renyi in 1959 \cite{erdos59}, in which they give the following construction:
 \begin{definition}
-We define by $\mathcal{G}_{n, M}$ a uniformly distributed graph among the graphs with $n$ given vertices and exactly $M$ edges.
+We define by $\mathcal{G}_{n, M}$ the space of uniformly distributed graph among the graphs with $n$ given vertices and exactly $M$ edges.
 \end{definition}
 One may observe that changes in notations are made compared to the articles from Erd\"os and R\'enyi in order to be more adapted with the modern study of random graphs.
 We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of possible edges on $n$ labelled vertices.
@@ -65,7 +65,7 @@ So, let's estimate the probability $\mathbb{P}(X_2 > 0) = \mathbb{P}(X_2 \geq 1 
 						    	&= \binom{n}{2}p((1-p)^{n-1})^2 \\
 							&\leq (\frac{ne}{2})^2p(e^{-p})^{2(n-2)} \\
 						    	&= \mathcal{O}\left(n^2p e^{-2pn}\right) \\
-							    &= \mathcal{O}(n^2pe^{-2(\log(n) + c}) = \mathcal{O}(p)
+							    &= \mathcal{O}(n^2pe^{-2(\log(n) + c)}) = \mathcal{O}(p)
 \end{align}
 However, this is not sufficient to prove that there is no isolated component other than isolated vertices. We will observe that there can't have any component of size larger than $\lceil \frac{n}{2} \rceil$ that is not the largest component in the graph.
 Hence, we will study the probability that there is any component of intermediary size that is not the greatest component.
@@ -77,7 +77,7 @@ Hence, we will study the probability that there is any component of intermediary
 In the above, the "$n$ choose $k$" term represents the number of possible subsets for the $k$ vertices of a connected component. 
 The term $k^{k-2}$ is the number of possible spanning trees for each of these subset of $k$ vertices. 
 The $q_k$ is the probability that a set of $k$ vertices is not connected to any other of the $n-k$ vertices.
-Hence the term $p^{k-1}$ is the probability that the edges of the spanning tree are selected and the $((1-p)^{n-k})k$ is the probability that every vertex of the spanning tree are not connected to any of the other $n-k$ vertices.
+Hence the term $p^{k-1}$ is the probability that the edges of the spanning tree are selected and the $((1-p)^{n-k})^k$ is the probability that every vertex of the spanning tree are not connected to any of the other $n-k$ vertices.
 \newline 
 Now we will try to have an upper bound of the RHS such that the sum on $k$ will converges to a $o(n^{-\delta})$ for some $\delta >0$.
 \begin{align}
@@ -112,8 +112,8 @@ Indeed the property of appearance of certain graph properties will be either clo
 \newline
 For instance from the previous theorem we observe that $\forall \epsilon > 0$  if $p = (1+\epsilon)\frac{\log(n)}{n}$ 
 or if $p = \frac{\log(n) + \omega(n)}{n}$ with $\lim_{n\to \infty} \omega(n) = \infty$ then $\lim_{n\to\infty}\mathbb{P}(G \in \mathcal{G}_{n,p} \text{ is connected}) = 1$.
-We would say that for such $p$, $\mathcal{G}_{n,p}$ is asymptotically almost surely connected.
-We also observe that if in the previous definitions of $p$ we changed the $+$ signs into $-$ signs, we would find that $\mathcal{G}_{n,p}$ is asymptotically almost surely disconnected.
+We would say that for such $p$, $\mathcal{G}_{n,p}$ is connected with high probability.
+We also observe that if in the previous definitions of $p$ we changed the $+$ signs into $-$ signs, we would find that $\mathcal{G}_{n,p}$ is disconnected with high probability.
 \newline
 Hence, the function $p$ from \eqref{th:connect} has some very peculiar behaviour on the property of connectivity.
 We will call such a function a \emph{threshold} (here, for connectivity).
@@ -150,11 +150,11 @@ Here is a theorem showing that monotone increasing properties make probability d
 	\newline
 	For the second inequality, let $p = \frac{p_2 - p_1}{1 - p_1}$. Let $G_1 \in \mathcal{G}_{n, p_1}, G \in \mathcal{G}_{n, p}$ independent to each other.
 	\newline
-	So if $G_2 = G_1 \cup G$ it's edges are chosen with probability $p_1 + p - p_1 p = p_2$. 
+	So if $G_2 = G_1 \cup G$ its edges are chosen with probability $p_1 + p - p_1 p = p_2$. 
 	So $G_2$ follows $\mathcal{G}_{n,p_2}$ and contains $G_1$, the property being monotone increasing, we have $ \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$
 \
 \end{proof}
-The following result follows from definition, when $\mathcal{Q}$ is a monotone increasing property\footnote{It is in fact true for any property}:
+The following result follows from definition, when $\mathcal{Q}$ is any property:
 \begin{equation}\label{eq:QProp}
 	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
 \end{equation}
@@ -168,7 +168,7 @@ The following theorem shows that if we know quite accurately $\mathbb{P}_M(\math
 	Then $\mathbb{P}_M(\mathcal{Q}) \leq 3 \sqrt{M}\mathbb{P}_p(\mathcal{Q})$
 \end{theorem}
 \begin{proof}
-	Let $\mathcal{Q}$ be any property, then we will write $\mathcal{Q}$ as a partition based on the number of edges in each graph contained in $\mathcal{Q}$.
+	Let $\mathcal{Q}$ be any property, then we will write $\mathcal{Q}$ as a disjoint union based on the number of edges in each graph contained in $\mathcal{Q}$.
 	\newline
 	So we have
 	$$\mathcal{Q} = \bigsqcup_{m=0}^{N} \mathcal{Q}_m \quad, \text{ with } \forall G \in \mathcal{Q}_m, e(G) = m$$
@@ -183,7 +183,7 @@ The following theorem shows that if we know quite accurately $\mathbb{P}_M(\math
 						\geq \binom{N}{M}p^Mq^{N-M}\mathbb{P}_M(\mathcal{Q}) \\
 						&\geq \mathbb{P}_M(\mathcal{Q})(e^{\frac{1}{6M}}\sqrt{2\pi p q N})^{-1}\\
 	\end{align*}
-	The last inequality coming from inequality (1.5) of chapter 1 in \cite{Bollob01}. The proof of the inequality uses the sharp estimates of Stirling's $n! \sim (\frac{n}{e})^n\sqrt{2\pi n}e^{\alpha_n}$ proved in \cite{Robins55}. 
+	The last inequality coming from inequality (1.5) of Chapter 1 in \cite{Bollob01}. The proof of the inequality uses the sharp estimates of Stirling's $n! \sim (\frac{n}{e})^n\sqrt{2\pi n}e^{\alpha_n}$ for some $\alpha_n$ such that $\frac{1}{12n + 1} <\alpha_n < \frac{1}{12n}$ proved in \cite{Robins55}. 
 	The proof being rather lengthy and out of the topic of this report we will admit it.
 	\begin{equation}
 		\mathbb{P}_M(\mathcal{Q}) \leq  \mathbb{P}_p(\mathcal{Q})e^{\frac{1}{6M}}\sqrt{2\pi pq N}
@@ -272,7 +272,7 @@ If we denote by $\alpha(G)$ the stability number of a graph, it is not difficult
 \begin{equation}
 	\chi(G) \geq \frac{n}{\alpha(G)}
 \end{equation}
-Before giving a lower bound on the stability number of a graph it might be interesting to notion that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
+Before giving a lower bound on the stability number of a graph it might be interesting to notice that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
 Although the following theorem will give a bound that is quite tight in $\mathcal{G}_{n, p}$ the problem of finding the actual maximum stable set of a graph is a $NP$-hard problem.
 \begin{theorem}
 	The stability number of a graph in $\mathcal{G}_{n, p}$, is at most $\lceil 2p^{-1}\log(n)\rceil$, with probability going to 1 when $n \longrightarrow \infty$.
@@ -285,7 +285,7 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 	\end{equation}
 	as none of the $\binom{k+1}{2}$ possible edges must be selected.
 	\newline
-	Let's define our random values as follow, $X_S = \mathbbm{1}(\text{" $S$ is a stable set "})$ and
+	Let's define our random values as follows, $X_S = \mathbbm{1}(\text{" $S$ is a stable set "})$ and
 	\begin{equation}
 		X_{k+1} = \sum_{\substack{ S \subseteq V \\ |S| = k + 1}} X_S
 	\end{equation}
@@ -404,10 +404,11 @@ In fact the number of values that the diameter can take has been fully resolved 
 \newline
 Before proving such a theorem we will need some technical lemmas and assumptions. So we will give here some equations for reference later.
 Also from \eqref{eq:logtrois},
-\begin{equation}
-	p (\frac{\log(n)}{n})^{-1} \longrightarrow_{n \to \infty} \infty
+\begin{equation}\label{eq:plogdiam}
+	p (\frac{\log(n)}{n})^{-1} \longrightarrow_{n \to \infty} \infty.
 \end{equation}
-that should not be too surprising as the threshold for connectivity is $\frac{\log(n) + c}{n}$ as shown before.
+The previous limit \eqref{eq:plogdiam} meaning that $p$ grows faster $\log(n)/n$ should not be too surprising as the threshold for connectivity is $\frac{\log(n) + c}{n}$ as shown before.
+Hence we are studying a connected graph with high probability.
 We may also observe, since $d(n) \geq 2$ that $p = o(n^{-\frac{1}{2} +\epsilon}), \forall \epsilon > 0$.
 We observe that $p$ and $d$ are connected as follows:
 \begin{equation}
@@ -505,7 +506,7 @@ We will now prove another lemma
 \end{lemma}
 
 \begin{proof}
-	As $\delta_{d-1} \longrightarrow_{n\to\infty} 0$ we may assume that $\delta_{d-1} < \frac{1}{4}$
+	As $\delta_{d-1} \longrightarrow_{n\to\infty} 0$ we may assume that $\delta_{d-1} < \frac{1}{4}$.
 	For a fixed vertex $x$, we denote by $\Omega_k^*$ the set of graph for which 
 	\begin{equation}
 		||\Gamma_l(x)| - (pn)^l| \leq \delta_l(pn)^l \quad , 0 \leq l \leq k
@@ -579,10 +580,10 @@ We will now prove another lemma
 	\begin{lemma}
 		The $r$-th factorial moment of $X$, $X$ being the number of remote pairs of vertices, is within $o(1)$ of the expected number of ordered $r$-tuples of disjoint remote pairs.
 	\end{lemma}
-	If we denote by $\mathbb{F}_r$ the probability that a fixed $r$-tuple consists of vertices remote from each other.
+	If we denote by $\mathbb{F}_r$ the probability that a fixed $r$-tuple consists of vertices remote from other vertices.
 	Then,
 	\begin{equation}
-		\mathbb{E}_r(X) = \frac{n!}{(n-r)!}2\mathbb{F}_r(1+o(1)) + o(1)
+		\mathbb{E}_r(X) = \frac{n!}{(n-r)!}2^{-r}\mathbb{F}_r(1+o(1)) + o(1)
 	\end{equation}
 	In order to shorten the proof, we admit the following lemma that requires a quite long and technical proof. The proof can be found in \cite{Bollob81}.
 	\begin{lemma}
@@ -661,7 +662,7 @@ We will now prove another lemma
 		\mathbb{P}(\text{diam}(\mathbb{G}_{n,p}) > 2) 	&\leq \mathbb{E}(\text{number of pairs of vertices with distance} > 2) \\
 	&\leq \binom{n}{2}(1-p)(1-p^2)^{n-2} = \mathcal{O}(n^2e^{-np^2})
 	\end{align}
-	Which tends to 0 by $i)$. Hence, with high proability, the diameter of $\mathbb{G}_{n,p}$ is less than 2. 
+	which tends to 0 by $i)$. Hence, with high proability, the diameter of $\mathbb{G}_{n,p}$ is less than 2. 
 	In order to finish to prove the theorem we need to show that the diameter of $\mathbb{G}_{n,p}$ is not 1 with high probability.
 	A graph of diameter 1 being a complete graph we have
 	\begin{align}
@@ -713,7 +714,7 @@ This informal reasoning gives motivation for the following corollary of \eqref{t
 \begin{proof}
 	Let $K_1$ and $K_2$ be positive constants and define $0<p_1<p_2<1$ by
 	\begin{equation}
-		p_2^{d-1}n^{d-2} = \log(\frac{n^2}{K_2}) \quad \text{and} \quad p_1^{d}n^{d-1} = \log(\frac{n^2}{K_2})	
+	p_1^{d}n^{d-1} = \log(\frac{n^2}{K_1})	\quad \text{and} \quad 	p_2^{d-1}n^{d-2} = \log(\frac{n^2}{K_2}) 
 	\end{equation}
 	Then 
 	\begin{equation}
@@ -767,7 +768,7 @@ We can obtain the following result :
 						&= (1+o(1))n_k^{1/D_k}(2\log n_k + \log\log n_k)^{1/D_k}	\\
 						&= (1+o(1))\lceil{\frac{(1-\epsilon)\Delta_k}{(2D_k\log(\Delta_k))^{1/D_k}}}\rceil(2\log n_k +  \log\log n_k)^{1/D_k}\\	
 						&\leq \frac{(1+o(1))(1-\epsilon) \Delta_k}{(2D_k \log\Delta_k)^{1/D_k}} (2D_k\log((1-\epsilon)\Delta_k))^{1/D_k} \\   
-						&\leq (1+o(1))(1-\epsilon)\Delta_k \leq (1-\epsilon)\Delta_k \\
+						&\leq (1+o(1))(1-\epsilon)\Delta_k \\
 						&< \Delta_k	
 	\end{align}	
 	This provides the existence of a graph with $n_k$ vertices, diameter at most $D_k$, degree at most $\Delta_k$.

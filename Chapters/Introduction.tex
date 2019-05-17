@@ -11,7 +11,7 @@ The last part of the introduction is a proof of Cayley's formula, formula which 
 The second chapter gives a description of the Erd\"os-R\'enyi model. 
 Different techniques to solve graph problems are used, the theorem on connectivity and the stability number use enumerative techniques. 
 The section on the diameter contains a long proof which is applied in the end using the probabilistic method which exhibits the existence of graphs satisfying certain properties.
-The second chapters also contains a formal characterisation of properties and a theorem on the existence of thresholds.
+The second chapter also contains a formal characterisation of properties and a theorem on the existence of thresholds.
 \newline
 The third chapter is focused on the phase transition of random graphs and it uses many different exploration techniques.
 The first part is on a formal definition of a Galton-Watson process and the probability of survival of such a process using martingales.
@@ -28,11 +28,11 @@ In this report most of the results are proved and it is nearly self-contained.
 However some results are admitted otherwise the report would have vastly exceeded the expected length.
 \paragraph{Notations} The author has tried to be as close as possible from standard notations. 
 Here some notations are presented, $\mathbb{P}, \mathbb{E}, \mathbb{V}$ respectively define a probability measure, the expectation and the variance.
-$\mathcal{G}_n$ will define a probability space of random graphs on $n$ vertices and $\mathbb{G}_n$ will be a random (graph) variable in a specified space of random graphs.
+$\mathcal{G}_n$ will denote a probability space of random graphs on $n$ vertices and $\mathbb{G}_n$ will be a random (graph) variable in a specified space of random graphs.
 The distinction between $\mathcal{G}$ and $\mathbb{G}$ is not necessarily done.
-We will say that a property is satisfied with high probability if the probability is tending to one as $n$ goes to infinity.
+We will say that a property is satisfied with high probability if its probability is tending to one as $n$ goes to infinity.
 \section{Graph theory}\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}
-Formally a \emph{graph} $G$ is defined as $G = (V(G), E(G))$, with $V(G)$ designing the vertex set ( the points or nodes ) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges ( the lines ) of $G$. 
+Formally a \emph{graph} $G$ is defined as $G = (V(G), E(G))$, with $V(G)$ denoting the vertex set (the points or nodes) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges (the lines) of $G$. 
 \newline
 This is the simplest way to define a graph, hence this kind of graph is usually called a \emph{simple graph}. 
 More general graphs can be defined, for instance the loopy graphs, multigraphs, directed graphs or hypergraphs. 
@@ -95,7 +95,7 @@ We also call the degree sequence the non-increasing sequence of its vertex degre
 And we can also define the two following notations that will be useful in the following of this report, $\delta(G)$ as the minimal degree of $G$ and $\Delta(G)$ as the maximal degree of $G$.
 \newline
 We define a \emph{path} on a graph as a sequence of edges being two by two adjacent. 
-One of the most fundamental properties of graphs is also the connectivity.
+One of the most fundamental properties of graphs is the connectivity.
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
 In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths because we are studying simple graphs.
 It is clear that if a path exists it is always possible to extract a simple path from it.
@@ -134,7 +134,7 @@ The \emph{complete bipartite graph} is a bipartite graph such that for all $x \i
 This implies the same condition on the vertices in $Y$.
 We will also call a \emph{cycle}, of size $n \geq 3$, denoted $C_n$ a graph whose vertices can be arranged in a cyclic sequence in such a way that two vertices are adjacent if and only if they are consecutive in the sequence.
 
-As there is usually no confusion possible we will denote $V = V(G), E =E(G), d = d_G, ...$. 
+As there is usually no confusion possible we will denote $V = V(G)$ and $E =E(G)$. 
 
 
 \section{Random graphs}
@@ -213,9 +213,9 @@ We also denote by $DRT_n$ the set of doubly rooted trees on $n$ vertices.
 \newline
 As a consequence of this definition we have $|DRT_n| = n^2 t_n$, with $|\ |$ denoting the cardinal. 
 To prove the theorem it is then sufficient to prove that the number of elements in $DRT_n$ is equal to $n^n$.
-We will base our approach on Joyal's proof \cite{joyal} and show a bijection between the set of doubly rooted trees on $n$ vertices and the the set of functions from $\{1, 2, \ldots, n\}$ to $\{1, 2, \ldots, n\}$.
+We will base our approach on Joyal's proof \cite{joyal} and show a bijection between the set of doubly rooted trees on $n$ vertices and the set of functions from $\{1, 2, \ldots, n\}$ to $\{1, 2, \ldots, n\}$.
 The presentation of the proof we use comes from \cite{JoyalProof}.
-We recommend the reader to follow the proof using a given function as an example, see for instance Figure \ref{fig:ExampleJoyal} which is the corresponding doubly rooted tree of the function defined in \eqref{eq:functionJoyal}.
+We recommend the reader to follow the proof using a given function as an example, see for instance Figure \ref{fig:exampleJoyal} which is the corresponding doubly rooted tree of the function defined in \eqref{eq:functionJoyal}.
 \begin{proof}
 We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
 Let's take $f:V \longrightarrow V$, and let's consider the directed graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.

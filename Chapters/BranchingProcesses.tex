@@ -19,11 +19,11 @@ Branching processes have not only been applied to genealogy but also for such ob
 \newline
 We define $\mu = \mathbb{E} X_{1,1} < \infty$ which we assume to be finite and different from zero.
 \begin{lemma}\label{martinGW}
-	$M_n = \frac{1}{\mu^n}Z_n$ is a Martingale. 
-	\footnote{We take $\mathcal{F}_n = \sigma(X_{i,j} , i,j \in \mathbb{N})$ as the filtration adapted to $M_n$ }
+	$M_n = \frac{1}{\mu^n}Z_n$ is a martingale. 
+	\footnote{We take $\mathcal{F}_n = \sigma(X_{n,j} , i \in \mathbb{N})$ as the filtration adapted to $M_n$ }
 \end{lemma}
 \begin{proof}
-	Recall that a Martingale satisfies for all $n\geq0$, $\mathbb{E}(|M_n|) < \infty$ and $\mathbb{E}(M_{n+1} | \mathcal{F}_n) = M_n$.
+	Recall that a martingale satisfies for all $n\geq0$, $\mathbb{E}(|M_n|) < \infty$ and $\mathbb{E}(M_{n+1} | \mathcal{F}_n) = M_n$.
 	Let's first show the integrability property.
 	\begin{align}
 		\mathbb{E}Z_{n+1} 	&= \mathbb{E}(X_{n,1} + X_{n,2} + ... + X_{n, Z_n}) \\
@@ -60,7 +60,7 @@ we have
 		Z_{n+1} = \sum_{j=1}^{Z_1} Z_n(j)
 	\end{equation}
 	Each of these $Z_n(j)$ is a GW process independent from the others and for each of them we can then construct $M_n(j)$ as in \eqref{martinGW}.
-	As these are Martingales, using the convergence theorem of Martingales
+	As these are martingales, using the convergence theorem of martingales
 	\footnote{See Theorem 9.4.6 from \cite{chung00} for a proof.}
 	we have that they converge to some random values that we denote by $M$ and $M(j)$.
 	Now if we divide both sides in \eqref{indepGW} by $\mu^{n+1}$.
@@ -71,7 +71,7 @@ we have
 	\begin{equation}
 		M = \frac{1}{\mu} \sum_{j=1}^{Z_1}M(j)
 	\end{equation}
-	Which gives that $\mu M$ is distributed as $\sum_{j=1}^{Z_1}M(j)$ and we can finally obtain
+	which gives that $\mu M$ is distributed as $\sum_{j=1}^{Z_1}M(j)$ and we can finally obtain
 	\begin{align}
 		\mathbb{P}(M = 0) 	&= \mathbb{P}(\mu M = 0) = \mathbb{P}(\sum_{j=1}^{Z_1}M_j = 0) \\
 					&= \sum_{k=1}^{\infty} p_k \mathbb{P}(\sum_{j=1}^{k} M(j) = 0 | Z_1 = k) \\
@@ -105,6 +105,12 @@ We can obtain the following theorem
 	If $\mathbb{E}X > 1$ then the population survives with a non-zero probability.
 \end{theorem}
 \begin{proof}
+	First of all, let's observe that the $k$-th iterate of $\phi(0)$ is the probability of extinction at generation $k$.
+	It is clear that the probability of extinction at the first generation is $p_0$ which is equal to $\phi(0)$.
+	If the progeny goes extinct at the second generation it means that if there is only one child, it goes extinct with probability $p_0$, if there are two childs, with probability $p_0^2$, and so on.
+	Hence the probability of extinction at the second generation is $p_1 p_0 + p_2 p_0^2 + \ldots$ which is equal to $\phi(\phi(0)) = \phi^2(0)$.
+	Applying this inductive reasonning proves that the probability of extinction at generation $k$ is $\phi^k(0)$.
+	\newline
 	If $\mathbb{E}X > 1$ then $\phi(s) < s$ when $s$ is slightly less than 1, but $\phi(0) \geq 0$, hence there must have a solution to $s = \phi(s)$ in $[0,1)$.
 	By convexity of $\phi$ and Rolle's theorem this solution is unique.
 	Moreover, the iterates $\phi^k(0)$ are non decreasing, which gives that the probability of survival is $\lim_{k \to \infty} \phi^k(0)$ which is the smallest fixed point of $\phi$.
@@ -163,7 +169,7 @@ This process is called \emph{Breadth First Search} and might be referred to as B
 	\caption{Order in which BFS explores a fixed tree.}
 	\label{fig:BFS}
 \end{figure}	
-See Figure \ref{fig:BFS} for a visual representation of the BFS \footnote{This is a visual representation of an exploration as it would be done by a computer. In this study we consider that all neighbours are explored at once.}.
+See Figure \ref{fig:BFS} for a visual representation of the BFS.
 Notice that we have:
 \begin{align}\label{activatedV}
 	\left\{\begin{array}{rl}
@@ -172,7 +178,7 @@ Notice that we have:
 	 \end{array}
 	\right.
 \end{align}
-In this case all the $\eta_i$ are independent and identically distributed random variables.
+In this case (a Galton-Watson process) all the $\eta_i$ are independent and identically distributed random variables.
 We can then define $T$ as the instant the population dies out.
 Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out if and only if the algorithm finishes.
 We can then define $T$ as the instant the population dies out.
@@ -193,7 +199,7 @@ Studying the random walk in that case we observe that the number of vertices to 
 	|U_{t-1}| = n - |E_{t-1}| - |A_{t-1}| = n - (t-1) - |A_{t-1}|
 \end{equation}
 So we have, conditionally on $|A_{t-1}|$,
-\footnote{This is the conditional law on the number of neighbour of a vertex knowing $|A_{t-1}|$}
+\footnote{This is the conditional law of the number of neighbours of a vertex knowing $|A_{t-1}|$}
 \begin{equation}
 	\eta_t \sim \text{Bin}( n - (t-1) - |A_{t-1}|, p)
 \end{equation}
@@ -224,7 +230,7 @@ For a branching process with a binomial offspring distribution with parameter $n
 		\mathbb{P}_{n,p}(T\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T\geq k, T^* < k)\\
 		\mathbb{P}_{\lambda}^*(T^*\leq k) &= \mathbb{P}(T\geq k, T^* \geq k) +\mathbb{P}(T< k, T^* \geq k)
 	\end{align}
-	Which gives,
+	which gives,
 	\begin{align}
 		|\mathbb{P}_{n, p}&(T \geq k) -\mathbb{P}_{\lambda}^*(T^* \geq k)|\\
 				  &\leq  \mathbb{P}(T\geq k, T^* < k) +\mathbb{P}(T< k, T^* \geq k)
@@ -232,21 +238,22 @@ For a branching process with a binomial offspring distribution with parameter $n
 	The following part, until the end of the proof, is valid if we exchange $T$ by $T^*$ and $X$ by $X^*$.
 	\newline
 	By construction of $T$, the event $\{T\geq k\}$ is only defined by the events $X_1, ...., X_{k-1}$
-	Then we have $T\geq k$ and $T^*<k$ if there exists some $s$ such as $X_s \neq X_s^*$.
+	Then we have $T\geq k$ and $T^*<k$ only if there exists some $s$ such as $X_s \neq X_s^*$.
 	Hence, 
 	\begin{equation}
-		\mathbb{P}(T\geq k, T^*<k) \leq \sum_{s=1}^{k-1}\mathbb{P}(T \geq K, X_i \neq X_i^*, \forall i \leq s-1, X_s \neq X_s^*)
+		\mathbb{P}(T\geq k, T^*<k) \leq \sum_{s=1}^{k-1}\mathbb{P}(T \geq k, X_i \neq X_i^*, \forall i \leq s-1, X_s \neq X_s^*)
 	\end{equation}
-	If we are in the event,$T \geq K, X_i \neq X_i^*, \forall i \leq s-1$ then
+	If we are in the event,$T \geq k, X_i \neq X_i^*, \forall i \leq s-1$ then
 	\begin{equation}
 		X_1^*+...+X_i^* \geq i, \forall i \leq s-1
 	\end{equation}
 	In particular,
 	\begin{equation}
-		X_1^*+....+X_s^* = T^* - 1 \geq s-1
+		X_1^*+....+X_s^*  \geq s-1
 	\end{equation}
-	Then the event $\{T^* \geq s\}$ depends only on the $X_i^*, i\leq s-1$ thus it is independent of the event $X_s \neq X_s^*$.
-	Combining these elements we obtain,
+	from which we have $T^* \geq s$.
+	Moreover the event $\{T^* \geq s\}$ depends only on the $X_i^*, i\leq s-1$ thus it is independent of the event $X_s \neq X_s^*$.
+	Combining these elements, we obtain
 	\begin{align}
 		\mathbb{P}(T\geq k, T^* < k) &\leq \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s, X_s \neq X_s^*) 	\\
 					&\leq  \sum_{s=1}^{k-1} \mathbb{P}(T^* \geq s)\mathbb{P}(X_s \neq X_s^*) 	\\
@@ -287,7 +294,7 @@ Another similar theorem is the following one that gives a lower bound on the siz
 \begin{proof}
 	In this case, we couple $\eta_t$ with i.i.d. random variables $\eta_t''$ which are binomial with parameters $n-k$ and $p$ in such a way that $\eta_t \geq \eta_t''$ when $n-(t-1)-|A_{t-1}| \geq n-k$.
 	On the event $T<k$ this condition is always satisfied since the number of unseen vertices in the graph is larger that $n-k$. 
-	Since in this event, $\eta_i + \ldots + \eta_{i-1} - (i-1) \leq 0$, which implies that the total progeny of a Galton-Watson tree is smaller than $k$.
+	Since in this event, for some $i\leq k$, we have $\eta_i + \ldots + \eta_{i-1} - (i-1) \leq 0$, the total progeny of the Galton-Watson tree is smaller than $k$.
 \end{proof}
 We will now admit the following theorem which gives a way to obtain the probability that the total progeny of a Galton-Watson branching process is of a specified size.
 \begin{theorem}[Hitting-time Theorem]
@@ -350,7 +357,7 @@ In the previous theorem, $I_{\lambda}$ stands for the large deviation rate funct
 \begin{equation}
 	I_{\lambda} = \lambda - 1 - \log(\lambda)
 \end{equation}
-It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$
+It is interesting to note that $I_\lambda$ is positive if $\lambda \neq 0$.
 \begin{proof}[Proof of Theorem \ref{th:uplambda}]
 	This proof uses the fact that $|A_t| = 0$ means that the whole connected component has been explored after $t$ steps, so the connected component is of size less than $t$.
 	Using Theorem \ref{th:Atlaw} we obtain that $|A_t| \sim \text{Bin}(n-1, 1-(1-p)^t) - (t-1)$, so 
@@ -380,7 +387,7 @@ For this we will use the random variable
 \begin{equation}
 	Z_{\geq k } = \sum_{v \in V} \mathbbm{1}_{|\mathcal{C}(v)| \geq k}
 \end{equation}
-Observing that $Z_{\geq k}$ is equal to 0 if $k$ is larger than $C_{\max}$, the size of the greatest connected components, and we denote it by $\mathcal{C}_{\max}$. Hence we have
+We observe that $Z_{\geq k}$ is equal to 0 if $k$ is larger than $C_{\max}$, the size of the greatest connected components. Hence we have
 \begin{equation}
 	C_{\max} = \max\{k: Z_{\geq k} \geq k\}
 \end{equation}
@@ -404,7 +411,7 @@ These two lemmas together imply Theorem \ref{th:subCritCV}.
 	\end{equation}
 \end{lemma}
 \begin{proof}
-	This proof will be a little bit more technical as it uses the second moment methods.
+	This proof will be a little bit more technical as it uses the second moment method.
 	First of all we will need an estimate of the variance on $Z_{\geq}$, for this purpose we will use the following function
 	\begin{equation}
 		\chi_k(\lambda) = \mathbb{E}_{\lambda}(|\mathcal{C}(1)|\mathbbm{1}_{\{|\mathcal{C}(1)| \geq k\}})
@@ -415,7 +422,7 @@ These two lemmas together imply Theorem \ref{th:subCritCV}.
 	\begin{proof}
 		By definition of the variance
 		\begin{equation}
-			\mathbb{V}_{\lambda}(Z_{\geq k}) = \sum_{i,j \in V}(\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
+			\mathbb{V}_{\lambda}(Z_{\geq k}) = \sum_{i,j \in V}\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k)
 				-\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)
 		\end{equation}
 		And we can split those probabilities as components form an obvious partition of the vertex set as follows
@@ -432,7 +439,7 @@ These two lemmas together imply Theorem \ref{th:subCritCV}.
 		\end{equation}
 		Multiplying both sides by $\mathbbm{1}_{\mathcal{C}(i)| \geq k}$ we have
 		\begin{align}
-			\mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k, |\mathcal{C}(j)| \geq k | \mathcal{C}(i), i \not\leftrightarrow j) 
+			\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k, |\mathcal{C}(j)| \geq k | \mathcal{C}(i), i \not\leftrightarrow j) 
 			&\leq \mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)\mathbbm{1}_{|\mathcal{C}(i)| \geq k}\\
 			&\leq \mathbb{P}_{\lambda}(|\mathcal{C}(j)| \geq k)\mathbb{P}_{\lambda}(|\mathcal{C}(i)| \geq k).
 		\end{align}
@@ -499,12 +506,12 @@ These two lemmas together imply Theorem \ref{th:subCritCV}.
 		\mathbb{P}(Z_{k_n} = 0) \leq \frac{\mathbb{V}Z_{k_n}}{(\mathbb{E}Z_{k_n})^2} \leq \frac{\mathcal{O}(n^{ 1 - u})}{n^{-2I_{\lambda}a + 2} \lambda I_{\lambda}} 	
 		= \mathcal{O}(n^{ -\delta})
 	\end{equation}
-	When $u$ is close enough to $aI_{\lambda}$ and $\delta >0$ small enough.
+	when $u$ is close enough to $aI_{\lambda}$ and $\delta >0$ small enough.
 	\newline
 	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ with probability going to one.
 \end{proof}
 Now, simply combining the previous results \eqref{lemmalambdainf} and \eqref{lemmalambdasup} we have our proof of our main theorem in this section \eqref{th:subCritCV}.
-Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
+Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the largest connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
 This change of speed in the growth rate is called a phase transition.
 
 \section{The supercritical case : $\lambda > 1 $ }

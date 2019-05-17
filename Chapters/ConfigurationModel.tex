@@ -25,7 +25,7 @@ In the following, we suppose that the edge probabilities $p_{ij}$ are chosen in 
 \begin{align}
 	\max_{1\leq i \leq n} Q_i &\to 0 \label{eq:C1}\\
 	\lim_{n \to \infty} \lambda_n &= \lambda = \text{constant} \label{eq:C2} \\
-	\lim_{n\to \infty} \sum_{k=1}^{n/2} \frac{1}{k!}(\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k &= e^{\lambda} - 1 \label{eq:C3}
+	\lim_{n\to \infty} \sum_{k=1}^{\lfloor n/2 \rfloor} \frac{1}{k!}(\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k &= e^{\lambda} - 1 \label{eq:C3}
 \end{align}
 In this section we are interested in proving the following theorem.
 \begin{theorem}\label{th:CVIsolPoi}
@@ -93,7 +93,7 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	If we suppose that $\limsup_{n\to \infty} \sum_{i=1}^n \frac{Q_i}{R_{ik}} > \lambda$, 
 	this would imply that
 	\begin{equation}
-		\limsup_{n\to \infty} \sum_{k=1}^{\frac{n}{2}} \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k > e^{\lambda} - 1
+		\limsup_{n\to \infty} \sum_{k=1}^{\floor \frac{n}{2}\rfloor} \frac{1}{k!} (\sum_{i=1}^n \frac{Q_i}{R_{ik}})^k > e^{\lambda} - 1
 	\end{equation}
 	which contradicts \eqref{eq:C3}.
 	It follows that 
@@ -116,7 +116,8 @@ It is interesting to note through the following theorem, which we will not prove
 
 Above we have seen a generalised binomial model which changed the probability distribution on the set of all edges, now we will describe models in which we change the edge set.
 \paragraph{Bipartite random graphs}
-Bipartite graphs are formally defined as $K_{n,m} = G([n+m], E)$ with $E=\{\{x,y\} : x\in[n], y\in n+[m]\}$.
+Complete Bipartite graphs are formally defined as $K_{n,m} = G([n+m], E)$ with $E=\{\{x,y\} : x\in[n], y\in n+[m]\}$.
+In the above we have studied graphs as subgraphs of the complete graph, now we restrict ourselves to graphs which are subgraphs of the complete bipartite graph.
 They are an appropriate way to describe many networks, for instance if you consider a graph in which you consider a graph on the set of movie actors and you draw an edge linking two actors if they have collaborated in a movie.
 The resulting graph looks very convoluted, with many cliques and doesn't seem to give much information on what we might be interested for.
 However, if you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie.
@@ -144,10 +145,10 @@ Hence, if we consider $1_n$ the $n$ by $n$ matrix made only of 1, then we have $
         \end{array}
 \right]
 \end{equation}
-This raises interest in studying the random generalised binomial model through the point of view of the generalised model.
+This raises interest in studying random bipartite graphs through the point of view of the generalised model.
 For instance we will prove the following theorem for connectivity in $\mathcal{G}_{n,n,p}$:
 \begin{theorem}
-	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices of $\mathcal{G}_{n,n,p}$  follows a Poisson of mean $2e^{-c}$.
+	Let $c\in \mathbb{R}$ and $p=\frac{\log(n) + c}{n}$, then the number of isolated vertices of $\mathcal{G}_{n,n,p}$  follows a Poisson of mean $2e^{-c}$ for $n$ large enough.
 \end{theorem}
 \begin{proof}
 	Let $\bold{p}$ as in \ref{eq:pMat}, and let's show that the conditions \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} of Theorem \ref{th:CVIsolPoi} are satisfied. 
