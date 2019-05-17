@@ -56,7 +56,7 @@ See Theorem 2.3 from \cite{Hofstad16} for a proof.
 	\end{equation}
 \end{theorem}
 
-\begin{corollary}[n choose k approximation]\label{th:NChooseK}
+\begin{corollary}[$n$ choose $k$ approximation]\label{th:NChooseK}
 	\begin{equation}
 		\binom{n}{k} \leq \frac{n^k}{k!} \leq (\frac{ne}{k})^k
 	\end{equation}
@@ -87,7 +87,7 @@ See Theorem 2.3 from \cite{Hofstad16} for a proof.
     Apply \eqref{markov} using the random variable $(X-\mathbb{E}X)^2$
 \end{proof}
 \begin{theorem}\label{chernoff3}
-	Let $X_1, \ldots, X_n$ be independent random variables (not necessariliy with the same distribution).
+	Let $X_1, \ldots, X_n$ be independent random variables (not necessarily with the same distribution).
 	Assume $0 \leq X_i \leq 1$ for each $i$.
 	Let $X = X_1 + \ldots X_n$ and $\mu = \mathbb{E}(X)$,
 	then for any $0 \leq \epsilon \leq 1$,
@@ -108,7 +108,7 @@ We define the \emph{total variation distance} as:
 	d_{TV} = \sup_{A \in \mathcal{F}} |P(A) - Q(A)|
 \end{equation}
 First of all, let's observe that the absolute value can be removed as $P(A^c) - Q(A^c) = -(P(A) - Q(A))$ for any $A \in \mathcal{F}$.
-using the fact that $\Omega$ is countable we can construct the set reaching the supremum as $A = \{x\in \Omega: P((x) \geq Q(x)\}$.
+using the fact that $\Omega$ is countable we can construct the set reaching the supremum as $A = \{x\in \Omega: P(x) \geq Q(x)\}$.
 We have $P(A) - Q(A) = \sum_{x \in A} |P(x) - Q(x)|$
 and we obtain the simple formula:
 \begin{equation}
@@ -145,7 +145,7 @@ Now let's prove the following Theorem from \cite{Hofstad16} on couplings:
 	\begin{equation}
 		p_{i,1} = \mathbb{P}(I_i = 1) = 1-p_{i,0}, \quad q_{i,x} = \mathbb{P}(J_i = x) = e^{-p_i}\frac{p_i^x}{x!}
 	\end{equation}
-	which are the Bernoulli and Poisson probability mass function\footnote{The probability mass function of $X$ is the probability density function of $X$ with respect to the counting measure.}.
+	which are the Bernoulli and Poisson probability mass functions\footnote{The probability mass function of $X$ is the probability density function of $X$ with respect to the counting measure.}.
 	\newline
 	For each pair $I_i, J_i$, we consider the (maximal) coupling $(\hat{I}_i, \hat{J}_i)$:
 	\begin{equation}
