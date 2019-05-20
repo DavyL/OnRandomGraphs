@@ -3,7 +3,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \section{Notes for the reader}
 This report has been written as a survey on random graphs and the different ways to approach them.
-This section gives an overview of the structure of the report and different notations that are used in this report, all of the vocabulary introduced here will be properly defined is the following of this report.
+This section gives an overview of the structure of the report and different notations that are used in this report, all of the vocabulary introduced here will be properly defined in the following of this report.
 \paragraph{Structure of the report}
 It is structured in three different chapters, the first one is mostly an introduction to the language of graph theory followed by a very short introduction to what is a random graph.
 The last part of the introduction is a proof of Cayley's formula, formula which is central in many enumerative proofs on random graphs.
@@ -11,7 +11,7 @@ The last part of the introduction is a proof of Cayley's formula, formula which 
 The second chapter gives a description of the Erd\"os-R\'enyi model. 
 Different techniques to solve graph problems are used, the theorem on connectivity and the stability number use enumerative techniques. 
 The section on the diameter contains a long proof which is applied in the end using the probabilistic method which exhibits the existence of graphs satisfying certain properties.
-The second chapter also contains a formal characterisation of properties and a theorem on the existence of thresholds.
+The second chapter also contains a formal characterisation of graph properties and a theorem on the existence of thresholds for graph properties.
 This chapter concludes with a generalisation of the Erd\"os-R\'enyi in which we consider that all edges do not necessarily have the same probability of appearance.
 This allows us to finish the proof of connectivity and obtain a result on random bipartite graphs.
 \newline
@@ -20,9 +20,6 @@ The first part is on a formal definition of a Galton-Watson process and the prob
 It also contains important results on the links between different kinds of Galton-Watson process and random graphs.
 Then a study is done on the subcritical case using the Breadth-First search algorithm and a study of the supercritical case 
 is done using the recent approach which uses the Depth-First search algorithm.
-\newline
-The last chapter is quite different, first of all a generalised model of Erd\"os-R\'enyi is introduced and a simple result is proved which gives a result on the classical Erd\"os-R\'enyi model and on Bipartite random graphs.
-The last section is an overview of an approach of random graphs defined by their degree sequence using generating functions, several results on the phase transition are found and they are applied to the Erd\"os-R\'enyi model and results from chapter 3 are obtained again.
 \newline
 This report also contains an Appendix in which several results used in the report are detailed and most of them are proved.
 \newline
@@ -33,7 +30,7 @@ Here some notations are presented, $\mathbb{P}, \mathbb{E}, \mathbb{V}$ respecti
 $\mathcal{G}_n$ will denote a probability space of random graphs on $n$ vertices and $\mathbb{G}_n$ will be a random (graph) variable in a specified space of random graphs.
 The distinction between $\mathcal{G}$ and $\mathbb{G}$ is not necessarily done.
 We will say that a property is satisfied with high probability if its probability is tending to one as $n$ goes to infinity.
-\section{Graph theory}\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}
+\section{Graph theory\footnote{ For a very simple introduction to graph theory, see \cite{Trudeau93}, for an advanced review of graph theory, see \cite{Bondy08}}}
 Formally a \emph{graph} $G$ is defined as $G = (V(G), E(G))$, with $V(G)$ denoting the vertex set (the points or nodes) of $G$ and $E(G)$ as $E(G) \subseteq \{ \{x, y\}, x, y, \in V(G), x \neq y \}$, the set of edges (the lines) of $G$. 
 \newline
 This is the simplest way to define a graph, hence this kind of graph is usually called a \emph{simple graph}. 
@@ -99,7 +96,7 @@ And we can also define the two following notations that will be useful in the fo
 We define a \emph{path} on a graph as a sequence of edges being two by two adjacent. 
 One of the most fundamental properties of graphs is the connectivity.
 We will say that a graph is \emph{connected}, if there is a path connecting any two edges. 
-In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without loop or multi-edge}  paths because we are studying simple graphs.
+In fact we will consider simple\footnote{ More generally, the use of the adjective \emph{simple} denotes that we study something without any loops or multi-edges}  paths because we are studying simple graphs.
 It is clear that if a path exists it is always possible to extract a simple path from it.
 There are two famous kinds of path, the \emph{Hamiltonian path}, it is a path that includes all vertices of $G$. Analogously, an \emph{Eulerian path} is a path in which all edges are used exactly once.
 \newline
@@ -140,7 +137,7 @@ As there is usually no confusion possible we will denote $V = V(G)$ and $E =E(G)
 
 
 \section{Random graphs}
-The study of random graphs is a flourishing area of mathematics since its founding papers have been published by Erd\H{o}s and Renyi between 1959 and 1963 \cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
+The study of random graphs is a flourishing area of mathematics since its founding papers have been published by Erd\H{o}s and Renyi between 1959 and 1963 (\cite{erdos59} \cite{erdos60} \cite{erdosconnect61} \cite{erdosevol61} \cite{erdos63}).
 Since then a lot of work has been done on random graphs, most of the questions on the Erd\H{o}s-Renyi model have found satisfying answers, and the model being simplistic, many new models have been developed.
 So we will use the very vague definition by Janson \cite{Janson14}.
 \begin{definition}
@@ -151,7 +148,7 @@ This means that when studying random graphs, we can not only change the distribu
 \newline
 Usually we make the choice of sampling on a space of graphs containing any graph with a specified number of vertices.
 \footnote{This choices differs from what usually appear in the real-world where networks are grown through time, see \cite{CHKNS01} for a discussion on fundamental differences between grown random graphs and the static random graphs.}
-Some restrictions on this space might be done, for instance by selecting graphs with each vertex of the same degree ($r$-regular random graphs), or with the degree sequence following a specific distribution ( like the Newman-Strogatz-Watts model \cite{Newman01}, \cite{Newman02} ).
+Some restrictions on this space might be done, for instance by selecting graphs with each vertex of the same degree ($r$-regular random graphs), or with the degree sequence following a specific distribution (like the Newman-Strogatz-Watts model \cite{Newman01}, \cite{Newman02}).
 Sometimes random graphs are developped in order to produce a sampling space matching  some particular phenomenom observed in real-world networks.
 
 For instance in social networks, two persons having a friend in common are likely to be friends which in the vocabulary of graph theory indicates the presence of a triangle.
@@ -222,7 +219,7 @@ We recommend the reader to follow the proof using a given function as an example
 We will use the notation $[n] = \{1, 2, ..., n\}$ and $V = [n]$.
 Let's take $f:V \longrightarrow V$, and let's consider the directed graph of $f$. That is, $\forall v_1, v_2 \in V$ we have $v_1 \rightarrow v_2$ if and only if $f(v_1) = v_2$.
 Drawing such a graph for any function, and it will appear two different kind of structures: directed lines leading to cycles, and cycles. 
-And the whole graph will be a disjoint union of such components.
+Also, the whole graph will be a disjoint union of such components.
 It can be interesting to observe the case in which $f$ is a permutation and then observe that the graph of $f$ is a union of disjoint cycles as expected from the common group theory result.
 \newline
 We now take $C \subseteq V$ the set of vertices that are part of a cycle under the action of $f$. Equivalently,
@@ -277,7 +274,8 @@ The corresponding doubly rooted tree is then:
 		\Edge[](2)(1)
 		\Edge[](8)(4)
 	\end{tikzpicture}
-	\label{fig:exampleJoyal}
 	\caption{The corresponding doubly-rooted tree of \eqref{eq:functionJoyal}, the "Start" root is vertex 3, the "End" root is vertex 4.}
+	\label{fig:exampleJoyal}
+
 \end{figure}
 

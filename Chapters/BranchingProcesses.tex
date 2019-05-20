@@ -1,6 +1,6 @@
 \section{Galton-Watson trees}
 A branching process is the simplest model that can be used to describe the evolution of a population over time.
-Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime. 
+Typically in a branching process we start with one individual, consider it will create a number of individuals through his lifetime, and those individuals will create themselves a number of individuals through their lifetime, and so on. 
 The distribution of this number is called the offspring distribution and we denote it by $\{p_i\}_0^{\infty}$ such as
 \begin{equation}
 	p_i = \mathbb{P}(\text{ having i children })
@@ -45,7 +45,7 @@ We define $\mu = \mathbb{E} X_{1,1} < \infty$ which we assume to be finite and d
 \end{proof}
 We now define the following generating function
 \begin{equation}
-	\phi(s) = \sum_{k=0}^{\infty} p_k s^k \quad , |s| <1
+	\phi(s) = \sum_{k=0}^{\infty} p_k s^k \quad , |s| <1.
 \end{equation}
 Then if we define the extinction probability $\zeta$ as $\zeta = \mathbb{P}(\lim_{n \to \infty} Z_n = 0)$
 we have
@@ -76,10 +76,10 @@ we have
 		\mathbb{P}(M = 0) 	&= \mathbb{P}(\mu M = 0) = \mathbb{P}(\sum_{j=1}^{Z_1}M_j = 0) \\
 					&= \sum_{k=1}^{\infty} p_k \mathbb{P}(\sum_{j=1}^{k} M(j) = 0 | Z_1 = k) \\
 					&= \sum_{k=1}^{\infty} p_k (\mathbb{P}(M=0))^k\\
-					&= \phi(\mathbb{P}(M=0))
+					&= \phi(\mathbb{P}(M=0)).
 	\end{align}
 \end{proof}
-Using this result we can obtain the following result
+Using this result we can obtain the following result,
 \begin{theorem}
 	The extinction probability of a Poisson branching process of parameter $\lambda$ is a solution of $x = e^{-\lambda(1-x)}$.
 \end{theorem}
@@ -141,6 +141,16 @@ This process is called \emph{Breadth First Search} and might be referred to as B
     U_t &= U_{t-1}\backslash N(v_t)  \\
     E_t &= E_{t-1}\cup \{v_t\}
 \end{align}
+	
+See Figure \ref{fig:BFS} for a visual representation of the BFS.
+Notice that we have:
+\begin{align}\label{activatedV}
+	\left\{\begin{array}{rl}
+			|A_0| &= 1\\
+			|A_i| &= |A_{i-1}| + \eta_i - 1 = \eta_1 + ... + \eta_i - ( i - 1)
+	 \end{array}
+	\right.
+\end{align}
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
@@ -168,16 +178,8 @@ This process is called \emph{Breadth First Search} and might be referred to as B
 	\end{tikzpicture}
 	\caption{Order in which BFS explores a fixed tree.}
 	\label{fig:BFS}
-\end{figure}	
-See Figure \ref{fig:BFS} for a visual representation of the BFS.
-Notice that we have:
-\begin{align}\label{activatedV}
-	\left\{\begin{array}{rl}
-			|A_0| &= 1\\
-			|A_i| &= |A_{i-1}| + \eta_i - 1 = \eta_1 + ... + \eta_i - ( i - 1)
-	 \end{array}
-	\right.
-\end{align}
+\end{figure}
+
 In this case (a Galton-Watson process) all the $\eta_i$ are independent and identically distributed random variables.
 We can then define $T$ as the instant the population dies out.
 Connecting this to a Galton-Watson tree, $\eta_t$ is the direct progeny of $v_t$ so $\eta_t$ follows the offspring distribution defined by $X_{1, 1}$ and we consider that the population dies out if and only if the algorithm finishes.
@@ -190,7 +192,7 @@ If $T = \infty$ then we say that the population survives.
 \newline
 We have that $\{v_t\}_t$ is a random walk on the tree under exploration and we also get the following evolution equation 
 \begin{equation}\label{eq:St}
-	|A_t| = |A_{t-1}| + \eta_t - 1
+	|A_t| = |A_{t-1}| + \eta_t - 1.
 \end{equation}
 \newline
 When we are considering the Erd\H{o}s Renyi model as a random graph process, we consider that in this random walk each vertex $v$ has a probability $p$ of turning active. 
@@ -491,11 +493,11 @@ These two lemmas together imply Theorem \ref{th:subCritCV}.
 		= \frac{1}{\lambda t^{\frac{3}{2}}}(\lambda t t^{-\lambda})^t (1 + o(1))
 		= \frac{e^{-I_{\lambda} t }}{\lambda t^{\frac{3}{2}}} (1 + o(1)) \geq \frac{1}{\lambda}e^{-I_{\lambda} t}.
 	\end{equation}
-	Now, as the summand is decreasing we can bound it by the integral as follows.
+	Now, as the summand is decreasing we can bound it by the integral as follows,
 	\begin{equation}
 		n\mathbb{P}_{\lambda_n}^*(T^* \geq k)
 		\geq \frac{n}{\lambda} \int_{k}^{\infty} e^{-I_{\lambda} t} \mathrm{d}t
-		 = \frac{e^{-I_{\lambda} k}}{\lambda I_{\lambda}}
+		 = \frac{e^{-I_{\lambda} k}}{\lambda I_{\lambda}}.
 	\end{equation}
 	With $k_n = a\log(n)$ we have 
 	\begin{equation}

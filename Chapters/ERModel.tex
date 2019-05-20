@@ -7,12 +7,13 @@ We define by $\mathcal{G}_{n, M}$ the space of uniformly distributed graph among
 \end{definition}
 One may observe that changes in notations are made compared to the articles from Erd\"os and R\'enyi in order to be more adapted with the modern study of random graphs.
 We will also adopt for the following $N = \binom{n}{2}$ to denote the total number of possible edges on $n$ labelled vertices.
-From the previous definition, the probability of obtaining a chosen graph in with $n$ vertices and $M$ edges in $\mathcal{G}_{n, M}$ is $1/\binom{N}{M}$.
+From the previous definition, the probability of obtaining a chosen graph with $n$ vertices and $M$ edges in $\mathcal{G}_{n, M}$ is $1/\binom{N}{M}$.
 The associated probability measure is denoted by $\mathbb{P}_M$.
 \newline
 We then arrive at our main model that has been the most extensively studied in the literature of random graphs, that is $\mathcal{G}_{n, p}$ on which each of the $N$ possible edges is taken with probability $p \in [0, 1]$, independently of the others.
-This model was first introduced by Gilbert in 1959, see \cite{Gilbert59}\footnote{It is interesting to note that Gilbert's paper who was at the time working at Bell's laboratories formulated the question of connectivity based on real life phone networks.}.
-Now if we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$, we have :
+This model was first introduced in \cite{Gilbert59} by Gilbert\footnote{It is interesting to note that Gilbert's paper who was at the time working at Bell's laboratories formulated the question of connectivity based on real life phone networks.}.
+\newline
+If we denote by $e_G$ the number of edges of a graph $G$ on the vertex set $[n]$, we have :
 \begin{align}
 	\mathbb{P}_p(G) = p^{e_G}(1-p)^{N-e_G}
 \end{align}
@@ -20,19 +21,19 @@ This model is called the \emph{binomial model}.
 When there is no confusion possible, in order to shorten the writings we consider $\mathbb{P}=\mathbb{P}_p$.
 It is expected that this model is close to the first one if $Np$ is close to $M$.
 \newline
-The third model that we will investigate is on the form of a Markov process, see in Appendix for a discussion on properties used here from Markov chains. 
+The third model that we will investigate is on the form of a Markov process. 
 At time 0 there is no edge in the graph and an edge is selected at random among all of the possible edges. 
 At time $t$, an edge is chosen among all the edges not already present in the graph. We denote this process by $\{\mathcal{G}_{n, t}\}_t$, with $t$ the number of edges added. 
 It is clear that this model is perfectly equivalent to the first model presented if we fix $t = M$. 
 This model was also introduced in 1959 by Erd\H{o}s and Renyi and is usually referred to as the \emph{random graph process}.
 The advantage of this model is that it allows one to study properties on the verge of their realisations.
-For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertex and the giant component. Equivalently, at the first time when $\delta(G) > 1$.
+For instance, using this model Bollob\'as and Thomason \cite{Bollob85} proved that a graph is fully connected, when the last connection made is between an isolated vertex and the giant component. Equivalently, at the first time when $\delta(G) \geq 1$.
 \newline
 The three models introduced above ( $\mathcal{G}_{n, M}$, $\mathcal{G}_{n, p}$ and $\{\mathcal{G}_{n, t}\}_t $) are usually designated in the literature as Erd\H{o}s-R\'enyi model.
 However, even if the first two are quite similar (static random graphs) the last one is of a different nature as it is dynamic.
 \newline
-In this report we will mainly focus on $\mathcal{G}_{n, p}$ which is in fact easier to study than $\mathcal{G}_{n,M}$.
-\footnote{There is usually no confusion possible on the model being studied.}
+In this report we will mainly focus on $\mathcal{G}_{n, p}$ which is in fact easier to study than $\mathcal{G}_{n,M}$
+\footnote{There is usually no confusion possible on the model being studied.}.
 We might also make use of the notation $\mathbb{P}_{p}$ (resp. $\mathbb{P}_{M}$) to designate the probability law associated with $\mathcal{G}_{n, p}$ (resp. $\mathcal{G}_{n,M}$).
 We will see in \eqref{th:linkMP} that there is a strong relation between those two models.
 
@@ -40,7 +41,7 @@ We will see in \eqref{th:linkMP} that there is a strong relation between those t
 
 One of the most fundamental structure of a graph is its number of connected components. 
 Hence, the first question we will try to ask is with which probability a random graph following the Erd\H{o}s-Renyi model is connected. 
-It is essential to answer this question as many other questions might not make sense or have an obvious answer on a graph that is not connected ( for instance the diameter, the existence of Hamiltonian paths or the stability number of the graph ). 
+It is essential to answer this question as many other questions might not make sense or have an obvious answer on a graph that is not connected (for instance the diameter, the existence of Hamiltonian paths or the stability number of the graph). 
 \newline
 It is also an interesting first topic to have an insight of the kind of elegant results that arise from the study of random graphs.
 The main aim of this section will be to prove the following theorem in a detailed way as it is the first random graphs proof that we will study.
@@ -59,7 +60,7 @@ We designate by giant component a component with a size larger than a constant t
 This proof can be found in \cite{Spencer14} or \cite{Bollob01}.
 \newline
 During this proof we will consider the random value $X_k$ that counts the number of connected components of size $k$.
-So, let's estimate the probability $\mathbb{P}(X_2 > 0) = \mathbb{P}(X_2 \geq 1 )$. In order to do so we will use the method of first moment.
+So, let's estimate the probability $\mathbb{P}(X_2 > 0) = \mathbb{P}(X_2 \geq 1 )$. In order to do so we will use the method of first moment which is based on Markov's inequality, (see \ref{markov}).
 \begin{align}
 	\mathbb{P}(X_2 \geq 1) \leq \mathbb{E}(X_2) 	&= \binom{n}{2}\mathbb{P}(\text{"drawing an isolated edge"}) \\
 						    	&= \binom{n}{2}p((1-p)^{n-1})^2 \\
@@ -151,12 +152,11 @@ Here is a theorem showing that monotone increasing properties make probability d
 	For the second inequality, let $p = \frac{p_2 - p_1}{1 - p_1}$. Let $G_1 \in \mathcal{G}_{n, p_1}, G \in \mathcal{G}_{n, p}$ independent to each other.
 	\newline
 	So if $G_2 = G_1 \cup G$ its edges are chosen with probability $p_1 + p - p_1 p = p_2$. 
-	So $G_2$ follows $\mathcal{G}_{n,p_2}$ and contains $G_1$, the property being monotone increasing, we have $ \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$
-\
+	So $G_2$ follows $\mathcal{G}_{n,p_2}$ and contains $G_1$, the property being monotone increasing, we have $ \mathbb{P}_{p_1}(\mathcal{Q}) \leq \mathbb{P}_{p_2}(\mathcal{Q})$.
 \end{proof}
 The following result follows from definition, when $\mathcal{Q}$ is any property:
 \begin{equation}\label{eq:QProp}
-	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}
+	\mathbb{P}(\mathcal{Q}) = \sum_{A \in \mathcal{Q}} p^{|A|}(1-p)^{N-|A|}.
 \end{equation}
 However this result requires to know all of the elements in $\mathcal{Q}$ and as we are often interested with properties for very large $n$ this result won't be magical... 
 \newline
@@ -212,7 +212,7 @@ Analogously, in $\mathcal{G}_{n, M}$, we call $\hat{M} = \hat{M}(n)$ a threshold
 									 \end{array}
 									\right.
 \end{align}
-In fact, thresholds are unique with respect to the multiplication by a positive constant. So for the following, we should denote a threshold for a property as \emph{the} threshold.
+In fact, thresholds are unique with respect to the multiplication by a positive constant. Hence, in what follows, we shall denote as a threshold for a property as \emph{the} threshold.
 \newline
 As said in the introduction of this section, the fact that thresholds could be found for many of the properties that where investigated is one of the main reason behind the study of random graphs.
 In fact, the following theorem from Bollob\'as and Thomason in \cite{Bollob87} confirms that we can always expect the existence of a threshold if the property investigated is non trivial
@@ -222,7 +222,7 @@ In fact, the following theorem from Bollob\'as and Thomason in \cite{Bollob87} c
 \end{theorem}
 \begin{proof}
 	We consider without loss of generality that $\mathcal{P}$ is a non-trivial monotone increasing graph property.
-	Given $0 < \epsilon < 1$ we define $p:[0,1] \to [0,1]$ such that :
+	Given $0 < \epsilon < 1$ we define $p:[0,1] \to [0,1]$ such that:
 	\begin{equation}
 		\mathbb{P}(\mathcal{G}_{n, p} \in \mathcal{P}) = \epsilon
 	\end{equation}
@@ -270,7 +270,7 @@ Indeed, the chromatic number is the smallest number of colours\footnote{A colour
 that means a colouring on which there are no two adjacent vertices of the same colour. 
 If we denote by $\alpha(G)$ the stability number of a graph, it is not difficult to get \footnote{ We use this link with the chromatic as a simple motivation for studying the stability number. It is a number which is in fact of great importance in graph theory but on matters that are out of the scope of this report. See for instance Chapter 12 in \cite{Bondy08}.}
 \begin{equation}
-	\chi(G) \geq \frac{n}{\alpha(G)}
+	\chi(G) \geq \frac{n}{\alpha(G)}.
 \end{equation}
 Before giving a lower bound on the stability number of a graph it might be interesting to notice that the notion of stable set is dual to the notion of clique and is analogous to the notion of perfect matching that concerns the edges.
 Although the following theorem will give a bound that is quite tight in $\mathcal{G}_{n, p}$ the problem of finding the actual maximum stable set of a graph is a $NP$-hard problem.
@@ -303,27 +303,27 @@ Although the following theorem will give a bound that is quite tight in $\mathca
 		\mathbb{E}X_{k+1} 	&\leq  \frac{n^{k+1}}{(k+1)!} e^{-p \binom{k+1}{2}} = \frac{n^{k+1}}{(k+1)!} e^{-p \frac{k(k+1)}{2}}\\
 									     &\leq  \frac{(ne^{-p\frac{k}{2}})^{k+1}}{(k+1)!}
 	\end{align}
-	So, if we consider $k = \lceil 2p^{-1}\log(n)\rceil \leq 2p^{-1}\log(n)$ we have that $ ne^{-p\frac{k}{2}} \leq 1$.
+	So, if we consider $k = \lceil 2p^{-1}\log(n)\rceil \geq 2p^{-1}\log(n)$ we have that $ ne^{-p\frac{k}{2}} \leq 1$.
 	We finally obtain 
 	\begin{equation}
-		\mathbb{E} X_{k+1} \longrightarrow_{n \to \infty} 0
+		\mathbb{E} X_{k+1} \longrightarrow_{n \to \infty} 0.
 	\end{equation}
-	And then $X_{k+1} = 0$ with probability tending to 1 which proves the theorem.
+	Then $X_{k+1} = 0$ with probability tending to 1 which proves the theorem.
 
 \end{proof}
 
-\section{The diameter}\footnote{This section uses \cite{Bollob01}}
-
+\section{The diameter\footnote{This section uses \cite{Bollob01}}
+}
 \begin{definition}
 	The \emph{diameter} of a graph is the greatest distance between any pair of vertices. We denote it by diam($G$) and say it is equal to $\infty$ if the graph is not connected.
 \end{definition}
-It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious ( and will be discussed later in this report ) but we can also think of optimisation problems in which the fact that two points are far apart might be of great consequences.
+It is quite easy to understand that the diameter is a value that is a great importance particularly in applied systems. For instance, the small world phenomena is quite notorious but we can also think of optimisation problems in which the fact that two points are far apart might be of great consequences.
 This section won't be focused on real world applications of the diameter because as we will see we are studying a model which is not realistic for that. 
-Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will prove it through several technical lemmas, some of which will be admitted. Finally some corollary will be obtained from the theorem.
+Hence we will first discuss some graph theoretic problems and results on the diameter and after giving the main theorem on the diameter we will prove it through several technical lemmas, some of which will be admitted. Finally some corollaries will be obtained from the theorem.
 \newline
 One of the challenging questions in graph theory is estimating the following function
 \begin{equation}\label{eq:DDeltaProb}
-	n(D, \Delta) = max\{ |G|, \text{diam}(G) \leq D, \Delta(G) \leq \Delta\}
+	n(D, \Delta) = max\{ |G|, \text{diam}(G) \leq D, \Delta(G) \leq \Delta\},
 \end{equation}
 $n$ is the function that for a fixed diameter $D$ and a fixed maximal degree $\Delta$, gives the maximal number of vertices of a graph that verifies both conditions. This is the kind of problem that is part of \emph{extremal graph theory}.
 \newline
@@ -333,7 +333,8 @@ For instance if we take $\Delta = 2$ we obtain easily by construction that a gra
 \end{equation}
 But it is in fact very hard to obtain such a formula for other values of $D$ or $\Delta$.
 \newline
-If we take a graph of max degree $\Delta$ we observe that there are at most $\Delta (\Delta - 1)^{k-1}$ vertices at distance $k$ from a chosen vertex. It is easily to be convinced of this simply by drawing such a graph. 
+If we take a graph of max degree $\Delta$ we observe that there are at most $\Delta (\Delta - 1)^{k-1}$ vertices at distance $k$ from a chosen vertex.
+One can be easily convinced of this simply by drawing such a graph. 
 From this very simple construction we can obtain the following upper bound
 \begin{equation}
 	n(D, \Delta) \leq 1 + \Delta \sum_{j=1}^{D}(\Delta - 1)^{j-1} = \frac{\Delta(\Delta - 1)^D - 2}{\Delta - 2} = n_0(D, \Delta)
@@ -418,9 +419,9 @@ We observe that $p$ and $d$ are connected as follows:
 	d &= \frac{1}{\log(pn)}(\log(n) + \log \log (n) + \log(2) + \mathcal{O}(\frac{1}{\log(n)}))\\
 	  &= \mathcal{O}((1+o(1))\frac{\log(n)}{\log\log(n)})
 \end{align}
-And finally
+and finally
 \begin{equation}
-	p(pn)^{d-2} = o(1)
+	p(pn)^{d-2} = o(1).
 \end{equation}
 The first lemma that we present here gives a tail inequality of $\Gamma_k(x)$ conditionally on some space that we will now define. 
 In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma_{k-1}(x)|$ and $b = |N_{k-1}(x)|$ that satisfy
@@ -432,37 +433,38 @@ In this section, $\Omega_k$ is $\mathcal{G}_{n, p}$ conditionned on $a = |\Gamma
 	\right.
 \end{align}
 \begin{lemma}
-	Let $x$ be a fixed vertex.
+	Let $x$ be a fixed vertex,
 	\begin{equation}
 		1 \leq k = k(n)  \leq d-1
 	\end{equation}
-	And $ K = K(n)$ that satisfy $ 6 \leq K \leq \frac{1}{12} \sqrt{pn\frac{1}{\log(n)}}$
+	and $ K = K(n)$ that satisfy $ 6 \leq K \leq \frac{1}{12} \sqrt{pn\frac{1}{\log(n)}}$.
 	We also define
 	\begin{equation}
-		\alpha_k = K\sqrt{\frac{\log{n}}{(pn)^k}} , \quad \beta_k = p(pn)^{k-1}, \quad \gamma_k = 2\frac{(pn)^{k-1}}{n} = \frac{2\beta_k}{pn}
+		\alpha_k = K\sqrt{\frac{\log{n}}{(pn)^k}} , \quad \beta_k = p(pn)^{k-1}, \quad \gamma_k = 2\frac{(pn)^{k-1}}{n} = \frac{2\beta_k}{pn}.
 	\end{equation}
 
-	Then
+	Then,
 	\begin{equation}
-		\mathbb{P}(|\Gamma_k(x)| - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \leq n^{-\frac{K^2}{9}}
+		\mathbb{P}(|\Gamma_k(x)| - apn| \geq (\alpha_k + \beta_k + \gamma_k)apn \quad|\quad \Omega_k) \leq n^{-\frac{K^2}{9}}.
 	\end{equation}
 \end{lemma}
 
 \begin{proof}
 	Conditionally on $|\Gamma_{k-1}(x)| = a$ and $|N_{k-1}(x)| = b$, $|\Gamma_k(x)|$ follows a binomial distribution of parameters $n_k = n-b$ and
 	\begin{equation}
-		p_a = 1 - (1-p)^a
+		p_a = 1 - (1-p)^a.
 	\end{equation}
 	Indeed $\Gamma_k(x)$ is the set of vertices not in $N_{k-1}(x)$ and connected to at least one element of $\Gamma_{k-1}(x)$.
 	\newline
 	In the following inequalities we will assume that $n$ is large enough, this will allow us to do certain inequalities that are only asymptotically satisfying. Also to make it more easy for the reader we consider that all of these inequalities take place in $\Omega_k$ without writing it explicitly.
 	Under the event we consider, we have:
 	\begin{align}
-		|\Gamma_k(x)| - apn| &\geq (\alpha_k + \beta_k + \gamma_k)apn \\
-		 &\geq (\alpha_k + \beta_k + \gamma_k)apn + ap(n -n_k) \\
-		 &= (\alpha_k + \beta_k + \gamma_k + 1 - \frac{n_k}{n})apn \\ 
+		||\Gamma_k(x)| - apn| &\geq (\alpha_k + \beta_k + \gamma_k)apn \\
+		 &\geq (\alpha_k + \beta_k + \gamma_k)apn - ap(n -n_k) \\
+		 &= (\alpha_k + \beta_k + \gamma_k - 1 + \frac{n_k}{n})apn \\ 
 		 &= (\alpha_k + \beta_k + \gamma_k - \frac{b}{n})apn \\  
 	\end{align}
+	with $n_k = n-b$.
 	Using, \eqref{eq:CondAB}, we obtain the following inequality:
 	\begin{equation}
 		\gamma_k - \frac{b}{n} = \frac{1}{n}(\frac{2\beta_k}{p} - b) = \frac{1}{n}(2(pn)^{k-1} -b) > 0
@@ -686,16 +688,16 @@ And simply if we remember the previous theorem \eqref{th:linkMP} linking $\mathc
 	And we have the proof simply using \eqref{th:linkMP} with $pN = M$ and combining it with the previous theorem \eqref{th:diam2} we have the result.
 \end{proof}
 
-Now that we know that the diameter is spread on two values we are interested in restricting it on only one value. 
+Now that we know that the diameter is spreading on two values we are interested in restricting it on only one value. 
 We may observe that theorem \eqref{th:diam2} gives us enough information to do so.
 Indeed, we see that if we forced $c \to 0$ then the diameter would be $d$. This would translate in \eqref{eq:pdiam} as
 \begin{equation}
-	p^dn^{d-1} - 2\log(n) \longrightarrow \infty
+	p^dn^{d-1} - 2\log(n) \longrightarrow \infty.
 \end{equation}
 But this restriction is not sufficient because the values of the diameter might be smaller than $d$ then we will need to make sure that the probability that the diameter is $d-1$ goes to 0 which we could do forcing $c \to \infty$.
 In the same fashion as previously this would translate as
 \begin{equation}
-	p^{d-1}n^{d-2} - 2 \log(n) \longrightarrow -\infty
+	p^{d-1}n^{d-2} - 2 \log(n) \longrightarrow -\infty.
 \end{equation}
 
 This informal reasoning gives motivation for the following corollary of \eqref{th:diam2} that we will now formally prove. 
@@ -782,7 +784,7 @@ As a strengthening of this result, Bollob\'as \cite{BollobExtr} conjectured that
 A quite recent survey on the degree-diameter problem can be found in \cite{degreeDiam}.
 
 \section{Generalized Erd\"os-R\'enyi model}
-We are now interested in a generalization of the ( binomial ) Erd\"os-R\'enyi model which was first considered by Kovalenko in \cite{Kovalenko71}.
+We are now interested in a generalization of the (binomial) Erd\"os-R\'enyi model which was first considered by Kovalenko in \cite{Kovalenko71}.
 In this model, often referred to as \emph{inhomogeneous}, the probability of appearance of the edge $(i,j)$, that we call $p_{ij}$, is not necessarily the same for all pairs of vertices $i,j$.
 \newline
 From this definition it is very natural to write those edge probabilities in an $n\times n$ matrix, which we denote by
@@ -850,7 +852,7 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	If we write \eqref{eq:C3} with the observations made above we have,
 	\begin{align}
 		\lim_{n\to \infty} \sum_{k=1}^{\lfloor n/2 \rfloor} \frac{1}{k!} (nq^{n-1-k})^k &=
-		\lim_{n\to\infty} \sum_{k=1}^{\lfloor n/\log n \rfloor} \frac{1}{k!}e^{-ck} +  \sum_{\lfloor n/2 \rfloor}^{n/2} \frac{1}{k!} \mathcal{O}(\sqrt{n})^k \\
+		\lim_{n\to\infty} \sum_{k=1}^{\lfloor n/\log n \rfloor} \frac{1}{k!}e^{-ck} +  \sum_{\lfloor n/\log n \rfloor}^{n/2} \frac{1}{k!} \mathcal{O}(\sqrt{n})^k \\
 		&= \lim_{n \to \infty} \sum_{k=1}^{\lfloor n/\log n \rfloor} \frac{1}{k!}e^{-ck} +  \sum_{\lceil n/\log n \rceil}^{\lfloor n/2\rfloor} \mathcal{O}(\frac{\sqrt{n}\log{n}}{n})^k 
 	\end{align}
 	when $n$ is large enough, $\frac{\sqrt{n}\log n}{n} \leq 1/1000$ which gives that the rightmost sum converges to 0.
@@ -861,13 +863,13 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	which concludes the proof.
 \end{proof}
 \begin{proof}[Proof of Theorem \ref{th:CVIsolPoi}]
-	Let $Y_{ij}$ a random variable following a Bernoulli of parameter $p_{ij}$.
-	\footnote{ Recall that a Bernoulli of parameter $p$ is 1 with prob. $p$ and 0 with prob. $1-p$.}
+	Let $Y_{ij}$ a random variable following a Bernoulli of parameter $p_{ij}$
+	\footnote{ Recall that a Bernoulli of parameter $p$ is 1 with prob. $p$ and 0 with prob. $1-p$.}.
 	We denote by $Y_i$ the indicator of the event that vertex $i$ is isolated, i.e. $Y_i = \mathbbm{1}_{\sum_{j=1}^n Y_{ij} = 0}$.
 	In order to show the convergence of $X_0$ in distribution to the Poisson random variable we will use the method of factorial moments.
 	So, we want to show that for any natural number $k$ we have
 	\begin{equation}\label{eq:EIsolMom}
-		\mathbb{E}(\sum_{1\leq i_1<i_2< \ldots < i_k \leq n} X_{i_1}X_{i_2}\ldots X_{i_k}) \to_{n \to \infty} \frac{\lambda^k}{k!}
+		\mathbb{E}(\sum_{1\leq i_1<i_2< \ldots < i_k \leq n} X_{i_1}X_{i_2}\ldots X_{i_k}) \to_{n \to \infty} \frac{\lambda^k}{k!}.
 	\end{equation}
 	Let's observe that the LHS of \eqref{eq:EIsolMom} is the sum of $\mathbb{E}(X_{i_1}X_{i_2}\ldots X_{i_k})$ over all $i_1 < i_2 < \ldots i_k$.
 	\begin{align}
@@ -922,7 +924,7 @@ Complete Bipartite graphs are formally defined as $K_{n,m} = G([n+m], E)$ with $
 In the above we have studied graphs as subgraphs of the complete graph, now we restrict ourselves to graphs which are subgraphs of the complete bipartite graph.
 They are an appropriate way to describe many networks, for instance if you consider a graph in which you consider a graph on the set of movie actors and you draw an edge linking two actors if they have collaborated in a movie.
 The resulting graph looks very convoluted, with many cliques and doesn't seem to give much information on what we might be interested for.
-However, if you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie,
+However, as observed in \cite{Newman01}, if you consider that the set of vertices is the set of actors \emph{and} the set of movies, and there is an edge only between an actor and a movie if the actor played in the movie,
 this graph would give much more information on the nature of this network.
 \newline
 Hence, an important part of research has been studying random bipartite graph and we can very naturally define $\mathcal{G}_{n,n, p}$ with the generalised binomial model.
