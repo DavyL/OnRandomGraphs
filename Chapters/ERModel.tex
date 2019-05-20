@@ -820,7 +820,7 @@ In this section we are interested in proving the following theorem.
 		\lim_{n \to \infty} \mathbb{P}(X_0 = k) = \frac{\lambda^k}{k!}e^{-\lambda}
 	\end{equation}
 \end{theorem}
-Let's first show as a corollary that this theorem allows us to conclude the proof of \ref{th:connect}.
+Let's first show as a corollary that this theorem allows us to conclude the proof of \ref{th:connect} on the probability of connectivy of $\mathcal{G}_{n,p}$.
 \begin{corollary}\label{th:proofPoissonP}
 	If $p(n) = \frac{\log n + c}{n}$, then \eqref{eq:C1}, \eqref{eq:C2}, \eqref{eq:C3} are satisfied, 
 	and the number of isolated vertices is asymptotically Poisson distributed with mean $e^{-c}$.
@@ -836,10 +836,29 @@ Let's first show as a corollary that this theorem allows us to conclude the proo
 	and we have $\lim \lambda_n = e^{-c} = \lambda$, so \eqref{eq:C2} is also satisfied.
 	\newline
 	Let's observe that it is enough to show $\sum_{i=1}^n \frac{Q_i}{R_{ik}}$ converges uniformly to $\lambda = e^{-c}$ for \eqref{eq:C3} to be satisfied.
-	\begin{equation}
+	\begin{equation}\label{eq:expNQ}
 		\sum_{i=1}^n \frac{Q_i}{R_{ik}} = \sum_{i=1}^n \frac{Q}{R_k} = n \frac{Q}{R_k} = nq^{n-1-k}
 	\end{equation}
-	And $\lim_{n \to \infty}  nq^{n-1-k} = e^{-c}$ finally proves the corollary.
+	Now we need to show that \eqref{eq:C3} is satisfied.
+	Let's observe that we have pointwise convergence of \eqref{eq:expNQ} (when $k$ is fixed) to $e^{-c}$.
+	When we have $k \leq \frac{n}{\log n}$ then \eqref{eq:expNQ} is uniformly bounded.
+	Now to satisfy \eqref{eq:C3} it is sufficient to prove that the sum over the terms between $n/\log n$ and $n/2$ converges uniformly to 0.
+	Let's take $k=n/2$ in \eqref{eq:expNQ}, then
+	\begin{equation}
+		nq^{n-1-k} = \mathcal{O}(nq^{n-k}) = \mathcal{O}(nq^{\frac{n}{2}}) = \mathcal{O}(ne^{-\frac{\log n}{2}}) = \mathcal{O}(\sqrt{n}). 
+	\end{equation}
+	If we write \eqref{eq:C3} with the observations made above we have,
+	\begin{align}
+		\lim_{n\to \infty} \sum_{k=1}^{\lfloor n/2 \rfloor} \frac{1}{k!} (nq^{n-1-k})^k &=
+		\lim_{n\to\infty} \sum_{k=1}^{\lfloor n/\log n \rfloor} \frac{1}{k!}e^{-ck} +  \sum_{\lfloor n/2 \rfloor}^{n/2} \frac{1}{k!} \mathcal{O}(\sqrt{n})^k \\
+		&= \lim_{n \to \infty} \sum_{k=1}^{\lfloor n/\log n \rfloor} \frac{1}{k!}e^{-ck} +  \sum_{\lceil n/\log n \rceil}^{\lfloor n/2\rfloor} \mathcal{O}(\frac{\sqrt{n}\log{n}}{n})^k 
+	\end{align}
+	when $n$ is large enough, $\frac{\sqrt{n}\log n}{n} \leq 1/1000$ which gives that the rightmost sum converges to 0.
+	Hence, 
+	\begin{equation}
+		1 + \lim_{n\to \infty} \sum_{k=1}^{\lfloor n/2 \rfloor} \frac{1}{k!} (nq^{n-1-k})^k = e^{-c}
+	\end{equation}
+	which concludes the proof.
 \end{proof}
 \begin{proof}[Proof of Theorem \ref{th:CVIsolPoi}]
 	Let $Y_{ij}$ a random variable following a Bernoulli of parameter $p_{ij}$.
@@ -950,6 +969,7 @@ For instance we will prove the following theorem for connectivity in $\mathcal{G
 	\begin{equation}
 		\sum_{i=1}^{2n} \frac{Q}{R_k} =2n q^{n-k} \longrightarrow_{n\to\infty} 2e^{-c} = \lambda.
 	\end{equation}
+	In the equation above, the uniform convergence of the limit is done in the same way as in the proof of Corollary \ref{th:proofPoissonP}. 
 	Hence as a consequence of Theorem \ref{th:CVIsolPoi}, the number of isolated vertices follows a Poisson of mean $2e^{-c}$.
 \end{proof}
 As shown in Bollobas 2001 \cite{Bollob01}, there is the same hitting time for connectivity and $\delta \geq 1$ with high probability, as a consequence of the previous Theorem one could prove that the probability of connectivity of $\mathcal{G}_{n,n, p}$ is $e^{-2e^{-c}}$. 

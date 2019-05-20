@@ -511,7 +511,7 @@ These two lemmas together imply Theorem \ref{th:subCritCV}.
 	So, if $a<I_{\lambda}^{-1}$ there is no component larger than $a\log(n)$ with probability going to one.
 \end{proof}
 Now, simply combining the previous results \eqref{lemmalambdainf} and \eqref{lemmalambdasup} we have our proof of our main theorem in this section \eqref{th:subCritCV}.
-Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the largest connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which components grow linearly.
+Hence, in $\mathcal{G}_{n, \frac{\lambda}{n}}$ with $\lambda < 1$ the largest connected components grow at a logarithmic speed. We will see in the next section that this is very different from the case where $\lambda > 1$ in which the largest component grows linearly whilst the second largest component grows at logarithmic speed.
 This change of speed in the growth rate is called a phase transition.
 
 \section{The supercritical case : $\lambda > 1 $ }
@@ -519,7 +519,7 @@ First we will show that that in the supercritical case there is a component of l
 \newline
 In fact there exists stronger results that use the same method but make a use of martingales in order to get a really sharp result on the asymptotic size of the greatest connected component, see Bollob\'as and Riordan \cite{BollobRiordan12}.
 \newline
-Here we will consider $p = \frac{1 + \epsilon}{n}$. 
+Here we will consider $p = \frac{1 + \epsilon}{n}$ with $\epsilon$ is fixed and small enough. 
 For the beginning we will use the recent approach from Sudakov \cite{Sudakov} which makes use of an algorithm of graph exploration called the \emph{depth first search} (DFS).
 
 \begin{figure}[h]
@@ -560,16 +560,18 @@ of active vertices, $E_t$ the sorted vertices that we do not have to treat anymo
 The interest of using DFS here is that $A_t$ is by construction always a path.
 \newline
 We will describe the behaviour in the case of the exploration of a random graph so we say that we feed our DFS algorithm with $X = \{X_i\}_i^N$ a sequence of i.i.d. random values, one for each possible edge, recall that $N = \frac{n(n-1)}{2}$.
-So the algorithm starts at some specified vertex. From there it checks for edges using each time one of the $X_i$, the number of evaluations is what we refer to as time.
-If $X_t = 1$, then the new vertex under evaluation is moved from $U_t$ into $A_t$ and the same procedure repeats. 
+So the algorithm starts at some specified vertex. From there it checks each edge to which it can be connected, using each time one of the $X_i$, the number of evaluations is what we refer to as time.
+If $X_t = 1$, then the new vertex under evaluation is the one on the other end of the edge tested.
+This new vertex is moved from $U_t$ into $A_t$ and the same procedure repeats. 
 In the case that all possible edges from a vertex have been tested and answered negatively, then the vertex is moved to set of explored vertices of corresponding time, so it is moved from $A_t$ to $E_t$.
+The new active vertex is the vertex at the other end of the edge used to reach the vertex, (the father vertex).
 The algorithm stops when $U_t$ is empty.
 \newline
 In order for the algorithm to be able to explore all components, when $A_t$ is empty, a vertex is selected from $U_t$.
 \newline
 The proof will make an extensive use of the depth-first search algorithm, at each step of the algorithm, when it is searching for a neighbour it is simply following a Bernoulli random variable of parameter $p$.
 So we consider $X = \{X_i\}_i^N$ our sequence of i.i.d. random variables where each $X_i$ follows a Bernoulli of parameter $p$ in order to get an Erd\"os-Renyi random graph process.
-So we obtain the following inequality, as in the event $X_i = 1$, then a vertex is simply moved from $U_i$ to $A_i$. And if there is a sequence of $X_i = 0$ then the vertices might only move from $A$ to $E$.  
+So we obtain the following inequality, as in the event $X_i = 1$, a vertex is simply moved from $U_i$ to $A_i$. And if there is a sequence of $X_i = 0$ then the vertices might only move from $A$ to $E$.  
 \begin{equation}
 	|A_t \cup E_t| \geq \sum_{i=1}^t X_i
 \end{equation} 
@@ -587,28 +589,29 @@ The following simple lemma will give us information on the behaviour of binomial
 	\end{equation}
 \end{lemma}
 \begin{proof}
-	Let's observe that $\mathbb{E}X_{N_0} = N_0 p = \frac{\epsilon(1+\epsilon)}{2}n$.
+	Let's observe that $\mathbb{E}\sum_{i=1}^{N_0} X_i = N_0 p = \frac{\epsilon(1+\epsilon)}{2}n$.
 	Simply using Chernoff inequality \eqref{chernoff3}.
 	\begin{equation}
-		\mathbb{P}(|X_{N_0} - \mathbb{E}X_{N_0}| > n^{\frac{2}{3}} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
+		\mathbb{P}(|\sum_{i=1}^{N_0} X_i - \mathbb{E}\sum_{i=1}^{N_0} X_i| > n^{\frac{2}{3}} ) \leq 2 e^{-\frac{n^{\frac{4}{3}}}{2n}}
 	\end{equation}
 	So with high probability we have 
 	\begin{equation}
-		|X_{N_0} - \mathbb{E}X_{N_0}| \leq n^{\frac{2}{3}}
+		|\sum_{i=1}^{N_0} X_i - \mathbb{E}\sum_{i=1}^{N_0} X_i| \leq n^{\frac{2}{3}}
 	\end{equation}
 \end{proof}
 Now we can state and prove the following theorem making use of the previous lemma and of our knowledge of the depth first search algorithm.
 \begin{theorem}
-	Let $p = \frac{1+\epsilon}{n}$. Then, $\mathbb{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$.
+	Let $p = \frac{1+\epsilon}{n}$. Then, $\mathbb{G}_{n,p}$ contains a path of length at least $\frac{\epsilon^2n}{5}$ with high probability.
 \end{theorem}
 \begin{proof}
 	The proof will be done by contradiction.
 	\newline
-	We consider $X_N$ with parameter $p = \frac{1+\epsilon}{n}$. We claim that if $N_0 = \frac{\epsilon n^2}{2}$ then $|A_{N_0}| \geq \frac{\epsilon^2 n}{5}$.
+	We consider $X_N$ with parameter $p = \frac{1+\epsilon}{n}$. We claim that if $N_0 = \lfloor\frac{\epsilon n^2}{2} \rfloor$ then $|A_{N_0}| \geq \frac{\epsilon^2 n}{5}$.
 	\newline
 	Let's first show that $|E_{N_0}| < \frac{n}{3}$.
 	\newline
-	If it was not the case, elements flowing in $E$ one by one, there would exist a $t$ such that $|E_t| = \lfloor\frac{n}{3}\rfloor$. Also from \eqref{eq:At} and Lemma \ref{lemmaN0} we would have with high probability for $n$ large enough,
+	If it was not the case, elements flowing in $E$ one by one, there would exist a $t \leq N_0$ such that $|E_t| = \lfloor\frac{n}{3}\rfloor$. 
+	Also from \eqref{eq:At} and Lemma \ref{lemmaN0} we would have with high probability for $n$ large enough,
 	\begin{equation}
 		|A_t| \leq 1 + \sum_{i=1}^{t} X_i < 1 + n^{\frac{2}{3}} < \frac{n}{3}.
 	\end{equation}
@@ -616,26 +619,26 @@ Now we can state and prove the following theorem making use of the previous lemm
 	\begin{equation}
 		|U_t| = n - |A_t| - |E_t| \geq \frac{n}{3}
 	\end{equation}
-	So, we obtain that the algorithm has tested all the $|E_t||U_t| \geq \frac{n^2}{9}$ possible pairs between the set of explored vertices and not seen vertices.
-	But $\frac{n^2}{9} > \epsilon\frac{n^2}{2} = N_0$ \footnote{ $\epsilon$ is small enough} and as we assumed that we are at a step $t$ of the algorithm that is less than $N_0$ we have a contradiction. 
+	So, we obtain that the algorithm has tested all the $|E_t||U_t| \geq \frac{n^2}{10}$ possible pairs between the set of explored vertices and not seen vertices.
+	But $\frac{n^2}{9} > \epsilon\frac{n^2}{2} = N_0$ as $\epsilon$ is small enough and as we assumed that we are at a step $t$ of the algorithm that is less than $N_0$ we have a contradiction. 
 	\newline
-	We are then sure from the previous argument that $|E_{N_0}| < \frac{n}{3}$ and we claim $|A_{N_0}| < \frac{\epsilon^2 n}{5}$, then $U_{N_0} \neq \emptyset$. 
-	Which means that there are still elements that can be added to the connected component.
+	We are then sure from the previous argument that $|E_{N_0}| < \frac{n}{3}$ and we assume $|A_{N_0}| < \frac{\epsilon^2 n}{5}$, then $U_{N_0} \neq \emptyset$, 
+	which means that there are still elements that can be added to the connected component.
 	We are going to use the same arguments as previously.
 	\newline
-	By lemma \eqref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$.
-	Which gives that the number of active and explored vertices is at least as follows
+	By Lemma \eqref{lemmaN0}, the number of edges ( or vertices ) added is at least $\frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}$,
+	which gives that the number of active and explored vertices is at least as follows
 	\begin{equation}
-		|A_{N_0} \cup E_{N_0}| \geq \frac{\epsilon(1+\epsilon)n}{2} - n^{\frac{2}{3}}
+		|A_{N_0} \cup E_{N_0}| \geq \frac{\epsilon(1+\epsilon)n}{2} + n^{\frac{2}{3}}
 	\end{equation}
-	So $|E_{N_0}| \geq \frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}}$ and that would mean all of the pairs between $E_{N_0}$ and $A_{N_0}$ have been explored.
+	So $|E_{N_0}| \geq \frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}}$ and that would mean all of the pairs between $E_{N_0}$ and $U_{N_0}$ have been explored.
 	So we obtain the following set of inequalities.
 	\begin{align}
-		N_0 = \frac{\epsilon n^2}{2} \geq |E_{N_0}||A_{N_0}| &\geq (\frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}} )
-									(n - \frac{\epsilon n}{2} - \frac{\epsilon^2 n}{2} + n^{\frac{2}{3}})\\
-									&\geq \frac{\epsilon n^2}{2} + \frac{\epsilon ^2 n^2 }{20} - o(\epsilon ^3)n^2 			
+		N_0 = \frac{\epsilon n^2}{2} \geq |E_{N_0}||U_{N_0}| &\geq (\frac{\epsilon n}{2} + \frac{3\epsilon^2n}{10} - n^{\frac{2}{3}} )
+									(n - \frac{\epsilon n}{2} - \frac{\epsilon^2 n}{2} - n^{\frac{2}{3}})\\
+									&\geq \frac{\epsilon n^2}{2} + \frac{\epsilon ^2 n^2 }{20} - \mathcal{O}(\epsilon ^3n^2 + n^{5/3}) 			
 	\end{align}
-	The last inequality being only with the dominating terms ( i.e. the $n^2$ ) and for $\epsilon < 1$ it is larger than $\frac{\epsilon n^2}{2}$ Which is a contradiction.
+	This gives a contradiction for $\epsilon$ small enough and $n$ large enough depending on $\epsilon$.
 	Then $A_{N_0}$ must be larger or equal than $\frac{\epsilon ^2n}{5}$ and observing that $A_{N_0}$ must be a path we have the result.
 \end{proof}
 In fact, we can refine this result to the size of the connected component and not simply the size of a walk with the following theorem.
@@ -643,7 +646,6 @@ In fact, we can refine this result to the size of the connected component and no
 	Let $p = \frac{1+\epsilon}{n}$ and $N_0 = \frac{\epsilon n^2}{5}$. Then, $G \sim \mathcal{G}_{n,p}$ contains a connected component of size at least $\frac{\epsilon n}{2}$
 \end{theorem}
 This theorem can be proved using the same method as in the previous proof.
-However, a much more precise result will be proved later in this report on the size of the largest component in the supercritical phase, see Theorem \ref{th:NWS}.
 \paragraph{Some words on the critical phase}
 We have in the two previous sections investigated the different behaviours of $\mathcal{G}_{n, \frac{\lambda}{n}}$ for fixed values of $\lambda \neq 1$.
 We have seen that if $\lambda < 1$ then the largest component is growing in size as a logarithm of $n$ and the components will be trees or isolated vertices.
