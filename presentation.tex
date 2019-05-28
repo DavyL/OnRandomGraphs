@@ -13,12 +13,12 @@
 
 \usepackage[utf8]{inputenc}
 \usetheme{Berlin}
-\title[]{Random graphs}
+\title[Random graphs]{Random graphs}
  
 %\subtitle{The Erd\H{o}s-R\'enyi model}
  
-\author[]{Leo Davy}
- 
+\author[Leo Davy]{Leo Davy}
+\institute{Universit\'e Paul Sabatier / University of Bristol} 
 \date[]{Toulouse, May 27th 2019}
 
 \begin{document}
@@ -33,12 +33,14 @@
 				\item $E$ is the edge set, $E \subseteq \{\{x,y\}: x,y \in V\}$
 			\end{itemize}
 		\end{definition}
-		Interest :
-		\begin{itemize}
-			\item Simple graphical representation
-			\item Allows to describe phenomenas
-			\item and much more
-		\end{itemize}
+		\uncover<2>{
+			Interest :
+			\begin{itemize}
+				\item Simple graphical representation
+				\item Allows to model many networks (Social networks, neurology, biology, chemistry, ...)
+				\item and much more
+			\end{itemize}
+		}
 	\end{frame}
 	
 	\begin{frame}
@@ -48,42 +50,34 @@
 			\item $V$ the set of scientists
 			\item $E = \{\{x,y\}: x $ and $y$ co-authored a paper$\}$
 		\end{itemize}
-		Experimental results:
-		\begin{itemize}
-			\item Positive density of triangles
-			\item Degree distribution follows a power law 
-		\end{itemize}
-		\begin{block}{Remark}
-			The Erd\H{o}s collaboration graph is the subgraph of the above collaboration graph s.t. $d($Erd\H{o}s$, x) < \infty$ for all $v\in V$.
-		\end{block}
+		\uncover<2->{
+			Experimental results:
+			\begin{itemize}
+				\item Large number of triangles
+				\item Degree distribution follows a power law 
+			\end{itemize}
+		}
+		\uncover<3>{
+			\begin{block}{Remark}
+				The Erd\H{o}s collaboration graph is the subgraph of the above collaboration graph s.t. $d($Erd\H{o}s$, x) < \infty$ for all $x\in V$.
+			\end{block}
+		}
 	\end{frame}
-
-	\begin{frame}
-		\frametitle{Another example of real world graph}
-		The Web-graph:
-		\begin{itemize}
-			\item $V$ the set of web pages
-			\item $E = \{(x,y):x,y \in V, x$ contains a link to $y$\}
-		\end{itemize}
-		\begin{itemize}
-			\item The graph is directed
-			\item The degrees follow a power law
-		\end{itemize}
-	\end{frame}
-
 	\begin{frame}
 		\begin{definition}
 			A random graph is a graph where nodes, edges are both are selected by a random procedure.
 		\end{definition}
 		Restrict ourselves to \emph{static} random graphs on $n$ vertices.
-		\begin{block}{The model:}
-			\begin{itemize}
-				\item $V$ is fixed ($V = [n] = \{1,2,\ldots,n\}$).
-				\item No loops.
-				\item No parallel edges.
-				\item Total number of possible edges : $N= \binom{n}{2} = \frac{n(n-1)}{2}$.
-			\end{itemize}
-		\end{block}
+		\uncover<2>{
+			\begin{block}{The model:}
+				\begin{itemize}
+					\item $V$ is fixed ($V = [n] = \{1,2,\ldots,n\}$).
+					\item No loops.
+					\item No parallel edges.
+					\item Total number of possible edges : $N= \binom{n}{2} = \frac{n(n-1)}{2}$.
+				\end{itemize}
+			\end{block}
+		}
 	\end{frame}
 
 	\begin{frame}
@@ -96,6 +90,7 @@
 			\mathbb{P}_M (G) = 1/\binom{N}{M}
 		\end{equation}
 	\end{frame}
+
 	\begin{frame}
 		\frametitle{The Erd\H{o}s-R\'enyi model}
 		\begin{definition}[Gilbert 1959]
@@ -106,75 +101,94 @@
 			\mathbb{P}_p (G) = p^{e_G}(1-p)^{N-e_G}
 		\end{equation}
 	\end{frame}
+	
 	\begin{frame}
 		\frametitle{The stability number}
 		\begin{definition}
-			$\alpha(G) :=$ largest set of vertices s.t. no vertices are adjacent.
+			A set $S\subseteq V$ is called \emph{stable} if for any $x,y \in S$, then $\{x,y\} \not\in E$
 		\end{definition}
-		\begin{theorem}
-			$\alpha(G \in \mathcal{G}_{n,p}) \leq \lceil 2p^{-1}\log n\rceil$ w.h.p.
-		\end{theorem}
+		\uncover<2->{
+			\begin{definition}
+				$\alpha(G) :=$ size of the largest stable set.
+			\end{definition}
+		}
+		\uncover<3>{
+			\begin{theorem}
+				$\alpha(G \in \mathcal{G}_{n,p}) \leq \lceil 2p^{-1}\log n\rceil$ w.h.p.
+			\end{theorem}
+		}
 	\end{frame}
+	
 	\begin{frame}
+		\frametitle{The stability number: proof}
 		Let $S \subseteq V$, $|S| = k+1$,
-		\begin{equation}
-			\mathbb{P}("\text{S is a stable set}") = (1-p)^{\binom{k+1}{2}}
-		\end{equation}
-		Let $X_{k+1} = \sum_{S} \mathbbm{1}("\text{S is a stable set}")$.
-		\begin{block}{Remark}
+		\uncover<2->{
+			\begin{equation}
+				\mathbb{P}("\text{S is a stable set}") = (1-p)^{\binom{k+1}{2}}
+			\end{equation}
+		}
+		\uncover<3->{
+			Let $X_{k+1} = \sum_{S} \mathbbm{1}("\text{S is a stable set}")$.
+			\begin{block}{Remark}
 			We have $X_k = 0$ if $k> \alpha$.
-		\end{block}
-		\begin{equation}
-			\mathbb{E}X_{k+1} = \binom{n}{k+1} (1-p)^{\binom{k+1}{2}} \leq \frac{(ne^{-p\frac{k}{2}})^{k+1}}{(k+1)!}
-		\end{equation}
-		The RHS goes to 0 if $k \geq 2p^{-1}\log n$.
+			\end{block}
+		}
+		\uncover<4->{
+			\begin{equation}
+				\mathbb{E}X_{k+1} = \binom{n}{k+1} (1-p)^{\binom{k+1}{2}} \leq \frac{(ne^{-p\frac{k}{2}})^{k+1}}{(k+1)!}
+			\end{equation}
+			The RHS goes to 0 if $k \geq 2p^{-1}\log n$.
+		}
 	\end{frame}
+	
 	\begin{frame}
 		\frametitle{Is $\mathcal{G}_{n,p}$ connected ?}
 		\begin{definition}
 			A graph is connected if there is a path linking any two vertices.
 		\end{definition}
-		\begin{theorem}
-			Let $p = \frac{\log n + c}{n}$ with $c\in \mathbb{R}$, then
-			$\mathbb{P}(G \in \mathcal{G}_{n,p}\text{ is connected } )\longrightarrow_n e^{-e^{-c}}$.
-		\end{theorem}
-		\begin{block}{Remark}
-			Let $\epsilon >0$
+		\uncover<2->{
+			\begin{theorem}
+				Let $p = \frac{\log n + c}{n}$ with $c\in \mathbb{R}$, then
+				$\mathbb{P}(G \in \mathcal{G}_{n,p}\text{ is connected } )\longrightarrow_n e^{-e^{-c}}$.
+			\end{theorem}
+		}
+		\only<3>{
+			\begin{block}{Remark (Threshold)}
+				Let $\epsilon >0$
+				\begin{itemize}
+					\item If $p = (1+\epsilon) \frac{\log n}{n}$, then $\mathcal{G}_{n,p}$ is connected w.h.p. 
+					\item If $p = (1-\epsilon) \frac{\log n}{n}$, then $\mathcal{G}_{n,p}$ is disconnected w.h.p. 
+				\end{itemize}
+			\end{block}
+		}
+		\only<4>{
+			In order to prove this result, we need to know the probabilities that $\mathcal{G}_{n,p}$ contains :
 			\begin{itemize}
-				\item If $p = (1+\epsilon) \frac{\log n}{n}$, then $\mathcal{G}_{n,p}$ is connected w.h.p. 
-				\item If $p = (1-\epsilon) \frac{\log n}{n}$, then $\mathcal{G}_{n,p}$ is disconnected w.h.p. 
+				\item Isolated vertices
+				\item Isolated edges
+				\item Isolated components of size between 3 and $\lceil \frac{n}{2} \rceil$
 			\end{itemize}
-		\end{block}
+		}
 	\end{frame}
-	\begin{frame}	
-		\frametitle{Is $\mathcal{G}_{n,p}$ connected ?}
-		\begin{definition}
-			A graph is connected if there is a path linking any two vertices.
-		\end{definition}
-		\begin{theorem}
-			Let $p = \frac{\log n + c}{n}$ with $c\in \mathbb{R}$, then
-			$\mathbb{P}(G \in \mathcal{G}_{n,p}\text{ is connected } )\longrightarrow_n e^{-e^{-c}}$.
-		\end{theorem}
-
-		In order to prove this result, we need to know the probabilities that $\mathcal{G}_{n,p}$ contains :
-		\begin{itemize}
-			\item Isolated vertex
-			\item Isolated edges
-			\item No isolated component of size between 3 and $\lceil \frac{n}{2} \rceil$
-		\end{itemize}
-	\end{frame}
+	
 	\begin{frame}
+		\frametitle{Isolated edges ?}
 		$X_k$ : number of connected component of size $k$.
 		\newline
 		Does $\mathcal{G}_{n,p}$ contain an isolated edge ? 
-		\begin{align}
-			\mathbb{P}(X_2 \geq 1) \leq \mathbb{E} X_2 	&= \binom{n}{2}p((1-p)^{n-1})^2\\
-									&= \mathcal{O}(n^2 p e^{-2pn}) = \mathcal{O}(p) = o(1).
-		\end{align}
-		\begin{block}{Result}
-			No isolated edge with high probability.
-		\end{block}
+		\uncover<2->{
+			\begin{align}
+				\mathbb{P}(X_2 \geq 1) \leq \mathbb{E} X_2 	&= \binom{n}{2}p((1-p)^{n-1})^2\\
+										&= \mathcal{O}(n^2 p e^{-2pn}) = \mathcal{O}(p) = o(1).
+			\end{align}
+		}
+		\uncover<3->{
+			\begin{block}{Result}
+				No isolated edge with high probability.
+			\end{block}
+		}
 	\end{frame}
+	
 	\begin{frame}
 		Does $\mathcal{G}_{n,p}$ contain an isolated component of size $3 \leq k \leq n/2$ ? 
 		First moment method requires the number of connected components of size $k$.
@@ -185,6 +199,7 @@
 			There are $k^{k-2}$ possible spanning trees on $k$ vertices.
 		\end{theorem}
 	\end{frame}
+	
 	\begin{frame}
 		Let $q_k$ the probability that a set of $k$ vertices doesn't connect with any other vertex outside the set.
 		\begin{align}
@@ -194,35 +209,45 @@
 		\begin{equation}
 			\sum_{k=2}^{\lceil \frac{n}{2} \rceil} \mathbb{P}(X_k \geq 1) \leq o(1) + p^{-1}\sum_{k=3}^{\lceil \frac{n}{2} \rceil} A^k \longrightarrow 0
 		\end{equation}
-		With high probability $\mathcal{G}_{n,p}$ doesn't contain isolated component larger than 1.
+		\begin{block}
+			$\mathcal{G}_{n,p}$ doesn't contain isolated components larger than isolated vertices.
+		\end{block}
 	\end{frame}
+	
 	\begin{frame}
 		What is the distribution of isolated vertices ?
 		\begin{theorem}
 			In $\mathcal{G}_{n,p}$ the number of isolated vertices follows a Poisson distribution of mean $e^{-c}$.
 		\end{theorem}
-		Then, $\mathbb{P}(X_1 = 0) = e^{-e^{-c}}$.
+		\uncover<2->{
+			Then, $\mathbb{P}(X_1 = 0) = e^{-e^{-c}}$.
+		}
 		\newline
-		The probability that $\mathcal{G}_{n,p}$ is connected tends to $e^{-e^{-c}}$.
-	\end{frame}
-	\begin{frame}
-		\titleframe{The phase transition}
-		What does $\mathcal{G}_{n,\frac{\lambda}{n}}$ look like ?
-		\begin{block}{The subcritical phase: $\lambda < 1$}
-			\begin{itemize}
-				\item Tree like components (well approximated by a GW process).
-				\item Largest component of size $\mathcal{O}(\log n)$.
-			\end{itemize}
-		\end{block}
-		\begin{block}{The supercritical phase: $\lambda>1$}
-			\begin{itemize}
-				\item A single complex Giant Component of size $\theta(n)$.
-				\item All other components are simple and of size $\mathcal{O}(\log n)$.
-			\end{itemize}
-		\end{block}
+		\uncover<3->{
+			The probability that $\mathcal{G}_{n,p}$ is connected tends to $e^{-e^{-c}}$.
+		}
 	\end{frame}
 	
-
+	\begin{frame}
+		\frametitle{The phase transition}
+		What does $\mathcal{G}_{n,\frac{\lambda}{n}}$ look like ?
+		\uncover<2->{	
+			\begin{block}{The subcritical phase: $\lambda < 1$}
+				\begin{itemize}
+					\item Tree components (well approximated by a GW process).
+					\item Largest component of size $\mathcal{O}(\log n)$.
+				\end{itemize}
+			\end{block}
+		}
+		\uncover<3->{
+			\begin{block}{The supercritical phase: $\lambda>1$}
+				\begin{itemize}
+					\item A single complex Giant Component of size $\theta(n)$.
+					\item All other components are simple and of size $\mathcal{O}(\log n)$.
+				\end{itemize}
+			\end{block}
+		}
+	\end{frame}
 
 \end{document}
 
